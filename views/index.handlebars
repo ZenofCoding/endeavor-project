@@ -1,87 +1,42 @@
-<!-- begin page wrapper -->
-<div class="page-wrap">
+<!-- views/index.ejs -->
+<!doctype html>
+<html>
+<head>
+  <title>Node Authentication</title>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+  <style>
+    body    { padding-top:80px; }
+  </style>
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron text-center">
+            <h1><span class="fa fa-lock"></span> Node Authentication</h1>
 
-  <!-- begin header -->
-  <div class="header">
-    <div class="title"></div>
-    <div class="chef"></div>
-  </div>
-  <!-- end header -->
+            <p>Login or Register with:</p>
 
-  <!-- burger images -->
-  <div class="burger-top"></div>
-  <div class="burger-bottom"></div>
+            <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Local Login</a>
+            <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Local Signup</a>
+        </div>
 
-  <!-- begin content wrapper -->
-  <div class="content-wrap">
+        <div class="row">
 
-    <!-- begin order up wrapper -->
-    <ul class="order-panel">
-      <h1 class="panel-title">Order Up</h1>
-      <!-- loops through each burger -->
-      {{#each burgers}}
-        <!-- checks if burger has been eaten yet -->
-        {{#unless this.devoured}}
-          <li class="names-devour">
-            <!-- runs if burger is NOT marked as eaten in DB -->
-            {{this.burger_name}}
-          </li>
-          
-          <li>  
-            <!-- updates DB as this burger has been eaten. Posts to burgers_controller.js -->
-            <!-- method override used to pass PUT as POST -->
-            <form action="burgers/update/{{this.id}}?_method=PUT" method="POST">
-              <input type="hidden" name="devoured" value="true">
-              <button class="devour" type="submit">Devour!</button>
-            </form>
+        <!-- LOCAL INFORMATION -->
+        <div class="col-sm-6">
+            <div class="well">
+                <h3><span class="fa fa-user"></span> Local</h3>
 
-          </li>
-        {{/unless}}
-      {{/each}}
-    </ul>
-    <!-- end order up wrapper -->
+                    <!-- <p>
+                        <strong>id</strong>: <%= user.id %><br>
+                        <strong>username</strong>: <%= user.username %><br>
+                        <strong>password</strong>: <%= user.password %>
+                    </p> -->
 
-    <!-- begin burgers eaten wrapper -->
-    <ul class="order-panel">
-      <h1 class="panel-title">Burgers Eaten</h1>
-      <!-- loops through each burger -->
-      {{#each burgers}}
-        <!-- checks if burger has been eaten yet -->
-        {{#if this.devoured}} 
-          <li class="eaten">
-            <!-- runs if burger is marked as eaten in DB -->
-            {{this.burger_name}}  
-          </li>
+            </div>
+        </div>
 
-          <!-- uncomment this form to reverse eaten status in DB -->
-          <!-- <li>  
-            <form action="burgers/update/{{this.id}}?_method=PUT" method="POST">
-              <input type="hidden" name="devoured" value="false">
-              <button class="eaten" type="submit">Undevour?</button>
-            </form>
-
-          </li> -->
-        {{/if}}
-      {{/each}}
-    </ul>
-    <!-- end burgers eaten wrapper -->
-
-  </div>
-  <!-- end content wrapper -->
-
-  <!-- begin footer -->
-  <div class="footer">
-    <!-- form for adding new burgers to DB. Posts to burgers_controller.js -->
-    <form class="create-update-form add-form" action="burgers/create" method="POST">
-
-      <div class="form-group">
-        <input type="text" id="burger_name" class="add-burger" name="burger_name" placeholder=" Add a New Burger">
-        <button class="add-burger-btn" type="submit">Add Burger</button>
-      </div>
-
-    </form>
-  </div>
-  <!-- end footer -->
-
-</div>
-<!-- end page wrapper
+    </div>
+    </div>
+</body>
+</html>
