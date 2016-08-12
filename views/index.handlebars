@@ -1,4 +1,4 @@
-<!-- views/index.ejs -->
+<!-- views/index.handlebars -->
 <!doctype html>
 <html>
 <head>
@@ -27,11 +27,11 @@
             <div class="well">
                 <h3><span class="fa fa-user"></span> Local</h3>
 
-                    <!-- <p>
-                        <strong>id</strong>: <%= user.id %><br>
-                        <strong>username</strong>: <%= user.username %><br>
-                        <strong>password</strong>: <%= user.password %>
-                    </p> -->
+                    <p>
+                        <strong>id</strong>: {{user.id}}<br>
+                        <strong>username</strong>: {{user.username}}<br>
+                        <strong>password</strong>: {{user.password}}
+                    </p>
 
             </div>
         </div>

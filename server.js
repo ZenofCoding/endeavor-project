@@ -1,11 +1,11 @@
-var express  = require('express');
-var session  = require('express-session');
+var express = require('express');
+var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var morgan = require('morgan');
 var passport = require('passport');
-var flash    = require('connect-flash');
+var flash = require('connect-flash');
 
 var app = express();
 
