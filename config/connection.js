@@ -6,8 +6,8 @@ var connection = mysql.createConnection({
   port: 3306,
   host: 'localhost',
   user: 'root',
-  password: 'database password goes here',
-  database: 'database name goes here'
+  password: '',
+  database: 'endeavor_db'
 });
 
 connection.connect(function (err) {
