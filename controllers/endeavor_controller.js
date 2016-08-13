@@ -88,8 +88,8 @@ router.get('/endeavors', function (req, res) {
 // accesses the create function in endeavor.js
 // passes the values from the index.handlebars form and passes the db column name
 // redirects to .get /endeavors and reloads page
-router.post('/endeavors/create', function (req, res) {
-  endeavor.create(['endeavor'], [req.body.form.name], function () {
+router.post('/job/create', function (req, res) {
+  endeavor.create(['jobs'], ['jobtitle', 'jobdescription', 'posterid'], [req.body.job_title, req.body.job_description, req.body.poster_id], function () {
     res.redirect('/endeavors');
   });
 });

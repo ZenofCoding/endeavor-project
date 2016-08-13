@@ -12,8 +12,8 @@ var endeavor = {
   // calls INSERT/create function in orm.js
   // passes table name, column name, and value
   // cols and vals are arrays
-  create: function (cols, vals, cb) {
-    orm.create('endeavor table name goes here', cols, vals, function (res) {
+  create: function (table, cols, vals, cb) {
+    orm.create(table, cols, vals, function (res) {
       cb(res);
     });
   },
