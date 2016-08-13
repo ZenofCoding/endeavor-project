@@ -10,18 +10,35 @@ CREATE TABLE `user` (
   `firstName` varchar(255) NOT NULL,
   `lastName` varchar(255) NOT NULL,
   `email` varchar(255),
+  `avatar` varchar(255),
   `phoneNumber1` varchar(15) NOT NULL,
   `phoneNumber2` varchar(15),
   `address` varchar(255),
   `state` varchar(50),
   `zip` varchar(50),
-  PRIMARY KEY (userID)
+  `signUp` datetime DEFAULT now(),
+  `lastLogin` datetime,
+  `notesCheck` datetime,
+  `activate` boolean DEFAULT true,
+  PRIMARY KEY (`userID`)
 );
 
 CREATE TABLE `type` (
   `typeID` int NOT NULL AUTO_INCREMENT,
   `description` varchar(255) NOT NULL,
   PRIMARY KEY (`typeID`)
+);
+
+CREATE TABLE `status` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `osid` INT UNSIGNED NOT NULL,
+  `account_name` VARCHAR(20) NOT NULL,
+  `author` VARCHAR(20) NOT NULL,
+  `type` enum('a', 'b', 'c') NOT NULL,
+  `data` TEXT,
+  `postdate` DATETIME NOT NULL,
+      PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC)
 );
 
 #DROP TABLE `userType`;
@@ -104,14 +121,19 @@ CREATE TABLE `userGallery` (
   FOREIGN KEY (`galleryID`) REFERENCES `gallery`(`galleryID`)
 );
 
-CREATE TABLE `request` (
-  `requestID` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `jobs` (
+  `jobID` int NOT NULL AUTO_INCREMENT,
   `userID` int NOT NULL,
   `bidID` int NOT NULL,
   `categoryID` int NOT NULL,
   `subCategoryID` int NOT NULL,
-  `Description` varchar(255) NOT NULL,
-   PRIMARY KEY (`requestID`),
+  `Description` text NOT NULL,
+  `image` varchar(255),
+  `created` datetime DEFAULT now(),
+  `jobStart` datetime,
+  `deadline` datetime,
+  `completed` boolean DEFAULT false,
+   PRIMARY KEY (`jobID`),
    FOREIGN KEY (`userID`) REFERENCES `user`(`userID`),
    FOREIGN KEY (`categoryID`) REFERENCES `category`(`categoryID`),
    FOREIGN KEY (`subcategoryID`) REFERENCES `subcategory`(`subcategoryID`),

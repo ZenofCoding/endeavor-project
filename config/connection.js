@@ -8,6 +8,8 @@ var connection = mysql.createConnection({
   user: 'root',
   password: '',
   database: 'endeavor_db'
+  // password: 'sector001',
+  // database: 'my_schema'
 });
 
 connection.connect(function (err) {
