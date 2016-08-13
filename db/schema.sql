@@ -24,10 +24,13 @@ CREATE TABLE `type` (
   PRIMARY KEY (`typeID`)
 );
 
+#DROP TABLE `userType`;
 CREATE TABLE `userType` (
   `userID` INT NOT NULL,
   `typeID` INT NOT NULL,
-  PRIMARY KEY (`userID`, `typeID`)
+  PRIMARY KEY (`userID`, `typeID`),
+  FOREIGN KEY (`userID`) REFERENCES `user`(`userID`),
+  FOREIGN KEY (`typeID`) REFERENCES `type`(`typeID`)
 );
 
 CREATE TABLE `category` (
@@ -36,20 +39,25 @@ CREATE TABLE `category` (
   PRIMARY KEY (`categoryID`)
 );
 
+#DROP TABLE `subCategory`;
 CREATE TABLE `subCategory` (
   `subCategoryID` int NOT NULL AUTO_INCREMENT,
   `categoryID` int NOT NULL,
   `description` varchar(255) NOT NULL,
-  PRIMARY KEY (`subCategoryID`)
+  PRIMARY KEY (`subCategoryID`),
+  FOREIGN KEY (`categoryID`) REFERENCES `category`(`categoryID`)
 );
 
+#DROP TABLE `bid`;
 CREATE TABLE `bid` (
   `bidID` int NOT NULL AUTO_INCREMENT,
   `requestID` int NOT NULL,
   `userID` int NOT NULL,
   `description` varchar(255) NOT NULL,
   `amount` int NOT NULL,
-  PRIMARY KEY (`bidID`)
+  PRIMARY KEY (`bidID`),
+  FOREIGN KEY (`userID`) REFERENCES `user`(`userID`)#,
+  #FOREIGN KEY (`requestID`) REFERENCES `request`(`requestID`)
 );
 
 
@@ -59,10 +67,13 @@ CREATE TABLE `referral` (
   PRIMARY KEY (`referralID`)
 );
 
+#DROP TABLE `userReferral`;
 CREATE TABLE `userReferral` (
   `userID` int NOT NULL,
   `referralID` int NOT NULL,
-  PRIMARY KEY (`userID`, `referralID`)
+  PRIMARY KEY (`userID`, `referralID`),
+  FOREIGN KEY (`userID`) REFERENCES `user`(`userID`),
+  FOREIGN KEY (`referralID`) REFERENCES `referral`(`referralID`)
 );
 
 CREATE TABLE `faq` (
@@ -72,7 +83,10 @@ CREATE TABLE `faq` (
   `categoryID` int NOT NULL,
   `userID` int NOT NULL,
   `subcategoryID` int NOT NULL,
-  PRIMARY KEY (`faqID`)
+  PRIMARY KEY (`faqID`),
+  FOREIGN KEY (`userID`) REFERENCES `user`(`userID`),
+  FOREIGN KEY (`categoryID`) REFERENCES `category`(`categoryID`),
+  FOREIGN KEY (`subcategoryID`) REFERENCES `subcategory`(`subcategoryID`)
 );
 
 CREATE TABLE `gallery` (
@@ -81,10 +95,13 @@ CREATE TABLE `gallery` (
   PRIMARY KEY (`galleryID`)
 );
 
+#DROP TABLE `userGallery`;
 CREATE TABLE `userGallery` (
   `userID` int NOT NULL,
   `GalleryID` int NOT NULL,
-  PRIMARY KEY (`userID`, `galleryID`)
+  PRIMARY KEY (`userID`, `galleryID`),
+  FOREIGN KEY (`userID`) REFERENCES `user`(`userID`),
+  FOREIGN KEY (`galleryID`) REFERENCES `gallery`(`galleryID`)
 );
 
 CREATE TABLE `request` (
@@ -94,5 +111,9 @@ CREATE TABLE `request` (
   `categoryID` int NOT NULL,
   `subCategoryID` int NOT NULL,
   `Description` varchar(255) NOT NULL,
-   PRIMARY KEY (`requestID`)
+   PRIMARY KEY (`requestID`),
+   FOREIGN KEY (`userID`) REFERENCES `user`(`userID`),
+   FOREIGN KEY (`categoryID`) REFERENCES `category`(`categoryID`),
+   FOREIGN KEY (`subcategoryID`) REFERENCES `subcategory`(`subcategoryID`),
+   FOREIGN KEY (`bidID`) REFERENCES `bid`(`bidID`)
 );
