@@ -204,6 +204,39 @@
         </div>
       </div>
 
+      <!-- begin order up wrapper -->
+    <a name="comment test"></a>
+        <div class="content-section-a">
+
+            <div class="container">
+                <div class="row">
+                  <!-- loops through each burger -->
+                  {{#each jobs}}
+                    <!-- checks if burger has been eaten yet -->
+                    <!-- {{#unless this.devoured}} -->
+                      <li class="names-devour">
+                        <!-- runs if burger is NOT marked as eaten in DB -->
+                        <!-- {{this.burger_name}} -->
+                      </li>
+                      
+                      <li>  
+                        <!-- updates DB as this burger has been eaten. Posts to burgers_controller.js -->
+                        <!-- method override used to pass PUT as POST -->
+                        <form action="burgers/update/{{this.id}}?_method=PUT" method="POST">
+                          <input type="hidden" name="devoured" value="true">
+                          <button class="devour" type="submit">Devour!</button>
+                        </form>
+
+                      </li>
+                    <!-- {{/unless}} -->
+                  {{/each}}
+                </div>
+
+            </div>
+            <!-- /.container -->
+
+        </div>
+
     <a name="comment test"></a>
     <div class="content-section-a">
 
