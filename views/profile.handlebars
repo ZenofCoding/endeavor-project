@@ -22,6 +22,10 @@
     <link href="/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
+    <!-- added links to style sheets -->
+    <!-- <link rel="stylesheet" type="text/css" href="/assets/css/reset.css"> -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css" />
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -209,62 +213,58 @@
         <div class="content-section-a">
 
             <div class="container">
+                <a class="btn btn-warning btn-lg" data-toggle="modal" data-target="#jobPostModal">Create New Job Posting</a>
+
+                <!-- loops through each job -->
+                {{#each jobs}}
+                <!-- checks if job has been completed -->
+                {{#unless this.completed}}
+
                 <div class="row">
-                  <!-- loops through each burger -->
-                  {{#each jobs}}
-                    <!-- checks if burger has been eaten yet -->
-                    <!-- {{#unless this.devoured}} -->
-                      <li class="names-devour">
+                
+                    <div class="job-box-container">  
+                        <a href="/viewJob/{{this.jobID}}">
+                            <div class="job-box-small">
+                                <div class="job-title-box">
+                                    <h2 class="job-title">{{this.title}}</h2>
+                                </div>
+                                <img class="job-box-image1" src="{{this.image}}">
+                                <p class="job-title-desc">{{this.description}}</p>
+                                <div class="job-box-footer"></div>   
+                            </div>          
+                        </a>
+                    </div>
+                      
+                      <!-- show any messages that come back with authentication -->
+                    {{#if message}}
+                        <div class="alert alert-danger">{{message}}</div> 
+                    {{/if}}
+
+                    <!-- COMMENT FORM -->
+                    <form action="/comment/{{this.jobID}}" method="post">
+                        <div class="form-group">
+                            <label>Ask a question or comment on this posting.</label>
+                            <textarea type="text" class="form-control" name="comment"></textarea>
+                            <!-- <input type="hidden" name="this_id" data-id="{{this.jobID}}"> -->
+                        </div>
+
+                        <button type="submit" class="btn btn-warning btn-lg">Submit</button>
+                    </form>
+            
+                </div>
+                {{/unless}}
+                {{#if this.completed}}
+                    <li class="names-devour">
                         <!-- runs if burger is NOT marked as eaten in DB -->
                         <!-- {{this.burger_name}} -->
-                      </li>
-                      
-                      <li>  
-                        <!-- updates DB as this burger has been eaten. Posts to burgers_controller.js -->
-                        <!-- method override used to pass PUT as POST -->
-                        <form action="burgers/update/{{this.id}}?_method=PUT" method="POST">
-                          <input type="hidden" name="devoured" value="true">
-                          <button class="devour" type="submit">Devour!</button>
-                        </form>
-
-                      </li>
-                    <!-- {{/unless}} -->
-                  {{/each}}
-                </div>
+                    </li>
+                {{/if}}
+                {{/each}}
 
             </div>
             <!-- /.container -->
 
         </div>
-
-    <a name="comment test"></a>
-    <div class="content-section-a">
-
-        <div class="container">
-          <div class="row">
-
-            <!-- show any messages that come back with authentication -->
-            {{#if message}}
-                <div class="alert alert-danger">{{message}}</div> 
-            {{/if}}
-
-            <!-- LOGIN FORM -->
-            <form action="/comment" method="post">
-                <div class="form-group">
-                    <label>Ask a question or comment on this posting.</label>
-                    <textarea type="text" class="form-control" name="comment"></textarea>
-                </div>
-
-                <button type="submit" class="btn btn-warning btn-lg">Submit</button>
-            </form>
-          </div>
-
-        </div>
-        <!-- /.container -->
-
-    </div>
-
-    <div data-toggle="modal" data-target="#jobPostModal">Create New Job</div>
 
   <a name="services"></a>
     <div class="content-section-a">

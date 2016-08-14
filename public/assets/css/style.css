@@ -14,3 +14,42 @@
   color: #f8f8f8;
   width: 100%;
 }
+
+.job-box-container > a{
+  text-decoration: none;
+  color: #000000;
+}
+
+.job-box-small{
+  text-decoration: none;
+  position: relative;
+  margin-top: 15px;
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 6px;
+}
+
+.job-title-box{
+  position: relative;
+  background-color: #2a2a2a;
+  padding: 1px 15px 1px 15px;
+}
+
+.job-title{
+  color: #ffffff;
+}
+
+.job-box-image1{
+  float: left;
+  height: 150px;
+  border: 1px solid #f0ad4e;
+  margin: 15px;
+}
+
+.job-title-desc{
+  margin: 15px 15px 15px 15px;
+}
+
+.job-box-footer{
+  clear: left;
+}
