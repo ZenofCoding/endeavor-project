@@ -156,10 +156,10 @@
                       <label for="category">Category</label>
                       <select id="category" class="form-control" name="category" required>
                       <option value="">Choose a category</option>
-                      <option value="cleaning">Cleaning</option>
-                      <option value="computers">Computers</option>
-                      <option value="construction">Construction</option>
-                      <option value="landscaping">Landscaping</option>
+                      <option value="Cleaning">Cleaning</option>
+                      <option value="Computers">Computers</option>
+                      <option value="Construction">Construction</option>
+                      <option value="Landscaping">Landscaping</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -229,7 +229,11 @@
                                 </div>
                                 <img class="job-box-image1" src="{{this.image}}">
                                 <p class="job-title-desc">{{this.description}}</p>
-                                <div class="job-box-footer"></div>   
+                                <div class="job-box-footer">
+                                    <a class="btn btn-warning btn-lg job-box-category">{{this.category}}</a>
+                                    <a class="btn btn-warning btn-lg job-box-category">{{this.subcategory}}</a>
+                                    <h2 class="job-box-price">${{this.budget}}</h2>   
+                                </div>   
                             </div>          
                         </a>
                     </div>
