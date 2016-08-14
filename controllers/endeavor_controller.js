@@ -74,13 +74,13 @@ router.get('/endeavors', function (req, res) {
     // res.render('profile', {
     //   user : req.user // get the user out of session and pass to template
     // });
-    var userObject = { user : req.user };
+    //var userObject = { user : req.user };
     var condition = 'userID = ' + req.user.id;
     endeavor.allWhere('jobs', condition, function (jobs) {
       // var hbsObject = { endeavors: data, user : req.user };
       // console.log(hbsObject);
       res.render('profile', {
-        user: userObject, 
+        user: req.user, 
         jobs: jobs
       });
       console.log(jobs);
