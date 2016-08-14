@@ -26,7 +26,8 @@
   margin-top: 15px;
   background-color: #ffffff;
   border: 1px solid #000000;
-  border-radius: 6px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
 }
 
 .job-title-box{
@@ -51,5 +52,23 @@
 }
 
 .job-box-footer{
+  position: relative;
   clear: left;
+  border-top: 1px solid #f0ad4e;
+  padding: 5px 15px 5px 15px; 
+}
+
+.job-box-category{
+  margin-right: 15px;
+  background-color: #2a2a2a;
+  font-size: 12px;
+  border-radius: 0px;
+  border: 1px solid #2a2a2a;
+}
+
+.job-box-price{
+  position: absolute;
+  right: 15px;
+  bottom: 8px;
+  margin-bottom: 0;
 }
