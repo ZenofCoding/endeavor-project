@@ -86,7 +86,13 @@
 
     <!-- Header -->
     <a name="about"></a>
-    <div class="intro-header">
+    <div class="intro-replace-profile">
+        {{#if user.hasbackground}}
+            <img class="intro-header-profile" src="{{user.background}}">
+        {{/if}}
+        {{#unless user.hasbackground}}
+            <img class="intro-header-profile" src="https://wallpaperscraft.com/image/grass_sky_blue_purity_flowers_yellow_45522_3840x1200.jpg">
+        {{/unless}}
         <div class="container">
 
             <div class="row">

@@ -1,0 +1,16 @@
+.intro-header-index{
+  background: url(../images/intro-bg.jpg) no-repeat center center;
+}
+
+.intro-header-profile {
+  position: absolute;
+  width: 100%;
+  left: 0;
+}
+
+.intro-replace-profile {
+  padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+  text-align: center;
+  color: #f8f8f8;
+  width: 100%;
+}
