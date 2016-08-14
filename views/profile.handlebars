@@ -44,7 +44,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand topnav" href="#" title="Home">Endeavor</a>
+                <a class="navbar-brand topnav" href="/endeavors" title="Home">Endeavor</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -118,23 +118,92 @@
 
     <!-- Page Content -->
 
-    <!-- form for adding new burgers to DB. Posts to burgers_controller.js -->
-    <form action="job/create" method="POST">
-
-      <div class="form-group">
-        <input type="text" id="job_title" class="form-control" name="job_title" placeholder=" Add a New Job">
-        <textarea type="text" class="form-control" name="job_description"></textarea>
-        <input type="hidden" name="poster_id" value="{{user.id}}">
-        <button class="btn btn-warning btn-lg" type="submit">Add Job</button>
+    <!-- Modal for adding new jobs to DB. Posts to endeavor_controller.js -->
+      <div class="modal fade" id="jobPostModal" role="dialog">
+        <div class="modal-dialog">
+        
+          <!-- Modal content inputs populated from script.js-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Create a New Job</h4>
+            </div>
+            <div class="modal-body">
+              <form action="job/create" method="POST">
+                <div class="form-group">
+                    <label for="job_title">Title</label>
+                    <input type="text" id="job_title" class="form-control" name="job_title" placeholder=" Give your job a title" required>
+                </div>
+                <div class="form-group">
+                    <label for="job_description">Description</label>
+                    <textarea type="text" id="job_description" class="form-control" name="job_description" rows="10" placeholder=" Tell us about the job, task, or project you are hiring for." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="image1">Main Image</label>
+                    <input type="text" id="image1" class="form-control" name="image1"  placeholder="http://example-picture.jpg" required>
+                    <label for="image1">You can add more images later.</label>
+                </div>
+                <div class="form-group">
+                      <label for="category">Category</label>
+                      <select id="category" class="form-control" name="category" required>
+                      <option value="">Choose a category</option>
+                      <option value="cleaning">Cleaning</option>
+                      <option value="computers">Computers</option>
+                      <option value="construction">Construction</option>
+                      <option value="landscaping">Landscaping</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="subcategory">Subcategory</label>
+                    <input type="text" id="subcategory" class="form-control" name="subcategory" placeholder=" Enter a subcategory" required>
+                </div>
+                <div class="form-group">
+                    <label for="bidding">Allow users to submit bids or estimates for this posting?</label>
+                    <select id="bidding" class="form-control" name="bidding" required>
+                      <option value="">Choose an option</option>
+                      <option value="true">Yes</option>
+                      <option value="false">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="start">Start Date</label>
+                    <input type="date" id="start" class="form-control" name="start">
+                </div>
+                <div class="form-group">
+                    <label for="end">End Date</label>
+                    <input type="date" id="end" class="form-control" name="end">
+                </div>
+                <div class="form-group">
+                    <label for="firm">Is your budget for this posting "Firm" or "Negotiable"?</label>
+                    <select id="firm" class="form-control" name="firm" required>
+                      <option value="">Choose an option</option>
+                      <option value="firm">Firm</option>
+                      <option value="negotiable">Negotiable</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="budget">Budget</label>
+                    <input type="text" id="budget" class="form-control" name="budget" placeholder=" Example... $250" required>
+                </div>
+                <input type="hidden" name="user_id" value="{{user.id}}">
+                <input type="hidden" name="type" value="p">
+                <button class="btn btn-warning btn-lg" type="submit">Add Job</button>
+              </form>
+            </div>
+            <div class="modal-footer">
+                <!-- <label>Don't have an account? Create one for free.</label> -->
+            </div>
+          </div>
+          
+        </div>
       </div>
-
-    </form>
 
     <a name="comment test"></a>
     <div class="content-section-a">
 
         <div class="container">
           <div class="row">
+
             <!-- show any messages that come back with authentication -->
             {{#if message}}
                 <div class="alert alert-danger">{{message}}</div> 
@@ -155,6 +224,8 @@
         <!-- /.container -->
 
     </div>
+
+    <div data-toggle="modal" data-target="#jobPostModal">Create New Job</div>
 
   <a name="services"></a>
     <div class="content-section-a">
