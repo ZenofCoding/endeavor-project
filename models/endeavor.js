@@ -4,8 +4,14 @@ var orm = require('../config/orm.js');
 // object that is accessed from the gets and posts from endeavor_controller.js
 var endeavor = {
   // calls SELECT */all function in orm.js passing table name
-  all: function (cb) {
-    orm.all('endeavor table name goes here', function (res) {
+  all: function (table, cb) {
+    orm.all(table, function (res) {
+      cb(res);
+    });
+  },
+  // calls SELECT */all function where condition = ? in orm.js passing table name
+  allWhere: function (table, condition, cb) {
+    orm.allWhere(table, condition, function (res) {
       cb(res);
     });
   },

@@ -37,6 +37,20 @@ var orm = {
       cb(result);
     });
   },
+  // selects all rows from DB table
+  allWhere: function (table, condition, cb) {
+    var queryString = 'SELECT * FROM ' + table + ' ';
+
+    queryString = queryString + ' WHERE ';
+    queryString = queryString + condition;
+
+    console.log(queryString);
+
+    connection.query(queryString, function (err, result) {
+      if (err) throw err;
+      cb(result);
+    });
+  },
     // vals is an array of values that we want to save to cols
     // cols are the columns we want to insert the values into
     // insert into DB as prepared statement using parameters passed in

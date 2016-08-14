@@ -71,8 +71,19 @@ router.get('/endeavors', function (req, res) {
   // we will want this protected so you have to be logged in to visit
   // we will use route middleware to verify this (the isLoggedIn function)
   router.get('/profile', isLoggedIn, function(req, res) {
-    res.render('profile', {
-      user : req.user // get the user out of session and pass to template
+    // res.render('profile', {
+    //   user : req.user // get the user out of session and pass to template
+    // });
+    var userObject = { user : req.user };
+    var condition = 'userID = ' + req.user.id;
+    endeavor.allWhere('jobs', condition, function (jobs) {
+      // var hbsObject = { endeavors: data, user : req.user };
+      // console.log(hbsObject);
+      res.render('profile', {
+        user: userObject, 
+        jobs: jobs
+      });
+      console.log(jobs);
     });
     console.log(req.user);
   });
@@ -90,7 +101,7 @@ router.get('/endeavors', function (req, res) {
 // redirects to .get /endeavors and reloads page
 router.post('/job/create', function (req, res) {
   endeavor.create(['jobs'], ['title', 'description', 'userID', 'image', 'category', 'subcategory', 'bidding', 'jobstart', 'deadline', 'firmness', 'budget'], [req.body.job_title, req.body.job_description, req.body.user_id, req.body.image1, req.body.category, req.body.subcategory, req.body.bidding, req.body.start, req.body.end, req.body.firm, req.body.budget], function () {
-    res.redirect('/endeavors');
+    res.redirect('/profile');
   });
 });
 
