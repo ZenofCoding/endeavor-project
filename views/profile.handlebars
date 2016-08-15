@@ -208,19 +208,41 @@
       </div>
 
       <!-- begin order up wrapper -->
-    <a name="comment test"></a>
+    <a name="jobs area"></a>
+        <div class="content-section-b">
+
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                        <hr class="section-heading-spacer">
+                        <div class="clearfix"></div>
+                        <h2 class="section-heading">Find the best company<br>or person for the job!</h2>
+                        <p class="lead">Start a bidding war over your job, task, or project. Review portfolios and credentials to make a confident decision based on merit.</p>
+                    </div>
+                    <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+                        <a class="btn btn-warning btn-lg new-job-btn" data-toggle="modal" data-target="#jobPostModal" alt="">Create<br>New<br>Job<br>Posting</a>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.container -->
+
+        </div>
+
+      <!-- begin order up wrapper -->
+    <a name="jobs list"></a>
         <div class="content-section-a">
 
             <div class="container">
-                <a class="btn btn-warning btn-lg" data-toggle="modal" data-target="#jobPostModal">Create New Job Posting</a>
-
+                
                 <!-- loops through each job -->
                 {{#each jobs}}
                 <!-- checks if job has been completed -->
                 {{#unless this.completed}}
 
                 <div class="row">
-                
+
                     <div class="job-box-container">  
                         <a class="job-link" href="/viewJob/{{this.jobID}}">
                             {{#if this.bidding}}
@@ -238,19 +260,12 @@
                                 {{else}}
                                     <img class="job-view-image" src="/assets/images/view_fixed_btn.png">  
                                 {{/if}}
-                                <p class="job-title-desc">{{this.description}}</p>
+                                <p class="job-title-desc">{{trimString this.description}}</p>
 
                                 <div class="job-box-footer">
                                     <a class="btn btn-warning btn-lg job-box-category">{{this.category}}</a>
                                     <a class="btn btn-warning btn-lg job-box-category">{{this.subcategory}}</a>
                                     <h2 class="job-box-price">${{this.budget}}</h2>
-                                    <!-- <a class="float-right" href="/viewJob/{{this.jobID}}">
-                                        {{#if this.bidding}}
-                                            <img class="job-view-image" src="/assets/images/view_bid_btn.png">
-                                        {{else}}
-                                            <img class="job-view-image" src="/assets/images/view_fixed_btn.png">  
-                                        {{/if}}
-                                    </a> -->   
                                 </div>   
                             </div>          
                         </a>
@@ -418,14 +433,15 @@
     <script src="/assets/scripts/bootstrap.min.js"></script>
 
     <!-- Endeavor Script -->
-    <script src="/assets/scripts/script.js"></script>
+    <!-- <script src="/assets/scripts/script.js"></script> -->
 
-    <!-- <script type="text/javascript">
+    <script type="text/javascript">
         Handlebars.registerHelper('trimString', function(passedString) {
             var theString = passedString.substring(0,50);
+            console.log("theString", theString);
             return new Handlebars.SafeString(theString)
         });
-    </script> -->
+    </script>
 
 </body>
 
