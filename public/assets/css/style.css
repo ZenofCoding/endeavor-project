@@ -1,0 +1,108 @@
+.intro-header-index{
+  background: url(../images/intro-bg.jpg) no-repeat center center;
+}
+
+.intro-header-profile {
+  position: absolute;
+  width: 100%;
+  left: 0;
+}
+
+.intro-replace-profile {
+  padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+  text-align: center;
+  color: #f8f8f8;
+  width: 100%;
+}
+
+.job-box-container{
+  margin-top: 30px;
+}
+
+.job-link{
+  position: relative;
+  text-decoration: none;
+  color: #000000;
+}
+
+.job-link:hover{
+  text-decoration: none;
+  color: #000000;
+}
+
+.job-box-small{
+  text-decoration: none;
+  position: relative;
+  margin-top: 15px;
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.job-bid-image{
+  position: absolute;
+  top: -18px;
+  left: -13px;
+  width: 200px;
+  z-index: 101;
+}
+
+.job-title-box{
+  position: relative;
+  background-color: #2a2a2a;
+  padding: 1px 15px 1px 15px;
+}
+
+.job-title{
+  margin-left: 150px;
+  color: #ffffff;
+}
+
+.job-box-image1{
+  float: left;
+  /*clear: right;*/
+  height: 150px;
+  border: 1px solid #f0ad4e;
+  margin: 15px;
+}
+
+.job-title-desc{
+  margin: 15px 15px 15px 15px;
+  white-space: pre-wrap;
+}
+
+.float-right{
+  position: relative;
+  float: right;
+}
+
+.job-view-image{
+  position: relative;
+  float: right;
+  height: 65px;
+  margin-top: 9px;
+  right: -11px;
+}
+
+.job-box-footer{
+  position: relative;
+  clear: left;
+  border-top: 1px solid #f0ad4e;
+  padding: 5px 15px 5px 15px; 
+}
+
+.job-box-category{
+  margin-right: 15px;
+  background-color: #2a2a2a;
+  font-size: 12px;
+  border-radius: 0px;
+  border: 1px solid #2a2a2a;
+}
+
+.job-box-price{
+  position: absolute;
+  right: 15px;
+  bottom: 8px;
+  margin-bottom: 0;
+}
