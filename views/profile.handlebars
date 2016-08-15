@@ -73,10 +73,10 @@
                     {{/if}}
                     {{#unless user}}
                     <li>
-                        <a href="/login">Local Login</a>
+                        <a href="/login">Login</a>
                     </li>
                     <li>
-                        <a href="/signup">Local Signup</a>
+                        <a href="/signup">Signup</a>
                     </li>
                     {{/unless}}
                 </ul>
@@ -192,7 +192,7 @@
                 </div>
                 <div class="form-group">
                     <label for="budget">Budget</label>
-                    <input type="text" id="budget" class="form-control" name="budget" placeholder=" Example... $250" required>
+                    <input type="text" id="budget" class="form-control" name="budget" value="$" placeholder=" Example... $250" required>
                 </div>
                 <input type="hidden" name="user_id" value="{{user.id}}">
                 <input type="hidden" name="type" value="p">
@@ -222,37 +222,50 @@
                 <div class="row">
                 
                     <div class="job-box-container">  
-                        <a href="/viewJob/{{this.jobID}}">
+                        <a class="job-link" href="/viewJob/{{this.jobID}}">
+                            {{#if this.bidding}}
+                                <img class="job-bid-image" src="/assets/images/bid_btn.png">
+                            {{else}}
+                                <img class="job-bid-image" src="/assets/images/fixed_btn.png">  
+                            {{/if}}
                             <div class="job-box-small">
                                 <div class="job-title-box">
-                                    <h2 class="job-title">{{this.title}}</h2>
+                                        <h2 class="job-title">{{this.title}}</h2>
                                 </div>
                                 <img class="job-box-image1" src="{{this.image}}">
                                 <p class="job-title-desc">{{this.description}}</p>
+
                                 <div class="job-box-footer">
                                     <a class="btn btn-warning btn-lg job-box-category">{{this.category}}</a>
                                     <a class="btn btn-warning btn-lg job-box-category">{{this.subcategory}}</a>
-                                    <h2 class="job-box-price">${{this.budget}}</h2>   
+                                    <h2 class="job-box-price">${{this.budget}}</h2>
+                                    <a href="/viewJob/{{this.jobID}}">
+                                        {{#if this.bidding}}
+                                            <img class="job-view-image" src="/assets/images/view_bid_btn.png">
+                                        {{else}}
+                                            <img class="job-view-image" src="/assets/images/view_fixed_btn.png">  
+                                        {{/if}}
+                                    </a>   
                                 </div>   
                             </div>          
                         </a>
                     </div>
                       
                       <!-- show any messages that come back with authentication -->
-                    {{#if message}}
+                    <!-- {{#if message}}
                         <div class="alert alert-danger">{{message}}</div> 
-                    {{/if}}
+                    {{/if}} -->
 
                     <!-- COMMENT FORM -->
-                    <form action="/comment/{{this.jobID}}" method="post">
+                    <!-- <form action="/comment/{{this.jobID}}" method="post">
                         <div class="form-group">
                             <label>Ask a question or comment on this posting.</label>
                             <textarea type="text" class="form-control" name="comment"></textarea>
-                            <!-- <input type="hidden" name="this_id" data-id="{{this.jobID}}"> -->
+                            <input type="hidden" name="this_id" data-id="{{this.jobID}}">
                         </div>
 
                         <button type="submit" class="btn btn-warning btn-lg">Submit</button>
-                    </form>
+                    </form> -->
             
                 </div>
                 {{/unless}}
@@ -387,7 +400,7 @@
                             <a href="#contact">Contact</a>
                         </li>
                     </ul>
-                    <p class="copyright text-muted small">Copyright &copy; Your Company 2014. All Rights Reserved</p>
+                    <p class="copyright text-muted small">Copyright &copy; Endeavor 2016. All Rights Reserved</p>
                 </div>
             </div>
         </div>
@@ -398,6 +411,16 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="/assets/scripts/bootstrap.min.js"></script>
+
+    <!-- Endeavor Script -->
+    <script src="/assets/scripts/script.js"></script>
+
+    <!-- <script type="text/javascript">
+        Handlebars.registerHelper('trimString', function(passedString) {
+            var theString = passedString.substring(0,50);
+            return new Handlebars.SafeString(theString)
+        });
+    </script> -->
 
 </body>
 
