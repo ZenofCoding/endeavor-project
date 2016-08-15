@@ -92,7 +92,7 @@ router.get('/endeavors', function (req, res) {
   // =====================================
   // we will want this protected so you have to be logged in to visit
   // we will use route middleware to verify this (the isLoggedIn function)
-  router.get('/search', function(req, res) {
+  router.get('/jobsearch', function(req, res) {
     // res.render('profile', {
     //   user : req.user // get the user out of session and pass to template
     // });
@@ -101,9 +101,9 @@ router.get('/endeavors', function (req, res) {
     endeavor.all('jobs', function (jobs) {
       // var hbsObject = { endeavors: data, user : req.user };
       // console.log(hbsObject);
-      res.render('jobs', {
-        jobtitle: req.jobtitle, 
-        jobs: jobs
+      res.render('jobsearch', {
+        //jobtitle: req.jobtitle, 
+        //jobs: jobs
       });
       console.log(jobs);
     });
