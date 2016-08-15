@@ -233,19 +233,24 @@
                                         <h2 class="job-title">{{this.title}}</h2>
                                 </div>
                                 <img class="job-box-image1" src="{{this.image}}">
+                                {{#if this.bidding}}
+                                    <img class="job-view-image" src="/assets/images/view_bid_btn.png">
+                                {{else}}
+                                    <img class="job-view-image" src="/assets/images/view_fixed_btn.png">  
+                                {{/if}}
                                 <p class="job-title-desc">{{this.description}}</p>
 
                                 <div class="job-box-footer">
                                     <a class="btn btn-warning btn-lg job-box-category">{{this.category}}</a>
                                     <a class="btn btn-warning btn-lg job-box-category">{{this.subcategory}}</a>
                                     <h2 class="job-box-price">${{this.budget}}</h2>
-                                    <a href="/viewJob/{{this.jobID}}">
+                                    <!-- <a class="float-right" href="/viewJob/{{this.jobID}}">
                                         {{#if this.bidding}}
                                             <img class="job-view-image" src="/assets/images/view_bid_btn.png">
                                         {{else}}
                                             <img class="job-view-image" src="/assets/images/view_fixed_btn.png">  
                                         {{/if}}
-                                    </a>   
+                                    </a> -->   
                                 </div>   
                             </div>          
                         </a>

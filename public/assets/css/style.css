@@ -48,14 +48,6 @@
   z-index: 101;
 }
 
-.job-view-image{
-  position: relative;
-  float: right;
-  height: 65px;
-  top: -80px;
-  right: -26px;
-}
-
 .job-title-box{
   position: relative;
   background-color: #2a2a2a;
@@ -69,6 +61,7 @@
 
 .job-box-image1{
   float: left;
+  /*clear: right;*/
   height: 150px;
   border: 1px solid #f0ad4e;
   margin: 15px;
@@ -76,6 +69,20 @@
 
 .job-title-desc{
   margin: 15px 15px 15px 15px;
+  white-space: pre-wrap;
+}
+
+.float-right{
+  position: relative;
+  float: right;
+}
+
+.job-view-image{
+  position: relative;
+  float: right;
+  height: 65px;
+  margin-top: 9px;
+  right: -11px;
 }
 
 .job-box-footer{
