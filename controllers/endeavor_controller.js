@@ -110,6 +110,25 @@ router.get('/endeavors', function (req, res) {
     
   });
 
+
+router.get('/jobCategory/:id', function(req, res) {
+    // res.render('profile', {
+    //   user : req.user // get the user out of session and pass to template
+    // });
+    //var userObject = { user : req.user };
+
+  var condition = 'category = "' + req.params.id +'"';
+    endeavor.allWhere('jobs', condition, function (jobs) {
+      // var hbsObject = { endeavors: data, user : req.user };
+      // console.log(hbsObject);
+      res.render('jobsearch', {
+         
+        jobs: jobs
+      });
+      console.log(jobs);
+    });
+    console.log(req.user);
+  });
   // =====================================
   // LOGOUT ==============================
   // =====================================
