@@ -88,6 +88,24 @@ router.get('/endeavors', function (req, res) {
     console.log(req.user);
   });
   // =====================================
+  // PREFERENCES SECTION =========================
+  // =====================================
+  // we will want this protected so you have to be logged in to visit
+  // we will use route middleware to verify this (the isLoggedIn function)
+  router.get('/preferences', isLoggedIn, function(req, res) {
+    var condition = 'userID = ' + req.user.id;
+    endeavor.allWhere('jobs', condition, function (jobs) {
+      // var hbsObject = { endeavors: data, user : req.user };
+      // console.log(hbsObject);
+      res.render('preferences', {
+        user: req.user, 
+        jobs: jobs
+      });
+      console.log(jobs);
+    });
+    console.log(req.user);
+  });
+  // =====================================
   // JobSearch SECTION =========================
   // =====================================
   // we will want this protected so you have to be logged in to visit
@@ -102,7 +120,7 @@ router.get('/endeavors', function (req, res) {
       // var hbsObject = { endeavors: data, user : req.user };
       // console.log(hbsObject);
       res.render('jobsearch', {
-        //jobtitle: req.jobtitle, 
+        user: req.user,
         jobs: jobs
       });
       console.log(jobs);
@@ -122,7 +140,7 @@ router.get('/jobCategory/:id', function(req, res) {
       // var hbsObject = { endeavors: data, user : req.user };
       // console.log(hbsObject);
       res.render('jobsearch', {
-         
+        user: req.user,
         jobs: jobs
       });
       console.log(jobs);
@@ -149,11 +167,12 @@ router.post('/job/create', function (req, res) {
 // accesses the update function in endeavor.js
 // passes endeavor id and hidden input value from form in index.handlebars
 // redirects to .get /endeavors and reloads page
-router.put('/endeavors/update/:id', function (req, res) {
+router.put('/preferences/update/:id', function (req, res) {
+  console.log('working');
   var condition = 'id = ' + req.params.id;
   console.log('condition', condition);
-  endeavor.update({ devoured: req.body.devoured }, condition, function () {
-    res.redirect('/endeavors');
+  endeavor.updateString(['user'], { firstName: req.body.first_name, lastName: req.body.last_name, email: req.body.email_address, phoneNumber1: req.body.phone, address: req.body.address, city: req.body.city, state: req.body.state, zip: req.body.zip }, condition, function () {
+    res.redirect('/preferences');
   });
 });
 

@@ -130,7 +130,7 @@
                                 {{else}}
                                     <img class="job-view-image" src="/assets/images/view_fixed_btn.png">  
                                 {{/if}}
-                                <p class="job-title-desc">{{this.description}}</p>
+                                <p class="job-title-desc">{{trimString this.description}}</p>
 
                                 <div class="job-box-footer">
                                     <a class="btn btn-warning btn-lg job-box-category" href="/jobCategory/{{this.category}}">{{this.category}}</a>
