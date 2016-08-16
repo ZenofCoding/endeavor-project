@@ -87,152 +87,101 @@
 
 
     <!-- Header -->
-    <a name="about"></a>
-    <div class="intro-header intro-header-index">
-        <div class="container">
-
-<div class="row">
-
-            <div class="col-lg-12">
-                <h1 class="page-header">Thumbnail Gallery</h1>
-            </div>
-
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                </a>
-            </div>
-        </div>
+    <!-- <a name="about"></a>
+            <div class="intro-header intro-header-index">
+                <div class="container">
 
 
-        </div>
-        <!-- /.container -->
 
-    </div>
+                </div>
+        
+
+    </div>  -->
     <!-- /.intro-header -->
 
     <!-- Page Content -->
 
   <a  name="services"></a>
-    <div class="content-section-a">
+     <div class="content-section-a">
 
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5 col-sm-6">
-                    <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading">Death to the Stock Photo:<br>Special Thanks</h2>
-                    <p class="lead">A special thanks to <a target="_blank" href="http://join.deathtothestockphoto.com/">Death to the Stock Photo</a> for providing the photographs that you see in this template. Visit their website to become a member.</p>
+            <div class="container">
+                
+                <!-- loops through each job -->
+                {{#each jobs}}
+                <!-- checks if job has been completed -->
+                {{#unless this.completed}}
+
+                <div class="row">
+                
+                    <div class="job-box-container">  
+                        <a class="job-link" href="/viewJob/{{this.jobID}}">
+                            {{#if this.bidding}}
+                                <img class="job-bid-image" src="/assets/images/bid_btn.png">
+                            {{else}}
+                                <img class="job-bid-image" src="/assets/images/fixed_btn.png">  
+                            {{/if}}
+                            <div class="job-box-small">
+                                <div class="job-title-box">
+                                        <h2 class="job-title">{{this.title}}</h2>
+                                </div>
+                                <img class="job-box-image1" src="{{this.image}}">
+                                {{#if this.bidding}}
+                                    <img class="job-view-image" src="/assets/images/view_bid_btn.png">
+                                {{else}}
+                                    <img class="job-view-image" src="/assets/images/view_fixed_btn.png">  
+                                {{/if}}
+                                <p class="job-title-desc">{{this.description}}</p>
+
+                                <div class="job-box-footer">
+                                    <a class="btn btn-warning btn-lg job-box-category">{{this.category}}</a>
+                                    <a class="btn btn-warning btn-lg job-box-category">{{this.subcategory}}</a>
+                                    <h2 class="job-box-price">${{this.budget}}</h2>
+                                    <!-- <a class="float-right" href="/viewJob/{{this.jobID}}">
+                                        {{#if this.bidding}}
+                                            <img class="job-view-image" src="/assets/images/view_bid_btn.png">
+                                        {{else}}
+                                            <img class="job-view-image" src="/assets/images/view_fixed_btn.png">  
+                                        {{/if}}
+                                    </a> -->   
+                                </div>   
+                            </div>          
+                        </a>
+                    </div>
+                      
+                      <!-- show any messages that come back with authentication -->
+                    <!-- {{#if message}}
+                        <div class="alert alert-danger">{{message}}</div> 
+                    {{/if}} -->
+
+                    <!-- COMMENT FORM -->
+                    <!-- <form action="/comment/{{this.jobID}}" method="post">
+                        <div class="form-group">
+                            <label>Ask a question or comment on this posting.</label>
+                            <textarea type="text" class="form-control" name="comment"></textarea>
+                            <input type="hidden" name="this_id" data-id="{{this.jobID}}">
+                        </div>
+
+                        <button type="submit" class="btn btn-warning btn-lg">Submit</button>
+                    </form> -->
+            
                 </div>
-                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                    <img class="img-responsive" src="/assets/images/ipad.png" alt="">
-                </div>
+                {{/unless}}
+                {{#if this.completed}}
+                    <li class="names-devour">
+                        <!-- runs if burger is NOT marked as eaten in DB -->
+                        <!-- {{this.burger_name}} -->
+                    </li>
+                {{/if}}
+                {{/each}}
+
             </div>
+            <!-- /.container -->
 
         </div>
-        <!-- /.container -->
 
-    </div>
-    <!-- /.content-section-a -->
+    
 
-    <div class="content-section-b">
 
-        <div class="container">
-
-            <div class="row">
-                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
-                    <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading">3D Device Mockups<br>by PSDCovers</h2>
-                    <p class="lead">Turn your 2D designs into high quality, 3D product shots in seconds using free Photoshop actions by <a target="_blank" href="http://www.psdcovers.com/">PSDCovers</a>! Visit their website to download some of their awesome, free photoshop actions!</p>
-                </div>
-                <div class="col-lg-5 col-sm-pull-6  col-sm-6">
-                    <img class="img-responsive" src="/assets/images/dog.png" alt="">
-                </div>
-            </div>
-
-        </div>
-        <!-- /.container -->
-
-    </div>
-    <!-- /.content-section-b -->
-
-    <div class="content-section-a">
-
-        <div class="container">
-
-            <div class="row">
-                <div class="col-lg-5 col-sm-6">
-                    <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading">Google Web Fonts and<br>Font Awesome Icons</h2>
-                    <p class="lead">This template features the 'Lato' font, part of the <a target="_blank" href="http://www.google.com/fonts">Google Web Font library</a>, as well as <a target="_blank" href="http://fontawesome.io">icons from Font Awesome</a>.</p>
-                </div>
-                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                    <img class="img-responsive" src="/assets/images/phones.png" alt="">
-                </div>
-            </div>
-
-        </div>
-        <!-- /.container -->
-
-    </div>
-    <!-- /.content-section-a -->
 
   <a  name="contact"></a>
     <div class="banner">

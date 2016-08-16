@@ -103,11 +103,11 @@ router.get('/endeavors', function (req, res) {
       // console.log(hbsObject);
       res.render('jobsearch', {
         //jobtitle: req.jobtitle, 
-        //jobs: jobs
+        jobs: jobs
       });
       console.log(jobs);
     });
-    console.log(req.jobtitle);
+    
   });
 
   // =====================================
