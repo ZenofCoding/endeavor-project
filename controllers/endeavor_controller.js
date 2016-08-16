@@ -106,6 +106,25 @@ router.get('/endeavors', function (req, res) {
     console.log(req.user);
   });
   // =====================================
+  // PREFERENCES SUCCESS SECTION =========================
+  // =====================================
+  // we will want this protected so you have to be logged in to visit
+  // we will use route middleware to verify this (the isLoggedIn function)
+  router.get('/preferences/:success', isLoggedIn, function(req, res) {
+    var condition = 'userID = ' + req.user.id;
+    endeavor.allWhere('jobs', condition, function (jobs) {
+      // var hbsObject = { endeavors: data, user : req.user };
+      // console.log(hbsObject);
+      res.render('preferences', {
+        user: req.user, 
+        jobs: jobs,
+        success: req.params.success
+      });
+      console.log(jobs);
+    });
+    console.log(req.user);
+  });
+  // =====================================
   // JobSearch SECTION =========================
   // =====================================
   // we will want this protected so you have to be logged in to visit
@@ -146,7 +165,7 @@ router.get('/jobCategory/:id', function(req, res) {
       console.log(jobs);
     });
     console.log(req.user);
-  });
+});
   // =====================================
   // LOGOUT ==============================
   // =====================================
@@ -168,11 +187,10 @@ router.post('/job/create', function (req, res) {
 // passes endeavor id and hidden input value from form in index.handlebars
 // redirects to .get /endeavors and reloads page
 router.put('/preferences/update/:id', function (req, res) {
-  console.log('working');
   var condition = 'id = ' + req.params.id;
   console.log('condition', condition);
   endeavor.updateString(['user'], { firstName: req.body.first_name, lastName: req.body.last_name, email: req.body.email_address, phoneNumber1: req.body.phone, address: req.body.address, city: req.body.city, state: req.body.state, zip: req.body.zip }, condition, function () {
-    res.redirect('/preferences');
+    res.redirect('/preferences/' + true);
   });
 });
 

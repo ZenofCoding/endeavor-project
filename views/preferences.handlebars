@@ -87,6 +87,31 @@
         <!-- /.container -->
     </nav>
 
+    <!-- Modal for adding new jobs to DB. Posts to endeavor_controller.js -->
+    {{#if success}}
+      <div class="modal show" id="successModal" role="dialog">
+    {{else}}
+      <div class="modal hide" id="successModal" role="dialog">
+    {{/if}}
+        <div class="modal-dialog">
+        
+          <!-- Modal content inputs populated from script.js-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button id="closeSuccess1" type="button" class="close">&times;</button>
+              <h4 class="modal-title">Create a New Job</h4>
+            </div>
+            <div class="modal-body">
+              <h2>Success</h2>
+            </div>
+            <div class="modal-footer">
+                <!-- <label>Don't have an account? Create one for free.</label> -->
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
     <!-- Page Content -->
 
   <a name="account"></a>
@@ -307,15 +332,7 @@
     <script src="/assets/scripts/bootstrap.min.js"></script>
 
     <!-- Endeavor Script -->
-    <!-- <script src="/assets/scripts/script.js"></script> -->
-
-    <!-- <script type="text/javascript">
-        Handlebars.registerHelper('trimString', function(passedString) {
-            var theString = passedString.substring(0,50);
-            console.log("theString", theString);
-            return new Handlebars.SafeString(theString)
-        });
-    </script> -->
+    <script src="/assets/scripts/script.js"></script>
 
 </body>
 
