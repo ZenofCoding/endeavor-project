@@ -30,6 +30,11 @@
   border-color: #f8f8f8; 
 }
 
+.pref-pic{
+  border: 1px solid #f0ad4e;
+  margin-top: 21px;
+}
+
 .new-job-btn{
   padding: 20px 100px 20px 100px;
   font-size: 36px;
