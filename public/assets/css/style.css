@@ -15,6 +15,21 @@
   width: 100%;
 }
 
+.preferences-btn{
+  position: absolute;
+  right: 0;
+  padding: 10px 50px 10px 50px;
+  background-color: #f8f8f8;
+  border-color: #e7e7e7;
+  border-top: none;
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;  
+}
+
+.preferences-btn:hover{
+  border-color: #f8f8f8; 
+}
+
 .new-job-btn{
   padding: 20px 100px 20px 100px;
   font-size: 36px;
