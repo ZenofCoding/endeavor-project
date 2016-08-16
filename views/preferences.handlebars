@@ -99,10 +99,10 @@
           <div class="modal-content">
             <div class="modal-header">
               <button id="closeSuccess1" type="button" class="close">&times;</button>
-              <h4 class="modal-title">Create a New Job</h4>
+              <h4 class="modal-title">Account Preferences</h4>
             </div>
             <div class="modal-body">
-              <h2>Success</h2>
+              <h2>Successfully Updated Account</h2>
             </div>
             <div class="modal-footer">
                 <!-- <label>Don't have an account? Create one for free.</label> -->
@@ -209,11 +209,23 @@
                             <input type="text" id="budget" class="form-control" name="budget" value="$" placeholder=" Example... $250" required>
                         </div> -->
                         <input type="hidden" name="user_id" value="{{user.id}}">
-                        <button class="btn btn-warning btn-lg" type="submit">Update Info</button>
+                        <button class="btn btn-warning btn-lg" type="submit">Update Account Info</button>
                       </form>
                 </div>
                 <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                    <img class="img-responsive" src="/assets/images/ipad.png" alt="">
+                    {{#if user.hasavatar}}
+                        <img class="img-responsive pref-pic" src="{{user.avatar}}" alt="Profile Picture">
+                    {{else}}
+                    <img class="img-responsive pref-pic" src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="Profile Picture">
+                    {{/if}}
+                    <form action="preferences/update/avatar/{{user.id}}?_method=PUT" method="POST">
+                        <div class="form-group">
+                            <label for="profile_avatar">Profile Picture</label>
+                            <input type="text" id="profile_avatar" class="form-control" name="profile_avatar" value="{{user.avatar}}">
+                            <input type="hidden" name="has_avatar" value="true">
+                        </div>
+                        <button class="btn btn-warning btn-lg" type="submit">Update Profile Picture</button>
+                    </form>
                 </div>
             </div>
 

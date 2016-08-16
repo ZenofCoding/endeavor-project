@@ -194,6 +194,19 @@ router.put('/preferences/update/:id', function (req, res) {
   });
 });
 
+// accesses the update function in endeavor.js
+// passes user id
+// redirects to .get /endeavors and reloads page
+router.put('/preferences/update/avatar/:id', function (req, res) {
+  var condition = 'id = ' + req.params.id;
+  console.log('condition', condition);
+  endeavor.update(['user'], { hasavatar: req.body.has_avatar }, condition, function () {
+    endeavor.updateString(['user'], { avatar: req.body.profile_avatar}, condition, function () {
+    res.redirect('/preferences/' + true);
+  });    
+  });
+});
+
 // route middleware to make sure
 function isLoggedIn(req, res, next) {
 
