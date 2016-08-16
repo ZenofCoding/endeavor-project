@@ -90,44 +90,34 @@ router.get('/endeavors', function (req, res) {
   // =====================================
   // JobSearch SECTION =========================
   // =====================================
-  // we will want this protected so you have to be logged in to visit
-  // we will use route middleware to verify this (the isLoggedIn function)
+  // all the available jobs posted on the site
   router.get('/jobsearch', function(req, res) {
-    // res.render('profile', {
-    //   user : req.user // get the user out of session and pass to template
-    // });
-    //var userObject = { user : req.user };
     var condition = '';//'userID = ' + req.user.id;
     endeavor.all('jobs', function (jobs) {
-      // var hbsObject = { endeavors: data, user : req.user };
-      // console.log(hbsObject);
       res.render('jobsearch', {
-        //jobtitle: req.jobtitle, 
         jobs: jobs
       });
       console.log(jobs);
     });
     
   });
-
-
-router.get('/jobCategory/:id', function(req, res) {
-    // res.render('profile', {
-    //   user : req.user // get the user out of session and pass to template
-    // });
-    //var userObject = { user : req.user };
-
+ // all the available jobs posted on the site based on the category
+ router.get('/jobCategory/:id', function(req, res) {
   var condition = 'category = "' + req.params.id +'"';
     endeavor.allWhere('jobs', condition, function (jobs) {
-      // var hbsObject = { endeavors: data, user : req.user };
-      // console.log(hbsObject);
-      res.render('jobsearch', {
-         
+        res.render('jobsearch', {
         jobs: jobs
       });
-      console.log(jobs);
     });
-    console.log(req.user);
+  });
+ // all the available jobs posted on the site based on the subcategory
+ router.get('/jobSubCategory/:id', function(req, res) {
+  var condition = 'subcategory = "' + req.params.id +'"';
+    endeavor.allWhere('jobs', condition, function (jobs) {
+        res.render('jobsearch', {
+        jobs: jobs
+      });
+    });
   });
   // =====================================
   // LOGOUT ==============================
