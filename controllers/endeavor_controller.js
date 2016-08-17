@@ -150,9 +150,9 @@ router.get('/endeavors', function (req, res) {
  //get all the categories information
  router.get('/jobCategoies/', function(req, res) {
   var colName = 'category';
-    endeavor.distinct('jobs', colName, function (categories) {
+    endeavor.distinct('jobs', colName, function (category) {
         res.render('jobsearch', {
-        categories: categories
+        category: category
       });
     });
   });
