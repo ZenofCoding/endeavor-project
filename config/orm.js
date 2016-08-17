@@ -35,7 +35,7 @@ function objToSqlString(ob) {
 
   for (var key in ob) {
     if (ob.hasOwnProperty(key)) {
-      arr.push(key + '=' + "'" + ob[key] + "'");
+      arr.push(key + '=' + '"' + ob[key] + '"');
     }
   }
 
