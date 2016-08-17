@@ -92,7 +92,7 @@
 
 
     <!-- Header -->
-    <a name="about"></a>
+    <!-- <a name="about"></a> -->
     <div class="intro-replace-profile">
         {{#if user.hasbackground}}
             <img class="intro-header-profile" src="{{user.background}}">
@@ -221,7 +221,7 @@
                     <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
                         <hr class="section-heading-spacer">
                         <div class="clearfix"></div>
-                        <h2 class="section-heading">Find the best company<br>or person for the job!</h2>
+                        <h2 class="section-heading">Find the Best Company<br>or Person for the Job!</h2>
                         <p class="lead">Start a bidding war over your job, task, or project. Review portfolios and credentials to make a confident decision based on merit.</p>
                         <a class="btn btn-warning btn-lg" data-toggle="modal" data-target="#jobPostModal" alt="">Create New Job Posting</a>
                     </div>
@@ -229,17 +229,6 @@
                         <img class="img-responsive" src="http://www.breathtaking-network-marketing-secrets.com/images/best-company.png" alt="">
                     </div>
                 </div>
-
-            </div>
-            <!-- /.container -->
-
-        </div>
-
-      <!-- begin order up wrapper -->
-    <a name="jobs list"></a>
-        <div class="content-section-a">
-
-            <div class="container">
                 
                 <!-- loops through each job -->
                 {{#each jobs}}
@@ -307,7 +296,7 @@
 
         </div>
 
-  <a name="services"></a>
+  <a name="about"></a>
     <div class="content-section-a">
 
         <div class="container">
@@ -315,11 +304,15 @@
                 <div class="col-lg-5 col-sm-6">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
-                    <h2 class="section-heading">Death to the Stock Photo:<br>Special Thanks</h2>
-                    <p class="lead">A special thanks to <a target="_blank" href="http://join.deathtothestockphoto.com/">Death to the Stock Photo</a> for providing the photographs that you see in this template. Visit their website to become a member.</p>
+                    <h2 class="section-heading">About<br>{{user.displayName}}</h2>
+                    <p class="lead">{{user.summary}}</p>
                 </div>
                 <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                    <img class="img-responsive" src="/assets/images/ipad.png" alt="">
+                    {{#if user.hasavatar}}
+                        <img class="img-responsive pref-pic" src="{{user.avatar}}" alt="User Profile Picture">
+                    {{else}}
+                    <img class="img-responsive pref-pic" src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="Default Profile Picture">
+                    {{/if}}
                 </div>
             </div>
 
@@ -373,7 +366,7 @@
     </div>
     <!-- /.content-section-a -->
 
-  <a  name="contact"></a>
+  <a name="contact"></a>
     <div class="banner">
 
         <div class="container">

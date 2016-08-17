@@ -161,8 +161,8 @@ router.get('/endeavors', function (req, res) {
   var condition = 'subcategory = "' + req.params.id +'"';
     endeavor.allWhere('jobs', condition, function (jobs) {
         res.render('jobsearch', {
-          jobs: jobs
-        });
+        jobs: jobs
+      });
     });
 });
   // =====================================
