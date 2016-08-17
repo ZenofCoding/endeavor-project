@@ -32,8 +32,16 @@ var endeavor = {
   // calls UPDATE/update function in orm.js
   // passes table name, column name, value, and id
   // objColVals is object
-  update: function (objColVals, condition, cb) {
-    orm.update('endeavor table name goes here', objColVals, condition, function (res) {
+  update: function (table, objColVals, condition, cb) {
+    orm.update(table, objColVals, condition, function (res) {
+      cb(res);
+    });
+  },
+  // calls UPDATE/update function in orm.js
+  // passes table name, column name, value, and id
+  // objColVals is object
+  updateString: function (table, objColVals, condition, cb) {
+    orm.updateString(table, objColVals, condition, function (res) {
       cb(res);
     });
   }

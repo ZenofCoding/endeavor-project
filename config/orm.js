@@ -27,6 +27,22 @@ function objToSql(ob) {
   return arr.toString();
 }
 
+// creates name value pair for column in DB ("with quotes")
+// called from update function below
+function objToSqlString(ob) {
+  // column1=value, column2=value2,...
+  var arr = [];
+
+  for (var key in ob) {
+    if (ob.hasOwnProperty(key)) {
+      arr.push(key + '=' + '"' + ob[key] + '"');
+    }
+  }
+
+  //console.log(arr);
+  return arr;
+}
+
 // object containing MySQL queries
 var orm = {
   // selects all rows from DB table
@@ -76,10 +92,10 @@ var orm = {
     // objColVals would be the columns and values that you want to update
     // an example of objColVals would be {name: Big Mac, devoured: true}
   distinct: function (table, col, cb) {
+    alert('hh');
    var queryString = 'SELECT DISTINCT ';
     queryString = queryString + cols.toString();
     queryString = queryString + ' FROM ' + table;
-
     console.log(queryString);
     connection.query(queryString, function (err, result) {
       if (err) throw err;
@@ -93,6 +109,22 @@ var orm = {
 
     queryString = queryString + ' SET ';
     queryString = queryString + objToSql(objColVals);
+    queryString = queryString + ' WHERE ';
+    queryString = queryString + condition;
+
+    console.log(queryString);
+    connection.query(queryString, function (err, result) {
+      if (err) throw err;
+      cb(result);
+    });
+  },
+    // objColVals would be the columns and values that you want to update
+    // an example of objColVals would be {name: Big Mac, devoured: true}
+  updateString: function (table, objColVals, condition, cb) {
+    var queryString = 'UPDATE ' + table;
+
+    queryString = queryString + ' SET ';
+    queryString = queryString + objToSqlString(objColVals);
     queryString = queryString + ' WHERE ';
     queryString = queryString + condition;
 

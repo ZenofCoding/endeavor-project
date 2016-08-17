@@ -88,6 +88,43 @@ router.get('/endeavors', function (req, res) {
     console.log(req.user);
   });
   // =====================================
+  // PREFERENCES SECTION =========================
+  // =====================================
+  // we will want this protected so you have to be logged in to visit
+  // we will use route middleware to verify this (the isLoggedIn function)
+  router.get('/preferences', isLoggedIn, function(req, res) {
+    var condition = 'userID = ' + req.user.id;
+    endeavor.allWhere('jobs', condition, function (jobs) {
+      // var hbsObject = { endeavors: data, user : req.user };
+      // console.log(hbsObject);
+      res.render('preferences', {
+        user: req.user, 
+        jobs: jobs
+      });
+      console.log(jobs);
+    });
+    console.log(req.user);
+  });
+  // =====================================
+  // PREFERENCES SUCCESS SECTION =========================
+  // =====================================
+  // we will want this protected so you have to be logged in to visit
+  // we will use route middleware to verify this (the isLoggedIn function)
+  router.get('/preferences/:success', isLoggedIn, function(req, res) {
+    var condition = 'userID = ' + req.user.id;
+    endeavor.allWhere('jobs', condition, function (jobs) {
+      // var hbsObject = { endeavors: data, user : req.user };
+      // console.log(hbsObject);
+      res.render('preferences', {
+        user: req.user, 
+        jobs: jobs,
+        success: req.params.success
+      });
+      console.log(jobs);
+    });
+    console.log(req.user);
+  });
+  // =====================================
   // JobSearch SECTION =========================
   // =====================================
   // all the available jobs posted on the site
@@ -115,7 +152,7 @@ router.get('/endeavors', function (req, res) {
   var colName = 'category';
     endeavor.distinct('jobs', colName, function (categories) {
         res.render('jobsearch', {
-        category: category
+        categories: categories
       });
     });
   });
@@ -124,10 +161,10 @@ router.get('/endeavors', function (req, res) {
   var condition = 'subcategory = "' + req.params.id +'"';
     endeavor.allWhere('jobs', condition, function (jobs) {
         res.render('jobsearch', {
-        jobs: jobs
-      });
+          jobs: jobs
+        });
     });
-  });
+});
   // =====================================
   // LOGOUT ==============================
   // =====================================
@@ -146,14 +183,53 @@ router.post('/job/create', function (req, res) {
 });
 
 // accesses the update function in endeavor.js
-// passes endeavor id and hidden input value from form in index.handlebars
-// redirects to .get /endeavors and reloads page
-router.put('/endeavors/update/:id', function (req, res) {
+// passes endeavor id
+// redirects to .get /preferences with a value of true and shows success modal
+router.put('/preferences/update/:id', function (req, res) {
   var condition = 'id = ' + req.params.id;
   console.log('condition', condition);
-  endeavor.update({ devoured: req.body.devoured }, condition, function () {
-    res.redirect('/endeavors');
+  endeavor.updateString(['user'], { firstName: req.body.first_name, lastName: req.body.last_name, email: req.body.email_address, phoneNumber1: req.body.phone, address: req.body.address, city: req.body.city, state: req.body.state, zip: req.body.zip }, condition, function () {
+    res.redirect('/preferences/' + true);
   });
+});
+
+// accesses the update function in endeavor.js
+// passes user id
+// redirects to .get /preferences with a value of true and shows success modal
+router.put('/preferences/update/avatar/:id', function (req, res) {
+  var condition = 'id = ' + req.params.id;
+  console.log('condition', condition);
+  endeavor.update(['user'], { hasavatar: req.body.has_avatar }, condition, function () {
+    endeavor.updateString(['user'], { avatar: req.body.profile_avatar}, condition, function () {
+      res.redirect('/preferences/' + true);
+    });    
+  });
+});
+
+// accesses the update function in endeavor.js
+// passes user id
+// redirects to .get /preferences with a value of true and shows success modal
+router.put('/preferences/update/name/:id', function (req, res) {
+  var condition = 'id = ' + req.params.id;
+  console.log('condition', condition);
+  //endeavor.update(['user'], { hasavatar: req.body.has_avatar }, condition, function () {
+    endeavor.updateString(['user'], { displayName: req.body.profile_name, displaySentence: req.body.profile_sentence}, condition, function () {
+      res.redirect('/preferences/' + true);
+    });    
+  //});
+});
+
+// accesses the update function in endeavor.js
+// passes user id
+// redirects to .get /preferences with a value of true and shows success modal
+router.put('/preferences/update/summary/:id', function (req, res) {
+  var condition = 'id = ' + req.params.id;
+  console.log('condition', condition);
+  //endeavor.update(['user'], { hasavatar: req.body.has_avatar }, condition, function () {
+    endeavor.updateString(['user'], { summary: req.body.profile_summary}, condition, function () {
+      res.redirect('/preferences/' + true);
+    });    
+  //});
 });
 
 // route middleware to make sure

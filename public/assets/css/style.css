@@ -15,6 +15,26 @@
   width: 100%;
 }
 
+.preferences-btn{
+  position: absolute;
+  right: 0;
+  padding: 10px 50px 10px 50px;
+  background-color: #f8f8f8;
+  border-color: #e7e7e7;
+  border-top: none;
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;  
+}
+
+.preferences-btn:hover{
+  border-color: #f8f8f8; 
+}
+
+.pref-pic{
+  border: 1px solid #f0ad4e;
+  margin-top: 21px;
+}
+
 .new-job-btn{
   padding: 20px 100px 20px 100px;
   font-size: 36px;
@@ -73,7 +93,7 @@
 .job-box-image1{
   float: left;
   /*clear: right;*/
-  height: 150px;
+  height: 155px;
   border: 1px solid #f0ad4e;
   margin: 15px;
 }

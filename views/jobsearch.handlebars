@@ -109,11 +109,11 @@
                 <br>
                 <div class="form-group pull-right">
                     <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Categories
-                        <span class="caret"></span></button>
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><a href="/jobCategoies/">{{this.categories}}Categories
+                        <span class="caret"></span></a></button>
                         <ul class="dropdown-menu">
-                            {{#each category}}
-                                <li><a href="{{this.category}}">{{this.category}}</a></li>
+                            {{#each categories}}
+                                <li>{{this.categories}}</li>
                             {{/each}}
                         </ul>
                     </div>
@@ -143,12 +143,14 @@
                                 {{else}}
                                     <img class="job-view-image" src="/assets/images/view_fixed_btn.png">  
                                 {{/if}}
-                                <p class="job-title-desc">{{this.description}}</p>
+                                <p class="job-title-desc">{{trimString this.description}}</p>
 
                                 <div class="job-box-footer">
                                     <a class="btn btn-warning btn-lg job-box-category" href="/jobCategory/{{this.category}}">{{this.category}}</a>
                                     <a class="btn btn-warning btn-lg job-box-category" href="/jobSubCategory/{{this.subcategory}}">{{this.subcategory}}</a>
                                     <h2 class="job-box-price">${{this.budget}}</h2>
+                                </div>   
+
                                     <!-- <a class="float-right" href="/viewJob/{{this.jobID}}">
                                         {{#if this.bidding}}
                                             <img class="job-view-image" src="/assets/images/view_bid_btn.png">

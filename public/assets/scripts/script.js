@@ -1,4 +1,5 @@
-// Handlebars.registerHelper('trimString', function(passedString) {
-//     var theString = passedString.substring(0,150);
-//     return new Handlebars.SafeString(theString)
-// });
+// document.getElementById("closeSuccess1").onclick = function() {closeAcctModal()};
+
+// function closeAcctModal() {
+//   document.getElementById("successModal").className = "modal hide";
+// }

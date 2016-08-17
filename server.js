@@ -25,7 +25,18 @@ app.use(bodyParser.json());
 // override with POST having ?_method=DELETE
 app.use(methodOverride('_method'));
 var exphbs = require('express-handlebars');
-app.engine('handlebars', exphbs({
+var hbs = exphbs.create({
+    // Specify helpers which are only registered on this instance.
+    helpers: {
+        trimString: function(passedString) {
+            var str = passedString.substring(0,725);
+            str = (str.slice(0,-3) + '. . .');
+            return str
+        }
+        // bar: function () { return 'BAR!'; }
+    }
+});
+app.engine('handlebars', hbs.engine, exphbs({
   defaultLayout: 'main'
 }));
 app.set('view engine', 'handlebars');
