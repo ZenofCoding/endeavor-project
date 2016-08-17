@@ -109,10 +109,10 @@
                 <br>
                 <div class="form-group pull-right">
                     <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><a href="/categoies/{{this.category}}"></a>Categories
+                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Categories
                         <span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                            {{#each category}}
+                        <ul class="dropdown-menu"><a href="/categoies/{{this.category}}"></a>
+                            {{#each categoies}}
                                 <li>{{this.category}}</li>
                             {{/each}}
                         </ul>
