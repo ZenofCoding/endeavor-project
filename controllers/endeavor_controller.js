@@ -184,8 +184,8 @@ router.post('/job/create', function (req, res) {
 });
 
 // accesses the update function in endeavor.js
-// passes endeavor id and hidden input value from form in index.handlebars
-// redirects to .get /endeavors and reloads page
+// passes endeavor id
+// redirects to .get /preferences with a value of true and shows success modal
 router.put('/preferences/update/:id', function (req, res) {
   var condition = 'id = ' + req.params.id;
   console.log('condition', condition);
@@ -196,15 +196,41 @@ router.put('/preferences/update/:id', function (req, res) {
 
 // accesses the update function in endeavor.js
 // passes user id
-// redirects to .get /endeavors and reloads page
+// redirects to .get /preferences with a value of true and shows success modal
 router.put('/preferences/update/avatar/:id', function (req, res) {
   var condition = 'id = ' + req.params.id;
   console.log('condition', condition);
   endeavor.update(['user'], { hasavatar: req.body.has_avatar }, condition, function () {
     endeavor.updateString(['user'], { avatar: req.body.profile_avatar}, condition, function () {
-    res.redirect('/preferences/' + true);
-  });    
+      res.redirect('/preferences/' + true);
+    });    
   });
+});
+
+// accesses the update function in endeavor.js
+// passes user id
+// redirects to .get /preferences with a value of true and shows success modal
+router.put('/preferences/update/name/:id', function (req, res) {
+  var condition = 'id = ' + req.params.id;
+  console.log('condition', condition);
+  //endeavor.update(['user'], { hasavatar: req.body.has_avatar }, condition, function () {
+    endeavor.updateString(['user'], { displayName: req.body.profile_name, displaySentence: req.body.profile_sentence}, condition, function () {
+      res.redirect('/preferences/' + true);
+    });    
+  //});
+});
+
+// accesses the update function in endeavor.js
+// passes user id
+// redirects to .get /preferences with a value of true and shows success modal
+router.put('/preferences/update/summary/:id', function (req, res) {
+  var condition = 'id = ' + req.params.id;
+  console.log('condition', condition);
+  //endeavor.update(['user'], { hasavatar: req.body.has_avatar }, condition, function () {
+    endeavor.updateString(['user'], { summary: req.body.profile_summary}, condition, function () {
+      res.redirect('/preferences/' + true);
+    });    
+  //});
 });
 
 // route middleware to make sure
