@@ -105,6 +105,19 @@
      <div class="content-section-a">
 
             <div class="container">
+                <!--get all the job categories -->
+                <br>
+                <div class="form-group pull-right">
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Categories
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            {{#each category}}
+                                <li><a href="{{this.category}}">{{this.category}}</a></li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
                 
                 <!-- loops through each job -->
                 {{#each jobs}}
@@ -136,13 +149,15 @@
                                     <a class="btn btn-warning btn-lg job-box-category" href="/jobCategory/{{this.category}}">{{this.category}}</a>
                                     <a class="btn btn-warning btn-lg job-box-category">{{this.subcategory}}</a>
                                     <h2 class="job-box-price">{{this.budget}}</h2>
-                                    <!-- <a class="float-right" href="/viewJob/{{this.jobID}}">
+                                    <a class="btn btn-warning btn-lg job-box-category" href="/jobSubCategory/{{this.subcategory}}">{{this.subcategory}}</a>
+                                    <h2 class="job-box-price">${{this.budget}}</h2>
+                                    <a class="float-right" href="/viewJob/{{this.jobID}}">
                                         {{#if this.bidding}}
                                             <img class="job-view-image" src="/assets/images/view_bid_btn.png">
                                         {{else}}
                                             <img class="job-view-image" src="/assets/images/view_fixed_btn.png">  
                                         {{/if}}
-                                    </a> -->   
+                                    </a>   
                                 </div>   
                             </div>          
                         </a>
