@@ -1,3 +1,4 @@
+<!-- views/profile.handlebars -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,6 +65,9 @@
                     </li>
                     <li>
                         <a href="#contact">Contact</a>
+                    </li> 
+                    <li>
+                        <a href="/jobsearch">JobSearch</a>
                     </li>
                     {{#if user}}
                         <li>
@@ -85,49 +89,23 @@
         <!-- /.container -->
     </nav>
 
-
-    <!-- Header -->
-    <!-- <a name="about"></a>
-            <div class="intro-header intro-header-index">
-                <div class="container">
-
-
-
-                </div>
-        
-
-    </div>  -->
-    <!-- /.intro-header -->
-
     <!-- Page Content -->
 
-  <a  name="services"></a>
-     <div class="content-section-a">
+      <!-- begin order up wrapper -->
+    <a name="jobs area"></a>
+        <div class="content-section-b">
 
             <div class="container">
-                <!--get all the job categories -->
-                <br>
-                <div class="form-group pull-right">
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Categories
-                        <span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                            {{#each category}}
-                                <li><a href="{{this.category}}">{{this.category}}</a></li>
-                            {{/each}}
-                        </ul>
-                    </div>
-                </div>
-                
+
                 <!-- loops through each job -->
-                {{#each jobs}}
+                {{#each job}}    
                 <!-- checks if job has been completed -->
                 {{#unless this.completed}}
 
                 <div class="row">
-                
+
                     <div class="job-box-container">  
-                        <a class="job-link" href="/viewJob/{{this.jobID}}/{{this.userID}}">
+                        <div class="job-link">
                             {{#if this.bidding}}
                                 <img class="job-bid-image" src="/assets/images/bid_btn.png">
                             {{else}}
@@ -135,7 +113,7 @@
                             {{/if}}
                             <div class="job-box-small">
                                 <div class="job-title-box">
-                                        <h2 class="job-title">{{this.title}}</h2>
+                                    <h2 class="job-title">{{this.title}}</h2>
                                 </div>
                                 <img class="job-box-image1" src="{{this.image}}">
                                 {{#if this.bidding}}
@@ -143,33 +121,24 @@
                                 {{else}}
                                     <img class="job-view-image" src="/assets/images/view_fixed_btn.png">  
                                 {{/if}}
-                                <p class="job-title-desc">{{trimString this.description}}</p>
+                                <p class="job-title-desc">{{this.description}}</p>
 
                                 <div class="job-box-footer">
-                                    <a class="btn btn-warning btn-lg job-box-category" href="/jobCategory/{{this.category}}">{{this.category}}</a>
-                                    <a class="btn btn-warning btn-lg job-box-category" href="/jobSubCategory/{{this.subcategory}}">{{this.subcategory}}</a>
+                                    <a class="btn btn-warning btn-lg job-box-category">{{this.category}}</a>
+                                    <a class="btn btn-warning btn-lg job-box-category">{{this.subcategory}}</a>
                                     <h2 class="job-box-price">{{this.budget}}</h2>
-                                    <!-- <a class="btn btn-warning btn-lg job-box-category" href="/jobSubCategory/{{this.subcategory}}">{{this.subcategory}}</a> -->
-                                    <h2 class="job-box-price">{{this.budget}}</h2>
-                                    <!-- <a class="float-right" href="/viewJob/{{this.jobID}}">
-                                        {{#if this.bidding}}
-                                            <img class="job-view-image" src="/assets/images/view_bid_btn.png">
-                                        {{else}}
-                                            <img class="job-view-image" src="/assets/images/view_fixed_btn.png">  
-                                        {{/if}}
-                                    </a> -->   
                                 </div>   
                             </div>          
-                        </a>
+                        </div>
                     </div>
                       
                       <!-- show any messages that come back with authentication -->
-                    <!-- {{#if message}}
+                    {{#if message}}
                         <div class="alert alert-danger">{{message}}</div> 
-                    {{/if}} -->
+                    {{/if}}
 
                     <!-- COMMENT FORM -->
-                    <!-- <form action="/comment/{{this.jobID}}" method="post">
+                    <form action="/comment/{{this.jobID}}" method="post">
                         <div class="form-group">
                             <label>Ask a question or comment on this posting.</label>
                             <textarea type="text" class="form-control" name="comment"></textarea>
@@ -177,7 +146,7 @@
                         </div>
 
                         <button type="submit" class="btn btn-warning btn-lg">Submit</button>
-                    </form> -->
+                    </form>
             
                 </div>
                 {{/unless}}
@@ -194,11 +163,83 @@
 
         </div>
 
-    
+  <a name="about"></a>
+    <div class="content-section-a">
 
+        <div class="container">
+            {{#each postUser}} 
+            <div class="row">
+                <div class="col-lg-5 col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    {{#if this.displayName}}
+                        <h2 class="section-heading">Posted By:<br>{{this.displayName}}</h2>
+                    {{else}}
+                        <h2 class="section-heading">Posted By:<br>{{this.username}}</h2>
+                    {{/if}}
+                    <p class="lead">{{this.summary}}</p>
+                </div>
+                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                    {{#if this.hasavatar}}
+                        <img class="img-responsive pref-pic" src="{{this.avatar}}" alt="User Profile Picture">
+                    {{else}}
+                    <img class="img-responsive pref-pic" src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="Default Profile Picture">
+                    {{/if}}
+                </div>
+            </div>
+            {{/each}}
 
+        </div>
+        <!-- /.container -->
 
-  <a  name="contact"></a>
+    </div>
+    <!-- /.content-section-a -->
+
+    <div class="content-section-b">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">3D Device Mockups<br>by PSDCovers</h2>
+                    <p class="lead">Turn your 2D designs into high quality, 3D product shots in seconds using free Photoshop actions by <a target="_blank" href="http://www.psdcovers.com/">PSDCovers</a>! Visit their website to download some of their awesome, free photoshop actions!</p>
+                </div>
+                <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+                    <img class="img-responsive" src="/assets/images/dog.png" alt="">
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-b -->
+
+    <div class="content-section-a">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-5 col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">Google Web Fonts and<br>Font Awesome Icons</h2>
+                    <p class="lead">This template features the 'Lato' font, part of the <a target="_blank" href="http://www.google.com/fonts">Google Web Font library</a>, as well as <a target="_blank" href="http://fontawesome.io">icons from Font Awesome</a>.</p>
+                </div>
+                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                    <img class="img-responsive" src="/assets/images/phones.png" alt="">
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-a -->
+
+  <a name="contact"></a>
     <div class="banner">
 
         <div class="container">
@@ -262,6 +303,10 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="/assets/scripts/bootstrap.min.js"></script>
 
+    <!-- Endeavor Script -->
+    <!-- <script src="/assets/scripts/script.js"></script> -->
+
 </body>
 
 </html>
+
