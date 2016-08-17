@@ -77,13 +77,16 @@ router.get('/endeavors', function (req, res) {
     //var userObject = { user : req.user };
     var condition = 'userID = ' + req.user.id;
     endeavor.allWhere('jobs', condition, function (jobs) {
-      // var hbsObject = { endeavors: data, user : req.user };
-      // console.log(hbsObject);
-      res.render('profile', {
-        user: req.user, 
-        jobs: jobs
+      endeavor.all('category', function (category) {
+
+        // console.log(hbsObject);
+        res.render('profile', {
+          user: req.user, 
+          jobs: jobs,
+          category: category
+        });
+        console.log(jobs, category);
       });
-      console.log(jobs);
     });
     console.log(req.user);
   });
