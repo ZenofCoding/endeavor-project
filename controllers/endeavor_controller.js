@@ -147,7 +147,6 @@ router.get('/endeavors', function (req, res) {
       // console.log(hbsObject);
       res.render('jobsearch', {
         user: req.user,
-        res.render('jobsearch', {
         jobs: jobs
       });
     });
@@ -171,7 +170,6 @@ router.get('/endeavors', function (req, res) {
     });
     console.log(req.user);
 });
-  });
   // =====================================
   // LOGOUT ==============================
   // =====================================
