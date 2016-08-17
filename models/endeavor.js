@@ -23,12 +23,12 @@ var endeavor = {
       cb(res);
     });
   },
-  distinct: function  (table, col, cb) {
-    orm.distinct(table, col, function (res) {
-      cb(res);
-      console.log(res);
-    });
-  },
+  // distinct: function  (table, col, cb) {
+  //   orm.distinct(table, col, function (res) {
+  //     cb(res);
+  //     console.log(res);
+  //   });
+  // },
   // calls UPDATE/update function in orm.js
   // passes table name, column name, value, and id
   // objColVals is object
