@@ -92,9 +92,8 @@ var orm = {
     // objColVals would be the columns and values that you want to update
     // an example of objColVals would be {name: Big Mac, devoured: true}
   distinct: function (table, col, cb) {
-    alert('hh');
    var queryString = 'SELECT DISTINCT ';
-    queryString = queryString + cols.toString();
+    queryString = queryString + col.toString();
     queryString = queryString + ' FROM ' + table;
     console.log(queryString);
     connection.query(queryString, function (err, result) {

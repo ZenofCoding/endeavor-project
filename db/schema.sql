@@ -46,7 +46,7 @@ CREATE TABLE `status` (
 );
 CREATE TABLE `category` (
   `categoryID` int NOT NULL AUTO_INCREMENT,
-  `description` varchar(255) NOT NULL,
+  `category` varchar(255) NOT NULL,
   PRIMARY KEY (`categoryID`)
 );
 
@@ -54,7 +54,7 @@ CREATE TABLE `category` (
 CREATE TABLE `subCategory` (
   `subCategoryID` int NOT NULL AUTO_INCREMENT,
   `categoryID` int NOT NULL,
-  `description` varchar(255) NOT NULL,
+  `subcategory` varchar(255) NOT NULL,
   PRIMARY KEY (`subCategoryID`)#,
   #FOREIGN KEY (`categoryID`) REFERENCES `category`(`categoryID`)
 );

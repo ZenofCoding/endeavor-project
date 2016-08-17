@@ -24,7 +24,7 @@ var endeavor = {
     });
   },
   distinct: function  (table, col, cb) {
-    orm.create(table, col, function (res) {
+    orm.distinct(table, col, function (res) {
       cb(res);
       console.log(res);
     });
