@@ -87,6 +87,7 @@ var orm = {
     connection.query(queryString, vals, function (err, result) {
       if (err) throw err;
       cb(result);
+      console.log(vals);
     });
   },
     // objColVals would be the columns and values that you want to update

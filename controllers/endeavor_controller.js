@@ -77,13 +77,16 @@ router.get('/endeavors', function (req, res) {
     //var userObject = { user : req.user };
     var condition = 'userID = ' + req.user.id;
     endeavor.allWhere('jobs', condition, function (jobs) {
-      // var hbsObject = { endeavors: data, user : req.user };
-      // console.log(hbsObject);
-      res.render('profile', {
-        user: req.user, 
-        jobs: jobs
+      endeavor.all('category', function (category) {
+
+        // console.log(hbsObject);
+        res.render('profile', {
+          user: req.user, 
+          jobs: jobs,
+          category: category
+        });
+        console.log(jobs, category);
       });
-      console.log(jobs);
     });
     console.log(req.user);
   });
@@ -120,9 +123,9 @@ router.get('/endeavors', function (req, res) {
         jobs: jobs,
         success: req.params.success
       });
-      console.log(jobs);
+      // console.log(jobs);
     });
-    console.log(req.user);
+    // console.log(req.user);
   });
   // =====================================
   // JobSearch SECTION =========================
@@ -162,6 +165,23 @@ router.get('/endeavors', function (req, res) {
     endeavor.allWhere('jobs', condition, function (jobs) {
         res.render('jobsearch', {
         jobs: jobs
+      });
+    });
+});
+
+// renders the job that corresponds to the jobID passed in request
+ router.get('/viewJob/:id/:user', function(req, res) {
+  var condition = 'jobID = ' + req.params.id;
+  var condition2 = 'id = ' + req.params.user;
+    endeavor.allWhere('jobs', condition, function (job) {
+      endeavor.allWhere('user', condition2, function (postUser) {
+        res.render('job', {
+          user: req.user,
+          job: job,
+          postUser: postUser
+        });
+        console.log(postUser);
+        //console.log(job);
       });
     });
 });
