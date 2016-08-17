@@ -160,10 +160,14 @@
                       <label for="category">Category</label>
                       <select id="category" class="form-control" name="category" required>
                       <option value="">Choose a category</option>
-                      <option value="Cleaning">Cleaning</option>
+                      {{#each category}}
+                          <option value="{{this.description}}">{{this.description}}</option>
+                      {{/each}}
+                      
+                      <!-- <option value="Cleaning">Cleaning</option>
                       <option value="Computers">Computers</option>
                       <option value="Construction">Construction</option>
-                      <option value="Landscaping">Landscaping</option>
+                      <option value="Landscaping">Landscaping</option> -->
                     </select>
                 </div>
                 <div class="form-group">
@@ -433,13 +437,9 @@
     <!-- Endeavor Script -->
     <!-- <script src="/assets/scripts/script.js"></script> -->
 
-    <!-- <script type="text/javascript">
-        Handlebars.registerHelper('trimString', function(passedString) {
-            var theString = passedString.substring(0,50);
-            console.log("theString", theString);
-            return new Handlebars.SafeString(theString)
-        });
-    </script> -->
+    <script type="text/javascript">
+        console.log(category);
+    </script>
 
 </body>
 
