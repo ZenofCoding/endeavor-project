@@ -105,6 +105,19 @@
      <div class="content-section-a">
 
             <div class="container">
+                <!--get all the job categories -->
+                <br>
+                <div class="form-group pull-right">
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Categories
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            {{#each category}}
+                                <li><a href="{{this.category}}">{{this.category}}</a></li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
                 
                 <!-- loops through each job -->
                 {{#each jobs}}

@@ -110,6 +110,15 @@ router.get('/endeavors', function (req, res) {
       });
     });
   });
+ //get all the categories information
+ router.get('/jobCategoies/', function(req, res) {
+  var colName = 'category';
+    endeavor.distinct('jobs', colName, function (categories) {
+        res.render('jobsearch', {
+        category: category
+      });
+    });
+  });
  // all the available jobs posted on the site based on the subcategory
  router.get('/jobSubCategory/:id', function(req, res) {
   var condition = 'subcategory = "' + req.params.id +'"';
