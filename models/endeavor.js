@@ -23,6 +23,12 @@ var endeavor = {
       cb(res);
     });
   },
+  distinct: function  (table, col, cb) {
+    orm.create(table, col, function (res) {
+      cb(res);
+      console.log(res);
+    });
+  },
   // calls UPDATE/update function in orm.js
   // passes table name, column name, value, and id
   // objColVals is object
@@ -38,7 +44,7 @@ var endeavor = {
     orm.updateString(table, objColVals, condition, function (res) {
       cb(res);
     });
-  },
+  }
 };
 
 // makes orm accessible to endeavor_controller.js
