@@ -158,7 +158,7 @@
                 </div>
                 <div class="form-group">
                       <label for="category">Category</label>
-                      <select id="category" class="form-control" name="category" required>
+                      <select id="category" class="form-control" name="category" onChange="populate('category','subcategory')" required>
                       <option value="">Choose a category</option>
                       {{#each category}}
                           <option value="{{this.description}}">{{this.description}}</option>
@@ -166,9 +166,18 @@
                     </select>
                 </div>
                 <div class="form-group">
+                      <label for="subcategory">Subcategory</label>
+                      <select id="subcategory" class="form-control" name="subcategory" required>
+                      <option value="">Choose a subcategory</option>
+                      <!-- {{#each category}}
+                          <option value="{{this.description}}">{{this.description}}</option>
+                      {{/each}} -->
+                    </select>
+                </div>
+                <!-- <div class="form-group">
                     <label for="subcategory">Subcategory</label>
                     <input type="text" id="subcategory" class="form-control" name="subcategory" placeholder=" Enter a subcategory" required>
-                </div>
+                </div> -->
                 <div class="form-group">
                     <label for="bidding">Allow users to submit bids or estimates for this posting?</label>
                     <select id="bidding" class="form-control" name="bidding" required>
@@ -237,7 +246,7 @@
                 <div class="row">
 
                     <div class="job-box-container">  
-                        <a class="job-link" href="/viewJob/{{this.jobID}}">
+                        <a class="job-link" href="/viewJob/{{this.jobID}}/{{this.userID}}">
                             {{#if this.bidding}}
                                 <img class="job-bid-image" src="/assets/images/bid_btn.png">
                             {{else}}
@@ -433,8 +442,25 @@
     <!-- <script src="/assets/scripts/script.js"></script> -->
 
     <script type="text/javascript">
-        console.log(category);
-    </script>
+function populate(s1,s2){
+    var s1 = document.getElementById(s1);
+    var s2 = document.getElementById(s2);
+    s2.innerHTML = "";
+    if(s1.value == "Accounting"){
+        var optionArray = ["|","artpunk|Art Punk","alternativerock|Alternative Rock","collegerock|College Rock","experimentalrock|Experimental                              Rock","gothicrock|Gothic Rock","grunge|Grunge","hardcorepunk|Hardcore Punk","hardrock|Hard Rock","indierock|Indie Rock",                                                                                                                "lofi|Lo-fi","newwave|New Wave","progressiverock|Progressive Rock","punk|Punk","shoegaze|Shoegaze","steampunk|Steampunk"];
+    } else if(s1.value == "Administrative"){
+        var optionArray = ["|","acousticblues|Acoustic Blues","chicagoblues|Chicago Blues","classicblues|Classic Blues",
+                "contemporaryblues|Contemporary Blues","countryblues|Country Blues","deltablues|Delta Blues","electricblues|Electric Blues"];
+    }
+    for(var option in optionArray){
+        var pair = optionArray[option].split("|");
+        var newOption = document.createElement("option");
+        newOption.value = pair[0];
+        newOption.innerHTML = pair[1];
+        s2.options.add(newOption);
+    }
+}
+</script>
 
 </body>
 

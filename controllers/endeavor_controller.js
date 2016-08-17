@@ -123,9 +123,9 @@ router.get('/endeavors', function (req, res) {
         jobs: jobs,
         success: req.params.success
       });
-      console.log(jobs);
+      // console.log(jobs);
     });
-    console.log(req.user);
+    // console.log(req.user);
   });
   // =====================================
   // JobSearch SECTION =========================
@@ -172,6 +172,23 @@ router.get('/endeavors', function (req, res) {
       });
     });
     console.log(req.user);
+});
+
+// renders the job that corresponds to the jobID passed in request
+ router.get('/viewJob/:id/:user', function(req, res) {
+  var condition = 'jobID = ' + req.params.id;
+  var condition2 = 'id = ' + req.params.user;
+    endeavor.allWhere('jobs', condition, function (job) {
+      endeavor.allWhere('user', condition2, function (postUser) {
+        res.render('job', {
+          user: req.user,
+          job: job,
+          postUser: postUser
+        });
+        console.log(postUser);
+        //console.log(job);
+      });
+    });
 });
   // =====================================
   // LOGOUT ==============================
