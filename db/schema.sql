@@ -44,3 +44,17 @@ CREATE TABLE `status` (
         PRIMARY KEY (`id`),
     UNIQUE INDEX `id_UNIQUE` (`id` ASC)
 );
+CREATE TABLE `category` (
+  `categoryID` int NOT NULL AUTO_INCREMENT,
+  `description` varchar(255) NOT NULL,
+  PRIMARY KEY (`categoryID`)
+);
+
+#DROP TABLE `subCategory`;
+CREATE TABLE `subCategory` (
+  `subCategoryID` int NOT NULL AUTO_INCREMENT,
+  `categoryID` int NOT NULL,
+  `description` varchar(255) NOT NULL,
+  PRIMARY KEY (`subCategoryID`)#,
+  #FOREIGN KEY (`categoryID`) REFERENCES `category`(`categoryID`)
+);
