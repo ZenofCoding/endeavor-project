@@ -29,6 +29,8 @@ CREATE TABLE `jobs` (
     `jobstart` DATETIME,
     `deadline` DATETIME,
     `completed` BOOLEAN DEFAULT false,
+     `category` varchar(255) NOT NULL,
+     `subcategory` varchar(255) NOT NULL,
         PRIMARY KEY (`id`),
     UNIQUE INDEX `id_UNIQUE` (`id` ASC)
 );

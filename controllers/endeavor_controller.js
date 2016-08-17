@@ -134,7 +134,7 @@ router.get('/endeavors', function (req, res) {
       res.render('jobsearch', {
         jobs: jobs
       });
-      console.log(jobs);
+     console.log(jobs);
     });
     
   });
@@ -148,12 +148,12 @@ router.get('/endeavors', function (req, res) {
     });
   });
  //get all the categories information
- router.get('/jobCategoies/', function(req, res) {
-  var colName = 'category';
-    endeavor.distinct('jobs', colName, function (category) {
+ router.get('/categoies/', function(req, res) {
+    endeavor.all('category', function (categoies) {
         res.render('jobsearch', {
-        category: category
+        categoies: categoies
       });
+        console.log(categoies);
     });
   });
  // all the available jobs posted on the site based on the subcategory
