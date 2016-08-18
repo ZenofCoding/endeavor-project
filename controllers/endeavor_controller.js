@@ -131,40 +131,42 @@ router.get('/endeavors', function (req, res) {
   // JobSearch SECTION =========================
   // =====================================
   // all the available jobs posted on the site
-  router.get('/jobsearch', function(req, res) {
-    var condition = '';//'userID = ' + req.user.id;
-    endeavor.all('jobs', function (jobs) {
-      endeavor.all('category', function (category) {
-        res.render('jobsearch', {
-          user: req.user,
-          jobs: jobs,
-          category: category
-        });
-        console.log(jobs);
-      });
+    router.get('/jobsearch', function(req, res) {
+     var condition = '';//'userID = ' + req.user.id;
+       endeavor.all('jobs', function (jobs) {
+         endeavor.all('category', function (category) {
+           res.render('jobsearch', {
+             user: req.user,
+             jobs: jobs,
+             category: category
+           });
+           console.log(jobs);
+         });
+       });
     });
-  });
+
  // all the available jobs posted on the site based on the category
- router.get('/jobCategory/:id', function(req, res) {
-  var condition = 'category = "' + req.params.id +'"';
+ router.get('/jobCategory/:category', function(req, res) {
+  var condition = 'category = "' + req.params.category +'"';
     endeavor.allWhere('jobs', condition, function (jobs) {
-      // var hbsObject = { endeavors: data, user : req.user };
-      // console.log(hbsObject);
-      res.render('jobsearch', {
+        res.render('jobsearch', {
         user: req.user,
         jobs: jobs
+
       });
     });
   });
- //get all the categories information
- // router.get('/jobCategory', function(req, res) {
- //  var colName = 'category';
- //    endeavor.distinct('jobs', colName, function (category) {
- //        res.render('jobsearch', {
- //        category: category
- //      });
- //    });
- //  });
+ //
+ router.get('/jobCategory/', function(req, res) {
+    endeavor.all('category', function (category) {
+        res.render('jobsearch', {
+        user: req.user,
+        category: category
+      });
+        console.log(category);
+    });
+  });
+
  // all the available jobs posted on the site based on the subcategory
  router.get('/jobSubCategory/:id', function(req, res) {
   var condition = 'subcategory = "' + req.params.id +'"';
@@ -173,7 +175,6 @@ router.get('/endeavors', function (req, res) {
         jobs: jobs
       });
     });
-    console.log(req.user);
 });
 
 // renders the job that corresponds to the jobID passed in request

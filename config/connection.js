@@ -13,6 +13,10 @@ var source = {
         user: 'kopdakel41c0b6bm',
         password: "c377x1xc6713qabw",
         database: "pwdopoqcppufqavw" 
+        // host: 'localhost',
+        // user: 'root',
+        // password: "",
+        // database: "my_schema" 
     },
 
 
@@ -27,7 +31,8 @@ var source = {
 }
 
 // we use source.[name of connection] to hook into mysql
-var connection = mysql.createConnection(source.jawsDB || source.localhost);
+ var connection = mysql.createConnection(source.jawsDB || source.localhost);
+//var connection = mysql.createConnection(source.localhost);
 
 
 connection.connect(function(err) {
