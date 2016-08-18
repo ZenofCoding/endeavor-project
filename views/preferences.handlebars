@@ -300,9 +300,9 @@
                 <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
-                    <h2 class="section-heading">Professional Experience</h2>
-                    <p class="lead">Add or update your relevant professional work experience.</p>
-                    <form action="professional/create/{{user.id}}" method="POST">
+                    <h2 class="section-heading">Add Professional Experience</h2>
+                    <p class="lead">Add your relevant professional work experience.</p>
+                    <form action="professional/create" method="POST">
                         <div class="form-group">
                             <label for="company_name">Company Name</label>
                             <input type="text" id="company_name" class="form-control" name="company_name" placeholder="Company Name" required>
@@ -341,6 +341,73 @@
 
     </div>
     <!-- /.content-section-b -->
+
+    <div class="content-section-a">
+
+        <div class="container">
+
+            <!-- loops through each job -->
+            {{#each resumes}}
+
+            <div class="row">
+                <div class="col-lg-5 col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">Update<br>{{this.company}}</h2>
+                    <p class="lead">Update your professional work experience.</p>
+                    <form action="/professional/update/{{this.id}}?_method=PUT" method="POST">
+                        <div class="form-group">
+                            <label for="up_proName">Company Name</label>
+                            <input type="text" id="up_proName" class="form-control" name="up_proName" value="{{this.company}}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="up_proTitle">Title</label>
+                            <input type="text" id="up_proTitle" class="form-control" name="up_proTitle" value="{{this.position}}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="up_proLocation">Location</label>
+                            <input type="text" id="up_proLocation" class="form-control" name="up_proLocation" value="{{this.location}}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="up_startdate">Start Date</label>
+                            <input type="date" id="up_startdate" class="form-control" name="up_startdate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="up_enddate">End Date</label>
+                            <input type="date" id="up_enddate" class="form-control" name="up_enddate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="up_proDescription">Description</label>
+                            <textarea type="text" id="up_proDescription" class="form-control" name="up_proDescription" rows="10" required>{{this.description}}</textarea>
+                        </div>
+                        <!-- <input type="hidden" name="user_id" value="{{user.id}}"> -->
+                        <button class="btn btn-warning btn-lg" type="submit">Update This Experience</button>
+                      </form>
+                </div>
+                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                    {{#if this.hasimage}}
+                        <img class="img-responsive pref-pic" src="{{this.image}}" alt="Custom Background Banner">
+                    {{else}}
+                    <img class="img-responsive pref-pic" src="https://upload.wikimedia.org/wikipedia/commons/5/59/Logo-Logo.svg" alt="No Logo Image">
+                    {{/if}}
+                    <form action="/professional/update/logo/{{this.id}}?_method=PUT" method="POST">
+                        <div class="form-group">
+                            <label for="pro_image">{{this.company}} Picture</label>
+                            <input type="text" id="pro_image" class="form-control" name="pro_image" value="{{this.image}}" placeholder="Example... http://professional_pic.jpg">
+                            <input type="hidden" name="has_image" value="1">
+                        </div>
+                        <button class="btn btn-warning btn-lg" type="submit">Update {{this.company}} Picture</button>
+                    </form>
+                </div>
+            </div>
+
+            {{/each}}
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-a -->
 
   <a name="contact"></a>
     <div class="banner">
