@@ -98,13 +98,16 @@ router.get('/endeavors', function (req, res) {
   router.get('/preferences', isLoggedIn, function(req, res) {
     var condition = 'userID = ' + req.user.id;
     endeavor.allWhere('jobs', condition, function (jobs) {
+      endeavor.allWhere('resume', condition, function (resumes) {
       // var hbsObject = { endeavors: data, user : req.user };
       // console.log(hbsObject);
-      res.render('preferences', {
-        user: req.user, 
-        jobs: jobs
+        res.render('preferences', {
+          user: req.user, 
+          jobs: jobs,
+          resumes: resumes
+        });
+        console.log(jobs);
       });
-      console.log(jobs);
     });
     console.log(req.user);
   });
@@ -205,6 +208,39 @@ router.get('/endeavors', function (req, res) {
 router.post('/job/create', function (req, res) {
   endeavor.create(['jobs'], ['title', 'description', 'userID', 'image', 'category', 'subcategory', 'bidding', 'jobstart', 'deadline', 'firmness', 'budget'], [req.body.job_title, req.body.job_description, req.body.user_id, req.body.image1, req.body.category, req.body.subcategory, req.body.bidding, req.body.start, req.body.end, req.body.firm, req.body.budget], function () {
     res.redirect('/profile');
+  });
+});
+
+// accesses the create function in endeavor.js
+// passes the values from the index.handlebars form and passes the db column name
+// redirects to .get /endeavors and reloads page
+router.post('/professional/create', function (req, res) {
+  endeavor.create(['resume'], ['userID', 'company', 'position', 'location', 'description', 'startdate', 'enddate'], [req.body.user_id, req.body.company_name, req.body.pro_title, req.body.pro_location, req.body.pro_description, req.body.start_date, req.body.end_date], function () {
+    res.redirect('/preferences/' + true);
+  });
+});
+
+// accesses the update function in endeavor.js
+// passes endeavor id
+// redirects to .get /preferences with a value of true and shows success modal
+router.put('/professional/update/:id', function (req, res) {
+  var condition = 'id = ' + req.params.id;
+  console.log('condition', condition);
+  endeavor.updateString(['resume'], { company: req.body.up_proName, position: req.body.up_proTitle, location: req.body.up_proLocation, description: req.body.up_proDescription, startdate: req.body.up_startdate, enddate: req.body.up_enddate }, condition, function () {
+    res.redirect('/preferences/' + true);
+  });
+});
+
+// accesses the update function in endeavor.js
+// passes user id
+// redirects to .get /preferences with a value of true and shows success modal
+router.put('/professional/update/logo/:id', function (req, res) {
+  var condition = 'id = ' + req.params.id;
+  console.log('condition', condition);
+  endeavor.update(['resume'], { hasimage: req.body.has_image }, condition, function () {
+    endeavor.updateString(['resume'], { image: req.body.pro_image}, condition, function () {
+      res.redirect('/preferences/' + true);
+    });    
   });
 });
 
