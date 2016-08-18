@@ -159,22 +159,17 @@ router.get('/endeavors', function (req, res) {
     });
   });
  //
- router.get('/jobCategory/', function(req, res) {
-    endeavor.all('category', function (category) {
-        res.render('jobsearch', {
-        user: req.user,
-        category: category
-      });
-        console.log(category);
-    });
-  });
 
  // all the available jobs posted on the site based on the subcategory
  router.get('/jobSubCategory/:id', function(req, res) {
   var condition = 'subcategory = "' + req.params.id +'"';
     endeavor.allWhere('jobs', condition, function (jobs) {
+      endeavor.all('category', function (category) {
         res.render('jobsearch', {
-        jobs: jobs
+          user: req.user,
+          jobs: jobs,
+          category: category
+        });
       });
     });
 });
