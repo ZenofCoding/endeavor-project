@@ -78,17 +78,20 @@ router.get('/endeavors', function (req, res) {
     var condition = 'userID = ' + req.user.id;
     endeavor.allWhere('jobs', condition, function (jobs) {
       endeavor.all('category', function (category) {
-
-        // console.log(hbsObject);
-        res.render('profile', {
-          user: req.user, 
-          jobs: jobs,
-          category: category
+        endeavor.allWhere('resume', condition, function (resumes) {
+          // console.log(hbsObject);
+          res.render('profile', {
+            user: req.user, 
+            jobs: jobs,
+            category: category,
+            resumes: resumes
+          });
+          
         });
-        console.log(jobs, category);
+        //console.log(jobs, category);
       });
     });
-    console.log(req.user);
+    //console.log(req.user);
   });
   // =====================================
   // PREFERENCES SECTION =========================

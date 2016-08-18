@@ -61,6 +61,12 @@
                         <a href="#account">Account</a>
                     </li>
                     <li>
+                        <a href="#profile">Profile</a>
+                    </li>
+                    <li>
+                        <a href="#experience">Experience</a>
+                    </li>
+                    <li>
                         <a href="#contact">Contact</a>
                     </li> 
                     <li>
@@ -235,6 +241,7 @@
     </div>
     <!-- /.content-section-b -->
 
+    <a name="profile"></a>
     <div class="content-section-a">
 
         <div class="container">
@@ -291,7 +298,7 @@
     </div>
     <!-- /.content-section-a -->
 
-    <a name="account"></a>
+    <a name="experience"></a>
     <div class="content-section-b">
 
         <div class="container">
@@ -381,7 +388,7 @@
                             <textarea type="text" id="up_proDescription" class="form-control" name="up_proDescription" rows="10" required>{{this.description}}</textarea>
                         </div>
                         <!-- <input type="hidden" name="user_id" value="{{user.id}}"> -->
-                        <button class="btn btn-warning btn-lg" type="submit">Update This Experience</button>
+                        <button class="btn btn-warning btn-lg" type="submit">Update {{this.company}}</button>
                       </form>
                 </div>
                 <div class="col-lg-5 col-lg-offset-2 col-sm-6">
@@ -400,6 +407,7 @@
                     </form>
                 </div>
             </div>
+            <br><br>
 
             {{/each}}
 
