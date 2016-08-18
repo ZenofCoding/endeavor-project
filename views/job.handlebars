@@ -194,11 +194,13 @@
                     <p class="lead">{{this.summary}}</p>
                 </div>
                 <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                    {{#if this.hasavatar}}
-                        <img class="img-responsive pref-pic" src="{{this.avatar}}" alt="User Profile Picture">
-                    {{else}}
-                    <img class="img-responsive pref-pic" src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="Default Profile Picture">
-                    {{/if}}
+                    <a href="/public/profile/{{this.id}}">
+                        {{#if this.hasavatar}}
+                            <img class="img-responsive pref-pic" src="{{this.avatar}}" alt="User Profile Picture">
+                        {{else}}
+                        <img class="img-responsive pref-pic" src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="Default Profile Picture">
+                        {{/if}}
+                    </a>
                 </div>
             </div>
             {{/each}}
