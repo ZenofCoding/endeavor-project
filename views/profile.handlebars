@@ -61,7 +61,7 @@
                         <a href="#about">About</a>
                     </li>
                     <li>
-                        <a href="#services">Services</a>
+                        <a href="#experience">Experience</a>
                     </li>
                     <li>
                         <a href="#contact">Contact</a>
@@ -330,21 +330,47 @@
     </div>
     <!-- /.content-section-a -->
 
+    <a name="experience"></a>
     <div class="content-section-b">
 
         <div class="container">
 
-            <div class="row">
-                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
-                    <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading">3D Device Mockups<br>by PSDCovers</h2>
-                    <p class="lead">Turn your 2D designs into high quality, 3D product shots in seconds using free Photoshop actions by <a target="_blank" href="http://www.psdcovers.com/">PSDCovers</a>! Visit their website to download some of their awesome, free photoshop actions!</p>
+                <div class="row">
+                    <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                        <hr class="section-heading-spacer">
+                        <div class="clearfix"></div>
+                        <h2 class="section-heading">Professional Experience<br>{{user.displayName}}</h2>
+                        <p class="lead">Detailed history of professional and personal accomplishments.</p>
+                    </div>
+                    <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+                            <img class="img-responsive" src="http://www.kawman.com/images/company_profile.jpg" alt="Resume Section Image">
+                    </div>
                 </div>
-                <div class="col-lg-5 col-sm-pull-6  col-sm-6">
-                    <img class="img-responsive" src="/assets/images/dog.png" alt="">
+
+            <!-- loops through each job -->
+            {{#each resumes}}
+
+                <br><br>
+                <div class="row">
+                    <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                        <hr class="section-heading-spacer">
+                        <div class="clearfix"></div>
+                        <h2 class="section-heading resume-title">{{this.company}}</h2>
+                        <p class="lead  resume-position">{{this.position}}</p>
+                        <p class="lead resume-right">{{this.location}}</p>
+                        <p class="lead resume-description">{{this.description}}</p>
+                        <p class="lead resume-right">{{prettifyDate this.startdate}} - {{prettifyDate this.enddate}}</p>
+                    </div>
+                    <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+                        {{#if this.hasimage}}
+                            <img class="img-responsive pref-pic" src="{{this.image}}" alt="Custom Background Banner">
+                        {{else}}
+                            <img class="img-responsive pref-pic" src="https://upload.wikimedia.org/wikipedia/commons/5/59/Logo-Logo.svg" alt="No Logo Image">
+                        {{/if}}
+                    </div>
                 </div>
-            </div>
+
+            {{/each}}
 
         </div>
         <!-- /.container -->
