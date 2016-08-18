@@ -149,10 +149,12 @@ router.get('/endeavors', function (req, res) {
  router.get('/jobCategory/:category', function(req, res) {
   var condition = 'category = "' + req.params.category +'"';
     endeavor.allWhere('jobs', condition, function (jobs) {
-        res.render('jobsearch', {
-        user: req.user,
-        jobs: jobs
-
+        endeavor.all('category', function (category) {
+          res.render('jobsearch', {
+          user: req.user,
+          jobs: jobs,
+          category: category
+        });
       });
     });
   });
