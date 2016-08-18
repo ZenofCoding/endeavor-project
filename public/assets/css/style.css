@@ -1,3 +1,7 @@
+.extra-margin{
+  margin-top: 100px;
+}
+
 .intro-header-index{
   background: url(../images/intro-bg.jpg) no-repeat center center;
 }
@@ -50,6 +54,10 @@
   margin-top: 50px;
 }
 
+.job-container{
+  margin-top: 50px;
+}
+
 .job-link{
   position: relative;
   text-decoration: none;
@@ -69,6 +77,16 @@
   border: 1px solid #000000;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
+}
+
+.job-box-large{
+  text-decoration: none;
+  position: relative;
+  margin-top: 15px;
+  background-color: #ffffff;
+  border: 1px solid #2a2a2a;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 0px;
 }
 
 .job-bid-image{
@@ -98,6 +116,14 @@
   margin: 15px;
 }
 
+.job-box-image-lrg1{
+  float: left;
+  /*clear: right;*/
+  height: 255px;
+  border: 1px solid #f0ad4e;
+  margin: 15px;
+}
+
 .job-title-desc{
   margin: 15px 15px 15px 15px;
   white-space: pre-wrap;
@@ -116,11 +142,25 @@
   right: -11px;
 }
 
+.ribbon-break{
+  clear: both;
+  top: 134px;
+}
+
 .job-box-footer{
   position: relative;
   clear: left;
   border-top: 1px solid #f0ad4e;
   padding: 5px 15px 5px 15px; 
+}
+
+.job-box-head{
+  position: relative;  
+}
+
+.job-box-feet{
+  position: relative;
+  clear: left;   
 }
 
 .job-box-category{
@@ -129,6 +169,33 @@
   font-size: 12px;
   border-radius: 0px;
   border: 1px solid #2a2a2a;
+}
+
+.job-box-datesStart{
+  position: relative;
+  top: -36px;
+  float: right;
+  color: #ffffff;
+  background-color: #2a2a2a;
+  font-size: 18px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border: 1px solid #2a2a2a;
+  border-bottom: none;
+  padding: 5px 15px 5px 15px; 
+}
+
+.job-box-datesEnd{
+  float: right;
+  color: #ffffff;
+  background-color: #2a2a2a;
+  font-size: 18px;
+  border-radius: 0px;
+  border: 1px solid #2a2a2a;
+  border-top: none;
+  padding: 5px 15px 5px 15px; 
 }
 
 .job-box-price{

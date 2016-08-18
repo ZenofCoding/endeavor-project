@@ -97,7 +97,7 @@
     <a name="jobs area"></a>
         <div class="content-section-b">
 
-            <div class="container">
+            <div class="container extra-margin">
 
                 <!-- loops through each job -->
                 {{#each job}}    
@@ -106,22 +106,26 @@
 
                 <div class="row">
 
-                    <div class="job-box-container">  
+                <div class="job-box-head">
+                        
+                    </div>
+                    <div class="job-container"> 
+                        <span class="job-box-datesStart">Starting: {{prettifyDate this.jobstart}}</span> 
                         <div class="job-link">
                             {{#if this.bidding}}
                                 <img class="job-bid-image" src="/assets/images/bid_btn.png">
                             {{else}}
                                 <img class="job-bid-image" src="/assets/images/fixed_btn.png">  
                             {{/if}}
-                            <div class="job-box-small">
+                            <div class="job-box-large">
                                 <div class="job-title-box">
                                     <h2 class="job-title">{{this.title}}</h2>
                                 </div>
-                                <img class="job-box-image1" src="{{this.image}}">
+                                <img class="job-box-image-lrg1" src="{{this.image}}">
                                 {{#if this.bidding}}
                                     <img class="job-view-image" src="/assets/images/submit_bid_btn.png">
                                 {{else}}
-                                    <img class="job-view-image" src="/assets/images/view_fixed_btn.png">  
+                                    <img class="job-view-image" src="/assets/images/apply_fixed_btn.png">  
                                 {{/if}}
                                 <p class="job-title-desc">{{this.description}}</p>
                                 <div class="job-box-footer">
@@ -129,14 +133,18 @@
                                     <a class="btn btn-warning btn-lg job-box-category">{{this.subcategory}}</a>
                                     <h2 class="job-box-price">{{this.budget}}</h2>
                                 </div>
-                                <div class="job-box-footer">
-                                    <a class="btn btn-warning btn-lg job-box-category">{{prettifyDate this.jobstart}}</a>
-                                    <a class="btn btn-warning btn-lg job-box-category">{{prettifyDate this.deadline}}</a>
-                                    <h2 class="job-box-price">{{this.budget}}</h2>
-                                </div>   
+                                   
                             </div>          
                         </div>
                     </div>
+                    <div class="job-box-feet">
+                        <span class="job-box-datesEnd">Deadline: {{prettifyDate this.deadline}}</span>
+                        <!-- <h2 class="job-box-price">{{this.budget}}</h2> -->
+                    </div>
+
+                </div>
+
+                <div class="row">
                       
                       <!-- show any messages that come back with authentication -->
                     {{#if message}}
@@ -186,11 +194,13 @@
                     <p class="lead">{{this.summary}}</p>
                 </div>
                 <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                    {{#if this.hasavatar}}
-                        <img class="img-responsive pref-pic" src="{{this.avatar}}" alt="User Profile Picture">
-                    {{else}}
-                    <img class="img-responsive pref-pic" src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="Default Profile Picture">
-                    {{/if}}
+                    <a href="/public/profile/{{this.id}}">
+                        {{#if this.hasavatar}}
+                            <img class="img-responsive pref-pic" src="{{this.avatar}}" alt="User Profile Picture">
+                        {{else}}
+                        <img class="img-responsive pref-pic" src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="Default Profile Picture">
+                        {{/if}}
+                    </a>
                 </div>
             </div>
             {{/each}}
