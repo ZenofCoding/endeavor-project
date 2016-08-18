@@ -22,10 +22,29 @@ INSERT INTO `userType` (`userID`, `typeID`) VALUES (2,2);
 
 #SELECT * FROM `userType`;
 
-INSERT INTO `category` (`description`) VALUES ('category1');
-INSERT INTO `category` (`description`) VALUES ('category2');
-INSERT INTO `category` (`description`) VALUES ('category3');
-INSERT INTO `category` (`description`) VALUES ('category4');
+INSERT INTO `category` (`category`) VALUES ('Accounting');
+INSERT INTO `category` (`category`) VALUES ('Administrative');
+INSERT INTO `category` (`category`) VALUES ('Architecture');
+INSERT INTO `category` (`category`) VALUES ('Artistic');
+INSERT INTO `category` (`category`) VALUES ('Business');
+INSERT INTO `category` (`category`) VALUES ('Computers');
+INSERT INTO `category` (`category`) VALUES ('Customer Relations');
+INSERT INTO `category` (`category`) VALUES ('Education');
+INSERT INTO `category` (`category`) VALUES ('Engineering');
+INSERT INTO `category` (`category`) VALUES ('Government');
+INSERT INTO `category` (`category`) VALUES ('Hospitality');
+INSERT INTO `category` (`category`) VALUES ('Human Resources');
+INSERT INTO `category` (`category`) VALUES ('Labor');
+INSERT INTO `category` (`category`) VALUES ('Legal');
+INSERT INTO `category` (`category`) VALUES ('Manufacturing');
+INSERT INTO `category` (`category`) VALUES ('Marketing');
+INSERT INTO `category` (`category`) VALUES ('Mechanical');
+INSERT INTO `category` (`category`) VALUES ('Medical');
+INSERT INTO `category` (`category`) VALUES ('Music');
+INSERT INTO `category` (`category`) VALUES ('Retail');
+INSERT INTO `category` (`category`) VALUES ('Sales');
+INSERT INTO `category` (`category`) VALUES ('Security');
+INSERT INTO `category` (`category`) VALUES ('Transportation');
 
 #SELECT * FROM `category`;
 

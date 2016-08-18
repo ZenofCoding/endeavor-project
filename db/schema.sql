@@ -29,6 +29,8 @@ CREATE TABLE `jobs` (
     `jobstart` DATETIME,
     `deadline` DATETIME,
     `completed` BOOLEAN DEFAULT false,
+     `category` varchar(255) NOT NULL,
+     `subcategory` varchar(255) NOT NULL,
         PRIMARY KEY (`id`),
     UNIQUE INDEX `id_UNIQUE` (`id` ASC)
 );
@@ -43,4 +45,18 @@ CREATE TABLE `status` (
     `postdate` DATETIME NOT NULL,
         PRIMARY KEY (`id`),
     UNIQUE INDEX `id_UNIQUE` (`id` ASC)
+);
+CREATE TABLE `category` (
+  `categoryID` int NOT NULL AUTO_INCREMENT,
+  `category` varchar(255) NOT NULL,
+  PRIMARY KEY (`categoryID`)
+);
+
+#DROP TABLE `subCategory`;
+CREATE TABLE `subCategory` (
+  `subCategoryID` int NOT NULL AUTO_INCREMENT,
+  `categoryID` int NOT NULL,
+  `subcategory` varchar(255) NOT NULL,
+  PRIMARY KEY (`subCategoryID`)#,
+  #FOREIGN KEY (`categoryID`) REFERENCES `category`(`categoryID`)
 );

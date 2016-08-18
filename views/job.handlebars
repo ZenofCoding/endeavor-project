@@ -31,6 +31,8 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <!-- Link to Moment.js -->
+    <!-- <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script> -->
 
 </head>
 
@@ -117,15 +119,19 @@
                                 </div>
                                 <img class="job-box-image1" src="{{this.image}}">
                                 {{#if this.bidding}}
-                                    <img class="job-view-image" src="/assets/images/view_bid_btn.png">
+                                    <img class="job-view-image" src="/assets/images/submit_bid_btn.png">
                                 {{else}}
                                     <img class="job-view-image" src="/assets/images/view_fixed_btn.png">  
                                 {{/if}}
                                 <p class="job-title-desc">{{this.description}}</p>
-
                                 <div class="job-box-footer">
                                     <a class="btn btn-warning btn-lg job-box-category">{{this.category}}</a>
                                     <a class="btn btn-warning btn-lg job-box-category">{{this.subcategory}}</a>
+                                    <h2 class="job-box-price">{{this.budget}}</h2>
+                                </div>
+                                <div class="job-box-footer">
+                                    <a class="btn btn-warning btn-lg job-box-category">{{this.jobstart}}</a>
+                                    <a class="btn btn-warning btn-lg job-box-category">{{this.deadline}}</a>
                                     <h2 class="job-box-price">{{this.budget}}</h2>
                                 </div>   
                             </div>          
