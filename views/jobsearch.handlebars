@@ -107,7 +107,7 @@
             <div class="container">
                 <!--get all the job categories -->
                 <br>
-                <div class="form-group pull-right">
+                <!-- <div class="form-group pull-right">
                     <div class="dropdown">
                         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Categories
                         <span class="caret"></span></button>
@@ -117,7 +117,18 @@
                             {{/each}}
                         </ul>
                     </div>
-                </div>
+                </div> -->
+                <!-- <form action="/jobCategory/" method="GET"> -->
+                    <div class="form-group">
+                          <label for="category">Category</label>
+                          <select name="category" class="form-control" onChange="getComboA(this)" required>
+                          <option value="">Choose a category</option>
+                          <option value="Computers">Computers</option>
+                          <!-- {{#each category}}
+                              <option value="{{this.description}}">{{this.description}}</option>
+                          {{/each}} -->
+                        </select>
+                    </div>
                 
                 <!-- loops through each job -->
                 {{#each jobs}}
@@ -261,6 +272,13 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="/assets/scripts/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        function getComboA(sel) {
+            var value = sel.value; 
+            window.location.href = '/jobCategory/' + value; 
+        }
+    </script>
 
 </body>
 

@@ -6,6 +6,7 @@ var methodOverride = require('method-override');
 var morgan = require('morgan');
 var passport = require('passport');
 var flash = require('connect-flash');
+var moment = require('moment');
 
 var app = express();
 
