@@ -204,3 +204,24 @@
   bottom: 8px;
   margin-bottom: 0;
 }
+
+.resume-title{
+  background-color: #2a2a2a;
+  color: #ffffff;
+  padding: 5px 15px 5px 15px;
+}
+
+.resume-position{
+  color: #f0ad4e;
+}
+
+.resume-right{
+  text-align: right;
+  margin-bottom: 5px;
+}
+
+.resume-description{
+  border: 1px solid #2a2a2a;
+  border-radius: 6px;
+  padding: 5px 15px 5px 15px;
+}
