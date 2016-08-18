@@ -183,8 +183,8 @@ router.get('/endeavors', function (req, res) {
         res.render('job', {
           user: req.user,
           job: job,
-          postUser: postUser,
-          moment: moment
+          postUser: postUser
+          // moment: moment
         });
         console.log(postUser);
         //console.log(job);

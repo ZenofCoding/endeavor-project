@@ -33,6 +33,10 @@ var hbs = exphbs.create({
             var str = passedString.substring(0,725);
             str = (str.slice(0,-3) + '. . .');
             return str
+        },
+        prettifyDate: function(timestamp) {
+            // return new Date(timestamp).toString('yyyy-MM-dd')
+            return moment(timestamp).format('MMMM Do YYYY');
         }
         // bar: function () { return 'BAR!'; }
     }
