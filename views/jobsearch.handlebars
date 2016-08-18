@@ -104,25 +104,23 @@
   <a  name="services"></a>
      <div class="content-section-a">
 
-            <div class="container">
-                <!--get all the job categories -->
-                <br>
-                <div class="form-group pull-right">
-                    <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Categories
-                        <span class="caret"></span></button>
-                        <ul class="dropdown-menu"><a href="/categoies/{{this.category}}"></a>
-                            {{#each categoies}}
-                                <li>{{this.category}}</li>
-                            {{/each}}
-                        </ul>
-                    </div>
-                </div>
+        <div class="container">
+            <!--get all the job categories -->
+            <br>
+            <div class="form-group">
+              <label for="category">Category</label>
+            <select id="category" class="form-control" name="category" onChange="changeCategory(this.value)" required>
+                  <option value="">Choose a category</option>
+                  {{#each category}}
+                      <option id="category-val" name="category-val" value="{{this.description}}">{{this.description}}</option>
+                    {{/each}}
+            </select>
+        </div>
                 
-                <!-- loops through each job -->
-                {{#each jobs}}
+            <!-- loops through each job -->
+        {{#each jobs}}
                 <!-- checks if job has been completed -->
-                {{#unless this.completed}}
+            {{#unless this.completed}}
 
                 <div class="row">
                 
@@ -148,53 +146,26 @@
                                 <div class="job-box-footer">
                                     <a class="btn btn-warning btn-lg job-box-category" href="/jobCategory/{{this.category}}">{{this.category}}</a>
                                     <a class="btn btn-warning btn-lg job-box-category" href="/jobSubCategory/{{this.subcategory}}">{{this.subcategory}}</a>
-                                    
-                                    <!-- <a class="btn btn-warning btn-lg job-box-category" href="/jobSubCategory/{{this.subcategory}}">{{this.subcategory}}</a> -->
-
                                     <h2 class="job-box-price">{{this.budget}}</h2>
 
-                                    <!-- <a class="float-right" href="/viewJob/{{this.jobID}}">
-                                        {{#if this.bidding}}
-                                            <img class="job-view-image" src="/assets/images/view_bid_btn.png">
-                                        {{else}}
-                                            <img class="job-view-image" src="/assets/images/view_fixed_btn.png">  
-                                        {{/if}}
-                                    </a> -->   
                                 </div>   
                             </div>          
                         </a>
                     </div>
-                      
-                      <!-- show any messages that come back with authentication -->
-                    <!-- {{#if message}}
-                        <div class="alert alert-danger">{{message}}</div> 
-                    {{/if}} -->
-
-                    <!-- COMMENT FORM -->
-                    <!-- <form action="/comment/{{this.jobID}}" method="post">
-                        <div class="form-group">
-                            <label>Ask a question or comment on this posting.</label>
-                            <textarea type="text" class="form-control" name="comment"></textarea>
-                            <input type="hidden" name="this_id" data-id="{{this.jobID}}">
-                        </div>
-
-                        <button type="submit" class="btn btn-warning btn-lg">Submit</button>
-                    </form> -->
             
                 </div>
-                {{/unless}}
-                {{#if this.completed}}
-                    <li class="names-devour">
-                        <!-- runs if burger is NOT marked as eaten in DB -->
-                        <!-- {{this.burger_name}} -->
-                    </li>
-                {{/if}}
-                {{/each}}
-
-            </div>
-            <!-- /.container -->
+            {{/unless}}
+            {{#if this.completed}}
+                <li class="names-devour">
+                    <!-- runs if burger is NOT marked as eaten in DB -->
+                    <!-- {{this.burger_name}} -->
+                </li>
+            {{/if}}
+        {{/each}}
 
         </div>
+
+    </div>
 
   <a  name="contact"></a>
     <div class="banner">
@@ -259,7 +230,12 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="/assets/scripts/bootstrap.min.js"></script>
+<script type="text/javascript">
 
+function changeCategory(category){
+   window.location.href = '/jobCategory/' + category;  
+};
+</script>
 </body>
 
 </html>
