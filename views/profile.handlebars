@@ -75,12 +75,12 @@
                         </li>  
                     {{/if}}
                     {{#unless user}}
-                    <li>
-                        <a href="/login">Login</a>
-                    </li>
-                    <li>
-                        <a href="/signup">Signup</a>
-                    </li>
+                        <li>
+                            <a href="/login">Login</a>
+                        </li>
+                        <li>
+                            <a href="/signup">Signup</a>
+                        </li>
                     {{/unless}}
                 </ul>
             </div>
@@ -265,8 +265,8 @@
                                 <p class="job-title-desc">{{trimString this.description}}</p>
 
                                 <div class="job-box-footer">
-                                    <a class="btn btn-warning btn-lg job-box-category">{{this.category}}</a>
-                                    <a class="btn btn-warning btn-lg job-box-category">{{this.subcategory}}</a>
+                                    <a class="btn btn-warning btn-lg job-box-category" href="/jobCategory/{{this.category}}">{{this.category}}</a>
+                                    <a class="btn btn-warning btn-lg job-box-category" href="/jobSubCategory/{{this.subcategory}}">{{this.subcategory}}</a>
                                     <h2 class="job-box-price">{{this.budget}}</h2>
                                 </div>   
                             </div>          
@@ -313,7 +313,7 @@
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
                     <h2 class="section-heading">About<br>{{user.displayName}}</h2>
-                    <p class="lead">{{user.summary}}</p>
+                    <p class="lead summary-about">{{user.summary}}</p>
                 </div>
                 <div class="col-lg-5 col-lg-offset-2 col-sm-6">
                     {{#if user.hasavatar}}

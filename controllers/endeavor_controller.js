@@ -35,7 +35,7 @@ router.get('/endeavors', function (req, res) {
   // process the login form
   router.post('/login', passport.authenticate('local-login', {
             successRedirect : '/profile', // redirect to the secure profile section
-            failureRedirect : '/login', // redirect back to the signup page if there is an error
+            failureRedirect : '/login', // redirect back to the login page if there is an error
             failureFlash : true // allow flash messages
     }),
         function(req, res) {
@@ -181,21 +181,30 @@ router.get('/endeavors', function (req, res) {
 });
 
 // renders the job that corresponds to the jobID passed in request
- router.get('/viewJob/:id/:user', function(req, res) {
-  var condition = 'jobID = ' + req.params.id;
-  var condition2 = 'id = ' + req.params.user;
-    endeavor.allWhere('jobs', condition, function (job) {
-      endeavor.allWhere('user', condition2, function (postUser) {
-        res.render('job', {
-          user: req.user,
-          job: job,
-          postUser: postUser
-          // moment: moment
-        });
-        console.log(postUser);
-        //console.log(job);
-      });
+router.get('/viewJob/:id/:user', function(req, res) {
+var condition = 'jobID = ' + req.params.id;
+var condition2 = 'id = ' + req.params.user;
+  endeavor.allWhere('jobs', condition, function (job) {
+    endeavor.allWhere('user', condition2, function (postUser) {
+        if(req.user == undefined){
+          res.render('job', {
+            user: req.user,
+            job: job,
+            postUser: postUser
+          }); 
+        }else{
+          isOwner(req.params.user, req.user.id, function (owned) {
+            res.render('job', {
+              user: req.user,
+              job: job,
+              postUser: postUser,
+              owned: owned
+            });
+            console.log(postUser, req.params.user, req.user);
+          });
+        }     
     });
+  });
 });
   // =====================================
   // LOGOUT ==============================
@@ -306,6 +315,38 @@ function isLoggedIn(req, res, next) {
 
   // if they aren't redirect them to the home page
   res.redirect('/');
+}
+
+// route middleware to make sure
+function isLoggedIn2(req, next) {
+
+  // if user is authenticated in the session, carry on
+  if (req.isAuthenticated())
+    return next();
+}
+
+// checks to see if page viewer is page owner
+function isOwner(req, loggedin, owned) {
+
+  // if(loggedin == ''){
+  //   loggedin = 0001;
+  // }else{
+  //   loggedin = req.user.id;
+  // }
+
+  console.log(req, loggedin);
+  if (req == loggedin) {
+    var owner = true;
+    console.log(owner);
+    owned(owner);
+
+  }
+  else {
+    var owner = false;
+    console.log(owner);
+    owned(owner);
+  }
+
 }
 
 module.exports = router;
