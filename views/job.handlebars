@@ -118,7 +118,7 @@
                   <h4 class="modal-title">Edit This Job Posting</h4>
                 </div>
                 <div class="modal-body">
-                  <form action="job/update/{{this.jobID}}?_method=PUT"" method="POST">
+                  <form action="job/update/{{this.jobID}}?_method=PUT" method="POST">
                     <div class="form-group">
                         <label for="edit_jobTitle">Title</label>
                         <input type="text" id="edit_jobTitle" class="form-control" name="edit_jobTitle" value="{{this.title}}" required>
@@ -172,7 +172,7 @@
                     </div>
                     <!-- <input type="hidden" name="edit_jobUserID" value="{{user.id}}"> -->
                     <input type="hidden" name="edit_jobType" value="p">
-                    <button class="btn btn-warning btn-lg" type="submit">Add Job</button>
+                    <button class="btn btn-warning btn-lg" type="submit">Update Job Posting</button>
                   </form>
                 </div>
                 <div class="modal-footer">
@@ -182,6 +182,48 @@
               
             </div>
           </div>
+
+      {{/unless}}
+
+      {{/job}}
+
+      {{/if}}
+
+      {{#if owned}}
+        <!-- loops through each job -->
+      {{#job}}    
+        <!-- checks if job has been completed -->
+      {{#unless this.completed}}
+
+      <!-- Modal for adding new jobs to DB. Posts to endeavor_controller.js -->
+      <div class="modal fade" id="jobDeleteModal" role="dialog">
+
+        <div class="modal-dialog">
+        
+          <!-- Modal content inputs populated from script.js-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Remove Job Posting</h4>
+            </div>
+            <div class="modal-body">
+                <form action="/job/remove/{{this.jobID}}?_method=DELETE" method="POST">
+                    <h2>Are you sure you want to permanently remove this job posting?</h2>
+                    <div>
+                      <!-- <a class="btn btn-warning btn-lg" href="/job/remove/{{this.jobID}}?_method=DELETE" alt="Remove Posting Button">Remove</a> -->
+                      <button class="btn btn-warning btn-lg" type="submit">Remove</button>
+
+                      <a class="btn btn-warning btn-lg" data-dismiss="modal" alt="Cancel Button">Cancel</a>  
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <!-- <label>Don't have an account? Create one for free.</label> -->
+            </div>
+          </div>
+          
+        </div>
+      </div>
 
       {{/unless}}
 
@@ -201,7 +243,7 @@
                     <div>
                         <a class="btn btn-warning btn-lg" data-toggle="modal" data-target="#jobEditModal" alt="Edit Posting Button">Edit This Posting</a>
 
-                        <a class="btn btn-warning btn-lg" data-toggle="modal" data-target="#jobPostModal" alt="">Remove This Posting</a> 
+                        <a class="btn btn-warning btn-lg" data-toggle="modal" data-target="#jobDeleteModal" alt="">Remove This Posting</a> 
 
                         <a class="btn btn-warning btn-lg" data-toggle="modal" data-target="#jobPostModal" alt="">Review Bids</a>   
                     </div>
@@ -237,8 +279,8 @@
                                 {{/if}}
                                 <p class="job-title-desc">{{this.description}}</p>
                                 <div class="job-box-footer">
-                                    <a class="btn btn-warning btn-lg job-box-category">{{this.category}}</a>
-                                    <a class="btn btn-warning btn-lg job-box-category">{{this.subcategory}}</a>
+                                    <a class="btn btn-warning btn-lg job-box-category" href="/jobCategory/{{this.category}}">{{this.category}}</a>
+                                    <a class="btn btn-warning btn-lg job-box-category" href="/jobSubCategory/{{this.subcategory}}">{{this.subcategory}}</a>
                                     <h2 class="job-box-price">{{this.budget}}</h2>
                                 </div>
                                    

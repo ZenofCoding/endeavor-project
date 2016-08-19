@@ -238,6 +238,17 @@ router.put('/viewJob/:jobID/job/update/:id', function (req, res) {
   });
 });
 
+// accesses the delete function in endeavor.js
+// passes jobID
+// redirects to .get /profile page
+router.delete('/job/remove/:id', function (req, res) {
+  var condition = 'jobID = ' + req.params.id;
+  console.log('condition', condition);
+  endeavor.delete(['jobs'], condition, function () {
+    res.redirect('/profile');    
+  });
+});
+
 // accesses the create function in endeavor.js
 // passes the values from the index.handlebars form and passes the db column name
 // redirects to .get /endeavors and reloads page
