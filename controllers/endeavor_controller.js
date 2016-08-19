@@ -193,14 +193,18 @@ var condition2 = 'id = ' + req.params.user;
             postUser: postUser
           }); 
         }else{
-          isOwner(req.params.user, req.user.id, function (owned) {
-            res.render('job', {
-              user: req.user,
-              job: job,
-              postUser: postUser,
-              owned: owned
+          endeavor.all('category', function (category) {
+            isOwner(req.params.user, req.user.id, function (owned) {
+              res.render('job', {
+                user: req.user,
+                job: job,
+                postUser: postUser,
+                category: category,
+                owned: owned
+              });
+              console.log(category);
+              //console.log(postUser, req.params.user, req.user);
             });
-            console.log(postUser, req.params.user, req.user);
           });
         }     
     });
@@ -220,6 +224,17 @@ var condition2 = 'id = ' + req.params.user;
 router.post('/job/create', function (req, res) {
   endeavor.create(['jobs'], ['title', 'description', 'userID', 'image', 'category', 'subcategory', 'bidding', 'jobstart', 'deadline', 'firmness', 'budget'], [req.body.job_title, req.body.job_description, req.body.user_id, req.body.image1, req.body.category, req.body.subcategory, req.body.bidding, req.body.start, req.body.end, req.body.firm, req.body.budget], function () {
     res.redirect('/profile');
+  });
+});
+
+// accesses the update function in endeavor.js
+// passes endeavor id
+// redirects to .get /preferences with a value of true and shows success modal
+router.put('/viewJob/:jobID/job/update/:id', function (req, res) {
+  var condition = 'jobID = ' + req.params.id;
+  console.log('condition', condition);
+  endeavor.updateString(['jobs'], { title: req.body.edit_jobTitle, description: req.body.edit_jobDescription, image: req.body.edit_jobImage1, category: req.body.edit_jobCategory, subcategory: req.body.edit_jobSubcategory, bidding: req.body.edit_jobBidding, jobstart: req.body.edit_jobStart, deadline: req.body.edit_jobEnd, budget: req.body.edit_jobBudget }, condition, function () {
+    res.redirect('back');
   });
 });
 

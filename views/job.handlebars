@@ -101,6 +101,94 @@
         <!-- /.container -->
     </nav>
 
+    {{#if owned}}
+    <!-- loops through each job -->
+    {{#job}}    
+    <!-- checks if job has been completed -->
+    {{#unless this.completed}}
+
+        <!-- Modal for adding new jobs to DB. Posts to endeavor_controller.js -->
+          <div class="modal fade" id="jobEditModal" role="dialog">
+            <div class="modal-dialog">
+            
+              <!-- Modal content inputs populated from script.js-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Edit This Job Posting</h4>
+                </div>
+                <div class="modal-body">
+                  <form action="job/update/{{this.jobID}}?_method=PUT"" method="POST">
+                    <div class="form-group">
+                        <label for="edit_jobTitle">Title</label>
+                        <input type="text" id="edit_jobTitle" class="form-control" name="edit_jobTitle" value="{{this.title}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_jobDescription">Description</label>
+                        <textarea type="text" id="edit_jobDescription" class="form-control" name="edit_jobDescription" rows="10" required>{{this.description}}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_jobImage1">Main Image</label>
+                        <input type="text" id="edit_jobImage1" class="form-control" name="edit_jobImage1" value="{{this.image}}" required>
+                        <!-- <label for="image1">You can add more images later.</label> -->
+                    </div>
+                    <div class="form-group">
+                          <label for="edit_jobCategory">Category</label>
+                          <select id="edit_jobCategory" class="form-control" name="edit_jobCategory" onChange="populate('edit_jobCategory','edit_jobSubcategory')" required>
+                          <option value="">Choose a category</option>
+                          {{#each ../category}}
+                              <option value="{{this.description}}">{{this.description}}</option>
+                          {{/each}}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                          <label for="edit_jobSubcategory">Subcategory</label>
+                          <select id="edit_jobSubcategory" class="form-control" name="edit_jobSubcategory" required>
+                          <option value="">Choose a subcategory</option>
+                          <!-- {{#each category}}
+                              <option value="{{this.description}}">{{this.description}}</option>
+                          {{/each}} -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_jobBidding">Allow users to submit bids or estimates for this posting?</label>
+                        <select id="edit_jobBidding" class="form-control" name="edit_jobBidding" required>
+                          <option value="">Choose an option</option>
+                          <option value="1">Yes</option>
+                          <option value="0">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_jobStart">Start Date</label>
+                        <input type="date" id="edit_jobStart" class="form-control" name="edit_jobStart">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_jobEnd">End Date</label>
+                        <input type="date" id="edit_jobEnd" class="form-control" name="edit_jobEnd">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_jobBudget">Budget/Price</label>
+                        <input type="text" id="edit_jobBudget" class="form-control" name="edit_jobBudget" value="$" placeholder=" Example... $250" required>
+                    </div>
+                    <!-- <input type="hidden" name="edit_jobUserID" value="{{user.id}}"> -->
+                    <input type="hidden" name="edit_jobType" value="p">
+                    <button class="btn btn-warning btn-lg" type="submit">Add Job</button>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                    <!-- <label>Don't have an account? Create one for free.</label> -->
+                </div>
+              </div>
+              
+            </div>
+          </div>
+
+      {{/unless}}
+
+      {{/job}}
+
+      {{/if}}
+
     <!-- Page Content -->
 
       <!-- begin order up wrapper -->
@@ -108,6 +196,16 @@
         <div class="content-section-b">
 
             <div class="container extra-margin">
+
+                {{#if owned}}
+                    <div>
+                        <a class="btn btn-warning btn-lg" data-toggle="modal" data-target="#jobEditModal" alt="Edit Posting Button">Edit This Posting</a>
+
+                        <a class="btn btn-warning btn-lg" data-toggle="modal" data-target="#jobPostModal" alt="">Remove This Posting</a> 
+
+                        <a class="btn btn-warning btn-lg" data-toggle="modal" data-target="#jobPostModal" alt="">Review Bids</a>   
+                    </div>
+                {{/if}}
 
                 <!-- loops through each job -->
                 {{#each job}}    
@@ -331,6 +429,27 @@
 
     <!-- Endeavor Script -->
     <!-- <script src="/assets/scripts/script.js"></script> -->
+
+    <script type="text/javascript">
+    function populate(s1,s2){
+        var s1 = document.getElementById(s1);
+        var s2 = document.getElementById(s2);
+        s2.innerHTML = "";
+        if(s1.value == "Accounting"){
+            var optionArray = ["|","artpunk|Art Punk","alternativerock|Alternative Rock","collegerock|College Rock","experimentalrock|Experimental                              Rock","gothicrock|Gothic Rock","grunge|Grunge","hardcorepunk|Hardcore Punk","hardrock|Hard Rock","indierock|Indie Rock",                                                                                                                "lofi|Lo-fi","newwave|New Wave","progressiverock|Progressive Rock","punk|Punk","shoegaze|Shoegaze","steampunk|Steampunk"];
+        } else if(s1.value == "Administrative"){
+            var optionArray = ["|","acousticblues|Acoustic Blues","chicagoblues|Chicago Blues","classicblues|Classic Blues",
+                    "contemporaryblues|Contemporary Blues","countryblues|Country Blues","deltablues|Delta Blues","electricblues|Electric Blues"];
+        }
+        for(var option in optionArray){
+            var pair = optionArray[option].split("|");
+            var newOption = document.createElement("option");
+            newOption.value = pair[0];
+            newOption.innerHTML = pair[1];
+            s2.options.add(newOption);
+        }
+    }
+    </script>
 
 </body>
 
