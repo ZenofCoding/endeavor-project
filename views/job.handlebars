@@ -54,6 +54,16 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
+                    {{#if owned}}
+                        <li>
+                            <a>Owner!!!</a>
+                        </li>  
+                    {{/if}}
+                    {{#unless owned}}
+                    <li>
+                        <a>Not Owner!!!</a>
+                    </li>
+                    {{/unless}}
                     {{#if user}}
                         <li>
                             <a href="/profile">Dashboard</a>
@@ -187,11 +197,11 @@
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
                     {{#if this.displayName}}
-                        <h2 class="section-heading">Posted By:<br>{{this.displayName}}</h2>
+                        <h2 class="section-heading">Posted By<br>{{this.displayName}}</h2>
                     {{else}}
-                        <h2 class="section-heading">Posted By:<br>{{this.username}}</h2>
+                        <h2 class="section-heading">Posted By<br>{{this.username}}</h2>
                     {{/if}}
-                    <p class="lead">{{this.summary}}</p>
+                    <p class="lead summary-about">{{this.summary}}</p>
                 </div>
                 <div class="col-lg-5 col-lg-offset-2 col-sm-6">
                     <a href="/public/profile/{{this.id}}">
