@@ -44,6 +44,14 @@ var endeavor = {
     orm.updateString(table, objColVals, condition, function (res) {
       cb(res);
     });
+  },
+  // calls UPDATE/update function in orm.js
+  // passes table name, column name, value, and id
+  // objColVals is object
+  delete: function (table, condition, cb) {
+    orm.delete(table, condition, function (res) {
+      cb(res);
+    });
   }
 };
 

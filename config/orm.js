@@ -134,6 +134,20 @@ var orm = {
       cb(result);
     });
   },
+    // objColVals would be the columns and values that you want to update
+    // an example of objColVals would be {name: Big Mac, devoured: true}
+  delete: function (table, condition, cb) {
+    var queryString = 'DELETE FROM ' + table;
+
+    queryString = queryString + ' WHERE ';
+    queryString = queryString + condition;
+
+    console.log(queryString);
+    connection.query(queryString, function (err, result) {
+      if (err) throw err;
+      cb(result);
+    });
+  },
 };
 
 // makes orm accessible to endeavor.js
