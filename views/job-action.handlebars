@@ -274,11 +274,11 @@
                                 <img class="job-box-image-lrg1" src="{{this.image}}">
                                 {{#if this.bidding}}
                                     {{#unless ../owned}}
-                                        <a href="/viewJobAction/{{this.jobID}}/{{this.userID}}"><img class="job-view-image" src="/assets/images/submit_bid_btn.png"></a>
+                                        <img class="job-view-image" src="/assets/images/submit_bid_btn.png">
                                     {{/unless}}
                                 {{else}}
                                     {{#unless ../owned}}
-                                        <a href="/viewJobAction/{{this.jobID}}/{{this.userID}}"><img class="job-view-image" src="/assets/images/apply_fixed_btn.png"></a>
+                                        <img class="job-view-image" src="/assets/images/apply_fixed_btn.png">
                                     {{/unless}} 
                                 {{/if}}
                                 <p class="job-title-desc">{{this.description}}</p>

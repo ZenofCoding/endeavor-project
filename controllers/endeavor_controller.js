@@ -23,97 +23,129 @@ router.get('/endeavors', function (req, res) {
 });
 
 // =====================================
-  // LOGIN ===============================
-  // =====================================
-  // show the login form
-  router.get('/login', function(req, res) {
+// LOGIN ===============================
+// =====================================
+// show the login form
+router.get('/login', function(req, res) {
 
-    // render the page and pass in any flash data if it exists
-    res.render('login', { message: req.flash('loginMessage') });
+  // render the page and pass in any flash data if it exists
+  res.render('login', { 
+    message: req.flash('loginMessage') 
+  });
+});
+
+// process the login form
+router.post('/login', passport.authenticate('local-login', {
+          successRedirect : '/profile', // redirect to the secure profile section
+          failureRedirect : '/login', // redirect back to the login page if there is an error
+          failureFlash : true // allow flash messages
+  }),
+      function(req, res) {
+          console.log("hello");
+
+          if (req.body.remember) {
+            req.session.cookie.maxAge = 1000 * 60 * 3;
+          } else {
+            req.session.cookie.expires = false;
+          }
+      res.redirect('/');
   });
 
-  // process the login form
-  router.post('/login', passport.authenticate('local-login', {
-            successRedirect : '/profile', // redirect to the secure profile section
-            failureRedirect : '/login', // redirect back to the login page if there is an error
-            failureFlash : true // allow flash messages
-    }),
-        function(req, res) {
-            console.log("hello");
-
-            if (req.body.remember) {
-              req.session.cookie.maxAge = 1000 * 60 * 3;
-            } else {
-              req.session.cookie.expires = false;
-            }
-        res.redirect('/');
-    });
-
-  // =====================================
-  // SIGNUP ==============================
-  // =====================================
-  // show the signup form
-  router.get('/signup', function(req, res) {
-    // render the page and pass in any flash data if it exists
-    res.render('signup', { message: req.flash('signupMessage') });
+// show the login (STAY) form
+router.get('/login/stay/:id/:user', function(req, res) {
+  // var jobID = req.params.id;
+  // var userJob = req.params.user;
+  // render the page and pass in any flash data if it exists
+  res.render('login-stay', { 
+    message: req.flash('loginMessage'),
+    jobID: req.params.id,
+    userJob: req.params.user
   });
+});
 
-  // process the signup form
-  router.post('/signup', passport.authenticate('local-signup', {
-    successRedirect : '/profile', // redirect to the secure profile section
-    failureRedirect : '/signup', // redirect back to the signup page if there is an error
+// process the login form
+router.post('/login/stay', passport.authenticate('local-login-stay', {
+    failureRedirect : 'back', // redirect back to the login page if there is an error
     failureFlash : true // allow flash messages
-  }));
+  }),
+      function(req, res) {
+          console.log("hello");
 
-  // =====================================
-  // PROFILE SECTION =========================
-  // =====================================
-  // we will want this protected so you have to be logged in to visit
-  // we will use route middleware to verify this (the isLoggedIn function)
-  router.get('/profile', isLoggedIn, function(req, res) {
-    // res.render('profile', {
-    //   user : req.user // get the user out of session and pass to template
-    // });
-    //var userObject = { user : req.user };
-    var condition = 'userID = ' + req.user.id;
-    endeavor.allWhere('jobs', condition, function (jobs) {
-      endeavor.all('category', function (category) {
-        endeavor.allWhere('resume', condition, function (resumes) {
-          // console.log(hbsObject);
-          res.render('profile', {
-            user: req.user, 
-            jobs: jobs,
-            category: category,
-            resumes: resumes
-          });
-          
-        });
-        //console.log(jobs, category);
-      });
-    });
-    //console.log(req.user);
-  });
-  // =====================================
-  // PREFERENCES SECTION =========================
-  // =====================================
-  // we will want this protected so you have to be logged in to visit
-  // we will use route middleware to verify this (the isLoggedIn function)
-  router.get('/preferences', isLoggedIn, function(req, res) {
-    var condition = 'userID = ' + req.user.id;
-    endeavor.allWhere('jobs', condition, function (jobs) {
+          if (req.body.remember) {
+            req.session.cookie.maxAge = 1000 * 60 * 3;
+          } else {
+            req.session.cookie.expires = false;
+          }
+      res.redirect('/viewJobAction/' + req.body.jobID +'/'+ req.body.userJob);
+});
+
+// =====================================
+// SIGNUP ==============================
+// =====================================
+// show the signup form
+router.get('/signup', function(req, res) {
+  // render the page and pass in any flash data if it exists
+  res.render('signup', { message: req.flash('signupMessage') });
+});
+
+// process the signup form
+router.post('/signup', passport.authenticate('local-signup', {
+  successRedirect : '/profile', // redirect to the secure profile section
+  failureRedirect : '/signup', // redirect back to the signup page if there is an error
+  failureFlash : true // allow flash messages
+}));
+
+// =====================================
+// PROFILE SECTION =========================
+// =====================================
+// we will want this protected so you have to be logged in to visit
+// we will use route middleware to verify this (the isLoggedIn function)
+router.get('/profile', isLoggedIn, function(req, res) {
+  // res.render('profile', {
+  //   user : req.user // get the user out of session and pass to template
+  // });
+  //var userObject = { user : req.user };
+  var condition = 'userID = ' + req.user.id;
+  endeavor.allWhere('jobs', condition, function (jobs) {
+    endeavor.all('category', function (category) {
       endeavor.allWhere('resume', condition, function (resumes) {
-      // var hbsObject = { endeavors: data, user : req.user };
-      // console.log(hbsObject);
-        res.render('preferences', {
+        // console.log(hbsObject);
+        res.render('profile', {
           user: req.user, 
           jobs: jobs,
+          category: category,
           resumes: resumes
         });
-        console.log(jobs);
+        
       });
+      //console.log(jobs, category);
     });
-    console.log(req.user);
   });
+  //console.log(req.user);
+});
+
+// =====================================
+// PREFERENCES SECTION =========================
+// =====================================
+// we will want this protected so you have to be logged in to visit
+// we will use route middleware to verify this (the isLoggedIn function)
+router.get('/preferences', isLoggedIn, function(req, res) {
+  var condition = 'userID = ' + req.user.id;
+  endeavor.allWhere('jobs', condition, function (jobs) {
+    endeavor.allWhere('resume', condition, function (resumes) {
+    // var hbsObject = { endeavors: data, user : req.user };
+    // console.log(hbsObject);
+      res.render('preferences', {
+        user: req.user, 
+        jobs: jobs,
+        resumes: resumes
+      });
+      console.log(jobs);
+    });
+  });
+  console.log(req.user);
+});
+  
   // =====================================
   // PREFERENCES SUCCESS SECTION =========================
   // =====================================
@@ -207,6 +239,27 @@ var condition2 = 'id = ' + req.params.user;
             });
           });
         }     
+    });
+  });
+});
+
+// renders the job that corresponds to the jobID passed in request
+// renders page for bidding and applying for jobs
+router.get('/viewJobAction/:id/:user', isLoggedIn2, function(req, res) {
+var condition = 'jobID = ' + req.params.id;
+var condition2 = 'id = ' + req.params.user;
+  endeavor.allWhere('jobs', condition, function (job) {
+    endeavor.allWhere('user', condition2, function (postUser) {
+      endeavor.all('category', function (category) {
+        res.render('job', {
+          user: req.user,
+          job: job,
+          postUser: postUser,
+          category: category
+        });
+        console.log(category);
+        //console.log(postUser, req.params.user, req.user);
+      });         
     });
   });
 });
@@ -344,21 +397,18 @@ function isLoggedIn(req, res, next) {
 }
 
 // route middleware to make sure
-function isLoggedIn2(req, next) {
+function isLoggedIn2(req, res, next) {
 
   // if user is authenticated in the session, carry on
   if (req.isAuthenticated())
     return next();
+
+  // if they aren't redirect them to the login page
+  res.redirect('/login/stay/' + req.params.id +'/'+ req.params.user);
 }
 
 // checks to see if page viewer is page owner
 function isOwner(req, loggedin, owned) {
-
-  // if(loggedin == ''){
-  //   loggedin = 0001;
-  // }else{
-  //   loggedin = req.user.id;
-  // }
 
   console.log(req, loggedin);
   if (req == loggedin) {
@@ -371,6 +421,21 @@ function isOwner(req, loggedin, owned) {
     var owner = false;
     console.log(owner);
     owned(owner);
+  }
+
+}
+
+// route middleware to make sure
+function getUrlData(req, res, next) {
+
+  // if user is authenticated in the session, carry on
+  if (req.params.id && req.params.user != undefined){
+    var jobID = req.params.id;
+    var userID = req.params.user;
+    return next(jobID, userID);
+  }else{
+    // if they aren't redirect them to the login page
+    res.redirect('/login');
   }
 
 }
