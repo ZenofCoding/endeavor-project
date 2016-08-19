@@ -209,10 +209,12 @@
   background-color: #2a2a2a;
   color: #ffffff;
   padding: 5px 15px 5px 15px;
+  margin-bottom: 0px;
 }
 
 .resume-position{
   color: #f0ad4e;
+  margin-top: 5px;
 }
 
 .resume-right{
@@ -224,7 +226,12 @@
   border: 1px solid #2a2a2a;
   border-radius: 6px;
   padding: 5px 15px 5px 15px;
+  margin-bottom: 0px;
   white-space: pre-wrap;
+}
+
+.resume-date{
+  margin-top: 5px;
 }
 
 .summary-about{
