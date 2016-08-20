@@ -280,6 +280,18 @@ router.post('/job/create', function (req, res) {
   });
 });
 
+// accesses the create function in endeavor.js
+// passes the values from the index.handlebars form and passes the db column name
+// redirects to .get /endeavors and reloads page
+router.post('/job/bid', function (req, res) {
+  endeavor.create(['bid'], ['description', 'userID', 'jobID', 'amount', 'bidType'], [req.body.bid_description, req.body.bid_userID, req.body.bid_jobID, req.body.bid_budget, req.body.bid_type], function () {
+    var condition = 'jobID = ' + req.body.bid_jobID;
+    endeavor.update(['jobs'], { hasbid: req.body.hasbid_initial, bidderID: req.body.bid_userID}, condition, function () {
+      res.redirect('/profile');
+    });
+  });
+});
+
 // accesses the update function in endeavor.js
 // passes endeavor id
 // redirects to .get /preferences with a value of true and shows success modal
