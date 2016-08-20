@@ -216,29 +216,39 @@ router.get('/preferences', isLoggedIn, function(req, res) {
 router.get('/viewJob/:id/:user', function(req, res) {
 var condition = 'jobID = ' + req.params.id;
 var condition2 = 'id = ' + req.params.user;
+var condition3 = 'jobOwnerID = ' + req.params.user;
   endeavor.allWhere('jobs', condition, function (job) {
-    endeavor.allWhere('user', condition2, function (postUser) {
-        if(req.user == undefined){
-          res.render('job', {
-            user: req.user,
-            job: job,
-            postUser: postUser
-          }); 
-        }else{
-          endeavor.all('category', function (category) {
-            isOwner(req.params.user, req.user.id, function (owned) {
-              res.render('job', {
-                user: req.user,
-                job: job,
-                postUser: postUser,
-                category: category,
-                owned: owned
+    endeavor.allWhere('bid', condition3, function (bids) {
+      endeavor.allWhere('user', condition2, function (postUser) {
+        //endeavor.leftJoin(['user.id', 'user.avatar', 'bid.userID'] condition2, function (bidImages) {
+          if(req.user == undefined){
+            res.render('job', {
+              user: req.user,
+              job: job,
+              bids: bids,
+              postUser: postUser,
+              //bidImages: bidImages
+            }); 
+            console.log('hello', bids);
+          }else{
+            endeavor.all('category', function (category) {
+              isOwner(req.params.user, req.user.id, function (owned) {
+                res.render('job', {
+                  user: req.user,
+                  job: job,
+                  bids: bids,
+                  postUser: postUser,
+                  //bidImages: bidImages,
+                  category: category,
+                  owned: owned
+                });
+                console.log('hello', bids);
+                //console.log(postUser, req.params.user, req.user);
               });
-              console.log(category);
-              //console.log(postUser, req.params.user, req.user);
             });
-          });
-        }     
+          } 
+          //});
+        });  
     });
   });
 });
@@ -248,18 +258,22 @@ var condition2 = 'id = ' + req.params.user;
 router.get('/viewJobAction/:id/:user', isLoggedIn2, function(req, res) {
 var condition = 'jobID = ' + req.params.id;
 var condition2 = 'id = ' + req.params.user;
+var condition3 = 'jobOwnerID = ' + req.params.user;
   endeavor.allWhere('jobs', condition, function (job) {
-    endeavor.allWhere('user', condition2, function (postUser) {
-      endeavor.all('category', function (category) {
-        res.render('job-action', {
-          user: req.user,
-          job: job,
-          postUser: postUser,
-          category: category
-        });
-        console.log(category);
-        //console.log(postUser, req.params.user, req.user);
-      });         
+    endeavor.allWhere('bid', condition3, function (bids) {
+      endeavor.allWhere('user', condition2, function (postUser) {
+        endeavor.all('category', function (category) {
+          res.render('job-action', {
+            user: req.user,
+            job: job,
+            postUser: postUser,
+            category: category
+          });
+          console.log('hello', bids);
+          //console.log(category);
+          //console.log(postUser, req.params.user, req.user);
+        });         
+      });
     });
   });
 });

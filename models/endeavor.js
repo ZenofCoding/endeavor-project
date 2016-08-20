@@ -45,6 +45,14 @@ var endeavor = {
       cb(res);
     });
   },
+  // calls leftJoin function in orm.js
+  // passes table name, column name, value, and id
+  // objColVals is object
+  leftJoin: function (colNames, table1, table2, condition, cb) {
+    orm.leftJoin(colNames, table1, table2, condition, function (res) {
+      cb(res);
+    });
+  },
   // calls UPDATE/update function in orm.js
   // passes table name, column name, value, and id
   // objColVals is object
