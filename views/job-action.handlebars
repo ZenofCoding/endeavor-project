@@ -73,7 +73,7 @@
                         <a href="#about">About</a>
                     </li>
                     <li>
-                        <a href="#services">Services</a>
+                        <a href="#reviews">Reviews</a>
                     </li>
                     <li>
                         <a href="#contact">Contact</a>
@@ -101,137 +101,71 @@
         <!-- /.container -->
     </nav>
 
-    {{#if owned}}
-    <!-- loops through each job -->
-    {{#job}}    
-    <!-- checks if job has been completed -->
-    {{#unless this.completed}}
-
-        <!-- Modal for adding new jobs to DB. Posts to endeavor_controller.js -->
-          <div class="modal fade" id="jobEditModal" role="dialog">
-            <div class="modal-dialog">
-            
-              <!-- Modal content inputs populated from script.js-->
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">Edit This Job Posting</h4>
-                </div>
-                <div class="modal-body">
-                  <form action="job/update/{{this.jobID}}?_method=PUT" method="POST">
-                    <div class="form-group">
-                        <label for="edit_jobTitle">Title</label>
-                        <input type="text" id="edit_jobTitle" class="form-control" name="edit_jobTitle" value="{{this.title}}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="edit_jobDescription">Description</label>
-                        <textarea type="text" id="edit_jobDescription" class="form-control" name="edit_jobDescription" rows="10" required>{{this.description}}</textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="edit_jobImage1">Main Image</label>
-                        <input type="text" id="edit_jobImage1" class="form-control" name="edit_jobImage1" value="{{this.image}}" required>
-                        <!-- <label for="image1">You can add more images later.</label> -->
-                    </div>
-                    <div class="form-group">
-                          <label for="edit_jobCategory">Category</label>
-                          <select id="edit_jobCategory" class="form-control" name="edit_jobCategory" onChange="populate('edit_jobCategory','edit_jobSubcategory')" required>
-                          <option value="">Choose a category</option>
-                          {{#each ../category}}
-                              <option value="{{this.description}}">{{this.description}}</option>
-                          {{/each}}
-                        </select>
-                    </div>
-                    <div class="form-group">
-                          <label for="edit_jobSubcategory">Subcategory</label>
-                          <select id="edit_jobSubcategory" class="form-control" name="edit_jobSubcategory" required>
-                          <option value="">Choose a subcategory</option>
-                          <!-- {{#each category}}
-                              <option value="{{this.description}}">{{this.description}}</option>
-                          {{/each}} -->
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="edit_jobBidding">Allow users to submit bids or estimates for this posting?</label>
-                        <select id="edit_jobBidding" class="form-control" name="edit_jobBidding" required>
-                          <option value="">Choose an option</option>
-                          <option value="1">Yes</option>
-                          <option value="0">No</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="edit_jobStart">Start Date</label>
-                        <input type="date" id="edit_jobStart" class="form-control" name="edit_jobStart">
-                    </div>
-                    <div class="form-group">
-                        <label for="edit_jobEnd">End Date</label>
-                        <input type="date" id="edit_jobEnd" class="form-control" name="edit_jobEnd">
-                    </div>
-                    <div class="form-group">
-                        <label for="edit_jobBudget">Budget/Price</label>
-                        <input type="text" id="edit_jobBudget" class="form-control" name="edit_jobBudget" value="$" placeholder=" Example... $250" required>
-                    </div>
-                    <!-- <input type="hidden" name="edit_jobUserID" value="{{user.id}}"> -->
-                    <input type="hidden" name="edit_jobType" value="p">
-                    <button class="btn btn-warning btn-lg" type="submit">Update Job Posting</button>
-                  </form>
-                </div>
-                <div class="modal-footer">
-                    <!-- <label>Don't have an account? Create one for free.</label> -->
-                </div>
-              </div>
-              
-            </div>
-          </div>
-
-      {{/unless}}
-
-      {{/job}}
-
-      {{/if}}
-
-      {{#if owned}}
-        <!-- loops through each job -->
-      {{#job}}    
-        <!-- checks if job has been completed -->
-      {{#unless this.completed}}
-
-      <!-- Modal for adding new jobs to DB. Posts to endeavor_controller.js -->
-      <div class="modal fade" id="jobDeleteModal" role="dialog">
-
-        <div class="modal-dialog">
-        
-          <!-- Modal content inputs populated from script.js-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Remove Job Posting</h4>
-            </div>
-            <div class="modal-body">
-                <form action="/job/remove/{{this.jobID}}?_method=DELETE" method="POST">
-                    <h2>Are you sure you want to permanently remove this job posting?</h2>
-                    <br>
-                    <div>
-                      <button class="btn btn-warning btn-lg" type="submit">Remove</button>
-
-                      <a class="btn btn-warning btn-lg" data-dismiss="modal" alt="Cancel Button">Cancel</a>  
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <!-- <label>Don't have an account? Create one for free.</label> -->
-            </div>
-          </div>
-          
-        </div>
-      </div>
-
-      {{/unless}}
-
-      {{/job}}
-
-      {{/if}}
 
     <!-- Page Content -->
+
+    <a name="action"></a>
+    <div class="content-section-a">
+
+        <div class="container extra-margin">
+
+            {{#each job}}
+
+            {{#if this.bidding}}
+            <div class="row">
+                <div class="col-lg-5 col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                        <h2 class="section-heading">Submit Bid for<br>{{this.title}}</h2>
+                        <!-- <h2 class="section-heading">Submit Application for<br>{{this.title}}</h2> -->
+                    <p class="lead">Formally request to be considered for this job posting.</p>
+                    <form action="job/bid/{{this.jobID}}?_method=PUT" method="POST">
+                        <div class="form-group">
+                            <label for="edit_jobDescription">Details</label>
+                            <textarea type="text" id="edit_jobDescription" class="form-control" name="edit_jobDescription" rows="10" placeholder="Example... Hello, I am interested in completing the job you have posted. I have several years experience in this field and will have no problem meeting your deadline while upholding the highest standards." required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_jobBudget">Bid Amount</label>
+                            <input type="text" id="edit_jobBudget" class="form-control" name="edit_jobBudget" value="$" placeholder=" Example... $250" required>
+                        </div>
+                        <!-- <input type="hidden" name="edit_jobUserID" value="{{user.id}}"> -->
+                        <button class="btn btn-warning btn-lg" type="submit">Submit Bid</button>
+                    </form>
+                </div>
+                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                    <img class="img-responsive pref-pic" src="{{this.image}}" alt="Job Posting Picture">
+                </div>
+            </div>
+            {{else}}
+                <div class="row">
+                <div class="col-lg-5 col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                        <h2 class="section-heading">Submit Application for<br>{{this.title}}</h2>
+                        <!-- <h2 class="section-heading">Submit Application for<br>{{this.title}}</h2> -->
+                    <p class="lead">Formally request to be considered for this job posting.</p>
+                    <form action="job/apply/{{this.jobID}}?_method=PUT" method="POST">
+                        <div class="form-group">
+                            <label for="edit_jobDescription">Details</label>
+                            <textarea type="text" id="edit_jobDescription" class="form-control" name="edit_jobDescription" rows="10" placeholder="Example... Hello, I am interested in completing the job you have posted. I have several years experience in this field and will have no problem meeting your deadline while upholding the highest standards." required></textarea>
+                        </div>
+                        <!-- <input type="hidden" name="edit_jobUserID" value="{{user.id}}"> -->
+                        <button class="btn btn-warning btn-lg" type="submit">Submit Application</button>
+                    </form>
+                </div>
+                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                    <img class="img-responsive pref-pic" src="{{this.image}}" alt="Job Posting Picture">
+                </div>
+            </div>
+            {{/if}}
+
+            {{/each}}
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-b -->
 
       <!-- begin order up wrapper -->
     <a name="jobs area"></a>
@@ -272,15 +206,6 @@
                                     <h2 class="job-title">{{this.title}}</h2>
                                 </div>
                                 <img class="job-box-image-lrg1" src="{{this.image}}">
-                                {{#if this.bidding}}
-                                    {{#unless ../owned}}
-                                        <img class="job-view-image" src="/assets/images/submit_bid_btn.png">
-                                    {{/unless}}
-                                {{else}}
-                                    {{#unless ../owned}}
-                                        <img class="job-view-image" src="/assets/images/apply_fixed_btn.png">
-                                    {{/unless}} 
-                                {{/if}}
                                 <p class="job-title-desc">{{this.description}}</p>
                                 <div class="job-box-footer">
                                     <a class="btn btn-warning btn-lg job-box-category" href="/jobCategory/{{this.category}}">{{this.category}}</a>
@@ -365,6 +290,7 @@
     </div>
     <!-- /.content-section-a -->
 
+    <a name="reviews"></a>
     <div class="content-section-b">
 
         <div class="container">
@@ -454,7 +380,7 @@
                         </li>
                         <li class="footer-menu-divider">&sdot;</li>
                         <li>
-                            <a href="#services">Services</a>
+                            <a href="#reviews">Reviews</a>
                         </li>
                         <li class="footer-menu-divider">&sdot;</li>
                         <li>

@@ -251,7 +251,7 @@ var condition2 = 'id = ' + req.params.user;
   endeavor.allWhere('jobs', condition, function (job) {
     endeavor.allWhere('user', condition2, function (postUser) {
       endeavor.all('category', function (category) {
-        res.render('job', {
+        res.render('job-action', {
           user: req.user,
           job: job,
           postUser: postUser,
@@ -275,7 +275,7 @@ var condition2 = 'id = ' + req.params.user;
 // passes the values from the index.handlebars form and passes the db column name
 // redirects to .get /endeavors and reloads page
 router.post('/job/create', function (req, res) {
-  endeavor.create(['jobs'], ['title', 'description', 'userID', 'image', 'category', 'subcategory', 'bidding', 'jobstart', 'deadline', 'firmness', 'budget'], [req.body.job_title, req.body.job_description, req.body.user_id, req.body.image1, req.body.category, req.body.subcategory, req.body.bidding, req.body.start, req.body.end, req.body.firm, req.body.budget], function () {
+  endeavor.create(['jobs'], ['title', 'description', 'userID', 'image', 'category', 'subcategory', 'bidding', 'jobstart', 'deadline', 'budget'], [req.body.job_title, req.body.job_description, req.body.user_id, req.body.image1, req.body.category, req.body.subcategory, req.body.bidding, req.body.start, req.body.end, req.body.budget], function () {
     res.redirect('/profile');
   });
 });
