@@ -237,3 +237,21 @@
 .summary-about{
   white-space: pre-wrap;
 }
+
+.bid-title{
+  background-color: #2a2a2a;
+  color: #ffffff;
+  padding: 5px 15px 5px 15px;
+  margin-bottom: 0px;
+  margin-top: 5px;
+}
+
+.bid-amount{
+  color: #f0ad4e;
+  margin-top: 5px;
+  font-size: 24px;
+}
+
+.no-bottom-marg{
+  margin-bottom: 0px;
+}
