@@ -152,7 +152,7 @@ var orm = {
   },
     // objColVals would be the columns and values that you want to update
     // an example of objColVals would be {name: Big Mac, devoured: true}
-  innerJoin3: function (colNames, table1, table2, table3, condition1, condition2, condition3, cb) {
+  innerJoin3: function (colNames, table1, table2, table3, condition1, condition2, condition3, condition4, cb) {
     var queryString = 'SELECT ' + colNames.toString() + ' FROM ' + table1;
 
     queryString = queryString + ' INNER JOIN ';
@@ -165,6 +165,8 @@ var orm = {
     queryString = queryString + condition2;
     queryString = queryString + ' WHERE ';
     queryString = queryString + condition3;
+    queryString = queryString + ' AND ';
+    queryString = queryString + condition4;
 
     console.log(queryString);
     connection.query(queryString, function (err, result) {

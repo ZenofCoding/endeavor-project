@@ -55,8 +55,8 @@ var endeavor = {
   },
   // calls innerJoin 3 table function in orm.js
   // passes table names, column names, values, and ids
-  innerJoin3: function (colNames, table1, table2, table3, condition1, condition2, condition3, cb) {
-    orm.innerJoin3(colNames, table1, table2, table3, condition1, condition2, condition3, function (res) {
+  innerJoin3: function (colNames, table1, table2, table3, condition1, condition2, condition3, condition4, cb) {
+    orm.innerJoin3(colNames, table1, table2, table3, condition1, condition2, condition3, condition4, function (res) {
       cb(res);
     });
   },

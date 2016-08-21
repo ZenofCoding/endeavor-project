@@ -457,13 +457,17 @@
 
     </div>
     <!-- /.content-section-a -->
-    {{#if bidInfo}}
+    {{#each job}}
+
+    {{#if hasbid}}
+
+    {{#if ../bidInfo}}
     <a name=""></a>
     <div class="content-section-b">
 
         <div class="container">
 
-        {{#each bidInfo}}
+        {{#each ../bidInfo}}
 
             <div class="row">
                 <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
@@ -479,8 +483,8 @@
                     {{#if bidType}}
                         <p class="lead resume-right bid-amount">{{this.amount}}</p>
                     {{/if}}
-                    {{#if ../owned}}
-                        {{#each ../job}}
+                    {{#if ../../owned}}
+                        {{#each ../../job}}
                             {{#unless this.bidaccepted}}
                                 <a class="btn btn-warning btn-lg accepting" data-job="{{this.jobID}}" data-bid="{{../this.bidID}}" data-bidder="{{../this.userID}}" alt="Edit Posting Button">Accept Bid</a>
                                 <a class="btn btn-warning btn-lg rejecting" data-bid="{{../this.bidID}}" alt="Edit Posting Button">Reject Bid</a>
@@ -504,6 +508,10 @@
 
     </div>
     {{/if}}
+
+    {{/if}}
+
+    {{/each}}
     <!-- /.content-section-b -->
 
   <a name="contact"></a>
