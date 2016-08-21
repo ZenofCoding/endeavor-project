@@ -223,7 +223,7 @@ var condition6 = 'user.id = bid.userID';
   endeavor.allWhere('jobs', condition, function (job) {
     endeavor.allWhere('bid', condition3, function (bids) {
       endeavor.allWhere('user', condition2, function (postUser) {
-        endeavor.innerJoin3(['user.id', 'user.avatar', 'bid.bidID', 'bid.jobID', 'bid.userID', 'bid.description', 'bid.amount', 'bid.bidType', 'bid.bidaccepted', 'bid.biddenied', 'bid.jobOwnerID'], 'user', 'bid', 'jobs', condition4, condition5, condition6, function (bidInfo) {
+        endeavor.innerJoin3(['user.id', 'user.avatar', 'user.username', 'user.displayName', 'bid.bidID', 'bid.jobID', 'bid.userID', 'bid.description', 'bid.amount', 'bid.bidType', 'bid.bidaccepted', 'bid.biddenied', 'bid.jobOwnerID'], 'user', 'bid', 'jobs', condition4, condition5, condition6, function (bidInfo) {
           if(req.user == undefined){
             res.render('job', {
               user: req.user,
@@ -305,6 +305,20 @@ router.post('/job/bid', function (req, res) {
     var condition = 'jobID = ' + req.body.bid_jobID;
     endeavor.update(['jobs'], { hasbid: req.body.hasbid_initial, bidderID: req.body.bid_userID}, condition, function () {
       res.redirect('/profile');
+    });
+  });
+});
+
+// accesses the update function in endeavor.js
+// passes endeavor id
+// redirects to .get /preferences with a value of true and shows success modal
+router.put('/job/bid/accept/:jobID/:bidID/:bidderID', function (req, res) {
+  var condition = 'jobID = ' + req.params.jobID;
+  var condition2 = 'bidID = ' + req.params.bidID;
+  console.log('condition', condition,'condition2', condition2);
+  endeavor.updateString(['jobs'], { bidID: req.params.bidID, bidaccepted: req.body.accept_bid, bidderID: req.params.bidderID }, condition, function () {
+    endeavor.updateString(['bid'], { bidaccepted: req.body.accept_bid }, condition2, function () {
+    res.redirect('/profile');
     });
   });
 });

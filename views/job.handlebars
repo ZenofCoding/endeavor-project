@@ -33,7 +33,6 @@
     <![endif]-->
     <!-- Link to Moment.js -->
     <!-- <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script> -->
-
 </head>
 
 <body>
@@ -231,6 +230,100 @@
 
       {{/if}}
 
+      {{#if owned}}
+
+      {{#job}}  
+
+      {{#if bidding}}  
+        <!-- checks if job has been completed -->
+      {{#unless this.completed}}
+
+      <!-- Modal for adding new jobs to DB. Posts to endeavor_controller.js -->
+      <div class="modal hide" id="bidAcceptModal" role="dialog">
+
+        <div class="modal-dialog">
+        
+          <!-- Modal content inputs populated from script.js-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close close-accept" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Accept Bid Submission</h4>
+            </div>
+            <div class="modal-body">
+                <form id="accept-form" action="" method="POST">
+                    <h2>Are you sure you want to accept the bid for this job posting?</h2>
+                    <br>
+                    <div>
+                    <input type="hidden" name="accept_bid" value="1">
+                      <button class="btn btn-warning btn-lg" type="submit">Accept</button>
+
+                      <a class="btn btn-warning btn-lg close-accept" data-dismiss="modal" alt="Cancel Button">Cancel</a>  
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <!-- <label>Don't have an account? Create one for free.</label> -->
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+      {{/unless}}
+
+      {{/if}}
+
+      {{/job}}
+
+      {{/if}}
+
+      {{#if owned}}
+
+      {{#job}}  
+
+      {{#if bidding}}  
+        <!-- checks if job has been completed -->
+      {{#unless this.completed}}
+
+      <!-- Modal for adding new jobs to DB. Posts to endeavor_controller.js -->
+      <div class="modal hide" id="bidRejectModal" role="dialog">
+
+        <div class="modal-dialog">
+        
+          <!-- Modal content inputs populated from script.js-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close close-reject" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Reject Bid Submission</h4>
+            </div>
+            <div class="modal-body">
+                <form id="reject-form" action="" method="POST">
+                    <h2>Are you sure you want to reject the bid for this job posting?</h2>
+                    <br>
+                    <div>
+                    <input type="hidden" name="reject_bid" value="1">
+                      <button class="btn btn-warning btn-lg" type="submit">Reject</button>
+
+                      <a class="btn btn-warning btn-lg close-reject" data-dismiss="modal" alt="Cancel Button">Cancel</a>  
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <!-- <label>Don't have an account? Create one for free.</label> -->
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+      {{/unless}}
+
+      {{/if}}
+
+      {{/job}}
+
+      {{/if}}
+
     <!-- Page Content -->
 
       <!-- begin order up wrapper -->
@@ -377,17 +470,29 @@
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
                     <h2 class="section-heading no-bottom-marg">Submitted By</h2>
-                    <h2 class="section-heading bid-title">{{this.userID}}</h2><br>
+                    {{#if displayName}}
+                        <h2 class="section-heading bid-title">{{this.displayName}}</h2><br>
+                    {{else}}
+                        <h2 class="section-heading bid-title">{{this.username}}</h2><br>
+                    {{/if}}
                     <p class="lead resume-description">{{this.description}}</p>
                     {{#if bidType}}
                         <p class="lead resume-right bid-amount">{{this.amount}}</p>
                     {{/if}}
+                    {{#if ../owned}}
+                        {{#each ../job}}
+                            {{#unless this.bidaccepted}}
+                                <a class="btn btn-warning btn-lg accepting" data-job="{{this.jobID}}" data-bid="{{../this.bidID}}" data-bidder="{{../this.userID}}" alt="Edit Posting Button">Accept Bid</a>
+                                <a class="btn btn-warning btn-lg rejecting" data-bid="{{../this.bidID}}" alt="Edit Posting Button">Reject Bid</a>
+                            {{/unless}}
+                        {{/each}}
+                    {{/if}}
                 </div>
                     <div class="col-lg-5 col-sm-pull-6  col-sm-6">
                         {{#if avatar}}
-                        <img class="img-responsive" src="{{this.avatar}}" alt="">
+                        <img class="img-responsive pref-pic" src="{{this.avatar}}" alt="">
                         {{else}}
-                        <img class="img-responsive" src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="">
+                        <img class="img-responsive pref-pic" src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="">
                         {{/if}}
                     </div>
             </div>
@@ -466,19 +571,16 @@
     <script src="/assets/scripts/bootstrap.min.js"></script>
 
     <!-- Endeavor Script -->
-    <!-- <script src="/assets/scripts/script.js"></script> -->
+    <script src="/assets/scripts/script.js"></script>
 
     <script type="text/javascript">
-    // $(document).ready(function() {
-    //     //$(document).click(function() {
-    //         $.ajax({
-    //             url : '/',
-    //             type : 'GET',
-    //             data : { param : 'John Doe' }
-    //         }).done(function(data) {
-    //             if (data == "success") alert('request sent!');
-    //         });
-    //     //});
+    // $(document).on('ready', function(){
+
+    //   $(document).on('click', '.accepting', function(){
+    //     $("#bidAcceptModal").removeClass("hide").addClass("show");
+    //     $("#accept-form").attr("action", "/job/bid/accept/{{this.jobID}}/"this.data-bid"?_method=PUT");
+    //   })
+
     // });
     function populate(s1,s2){
         var s1 = document.getElementById(s1);
