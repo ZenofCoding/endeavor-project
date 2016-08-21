@@ -364,13 +364,13 @@
 
     </div>
     <!-- /.content-section-a -->
-    {{#if bids}}
+    {{#if bidInfo}}
     <a name=""></a>
     <div class="content-section-b">
 
         <div class="container">
 
-        {{#each bids}}
+        {{#each bidInfo}}
 
             <div class="row">
                 <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
@@ -383,9 +383,13 @@
                         <p class="lead resume-right bid-amount">{{this.amount}}</p>
                     {{/if}}
                 </div>
-                <div class="col-lg-5 col-sm-pull-6  col-sm-6">
-                    <img class="img-responsive" src="/assets/images/dog.png" alt="">
-                </div>
+                    <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+                        {{#if avatar}}
+                        <img class="img-responsive" src="{{this.avatar}}" alt="">
+                        {{else}}
+                        <img class="img-responsive" src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="">
+                        {{/if}}
+                    </div>
             </div>
 
         {{/each}}
@@ -465,6 +469,17 @@
     <!-- <script src="/assets/scripts/script.js"></script> -->
 
     <script type="text/javascript">
+    // $(document).ready(function() {
+    //     //$(document).click(function() {
+    //         $.ajax({
+    //             url : '/',
+    //             type : 'GET',
+    //             data : { param : 'John Doe' }
+    //         }).done(function(data) {
+    //             if (data == "success") alert('request sent!');
+    //         });
+    //     //});
+    // });
     function populate(s1,s2){
         var s1 = document.getElementById(s1);
         var s2 = document.getElementById(s2);

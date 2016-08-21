@@ -217,19 +217,22 @@ router.get('/viewJob/:id/:user', function(req, res) {
 var condition = 'jobID = ' + req.params.id;
 var condition2 = 'id = ' + req.params.user;
 var condition3 = 'jobOwnerID = ' + req.params.user;
+var condition4 = 'bid.jobOwnerID = ' + req.params.user;
+var condition5 = 'bid.jobID = jobs.jobID';
+var condition6 = 'user.id = bid.userID';
   endeavor.allWhere('jobs', condition, function (job) {
     endeavor.allWhere('bid', condition3, function (bids) {
       endeavor.allWhere('user', condition2, function (postUser) {
-        //endeavor.leftJoin(['user.id', 'user.avatar', 'bid.userID'] condition2, function (bidImages) {
+        endeavor.innerJoin3(['user.id', 'user.avatar', 'bid.bidID', 'bid.jobID', 'bid.userID', 'bid.description', 'bid.amount', 'bid.bidType', 'bid.bidaccepted', 'bid.biddenied', 'bid.jobOwnerID'], 'user', 'bid', 'jobs', condition4, condition5, condition6, function (bidInfo) {
           if(req.user == undefined){
             res.render('job', {
               user: req.user,
               job: job,
               bids: bids,
               postUser: postUser,
-              //bidImages: bidImages
+              bidInfo: bidInfo
             }); 
-            console.log('hello', bids);
+            console.log('hello', bidInfo);
           }else{
             endeavor.all('category', function (category) {
               isOwner(req.params.user, req.user.id, function (owned) {
@@ -238,16 +241,16 @@ var condition3 = 'jobOwnerID = ' + req.params.user;
                   job: job,
                   bids: bids,
                   postUser: postUser,
-                  //bidImages: bidImages,
+                  bidInfo: bidInfo,
                   category: category,
                   owned: owned
                 });
-                console.log('hello', bids);
+                console.log('hello', bidInfo);
                 //console.log(postUser, req.params.user, req.user);
               });
             });
           } 
-          //});
+          });
         });  
     });
   });
@@ -298,7 +301,7 @@ router.post('/job/create', function (req, res) {
 // passes the values from the index.handlebars form and passes the db column name
 // redirects to .get /endeavors and reloads page
 router.post('/job/bid', function (req, res) {
-  endeavor.create(['bid'], ['description', 'userID', 'jobID', 'amount', 'bidType'], [req.body.bid_description, req.body.bid_userID, req.body.bid_jobID, req.body.bid_budget, req.body.bid_type], function () {
+  endeavor.create(['bid'], ['description', 'userID', 'jobID', 'amount', 'bidType', 'jobOwnerID'], [req.body.bid_description, req.body.bid_userID, req.body.bid_jobID, req.body.bid_budget, req.body.bid_type, req.body.job_owner], function () {
     var condition = 'jobID = ' + req.body.bid_jobID;
     endeavor.update(['jobs'], { hasbid: req.body.hasbid_initial, bidderID: req.body.bid_userID}, condition, function () {
       res.redirect('/profile');
