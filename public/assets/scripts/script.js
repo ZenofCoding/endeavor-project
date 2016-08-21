@@ -22,7 +22,7 @@ $(document).on('ready', function(){
     var jobID = $(this).data("job");
     var bidID = $(this).data("bid");
     $("#bidRejectModal").removeClass("hide").addClass("show");
-    $("#reject-form").attr("action", "/job/bid/reject/" + jobID + "/" + bidID + "?_method=PUT");
+    $("#reject-form").attr("action", "/job/bid/reject/" + bidID + "?_method=PUT");
   })
 
   $(document).on('click', '.close-reject', function(){

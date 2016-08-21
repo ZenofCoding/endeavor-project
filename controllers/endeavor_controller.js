@@ -326,6 +326,17 @@ router.put('/job/bid/accept/:jobID/:bidID/:bidderID', function (req, res) {
 // accesses the update function in endeavor.js
 // passes endeavor id
 // redirects to .get /preferences with a value of true and shows success modal
+router.put('/job/bid/reject/:bidID', function (req, res) {
+  var condition = 'bidID = ' + req.params.bidID;
+  console.log('condition', condition);
+    endeavor.updateString(['bid'], { biddenied: req.body.reject_bid }, condition, function () {
+    res.redirect('back');
+    });
+});
+
+// accesses the update function in endeavor.js
+// passes endeavor id
+// redirects to .get /preferences with a value of true and shows success modal
 router.put('/viewJob/:jobID/job/update/:id', function (req, res) {
   var condition = 'jobID = ' + req.params.id;
   console.log('condition', condition);
