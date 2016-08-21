@@ -137,12 +137,34 @@ var orm = {
     // objColVals would be the columns and values that you want to update
     // an example of objColVals would be {name: Big Mac, devoured: true}
   leftJoin: function (colNames, table1, table2, condition, cb) {
-    var queryString = 'SELECT ' + colNames.toString() + 'FROM' + table1;
+    var queryString = 'SELECT ' + colNames.toString() + ' FROM ' + table1;
 
     queryString = queryString + ' LEFT JOIN ';
     queryString = queryString + table2;
     queryString = queryString + ' ON ';
     queryString = queryString + condition;
+
+    console.log(queryString);
+    connection.query(queryString, function (err, result) {
+      if (err) throw err;
+      cb(result);
+    });
+  },
+    // objColVals would be the columns and values that you want to update
+    // an example of objColVals would be {name: Big Mac, devoured: true}
+  innerJoin3: function (colNames, table1, table2, table3, condition1, condition2, condition3, cb) {
+    var queryString = 'SELECT ' + colNames.toString() + ' FROM ' + table1;
+
+    queryString = queryString + ' INNER JOIN ';
+    queryString = queryString + table2;
+    queryString = queryString + ' ON ';
+    queryString = queryString + condition1;
+    queryString = queryString + ' INNER JOIN ';
+    queryString = queryString + table3;
+    queryString = queryString + ' ON ';
+    queryString = queryString + condition2;
+    queryString = queryString + ' WHERE ';
+    queryString = queryString + condition3;
 
     console.log(queryString);
     connection.query(queryString, function (err, result) {
