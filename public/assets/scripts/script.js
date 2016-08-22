@@ -55,12 +55,12 @@ $(document).on('ready', function(){
   $('.rating input').click(function () {
       $(".rating span").removeClass('checked');
       $(this).parent().addClass('checked');
-      //$(this).prop( "checked", true );
   });
 
   $('input:radio').change(
   function(){
       var userRating = this.value;
+      $('#job_rated').val(userRating);
       // alert(userRating);
   }); 
   //End rating system

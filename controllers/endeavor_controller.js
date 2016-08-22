@@ -471,8 +471,8 @@ router.put('/preferences/update/summary/:id', function (req, res) {
 // passes the values from the index.handlebars form and passes the db column name
 // redirects to .get /profile
 router.put('/job/complete/:jobID/:employerID/:employeeID', function (req, res) {
-  endeavor.create(['feedback'], ['rating', 'jobID', 'employerID', 'employeeID', 'review'], [req.body.job_rating, req.params.jobID, req.params.employerID, req.params.employeeID, req.body.job_review], function () {
-    var condition = 'jobID = ' + req.body.bid_jobID;
+  endeavor.create(['feedback'], ['rating', 'jobID', 'employerID', 'employeeID', 'review'], [req.body.job_rated, req.params.jobID, req.params.employerID, req.params.employeeID, req.body.job_review], function () {
+    var condition = 'jobID = ' + req.params.jobID;
     endeavor.update(['jobs'], { completed: req.body.job_complete }, condition, function () {
       res.redirect('/profile');
     });
