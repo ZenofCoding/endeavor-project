@@ -55,6 +55,7 @@ $(document).on('ready', function(){
   $('.rating input').click(function () {
       $(".rating span").removeClass('checked');
       $(this).parent().addClass('checked');
+      //$(this).prop( "checked", true );
   });
 
   $('input:radio').change(
