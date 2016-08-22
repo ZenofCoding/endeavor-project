@@ -246,7 +246,7 @@ var condition7 = 'jobs.jobID = ' + req.params.id;
                   category: category,
                   owned: owned
                 });
-                console.log('hello', bidInfo);
+                console.log('hello', job);
                 //console.log(postUser, req.params.user, req.user);
               });
             });
