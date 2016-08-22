@@ -13,9 +13,22 @@ $(document).on('ready', function(){
     $("#accept-form").attr("action", "/job/bid/accept/" + jobID + "/" + bidID + "/" + bidderID + "?_method=PUT");
   })
 
+  $(document).on('click', '.app-accepting', function(){
+    var jobID = $(this).data("job");
+    var appID = $(this).data("app");
+    var applicantID = $(this).data("applicant");
+    $("#appAcceptModal").removeClass("hide").addClass("show");
+    $("#app-accept-form").attr("action", "/job/app/accept/" + jobID + "/" + appID + "/" + applicantID + "?_method=PUT");
+  })
+
   $(document).on('click', '.close-accept', function(){
     $("#bidAcceptModal").removeClass("show").addClass("hide");
     $("#accept-form").attr("action", "");
+  })
+
+  $(document).on('click', '.close-app-accept', function(){
+    $("#appAcceptModal").removeClass("show").addClass("hide");
+    $("#app-accept-form").attr("action", "");
   })
 
   $(document).on('click', '.rejecting', function(){

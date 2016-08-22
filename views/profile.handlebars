@@ -247,6 +247,13 @@
 
                     <div class="job-box-container">  
                         <a class="job-link" href="/viewJob/{{this.jobID}}/{{this.userID}}">
+                            {{#if this.bidaccepted}}
+                                {{#if this.bidding}}
+                                    <img class="job-accepted-image" src="/assets/images/bid_accepted.png">
+                                {{else}}
+                                    <img class="job-hired-image" src="/assets/images/hired.png">
+                                {{/if}}
+                            {{/if}}
                             {{#if this.bidding}}
                                 <img class="job-bid-image" src="/assets/images/bid_btn.png">
                             {{else}}
