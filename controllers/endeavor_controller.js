@@ -444,6 +444,19 @@ router.put('/preferences/update/name/:id', function (req, res) {
 // accesses the update function in endeavor.js
 // passes user id
 // redirects to .get /preferences with a value of true and shows success modal
+router.put('/preferences/update/background/:id', function (req, res) {
+  var condition = 'id = ' + req.params.id;
+  console.log('condition', condition);
+  endeavor.update(['user'], { hasbackground: req.body.has_background }, condition, function () {
+    endeavor.updateString(['user'], { background: req.body.profile_background}, condition, function () {
+      res.redirect('/preferences/' + true);
+    });    
+  });
+});
+
+// accesses the update function in endeavor.js
+// passes user id
+// redirects to .get /preferences with a value of true and shows success modal
 router.put('/preferences/update/summary/:id', function (req, res) {
   var condition = 'id = ' + req.params.id;
   console.log('condition', condition);
