@@ -230,6 +230,65 @@
 
       {{/if}}
 
+    <!-- Begin Modal for marking this job complete and leaving feedback -->
+    {{#if owned}}
+    <!-- loops through each job -->
+    {{#job}}    
+    <!-- checks if job has been completed -->
+    {{#unless this.completed}}
+
+        <!-- Modal for adding new jobs to DB. Posts to endeavor_controller.js -->
+          <div class="modal hide" id="jobCompleteModal" role="dialog">
+            <div class="modal-dialog">
+            
+              <!-- Modal content inputs populated from script.js-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close close-complete" >&times;</button>
+                  <h4 class="modal-title">Mark This Job Posting As Complete</h4>
+                </div>
+                <div class="modal-body">
+                  <form id="job-complete-form" action="" method="POST">
+                    <div class="form-group">
+                        <label class="clear" for="job_rating">Rate the Performance of this Person or Company</label>
+                        <div id="job_rating" class="rating clear" name="job_rating">
+                            <span><input type="radio" name="rating" id="str5" value="5"><label for="str5"></label></span>
+                            <span><input type="radio" name="rating" id="str4" value="4"><label for="str4"></label></span>
+                            <span><input type="radio" name="rating" id="str3" value="3"><label for="str3"></label></span>
+                            <span><input type="radio" name="rating" id="str2" value="2"><label for="str2"></label></span>
+                            <span><input type="radio" name="rating" id="str1" value="1"><label for="str1"></label></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="job_review">Write a Review for the Person or Company that Completed this Job</label>
+                        <textarea type="text" id="job_review" class="form-control" name="job_review" rows="10" placeholder="Example... I am extremely pleased with the way this project turned out. I would definitely hire this skilled and knowledgeable person in the future." required></textarea>
+                        <label for="job_review">This review will be available for other users to see and base their hiring decisions on.</label>
+                    </div>
+                    
+                    <!-- <input type="hidden" name="edit_jobUserID" value="{{user.id}}"> -->
+                    <input type="hidden" name="job_complete" value="1">
+                    <button class="btn btn-warning btn-lg" type="submit">Complete Job &amp; Post Review</button>
+
+                    <a class="btn btn-warning btn-lg close-complete" alt="Cancel Button">Cancel</a>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                    <!-- <label>Don't have an account? Create one for free.</label> -->
+                </div>
+              </div>
+              
+            </div>
+          </div>
+
+      {{/unless}}
+
+      {{/job}}
+
+      {{/if}}
+      <!-- End Modal for marking this job complete and leaving feedback -->
+
+
       {{#if owned}}
 
       {{#job}}  
@@ -385,7 +444,9 @@
 
                         <a class="btn btn-danger btn-lg edit-buttons" data-toggle="modal" data-target="#jobDeleteModal" alt="Remove Posting Button">Remove This Posting</a>
 
-                        <a class="btn btn-danger btn-lg edit-buttons" data-toggle="modal" data-target="#jobCompleteModal" alt="Mark Completed Button">Mark This Posting As Completed</a>   
+                        {{#job}}
+                            <a class="btn btn-danger btn-lg edit-buttons completing" data-job="{{this.jobID}}" data-employer="{{this.userID}}" data-employee="{{this.bidderID}}" alt="Edit Posting Button">Mark This Posting As Completed</a>
+                        {{/job}} 
                     </div>
                 {{/if}}
 

@@ -246,7 +246,7 @@ var condition7 = 'jobs.jobID = ' + req.params.id;
                   category: category,
                   owned: owned
                 });
-                console.log('hello', bidInfo);
+                console.log('hello', job);
                 //console.log(postUser, req.params.user, req.user);
               });
             });
@@ -465,6 +465,18 @@ router.put('/preferences/update/summary/:id', function (req, res) {
       res.redirect('/preferences/' + true);
     });    
   //});
+});
+
+// accesses the create and update function in endeavor.js
+// passes the values from the index.handlebars form and passes the db column name
+// redirects to .get /profile
+router.put('/job/complete/:jobID/:employerID/:employeeID', function (req, res) {
+  endeavor.create(['feedback'], ['rating', 'jobID', 'employerID', 'employeeID', 'review'], [req.body.job_rating, req.params.jobID, req.params.employerID, req.params.employeeID, req.body.job_review], function () {
+    var condition = 'jobID = ' + req.body.bid_jobID;
+    endeavor.update(['jobs'], { completed: req.body.job_complete }, condition, function () {
+      res.redirect('/profile');
+    });
+  });
 });
 
 // route middleware to make sure
