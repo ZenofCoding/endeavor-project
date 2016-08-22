@@ -1,0 +1,418 @@
+<!-- views/profile.handlebars -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Endeavor</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/assets/css/landing-page.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- added links to style sheets -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css" />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Link to Moment.js -->
+    <!-- <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script> -->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand topnav" href="/endeavors" title="Home">Endeavor</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    {{#if owned}}
+                        <li>
+                            <a>Owner!!!</a>
+                        </li>  
+                    {{/if}}
+                    {{#unless owned}}
+                    <li>
+                        <a>Not Owner!!!</a>
+                    </li>
+                    {{/unless}}
+                    {{#if user}}
+                        <li>
+                            <a href="/profile">Dashboard</a>
+                        </li>  
+                    {{/if}}
+                    <li>
+                        <a href="#about">About</a>
+                    </li>
+                    <li>
+                        <a href="#reviews">Reviews</a>
+                    </li>
+                    <li>
+                        <a href="#contact">Contact</a>
+                    </li> 
+                    <li>
+                        <a href="/jobsearch">JobSearch</a>
+                    </li>
+                    {{#if user}}
+                        <li>
+                            <a href="/logout">Logout</a>
+                        </li>  
+                    {{/if}}
+                    {{#unless user}}
+                    <li>
+                        <a href="/login">Login</a>
+                    </li>
+                    <li>
+                        <a href="/signup">Signup</a>
+                    </li>
+                    {{/unless}}
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+    <!-- Page Content -->
+
+    <a name="action"></a>
+    <div class="content-section-a">
+
+        <div class="container extra-margin">
+
+            {{#each job}}
+
+            {{#if this.bidding}}
+            <div class="row">
+                <div class="col-lg-5 col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                        <h2 class="section-heading">Submit Bid for<br>{{this.title}}</h2>
+                        <!-- <h2 class="section-heading">Submit Application for<br>{{this.title}}</h2> -->
+                    <p class="lead">Formally request to be considered for this job posting.</p>
+                    <form action="/job/bid" method="POST">
+                        <div class="form-group">
+                            <textarea type="text" class="form-control" name="bid_description" rows="10" placeholder="Example... Hello, I am interested in completing the job you have posted. I have several years of experience in this field and will have no problem meeting your deadline while upholding the highest standards." required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="bid_budget1">Bid Amount</label>
+                            <input type="text" id="bid_budget1" class="form-control" name="bid_budget" value="$" placeholder=" Example... ${{this.budget}}" required>
+                        </div>
+                        <input type="hidden" name="bid_jobID" value="{{this.jobID}}">
+                        {{#if ../user}}
+                        <input type="hidden" name="bid_userID" value="{{../user.id}}">
+                        {{/if}}
+                        <input type="hidden" name="bid_type" value="1">
+                        <input type="hidden" name="hasbid_initial" value="1">
+                        <input type="hidden" name="job_owner" value="{{this.userID}}">
+                        <button class="btn btn-warning btn-lg" type="submit">Submit Bid</button>
+                    </form>
+                </div>
+                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                    <img class="img-responsive pref-pic" src="{{this.image}}" alt="Job Posting Picture">
+                </div>
+            </div>
+            {{else}}
+                <div class="row">
+                <div class="col-lg-5 col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                        <h2 class="section-heading">Submit Application for<br>{{this.title}}</h2>
+                        <!-- <h2 class="section-heading">Submit Application for<br>{{this.title}}</h2> -->
+                    <p class="lead">Formally request to be considered for this job posting.</p>
+                    <form action="/job/bid" method="POST">
+                        <div class="form-group">
+                            <textarea type="text" class="form-control" name="bid_description" rows="10" placeholder="Example... Hello, I am interested in completing the job you have posted. I have several years of experience in this field and will have no problem meeting your deadline while upholding the highest standards." required></textarea>
+                        </div>
+                        <input type="hidden" name="bid_budget" value="${{this.budget}}">
+                        <input type="hidden" name="bid_jobID" value="{{this.jobID}}">
+                        {{#if ../user}}
+                        <input type="hidden" name="bid_userID" value="{{../user.id}}">
+                        {{/if}}
+                        <input type="hidden" name="bid_type" value="0">
+                        <input type="hidden" name="hasbid_initial" value="1">
+                        <input type="hidden" name="job_owner" value="{{this.userID}}">
+                        <button class="btn btn-warning btn-lg" type="submit">Submit Application</button>
+                    </form>
+                </div>
+                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                    <img class="img-responsive pref-pic" src="{{this.image}}" alt="Job Posting Picture">
+                </div>
+            </div>
+            {{/if}}
+
+            {{/each}}
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-b -->
+
+      <!-- begin order up wrapper -->
+    <a name="jobs area"></a>
+        <div class="content-section-b">
+
+            <div class="container extra-margin">
+
+                {{#if owned}}
+                    <div>
+                        <a class="btn btn-warning btn-lg" data-toggle="modal" data-target="#jobEditModal" alt="Edit Posting Button">Edit This Posting</a>
+
+                        <a class="btn btn-warning btn-lg" data-toggle="modal" data-target="#jobDeleteModal" alt="">Remove This Posting</a> 
+
+                        <a class="btn btn-warning btn-lg" alt="">Review Bids</a>   
+                    </div>
+                {{/if}}
+
+                <!-- loops through each job -->
+                {{#each job}}    
+                <!-- checks if job has been completed -->
+                {{#unless this.completed}}
+
+                <div class="row">
+
+                <div class="job-box-head">
+                        
+                    </div>
+                    <div class="job-container"> 
+                        <span class="job-box-datesStart">Starting: {{prettifyDate this.jobstart}}</span> 
+                        <div class="job-link">
+                            {{#if this.bidding}}
+                                <img class="job-bid-image" src="/assets/images/bid_btn.png">
+                            {{else}}
+                                <img class="job-bid-image" src="/assets/images/fixed_btn.png">  
+                            {{/if}}
+                            <div class="job-box-large">
+                                <div class="job-title-box">
+                                    <h2 class="job-title">{{this.title}}</h2>
+                                </div>
+                                <img class="job-box-image-lrg1" src="{{this.image}}">
+                                <p class="job-title-desc">{{this.description}}</p>
+                                <div class="job-box-footer">
+                                    <a class="btn btn-warning btn-lg job-box-category" href="/jobCategory/{{this.category}}">{{this.category}}</a>
+                                    <a class="btn btn-warning btn-lg job-box-category" href="/jobSubCategory/{{this.subcategory}}">{{this.subcategory}}</a>
+                                    <h2 class="job-box-price">{{this.budget}}</h2>
+                                </div>
+                                   
+                            </div>          
+                        </div>
+                    </div>
+                    <div class="job-box-feet">
+                        <span class="job-box-datesEnd">Deadline: {{prettifyDate this.deadline}}</span>
+                        <!-- <h2 class="job-box-price">{{this.budget}}</h2> -->
+                    </div>
+
+                </div>
+
+                <div class="row">
+                      
+                      <!-- show any messages that come back with authentication -->
+                    {{#if message}}
+                        <div class="alert alert-danger">{{message}}</div> 
+                    {{/if}}
+
+                    <!-- COMMENT FORM -->
+                    <form action="/comment/{{this.jobID}}" method="post">
+                        <div class="form-group">
+                            <label>Ask a question or comment on this posting.</label>
+                            <textarea type="text" class="form-control" name="comment"></textarea>
+                            <input type="hidden" name="this_id" data-id="{{this.jobID}}">
+                        </div>
+
+                        <button type="submit" class="btn btn-warning btn-lg">Submit</button>
+                    </form>
+            
+                </div>
+                {{/unless}}
+                {{#if this.completed}}
+                    <li class="names-devour">
+                        <!-- runs if burger is NOT marked as eaten in DB -->
+                        <!-- {{this.burger_name}} -->
+                    </li>
+                {{/if}}
+                {{/each}}
+
+            </div>
+            <!-- /.container -->
+
+        </div>
+
+  <a name="about"></a>
+    <div class="content-section-a">
+
+        <div class="container">
+            {{#each postUser}} 
+            <div class="row">
+                <div class="col-lg-5 col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    {{#if this.displayName}}
+                        <h2 class="section-heading">Posted By<br>{{this.displayName}}</h2>
+                    {{else}}
+                        <h2 class="section-heading">Posted By<br>{{this.username}}</h2>
+                    {{/if}}
+                    <p class="lead summary-about">{{this.summary}}</p>
+                </div>
+                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                    <a href="/public/profile/{{this.id}}">
+                        {{#if this.hasavatar}}
+                            <img class="img-responsive pref-pic" src="{{this.avatar}}" alt="User Profile Picture">
+                        {{else}}
+                        <img class="img-responsive pref-pic" src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="Default Profile Picture">
+                        {{/if}}
+                    </a>
+                </div>
+            </div>
+            {{/each}}
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-a -->
+
+    <a name="reviews"></a>
+    <div class="content-section-b">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">3D Device Mockups<br>by PSDCovers</h2>
+                    <p class="lead">Turn your 2D designs into high quality, 3D product shots in seconds using free Photoshop actions by <a target="_blank" href="http://www.psdcovers.com/">PSDCovers</a>! Visit their website to download some of their awesome, free photoshop actions!</p>
+                </div>
+                <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+                    <img class="img-responsive" src="/assets/images/dog.png" alt="">
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-b -->
+
+  <a name="contact"></a>
+    <div class="banner">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <h2>Connect to Start Bootstrap:</h2>
+                </div>
+                <div class="col-lg-6">
+                    <ul class="list-inline banner-social-buttons">
+                        <li>
+                            <a href="https://twitter.com/SBootstrap" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/IronSummitMedia/startbootstrap" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
+                        </li>
+                        <li>
+                            <a href="#" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">Linkedin</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.banner -->
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="list-inline">
+                        <li>
+                            <a href="#">Home</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="#about">About</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="#reviews">Reviews</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="#contact">Contact</a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted small">Copyright &copy; Endeavor 2016. All Rights Reserved</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="/assets/scripts/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/assets/scripts/bootstrap.min.js"></script>
+
+    <!-- Endeavor Script -->
+    <!-- <script src="/assets/scripts/script.js"></script> -->
+
+    <script type="text/javascript">
+    function populate(s1,s2){
+        var s1 = document.getElementById(s1);
+        var s2 = document.getElementById(s2);
+        s2.innerHTML = "";
+        if(s1.value == "Accounting"){
+            var optionArray = ["|","artpunk|Art Punk","alternativerock|Alternative Rock","collegerock|College Rock","experimentalrock|Experimental                              Rock","gothicrock|Gothic Rock","grunge|Grunge","hardcorepunk|Hardcore Punk","hardrock|Hard Rock","indierock|Indie Rock",                                                                                                                "lofi|Lo-fi","newwave|New Wave","progressiverock|Progressive Rock","punk|Punk","shoegaze|Shoegaze","steampunk|Steampunk"];
+        } else if(s1.value == "Administrative"){
+            var optionArray = ["|","acousticblues|Acoustic Blues","chicagoblues|Chicago Blues","classicblues|Classic Blues",
+                    "contemporaryblues|Contemporary Blues","countryblues|Country Blues","deltablues|Delta Blues","electricblues|Electric Blues"];
+        }
+        for(var option in optionArray){
+            var pair = optionArray[option].split("|");
+            var newOption = document.createElement("option");
+            newOption.value = pair[0];
+            newOption.innerHTML = pair[1];
+            s2.options.add(newOption);
+        }
+    }
+    </script>
+
+</body>
+
+</html>
+

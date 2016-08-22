@@ -97,6 +97,38 @@
   z-index: 101;
 }
 
+.job-accepted-image{
+  position: absolute;
+  top: 50px;
+  left: 275px;
+  max-width: 563px;
+  z-index: 102;
+}
+
+.job-accepted-image-sm{
+  position: absolute;
+  top: 160px;
+  left: 43px;
+  max-width: 400px;
+  z-index: 102;
+}
+
+.job-hired-image{
+  position: absolute;
+  top: 85px;
+  left: 680px;
+  max-width: 299px;
+  z-index: 102;
+}
+
+.job-hired-image-sm{
+  position: absolute;
+  top: 170px;
+  left: 91px;
+  max-width: 299px;
+  z-index: 102;
+}
+
 .job-title-box{
   position: relative;
   background-color: #2a2a2a;
@@ -209,10 +241,12 @@
   background-color: #2a2a2a;
   color: #ffffff;
   padding: 5px 15px 5px 15px;
+  margin-bottom: 0px;
 }
 
 .resume-position{
   color: #f0ad4e;
+  margin-top: 5px;
 }
 
 .resume-right{
@@ -224,4 +258,37 @@
   border: 1px solid #2a2a2a;
   border-radius: 6px;
   padding: 5px 15px 5px 15px;
+  margin-bottom: 0px;
+  white-space: pre-wrap;
+}
+
+.resume-date{
+  margin-top: 5px;
+}
+
+.summary-about{
+  white-space: pre-wrap;
+}
+
+.bid-title{
+  background-color: #2a2a2a;
+  color: #ffffff;
+  padding: 5px 15px 5px 15px;
+  margin-bottom: 0px;
+  margin-top: 5px;
+}
+
+.bid-amount{
+  color: #f0ad4e;
+  margin-top: 5px;
+  font-size: 24px;
+}
+
+.edit-buttons{
+  margin-right: 15px;
+  background-color: #b40505;
+}
+
+.no-bottom-marg{
+  margin-bottom: 0px;
 }

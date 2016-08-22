@@ -75,12 +75,12 @@
                         </li>  
                     {{/if}}
                     {{#unless user}}
-                    <li>
-                        <a href="/login">Login</a>
-                    </li>
-                    <li>
-                        <a href="/signup">Signup</a>
-                    </li>
+                        <li>
+                            <a href="/login">Login</a>
+                        </li>
+                        <li>
+                            <a href="/signup">Signup</a>
+                        </li>
                     {{/unless}}
                 </ul>
             </div>
@@ -194,14 +194,14 @@
                     <label for="end">End Date</label>
                     <input type="date" id="end" class="form-control" name="end">
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label for="firm">Is your budget for this posting "Firm" or "Negotiable"?</label>
                     <select id="firm" class="form-control" name="firm" required>
                       <option value="">Choose an option</option>
                       <option value="firm">Firm</option>
                       <option value="negotiable">Negotiable</option>
                     </select>
-                </div>
+                </div> -->
                 <div class="form-group">
                     <label for="budget">Budget</label>
                     <input type="text" id="budget" class="form-control" name="budget" value="$" placeholder=" Example... $250" required>
@@ -247,6 +247,13 @@
 
                     <div class="job-box-container">  
                         <a class="job-link" href="/viewJob/{{this.jobID}}/{{this.userID}}">
+                            {{#if this.bidaccepted}}
+                                {{#if this.bidding}}
+                                    <img class="job-accepted-image" src="/assets/images/bid_accepted.png">
+                                {{else}}
+                                    <img class="job-hired-image" src="/assets/images/hired.png">
+                                {{/if}}
+                            {{/if}}
                             {{#if this.bidding}}
                                 <img class="job-bid-image" src="/assets/images/bid_btn.png">
                             {{else}}
@@ -265,8 +272,8 @@
                                 <p class="job-title-desc">{{trimString this.description}}</p>
 
                                 <div class="job-box-footer">
-                                    <a class="btn btn-warning btn-lg job-box-category">{{this.category}}</a>
-                                    <a class="btn btn-warning btn-lg job-box-category">{{this.subcategory}}</a>
+                                    <a class="btn btn-warning btn-lg job-box-category" href="/jobCategory/{{this.category}}">{{this.category}}</a>
+                                    <a class="btn btn-warning btn-lg job-box-category" href="/jobSubCategory/{{this.subcategory}}">{{this.subcategory}}</a>
                                     <h2 class="job-box-price">{{this.budget}}</h2>
                                 </div>   
                             </div>          
@@ -313,7 +320,7 @@
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
                     <h2 class="section-heading">About<br>{{user.displayName}}</h2>
-                    <p class="lead">{{user.summary}}</p>
+                    <p class="lead summary-about">{{user.summary}}</p>
                 </div>
                 <div class="col-lg-5 col-lg-offset-2 col-sm-6">
                     {{#if user.hasavatar}}
@@ -356,10 +363,10 @@
                         <hr class="section-heading-spacer">
                         <div class="clearfix"></div>
                         <h2 class="section-heading resume-title">{{this.company}}</h2>
-                        <p class="lead  resume-position">{{this.position}}</p>
+                        <p class="lead resume-position">{{this.position}}</p>
                         <p class="lead resume-right">{{this.location}}</p>
                         <p class="lead resume-description">{{this.description}}</p>
-                        <p class="lead resume-right">{{prettifyDate this.startdate}} - {{prettifyDate this.enddate}}</p>
+                        <p class="lead resume-right resume-date">{{prettifyDate this.startdate}} - {{prettifyDate this.enddate}}</p>
                     </div>
                     <div class="col-lg-5 col-sm-pull-6  col-sm-6">
                         {{#if this.hasimage}}

@@ -44,6 +44,29 @@ var endeavor = {
     orm.updateString(table, objColVals, condition, function (res) {
       cb(res);
     });
+  },
+  // calls leftJoin function in orm.js
+  // passes table name, column name, value, and id
+  // objColVals is object
+  leftJoin: function (colNames, table1, table2, condition, cb) {
+    orm.leftJoin(colNames, table1, table2, condition, function (res) {
+      cb(res);
+    });
+  },
+  // calls innerJoin 3 table function in orm.js
+  // passes table names, column names, values, and ids
+  innerJoin3: function (colNames, table1, table2, table3, condition1, condition2, condition3, condition4, cb) {
+    orm.innerJoin3(colNames, table1, table2, table3, condition1, condition2, condition3, condition4, function (res) {
+      cb(res);
+    });
+  },
+  // calls UPDATE/update function in orm.js
+  // passes table name, column name, value, and id
+  // objColVals is object
+  delete: function (table, condition, cb) {
+    orm.delete(table, condition, function (res) {
+      cb(res);
+    });
   }
 };
 

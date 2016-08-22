@@ -33,7 +33,6 @@
     <![endif]-->
     <!-- Link to Moment.js -->
     <!-- <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script> -->
-
 </head>
 
 <body>
@@ -54,6 +53,16 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
+                    {{#if owned}}
+                        <li>
+                            <a>Owner!!!</a>
+                        </li>  
+                    {{/if}}
+                    {{#unless owned}}
+                    <li>
+                        <a>Not Owner!!!</a>
+                    </li>
+                    {{/unless}}
                     {{#if user}}
                         <li>
                             <a href="/profile">Dashboard</a>
@@ -63,7 +72,7 @@
                         <a href="#about">About</a>
                     </li>
                     <li>
-                        <a href="#services">Services</a>
+                        <a href="#reviews">Reviews</a>
                     </li>
                     <li>
                         <a href="#contact">Contact</a>
@@ -91,6 +100,277 @@
         <!-- /.container -->
     </nav>
 
+    {{#if owned}}
+    <!-- loops through each job -->
+    {{#job}}    
+    <!-- checks if job has been completed -->
+    {{#unless this.completed}}
+
+        <!-- Modal for adding new jobs to DB. Posts to endeavor_controller.js -->
+          <div class="modal fade" id="jobEditModal" role="dialog">
+            <div class="modal-dialog">
+            
+              <!-- Modal content inputs populated from script.js-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Edit This Job Posting</h4>
+                </div>
+                <div class="modal-body">
+                  <form action="job/update/{{this.jobID}}?_method=PUT" method="POST">
+                    <div class="form-group">
+                        <label for="edit_jobTitle">Title</label>
+                        <input type="text" id="edit_jobTitle" class="form-control" name="edit_jobTitle" value="{{this.title}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_jobDescription">Description</label>
+                        <textarea type="text" id="edit_jobDescription" class="form-control" name="edit_jobDescription" rows="10" required>{{this.description}}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_jobImage1">Main Image</label>
+                        <input type="text" id="edit_jobImage1" class="form-control" name="edit_jobImage1" value="{{this.image}}" required>
+                        <!-- <label for="image1">You can add more images later.</label> -->
+                    </div>
+                    <div class="form-group">
+                          <label for="edit_jobCategory">Category</label>
+                          <select id="edit_jobCategory" class="form-control" name="edit_jobCategory" onChange="populate('edit_jobCategory','edit_jobSubcategory')" required>
+                          <option value="">Choose a category</option>
+                          {{#each ../category}}
+                              <option value="{{this.description}}">{{this.description}}</option>
+                          {{/each}}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                          <label for="edit_jobSubcategory">Subcategory</label>
+                          <select id="edit_jobSubcategory" class="form-control" name="edit_jobSubcategory" required>
+                          <option value="">Choose a subcategory</option>
+                          <!-- {{#each category}}
+                              <option value="{{this.description}}">{{this.description}}</option>
+                          {{/each}} -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_jobBidding">Allow users to submit bids or estimates for this posting?</label>
+                        <select id="edit_jobBidding" class="form-control" name="edit_jobBidding" required>
+                          <option value="">Choose an option</option>
+                          <option value="1">Yes</option>
+                          <option value="0">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_jobStart">Start Date</label>
+                        <input type="date" id="edit_jobStart" class="form-control" name="edit_jobStart">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_jobEnd">End Date</label>
+                        <input type="date" id="edit_jobEnd" class="form-control" name="edit_jobEnd">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_jobBudget">Budget/Price</label>
+                        <input type="text" id="edit_jobBudget" class="form-control" name="edit_jobBudget" value="$" placeholder=" Example... $250" required>
+                    </div>
+                    <!-- <input type="hidden" name="edit_jobUserID" value="{{user.id}}"> -->
+                    <input type="hidden" name="edit_jobType" value="p">
+                    <button class="btn btn-warning btn-lg" type="submit">Update Job Posting</button>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                    <!-- <label>Don't have an account? Create one for free.</label> -->
+                </div>
+              </div>
+              
+            </div>
+          </div>
+
+      {{/unless}}
+
+      {{/job}}
+
+      {{/if}}
+
+      {{#if owned}}
+        <!-- loops through each job -->
+      {{#job}}    
+        <!-- checks if job has been completed -->
+      {{#unless this.completed}}
+
+      <!-- Modal for adding new jobs to DB. Posts to endeavor_controller.js -->
+      <div class="modal fade" id="jobDeleteModal" role="dialog">
+
+        <div class="modal-dialog">
+        
+          <!-- Modal content inputs populated from script.js-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Remove Job Posting</h4>
+            </div>
+            <div class="modal-body">
+                <form action="/job/remove/{{this.jobID}}?_method=DELETE" method="POST">
+                    <h2>Are you sure you want to permanently remove this job posting?</h2>
+                    <br>
+                    <div>
+                      <button class="btn btn-warning btn-lg" type="submit">Remove</button>
+
+                      <a class="btn btn-warning btn-lg" data-dismiss="modal" alt="Cancel Button">Cancel</a>  
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <!-- <label>Don't have an account? Create one for free.</label> -->
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+      {{/unless}}
+
+      {{/job}}
+
+      {{/if}}
+
+      {{#if owned}}
+
+      {{#job}}  
+
+      {{#if bidding}}  
+        <!-- checks if job has been completed -->
+      {{#unless this.completed}}
+
+      <!-- Modal for adding new jobs to DB. Posts to endeavor_controller.js -->
+      <div class="modal hide" id="bidAcceptModal" role="dialog">
+
+        <div class="modal-dialog">
+        
+          <!-- Modal content inputs populated from script.js-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close close-accept" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Accept Bid Submission</h4>
+            </div>
+            <div class="modal-body">
+                <form id="accept-form" action="" method="POST">
+                    <h2>Are you sure you want to accept the bid for this job posting?</h2>
+                    <br>
+                    <div>
+                    <input type="hidden" name="accept_bid" value="1">
+                      <button class="btn btn-warning btn-lg" type="submit">Accept</button>
+
+                      <a class="btn btn-warning btn-lg close-accept" data-dismiss="modal" alt="Cancel Button">Cancel</a>  
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <!-- <label>Don't have an account? Create one for free.</label> -->
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+      {{/unless}}
+
+      {{/if}}
+
+      {{/job}}
+
+      {{/if}}
+
+      {{#if owned}}
+
+      {{#job}}  
+
+      {{#if bidding}}  
+        <!-- checks if job has been completed -->
+      {{#unless this.completed}}
+
+      <!-- Modal for adding new jobs to DB. Posts to endeavor_controller.js -->
+      <div class="modal hide" id="bidRejectModal" role="dialog">
+
+        <div class="modal-dialog">
+        
+          <!-- Modal content inputs populated from script.js-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close close-reject" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Reject Bid Submission</h4>
+            </div>
+            <div class="modal-body">
+                <form id="reject-form" action="" method="POST">
+                    <h2>Are you sure you want to reject the bid for this job posting?</h2>
+                    <br>
+                    <div>
+                    <input type="hidden" name="reject_bid" value="1">
+                      <button class="btn btn-warning btn-lg" type="submit">Reject</button>
+
+                      <a class="btn btn-warning btn-lg close-reject" data-dismiss="modal" alt="Cancel Button">Cancel</a>  
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <!-- <label>Don't have an account? Create one for free.</label> -->
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+      {{/unless}}
+
+      {{/if}}
+
+      {{/job}}
+
+      {{/if}}
+
+      {{#if owned}}
+
+      {{#job}}  
+
+      {{#unless bidding}}  
+        <!-- checks if job has been completed -->
+      {{#unless this.completed}}
+
+      <!-- Modal for adding new jobs to DB. Posts to endeavor_controller.js -->
+      <div class="modal hide" id="appAcceptModal" role="dialog">
+
+        <div class="modal-dialog">
+        
+          <!-- Modal content inputs populated from script.js-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close close-app-accept" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Hire This Applicant</h4>
+            </div>
+            <div class="modal-body">
+                <form id="app-accept-form" action="" method="POST">
+                    <h2>Are you sure you want to hire this applicant for this job posting?</h2>
+                    <br>
+                    <div>
+                    <input type="hidden" name="accept_app" value="1">
+                      <button class="btn btn-warning btn-lg" type="submit">Hire Applicant</button>
+
+                      <a class="btn btn-warning btn-lg close-app-accept" data-dismiss="modal" alt="Cancel Button">Cancel</a>  
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <!-- <label>Don't have an account? Create one for free.</label> -->
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+      {{/unless}}
+
+      {{/unless}}
+
+      {{/job}}
+
+      {{/if}}
+
     <!-- Page Content -->
 
       <!-- begin order up wrapper -->
@@ -98,6 +378,16 @@
         <div class="content-section-b">
 
             <div class="container extra-margin">
+
+                {{#if owned}}
+                    <div>
+                        <a class="btn btn-danger btn-lg edit-buttons" data-toggle="modal" data-target="#jobEditModal" alt="Edit Posting Button">Edit This Posting</a>
+
+                        <a class="btn btn-danger btn-lg edit-buttons" data-toggle="modal" data-target="#jobDeleteModal" alt="Remove Posting Button">Remove This Posting</a>
+
+                        <a class="btn btn-danger btn-lg edit-buttons" data-toggle="modal" data-target="#jobCompleteModal" alt="Mark Completed Button">Mark This Posting As Completed</a>   
+                    </div>
+                {{/if}}
 
                 <!-- loops through each job -->
                 {{#each job}}    
@@ -123,14 +413,18 @@
                                 </div>
                                 <img class="job-box-image-lrg1" src="{{this.image}}">
                                 {{#if this.bidding}}
-                                    <img class="job-view-image" src="/assets/images/submit_bid_btn.png">
+                                    {{#unless ../owned}}
+                                        <a href="/viewJobAction/{{this.jobID}}/{{this.userID}}"><img class="job-view-image" src="/assets/images/submit_bid_btn.png"></a>
+                                    {{/unless}}
                                 {{else}}
-                                    <img class="job-view-image" src="/assets/images/apply_fixed_btn.png">  
+                                    {{#unless ../owned}}
+                                        <a href="/viewJobAction/{{this.jobID}}/{{this.userID}}"><img class="job-view-image" src="/assets/images/apply_fixed_btn.png"></a>
+                                    {{/unless}} 
                                 {{/if}}
                                 <p class="job-title-desc">{{this.description}}</p>
                                 <div class="job-box-footer">
-                                    <a class="btn btn-warning btn-lg job-box-category">{{this.category}}</a>
-                                    <a class="btn btn-warning btn-lg job-box-category">{{this.subcategory}}</a>
+                                    <a class="btn btn-warning btn-lg job-box-category" href="/jobCategory/{{this.category}}">{{this.category}}</a>
+                                    <a class="btn btn-warning btn-lg job-box-category" href="/jobSubCategory/{{this.subcategory}}">{{this.subcategory}}</a>
                                     <h2 class="job-box-price">{{this.budget}}</h2>
                                 </div>
                                    
@@ -187,11 +481,11 @@
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
                     {{#if this.displayName}}
-                        <h2 class="section-heading">Posted By:<br>{{this.displayName}}</h2>
+                        <h2 class="section-heading">Posted By<br>{{this.displayName}}</h2>
                     {{else}}
-                        <h2 class="section-heading">Posted By:<br>{{this.username}}</h2>
+                        <h2 class="section-heading">Posted By<br>{{this.username}}</h2>
                     {{/if}}
-                    <p class="lead">{{this.summary}}</p>
+                    <p class="lead summary-about">{{this.summary}}</p>
                 </div>
                 <div class="col-lg-5 col-lg-offset-2 col-sm-6">
                     <a href="/public/profile/{{this.id}}">
@@ -210,32 +504,72 @@
 
     </div>
     <!-- /.content-section-a -->
+    {{#each job}}
 
+    {{#if hasbid}}
+
+    {{#if ../bidInfo}}
+    <a name=""></a>
     <div class="content-section-b">
 
         <div class="container">
+
+        {{#each ../bidInfo}}
 
             <div class="row">
                 <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
-                    <h2 class="section-heading">3D Device Mockups<br>by PSDCovers</h2>
-                    <p class="lead">Turn your 2D designs into high quality, 3D product shots in seconds using free Photoshop actions by <a target="_blank" href="http://www.psdcovers.com/">PSDCovers</a>! Visit their website to download some of their awesome, free photoshop actions!</p>
+                    <h2 class="section-heading no-bottom-marg">Submitted By</h2>
+                    {{#if displayName}}
+                        <h2 class="section-heading bid-title">{{this.displayName}}</h2><br>
+                    {{else}}
+                        <h2 class="section-heading bid-title">{{this.username}}</h2><br>
+                    {{/if}}
+                    <p class="lead resume-description">{{this.description}}</p>
+                    {{#if bidType}}
+                        <p class="lead resume-right bid-amount">{{this.amount}}</p>
+                    {{/if}}
+                    {{#if ../../owned}}
+                        {{#each ../../job}}
+                            {{#unless this.bidaccepted}}
+                                {{#if this.bidding}}
+                                    <a class="btn btn-warning btn-lg accepting" data-job="{{this.jobID}}" data-bid="{{../this.bidID}}" data-bidder="{{../this.userID}}" alt="Edit Posting Button">Accept Bid</a>
+                                    <a class="btn btn-warning btn-lg rejecting" data-bid="{{../this.bidID}}" alt="Edit Posting Button">Reject Bid</a>
+                                {{/if}}
+                                {{#unless this.bidding}}
+                                    <a class="btn btn-warning btn-lg app-accepting" data-job="{{this.jobID}}" data-app="{{../this.bidID}}" data-applicant="{{../this.userID}}" alt="Hire Applicant Button">Hire Applicant</a>
+                                {{/unless}}
+                            {{/unless}}
+                        {{/each}}
+                    {{/if}}
                 </div>
-                <div class="col-lg-5 col-sm-pull-6  col-sm-6">
-                    <img class="img-responsive" src="/assets/images/dog.png" alt="">
-                </div>
+                    <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+                        {{#if this.bidaccepted}}
+                            {{#if this.bidType}}
+                                <img class="job-accepted-image-sm" src="/assets/images/bid_accepted.png">
+                            {{else}}
+                                <img class="job-hired-image-sm" src="/assets/images/hired.png">
+                            {{/if}}
+                        {{/if}}
+                        {{#if this.biddenied}}
+                            <img class="job-accepted-image-sm" src="/assets/images/bid_rejected.png">
+                        {{/if}}
+                        {{#if avatar}}
+                        <img class="img-responsive pref-pic" src="{{this.avatar}}" alt="">
+                        {{else}}
+                        <img class="img-responsive pref-pic" src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="">
+                        {{/if}}
+                    </div>
             </div>
+
+        {{/each}}
 
         </div>
         <!-- /.container -->
 
     </div>
-    <!-- /.content-section-b -->
-
-    <div class="content-section-a">
-
-        <div class="container">
+    {{/if}}
 
             <div class="row">
                 <div class="col-lg-5 col-sm-6">
@@ -252,8 +586,10 @@
         </div>
         <!-- /.container -->
 
-    </div>
-    <!-- /.content-section-a -->
+    {{/if}}
+
+    {{/each}}
+    <!-- /.content-section-b -->
 
   <a name="contact"></a>
     <div class="banner">
@@ -300,7 +636,7 @@
                         </li>
                         <li class="footer-menu-divider">&sdot;</li>
                         <li>
-                            <a href="#services">Services</a>
+                            <a href="#reviews">Reviews</a>
                         </li>
                         <li class="footer-menu-divider">&sdot;</li>
                         <li>
@@ -320,7 +656,28 @@
     <script src="/assets/scripts/bootstrap.min.js"></script>
 
     <!-- Endeavor Script -->
-    <!-- <script src="/assets/scripts/script.js"></script> -->
+    <script src="/assets/scripts/script.js"></script>
+
+    <script type="text/javascript">
+    function populate(s1,s2){
+        var s1 = document.getElementById(s1);
+        var s2 = document.getElementById(s2);
+        s2.innerHTML = "";
+        if(s1.value == "Accounting"){
+            var optionArray = ["|","artpunk|Art Punk","alternativerock|Alternative Rock","collegerock|College Rock","experimentalrock|Experimental                              Rock","gothicrock|Gothic Rock","grunge|Grunge","hardcorepunk|Hardcore Punk","hardrock|Hard Rock","indierock|Indie Rock",                                                                                                                "lofi|Lo-fi","newwave|New Wave","progressiverock|Progressive Rock","punk|Punk","shoegaze|Shoegaze","steampunk|Steampunk"];
+        } else if(s1.value == "Administrative"){
+            var optionArray = ["|","acousticblues|Acoustic Blues","chicagoblues|Chicago Blues","classicblues|Classic Blues",
+                    "contemporaryblues|Contemporary Blues","countryblues|Country Blues","deltablues|Delta Blues","electricblues|Electric Blues"];
+        }
+        for(var option in optionArray){
+            var pair = optionArray[option].split("|");
+            var newOption = document.createElement("option");
+            newOption.value = pair[0];
+            newOption.innerHTML = pair[1];
+            s2.options.add(newOption);
+        }
+    }
+    </script>
 
 </body>
 
