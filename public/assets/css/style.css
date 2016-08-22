@@ -97,6 +97,38 @@
   z-index: 101;
 }
 
+.job-accepted-image{
+  position: absolute;
+  top: 50px;
+  left: 275px;
+  max-width: 563px;
+  z-index: 102;
+}
+
+.job-accepted-image-sm{
+  position: absolute;
+  top: 160px;
+  left: 43px;
+  max-width: 400px;
+  z-index: 102;
+}
+
+.job-hired-image{
+  position: absolute;
+  top: 85px;
+  left: 680px;
+  max-width: 299px;
+  z-index: 102;
+}
+
+.job-hired-image-sm{
+  position: absolute;
+  top: 170px;
+  left: 91px;
+  max-width: 299px;
+  z-index: 102;
+}
+
 .job-title-box{
   position: relative;
   background-color: #2a2a2a;
@@ -250,6 +282,11 @@
   color: #f0ad4e;
   margin-top: 5px;
   font-size: 24px;
+}
+
+.edit-buttons{
+  margin-right: 15px;
+  background-color: #b40505;
 }
 
 .no-bottom-marg{

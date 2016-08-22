@@ -324,6 +324,53 @@
 
       {{/if}}
 
+      {{#if owned}}
+
+      {{#job}}  
+
+      {{#unless bidding}}  
+        <!-- checks if job has been completed -->
+      {{#unless this.completed}}
+
+      <!-- Modal for adding new jobs to DB. Posts to endeavor_controller.js -->
+      <div class="modal hide" id="appAcceptModal" role="dialog">
+
+        <div class="modal-dialog">
+        
+          <!-- Modal content inputs populated from script.js-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close close-app-accept" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Hire This Applicant</h4>
+            </div>
+            <div class="modal-body">
+                <form id="app-accept-form" action="" method="POST">
+                    <h2>Are you sure you want to hire this applicant for this job posting?</h2>
+                    <br>
+                    <div>
+                    <input type="hidden" name="accept_app" value="1">
+                      <button class="btn btn-warning btn-lg" type="submit">Hire Applicant</button>
+
+                      <a class="btn btn-warning btn-lg close-app-accept" data-dismiss="modal" alt="Cancel Button">Cancel</a>  
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <!-- <label>Don't have an account? Create one for free.</label> -->
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+      {{/unless}}
+
+      {{/unless}}
+
+      {{/job}}
+
+      {{/if}}
+
     <!-- Page Content -->
 
       <!-- begin order up wrapper -->
@@ -334,11 +381,9 @@
 
                 {{#if owned}}
                     <div>
-                        <a class="btn btn-warning btn-lg" data-toggle="modal" data-target="#jobEditModal" alt="Edit Posting Button">Edit This Posting</a>
+                        <a class="btn btn-danger btn-lg edit-buttons" data-toggle="modal" data-target="#jobEditModal" alt="Edit Posting Button">Edit This Posting</a>
 
-                        <a class="btn btn-warning btn-lg" data-toggle="modal" data-target="#jobDeleteModal" alt="">Remove This Posting</a> 
-
-                        <a class="btn btn-warning btn-lg" alt="">Review Bids</a>   
+                        <a class="btn btn-danger btn-lg edit-buttons" data-toggle="modal" data-target="#jobDeleteModal" alt="">Remove This Posting</a>   
                     </div>
                 {{/if}}
 
@@ -486,13 +531,28 @@
                     {{#if ../../owned}}
                         {{#each ../../job}}
                             {{#unless this.bidaccepted}}
-                                <a class="btn btn-warning btn-lg accepting" data-job="{{this.jobID}}" data-bid="{{../this.bidID}}" data-bidder="{{../this.userID}}" alt="Edit Posting Button">Accept Bid</a>
-                                <a class="btn btn-warning btn-lg rejecting" data-bid="{{../this.bidID}}" alt="Edit Posting Button">Reject Bid</a>
+                                {{#if this.bidding}}
+                                    <a class="btn btn-warning btn-lg accepting" data-job="{{this.jobID}}" data-bid="{{../this.bidID}}" data-bidder="{{../this.userID}}" alt="Edit Posting Button">Accept Bid</a>
+                                    <a class="btn btn-warning btn-lg rejecting" data-bid="{{../this.bidID}}" alt="Edit Posting Button">Reject Bid</a>
+                                {{/if}}
+                                {{#unless this.bidding}}
+                                    <a class="btn btn-warning btn-lg app-accepting" data-job="{{this.jobID}}" data-app="{{../this.bidID}}" data-applicant="{{../this.userID}}" alt="Hire Applicant Button">Hire Applicant</a>
+                                {{/unless}}
                             {{/unless}}
                         {{/each}}
                     {{/if}}
                 </div>
                     <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+                        {{#if this.bidaccepted}}
+                            {{#if this.bidType}}
+                                <img class="job-accepted-image-sm" src="/assets/images/bid_accepted.png">
+                            {{else}}
+                                <img class="job-hired-image-sm" src="/assets/images/hired.png">
+                            {{/if}}
+                        {{/if}}
+                        {{#if this.biddenied}}
+                            <img class="job-accepted-image-sm" src="/assets/images/bid_rejected.png">
+                        {{/if}}
                         {{#if avatar}}
                         <img class="img-responsive pref-pic" src="{{this.avatar}}" alt="">
                         {{else}}
@@ -582,14 +642,6 @@
     <script src="/assets/scripts/script.js"></script>
 
     <script type="text/javascript">
-    // $(document).on('ready', function(){
-
-    //   $(document).on('click', '.accepting', function(){
-    //     $("#bidAcceptModal").removeClass("hide").addClass("show");
-    //     $("#accept-form").attr("action", "/job/bid/accept/{{this.jobID}}/"this.data-bid"?_method=PUT");
-    //   })
-
-    // });
     function populate(s1,s2){
         var s1 = document.getElementById(s1);
         var s2 = document.getElementById(s2);

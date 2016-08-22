@@ -122,6 +122,8 @@
                 <!-- checks if job has been completed -->
             {{#unless this.completed}}
 
+                {{#unless this.bidaccepted}}
+
                 <div class="row">
                 
                     <div class="job-box-container">  
@@ -154,6 +156,8 @@
                     </div>
             
                 </div>
+                {{/unless}}
+                
             {{/unless}}
             {{#if this.completed}}
                 <li class="names-devour">
