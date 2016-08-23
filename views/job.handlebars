@@ -585,7 +585,9 @@
 
                 {{#if this.completed}}
                 <div class="row">
-
+                    <div class="comp-img-container">
+                        <img class="job-completed-res" src="/assets/images/completed_straight.png">
+                    </div>    
                 <div class="job-box-head">
                         
                     </div>
@@ -602,15 +604,7 @@
                                     <h2 class="job-title">{{this.title}}</h2>
                                 </div>
                                 <img class="job-box-image-lrg1" src="{{this.image}}">
-                                {{#if this.bidding}}
-                                    {{#unless ../owned}}
-                                        <a href="/viewJobAction/{{this.jobID}}/{{this.userID}}"><img class="job-view-image" src="/assets/images/submit_bid_btn.png"></a>
-                                    {{/unless}}
-                                {{else}}
-                                    {{#unless ../owned}}
-                                        <a href="/viewJobAction/{{this.jobID}}/{{this.userID}}"><img class="job-view-image" src="/assets/images/apply_fixed_btn.png"></a>
-                                    {{/unless}} 
-                                {{/if}}
+                                
                                 <p class="job-title-desc">{{this.description}}</p>
                                 <div class="job-box-footer">
                                     <a class="btn btn-warning btn-lg job-box-category" href="/jobCategory/{{this.category}}">{{this.category}}</a>
@@ -628,27 +622,58 @@
 
                 </div>
 
-                <div class="row">
-                      
-                      <!-- show any messages that come back with authentication -->
-                    {{#if message}}
-                        <div class="alert alert-danger">{{message}}</div> 
-                    {{/if}}
+                {{/if}}
 
-                    <!-- COMMENT FORM -->
-                    <form action="/comment/{{this.jobID}}" method="post">
-                        <div class="form-group">
-                            <label>Ask a question or comment on this posting.</label>
-                            <textarea type="text" class="form-control" name="comment"></textarea>
-                            <input type="hidden" name="this_id" data-id="{{this.jobID}}">
+                {{/each}}
+
+
+                {{#feedback}}
+
+                <div class="row">
+  
+                    <div class="job-box-head">
+                            
+                        </div>
+                        <div class="job-container"> 
+                           
+                            <div class="review-box">
+                                <div class="review-title-box">
+                                    {{#each ../job}}
+                                        <h2 class="review-title">Review for {{this.title}}</h2>
+                                    {{/each}}
+                                </div>
+
+                                    <img id="star-rating" class="job-view-image" src="{{starRating this.rating}}">
+                                
+
+                                {{#each ../bidInfo}}
+
+                                    {{#if this.bidaccepted}}
+
+                                        {{#if avatar}}
+                                            <img class="img-responsive user-thumbnail" src="{{this.avatar}}" alt="">
+                                        {{else}}
+                                            <img class="img-responsive user-thumbnail" src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="">
+                                        {{/if}}
+
+                                    {{/if}}
+
+                                {{/each}}
+                                
+                                <p class="job-title-desc">{{this.review}}</p>
+                                <div class="review-footer">
+                                    <a class="btn btn-warning btn-lg job-box-category" href="/jobCategory/{{this.category}}">{{this.category}}</a>
+                                    <a class="btn btn-warning btn-lg job-box-category" href="/jobSubCategory/{{this.subcategory}}">{{this.subcategory}}</a>
+                                    <h2 class="job-box-price">{{this.budget}}</h2>
+                                </div>
+                                   
+                            </div>
+                            
                         </div>
 
-                        <button type="submit" class="btn btn-warning btn-lg">Submit</button>
-                    </form>
-            
                 </div>
-                {{/if}}
-                {{/each}}
+
+                {{/feedback}}
 
             </div>
             <!-- /.container -->

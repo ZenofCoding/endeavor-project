@@ -223,36 +223,40 @@ var condition6 = 'user.id = bid.userID';
 var condition7 = 'jobs.jobID = ' + req.params.id;
   endeavor.allWhere('jobs', condition, function (job) {
     endeavor.allWhere('bid', condition3, function (bids) {
-      endeavor.allWhere('user', condition2, function (postUser) {
-        endeavor.innerJoin3(['user.id', 'user.avatar', 'user.username', 'user.displayName', 'bid.bidID', 'bid.jobID', 'bid.userID', 'bid.description', 'bid.amount', 'bid.bidType', 'bid.bidaccepted', 'bid.biddenied', 'bid.jobOwnerID'], 'user', 'bid', 'jobs', condition4, condition5, condition6, condition7, function (bidInfo) {
-          if(req.user == undefined){
-            res.render('job', {
-              user: req.user,
-              job: job,
-              bids: bids,
-              postUser: postUser,
-              bidInfo: bidInfo
-            }); 
-            console.log('hello', bidInfo);
-          }else{
-            endeavor.all('category', function (category) {
-              isOwner(req.params.user, req.user.id, function (owned) {
-                res.render('job', {
-                  user: req.user,
-                  job: job,
-                  bids: bids,
-                  postUser: postUser,
-                  bidInfo: bidInfo,
-                  category: category,
-                  owned: owned
+      endeavor.allWhere('feedback', condition, function (feedback) {
+        endeavor.allWhere('user', condition2, function (postUser) {
+          endeavor.innerJoin3(['user.id', 'user.avatar', 'user.username', 'user.displayName', 'bid.bidID', 'bid.jobID', 'bid.userID', 'bid.description', 'bid.amount', 'bid.bidType', 'bid.bidaccepted', 'bid.biddenied', 'bid.jobOwnerID'], 'user', 'bid', 'jobs', condition4, condition5, condition6, condition7, function (bidInfo) {
+            if(req.user == undefined){
+              res.render('job', {
+                user: req.user,
+                job: job,
+                bids: bids,
+                feedback: feedback,
+                postUser: postUser,
+                bidInfo: bidInfo
+              }); 
+              console.log('hello', feedback);
+            }else{
+              endeavor.all('category', function (category) {
+                isOwner(req.params.user, req.user.id, function (owned) {
+                  res.render('job', {
+                    user: req.user,
+                    job: job,
+                    bids: bids,
+                    feedback: feedback,
+                    postUser: postUser,
+                    bidInfo: bidInfo,
+                    category: category,
+                    owned: owned
+                  });
+                  console.log('hello', feedback);
+                  //console.log(postUser, req.params.user, req.user);
                 });
-                console.log('hello', job);
-                //console.log(postUser, req.params.user, req.user);
               });
-            });
-          } 
+            } 
           });
-        });  
+        });
+      });  
     });
   });
 });
