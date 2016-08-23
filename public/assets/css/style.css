@@ -132,8 +132,20 @@
 .job-completed-image{
   position: absolute;
   top: 50px;
-  left: 275px;
+  left: 345px;
   max-width: 479px;
+  z-index: 102;
+}
+
+.comp-img-container{
+  position: relative;
+  width:50%;
+}
+
+.job-completed-res{
+  /*left: 345px;*/
+  max-width: 479px;
+  min-width: 250px;
   z-index: 102;
 }
 
@@ -145,6 +157,10 @@
 
 .job-title{
   margin-left: 150px;
+  color: #ffffff;
+}
+
+.review-title{
   color: #ffffff;
 }
 
@@ -295,6 +311,36 @@
 .edit-buttons{
   margin-right: 15px;
   background-color: #b40505;
+}
+
+.user-thumbnail{
+  float: left;
+  height: 150px;
+  border: 1px solid #2a2a2a;
+  margin: 15px;
+}
+
+.review-box{
+  text-decoration: none;
+  position: relative;
+  margin-top: 15px;
+  background-color: #ffffff;
+  border: 1px solid #f0ad4e;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.review-title-box{
+  position: relative;
+  background-color: #f0ad4e;
+  padding: 1px 15px 1px 15px;
+}
+
+.review-footer{
+  position: relative;
+  clear: left;
+  border-top: 1px solid #2a2a2a;
+  padding: 5px 15px 5px 15px; 
 }
 
 .no-bottom-marg{
