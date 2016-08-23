@@ -279,30 +279,45 @@
                             </div>          
                         </a>
                     </div>
-                      
-                      <!-- show any messages that come back with authentication -->
-                    <!-- {{#if message}}
-                        <div class="alert alert-danger">{{message}}</div> 
-                    {{/if}} -->
-
-                    <!-- COMMENT FORM -->
-                    <!-- <form action="/comment/{{this.jobID}}" method="post">
-                        <div class="form-group">
-                            <label>Ask a question or comment on this posting.</label>
-                            <textarea type="text" class="form-control" name="comment"></textarea>
-                            <input type="hidden" name="this_id" data-id="{{this.jobID}}">
-                        </div>
-
-                        <button type="submit" class="btn btn-warning btn-lg">Submit</button>
-                    </form> -->
             
                 </div>
                 {{/unless}}
+                {{/each}}
+
+                {{#each jobs}}
                 {{#if this.completed}}
-                    <li class="names-devour">
-                        <!-- runs if burger is NOT marked as eaten in DB -->
-                        <!-- {{this.burger_name}} -->
-                    </li>
+                    <div class="row">
+
+                    <div class="job-box-container">  
+                        <a class="job-link" href="/viewJob/{{this.jobID}}/{{this.userID}}">
+                            <img class="job-completed-image" src="/assets/images/completed.png"> 
+                            {{#if this.bidding}}
+                                <img class="job-bid-image" src="/assets/images/bid_btn.png">
+                            {{else}}
+                                <img class="job-bid-image" src="/assets/images/fixed_btn.png">  
+                            {{/if}}
+                            <div class="job-box-small">
+                                <div class="job-title-box">
+                                        <h2 class="job-title">{{this.title}}</h2>
+                                </div>
+                                <img class="job-box-image1" src="{{this.image}}">
+                                {{#if this.bidding}}
+                                    <img class="job-view-image" src="/assets/images/view_bid_btn.png">
+                                {{else}}
+                                    <img class="job-view-image" src="/assets/images/view_fixed_btn.png">  
+                                {{/if}}
+                                <p class="job-title-desc">{{trimString this.description}}</p>
+
+                                <div class="job-box-footer">
+                                    <a class="btn btn-warning btn-lg job-box-category" href="/jobCategory/{{this.category}}">{{this.category}}</a>
+                                    <a class="btn btn-warning btn-lg job-box-category" href="/jobSubCategory/{{this.subcategory}}">{{this.subcategory}}</a>
+                                    <h2 class="job-box-price">{{this.budget}}</h2>
+                                </div>   
+                            </div>          
+                        </a>
+                    </div>
+            
+                </div>
                 {{/if}}
                 {{/each}}
 

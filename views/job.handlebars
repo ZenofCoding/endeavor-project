@@ -290,6 +290,53 @@
       <!-- End Modal for marking this job complete and leaving feedback -->
 
 
+      <!-- Begin Modal for marking this job complete (with NO REVIEW) -->
+    {{#if owned}}
+    <!-- loops through each job -->
+    {{#job}}    
+    <!-- checks if job has been completed -->
+    {{#unless this.completed}}
+
+        <!-- Modal for adding new jobs to DB. Posts to endeavor_controller.js -->
+          <div class="modal hide" id="jobCompleteNoReviewModal" role="dialog">
+            <div class="modal-dialog">
+            
+              <!-- Modal content inputs populated from script.js-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close close-no-complete" >&times;</button>
+                  <h4 class="modal-title">Mark This Job Posting As Complete</h4>
+                </div>
+                <div class="modal-body">
+                  <form id="job-complete-no-form" action="" method="POST">
+                    
+
+                    
+                    
+                    <!-- <input type="hidden" name="edit_jobUserID" value="{{user.id}}"> -->
+                    <input type="hidden" name="job_complete" value="1">
+                    
+                    <button class="btn btn-warning btn-lg" type="submit">Complete Job</button>
+
+                    <a class="btn btn-warning btn-lg close-no-complete" alt="Cancel Button">Cancel</a>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                    <!-- <label>Don't have an account? Create one for free.</label> -->
+                </div>
+              </div>
+              
+            </div>
+          </div>
+
+      {{/unless}}
+
+      {{/job}}
+
+      {{/if}}
+      <!-- End Modal for marking this job complete (with NO REVIEW) and leaving feedback -->
+
+
       {{#if owned}}
 
       {{#job}}  
@@ -440,15 +487,26 @@
             <div class="container extra-margin">
 
                 {{#if owned}}
+
+                {{#job}}
+
+                {{#unless this.completed}}
                     <div>
                         <a class="btn btn-danger btn-lg edit-buttons" data-toggle="modal" data-target="#jobEditModal" alt="Edit Posting Button">Edit This Posting</a>
 
                         <a class="btn btn-danger btn-lg edit-buttons" data-toggle="modal" data-target="#jobDeleteModal" alt="Remove Posting Button">Remove This Posting</a>
 
-                        {{#job}}
-                            <a class="btn btn-danger btn-lg edit-buttons completing" data-job="{{this.jobID}}" data-employer="{{this.userID}}" data-employee="{{this.bidderID}}" alt="Edit Posting Button">Mark This Posting As Completed</a>
-                        {{/job}} 
+                        {{#if this.hasbid}}
+                            <a class="btn btn-danger btn-lg edit-buttons completing" data-job="{{this.jobID}}" data-employer="{{this.userID}}" data-employee="{{this.bidderID}}" alt="Mark Posting Complete Button">Mark This Posting As Completed</a>
+                        {{else}}
+                            <a class="btn btn-danger btn-lg edit-buttons completing-no-review" data-job="{{this.jobID}}" alt="Mark Posting Complete Button">Mark This Posting As Completed</a>
+                        {{/if}}
+                         
                     </div>
+                {{/unless}}
+
+                {{/job}}   
+
                 {{/if}}
 
                 <!-- loops through each job -->
@@ -520,11 +578,75 @@
             
                 </div>
                 {{/unless}}
+
+                {{/each}}
+
+                {{#each job}}
+
                 {{#if this.completed}}
-                    <li class="names-devour">
-                        <!-- runs if burger is NOT marked as eaten in DB -->
-                        <!-- {{this.burger_name}} -->
-                    </li>
+                <div class="row">
+
+                <div class="job-box-head">
+                        
+                    </div>
+                    <div class="job-container"> 
+                        <span class="job-box-datesStart">Starting: {{prettifyDate this.jobstart}}</span> 
+                        <div class="job-link">
+                            {{#if this.bidding}}
+                                <img class="job-bid-image" src="/assets/images/bid_btn.png">
+                            {{else}}
+                                <img class="job-bid-image" src="/assets/images/fixed_btn.png">  
+                            {{/if}}
+                            <div class="job-box-large">
+                                <div class="job-title-box">
+                                    <h2 class="job-title">{{this.title}}</h2>
+                                </div>
+                                <img class="job-box-image-lrg1" src="{{this.image}}">
+                                {{#if this.bidding}}
+                                    {{#unless ../owned}}
+                                        <a href="/viewJobAction/{{this.jobID}}/{{this.userID}}"><img class="job-view-image" src="/assets/images/submit_bid_btn.png"></a>
+                                    {{/unless}}
+                                {{else}}
+                                    {{#unless ../owned}}
+                                        <a href="/viewJobAction/{{this.jobID}}/{{this.userID}}"><img class="job-view-image" src="/assets/images/apply_fixed_btn.png"></a>
+                                    {{/unless}} 
+                                {{/if}}
+                                <p class="job-title-desc">{{this.description}}</p>
+                                <div class="job-box-footer">
+                                    <a class="btn btn-warning btn-lg job-box-category" href="/jobCategory/{{this.category}}">{{this.category}}</a>
+                                    <a class="btn btn-warning btn-lg job-box-category" href="/jobSubCategory/{{this.subcategory}}">{{this.subcategory}}</a>
+                                    <h2 class="job-box-price">{{this.budget}}</h2>
+                                </div>
+                                   
+                            </div>          
+                        </div>
+                    </div>
+                    <div class="job-box-feet">
+                        <span class="job-box-datesEnd">Deadline: {{prettifyDate this.deadline}}</span>
+                        <!-- <h2 class="job-box-price">{{this.budget}}</h2> -->
+                    </div>
+
+                </div>
+
+                <div class="row">
+                      
+                      <!-- show any messages that come back with authentication -->
+                    {{#if message}}
+                        <div class="alert alert-danger">{{message}}</div> 
+                    {{/if}}
+
+                    <!-- COMMENT FORM -->
+                    <form action="/comment/{{this.jobID}}" method="post">
+                        <div class="form-group">
+                            <label>Ask a question or comment on this posting.</label>
+                            <textarea type="text" class="form-control" name="comment"></textarea>
+                            <input type="hidden" name="this_id" data-id="{{this.jobID}}">
+                        </div>
+
+                        <button type="submit" class="btn btn-warning btn-lg">Submit</button>
+                    </form>
+            
+                </div>
                 {{/if}}
                 {{/each}}
 
