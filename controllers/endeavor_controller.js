@@ -302,9 +302,10 @@ router.post('/job/create', function (req, res) {
 // passes the values from the index.handlebars form and passes the db column name
 // redirects to .get /endeavors and reloads page
 router.post('/job/bid', function (req, res) {
-  endeavor.create(['bid'], ['description', 'userID', 'jobID', 'amount', 'bidType', 'jobOwnerID'], [req.body.bid_description, req.body.bid_userID, req.body.bid_jobID, req.body.bid_budget, req.body.bid_type, req.body.job_owner], function () {
+  endeavor.create(['bid'], ['description', 'userID', 'jobID', 'amount', 'bidType', 'jobOwnerID'], [req.body.bid_description, req.body.bid_userID, req.body.bid_jobID, req.body.bid_budget, req.body.bid_type, req.body.job_owner], function (result) {
     var condition = 'jobID = ' + req.body.bid_jobID;
-    endeavor.update(['jobs'], { hasbid: req.body.hasbid_initial, bidderID: req.body.bid_userID}, condition, function () {
+    endeavor.update(['jobs'], { bidID: result.insertId, hasbid: req.body.hasbid_initial, bidderID: req.body.bid_userID}, condition, function () {
+      // console.log('Resonse Logged', res.json(result));
       res.redirect('/profile');
     });
   });
@@ -468,7 +469,7 @@ router.put('/preferences/update/summary/:id', function (req, res) {
 });
 
 // accesses the create and update function in endeavor.js
-// passes the values from the index.handlebars form and passes the db column name
+// passes the values from the job.handlebars form and passes the db column name
 // redirects to .get /profile
 router.put('/job/complete/:jobID/:employerID/:employeeID', function (req, res) {
   endeavor.create(['feedback'], ['rating', 'jobID', 'employerID', 'employeeID', 'review'], [req.body.job_rated, req.params.jobID, req.params.employerID, req.params.employeeID, req.body.job_review], function () {
@@ -476,6 +477,16 @@ router.put('/job/complete/:jobID/:employerID/:employeeID', function (req, res) {
     endeavor.update(['jobs'], { completed: req.body.job_complete }, condition, function () {
       res.redirect('/profile');
     });
+  });
+});
+
+// accesses the update function in endeavor.js
+// passes the values from the job.handlebars form and passes the db column name
+// redirects to .get /profile
+router.put('/job/complete/noReview/:jobID', function (req, res) {
+  var condition = 'jobID = ' + req.params.jobID;
+  endeavor.update(['jobs'], { completed: req.body.job_complete }, condition, function () {
+    res.redirect('/profile');
   });
 });
 

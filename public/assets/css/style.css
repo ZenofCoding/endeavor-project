@@ -129,6 +129,14 @@
   z-index: 102;
 }
 
+.job-completed-image{
+  position: absolute;
+  top: 50px;
+  left: 275px;
+  max-width: 479px;
+  z-index: 102;
+}
+
 .job-title-box{
   position: relative;
   background-color: #2a2a2a;

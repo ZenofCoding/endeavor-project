@@ -80,4 +80,17 @@ $(document).on('ready', function(){
     $("#job-complete-form").attr("action", "");
   })
 
+  //Grabs data from data dashes and builds post url for (Job Completion No Review)
+  $(document).on('click', '.completing-no-review', function(){
+    var jobID = $(this).data("job");
+    $("#jobCompleteNoReviewModal").removeClass("hide").addClass("show");
+    $("#job-complete-no-form").attr("action", "/job/complete/noReview/" + jobID + "?_method=PUT");
+  })
+
+  //Closes (Job Completion No Review) modal with 2 separate buttons
+  $(document).on('click', '.close-no-complete', function(){
+    $("#jobCompleteNoReviewModal").removeClass("show").addClass("hide");
+    $("#job-complete-no-form").attr("action", "");
+  })
+
 });
