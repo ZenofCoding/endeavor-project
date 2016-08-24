@@ -358,6 +358,20 @@
   clear: both;
 }
 
+#rating-back{
+  position: absolute;
+  top: 0px;
+  background-color: #f0ad4e;
+  width: 0px;
+  height: 85px;
+  z-index: 99;
+}
+
+.stars-cover{
+  position: relative;
+  z-index: 100;
+}
+
 /*begin styling for rating system*/
 .rating {
     float:left;
