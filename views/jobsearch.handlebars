@@ -108,14 +108,14 @@
             <!--get all the job categories -->
             <br>
             <div class="form-group">
-              <label for="category">Category</label>
-            <select id="category" class="form-control" name="category" onChange="changeCategory(this.value)" required>
-                  <option value="">Choose a category</option>
-                  {{#each category}}
-                      <option id="category-val" name="category-val" value="{{this.description}}">{{this.description}}</option>
-                    {{/each}}
-            </select>
-        </div>
+              <label for="category">Search for All Jobs in a Category</label>
+                <select id="category" class="form-control" name="category" onChange="changeCategory(this.value)" required>
+                      <option value="">Choose a category</option>
+                      {{#each category}}
+                          <option id="category-val" name="category-val" value="{{this.description}}">{{this.description}}</option>
+                        {{/each}}
+                </select>
+            </div>
                 
             <!-- loops through each job -->
         {{#each jobs}}
