@@ -341,7 +341,7 @@
                     {{#if user.hasavatar}}
                         <img class="img-responsive pref-pic" src="{{user.avatar}}" alt="User Profile Picture">
                     {{else}}
-                    <img class="img-responsive pref-pic" src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="Default Profile Picture">
+                        <img class="img-responsive pref-pic" src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="Default Profile Picture">
                     {{/if}}
                 </div>
             </div>
@@ -417,7 +417,8 @@
                     <p class="lead">The reviews displayed here are from jobs completed on this site.</p>
                 </div>
                 <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                    <img class="img-responsive" src="/assets/images/all-stars.png" alt="5 Stars Raing Picture">
+                    <img class="img-responsive stars-cover" src="/assets/images/all_5_stars.png" alt="5 Stars Raing Picture">
+                    <span id="rating-back"></span>
                 </div>
             </div>
 
@@ -464,7 +465,12 @@
     <!-- /.content-section-a -->
 
   <a name="contact"></a>
-    <div class="banner">
+{{#if user.hasbackground}}
+    <div class="banner2" style="background: url({{user.background}}) no-repeat center center;">
+{{/if}}
+{{#unless user.hasbackground}}
+    <div class="banner2" style="background: url(http://www.medicalrecoveryservices.org/wp-content/uploads/banner-background1.jpg) no-repeat center center;">
+{{/unless}}
 
         <div class="container">
 
@@ -477,7 +483,7 @@
                     {{/if}}
                 </div>
                 <div class="col-lg-6">
-                    <ul class="list-inline banner-social-buttons">
+                    <ul class="list-inline banner2-social-buttons">
                         <li>
                             <a href="https://twitter.com/SBootstrap" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
                         </li>
@@ -535,25 +541,54 @@
     <!-- <script src="/assets/scripts/script.js"></script> -->
 
     <script type="text/javascript">
-function populate(s1,s2){
-    var s1 = document.getElementById(s1);
-    var s2 = document.getElementById(s2);
-    s2.innerHTML = "";
-    if(s1.value == "Accounting"){
-        var optionArray = ["|","artpunk|Art Punk","alternativerock|Alternative Rock","collegerock|College Rock","experimentalrock|Experimental                              Rock","gothicrock|Gothic Rock","grunge|Grunge","hardcorepunk|Hardcore Punk","hardrock|Hard Rock","indierock|Indie Rock",                                                                                                                "lofi|Lo-fi","newwave|New Wave","progressiverock|Progressive Rock","punk|Punk","shoegaze|Shoegaze","steampunk|Steampunk"];
-    } else if(s1.value == "Administrative"){
-        var optionArray = ["|","acousticblues|Acoustic Blues","chicagoblues|Chicago Blues","classicblues|Classic Blues",
-                "contemporaryblues|Contemporary Blues","countryblues|Country Blues","deltablues|Delta Blues","electricblues|Electric Blues"];
-    }
-    for(var option in optionArray){
-        var pair = optionArray[option].split("|");
-        var newOption = document.createElement("option");
-        newOption.value = pair[0];
-        newOption.innerHTML = pair[1];
-        s2.options.add(newOption);
-    }
-}
-</script>
+        $(document).on('ready', function(){
+
+            var possFeedback = 0;
+            var actFeedback = 0;
+            var feedObj = {{{json feedback}}};
+
+            for(i=0; i<feedObj.length; i++) {
+                possFeedback += 5;
+                actFeedback += feedObj[i].rating;
+                //console.log(feedObj[i].rating);    
+            }
+
+            console.log("Possible Feedback Score: ", possFeedback);
+            console.log("Actual Feedback Score: ", actFeedback);
+
+            actualRating(possFeedback, actFeedback);
+
+            function actualRating(poss, act) {
+                if(actFeedback > 0){
+                    $('#rating-back').animate({
+                        'width': (455 * act)/poss
+                    }, 1000);   
+                }
+            };
+            
+
+
+            function populate(s1,s2){
+                var s1 = document.getElementById(s1);
+                var s2 = document.getElementById(s2);
+                s2.innerHTML = "";
+                if(s1.value == "Accounting"){
+                    var optionArray = ["|","artpunk|Art Punk","alternativerock|Alternative Rock","collegerock|College Rock","experimentalrock|Experimental                              Rock","gothicrock|Gothic Rock","grunge|Grunge","hardcorepunk|Hardcore Punk","hardrock|Hard Rock","indierock|Indie Rock",                                                                                                                "lofi|Lo-fi","newwave|New Wave","progressiverock|Progressive Rock","punk|Punk","shoegaze|Shoegaze","steampunk|Steampunk"];
+                } else if(s1.value == "Administrative"){
+                    var optionArray = ["|","acousticblues|Acoustic Blues","chicagoblues|Chicago Blues","classicblues|Classic Blues",
+                            "contemporaryblues|Contemporary Blues","countryblues|Country Blues","deltablues|Delta Blues","electricblues|Electric Blues"];
+                }
+                for(var option in optionArray){
+                    var pair = optionArray[option].split("|");
+                    var newOption = document.createElement("option");
+                    newOption.value = pair[0];
+                    newOption.innerHTML = pair[1];
+                    s2.options.add(newOption);
+                }
+            }
+
+        });
+    </script>
 
 </body>
 

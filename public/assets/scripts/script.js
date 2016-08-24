@@ -1,8 +1,3 @@
-// document.getElementById("closeSuccess1").onclick = function() {closeAcctModal()};
-
-// function closeAcctModal() {
-//   document.getElementById("successModal").className = "modal hide";
-// }
 $(document).on('ready', function(){
 
   //Grabs data from data dashes and builds post url for (Bid Acception)
