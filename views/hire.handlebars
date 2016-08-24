@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Endeavor</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/assets/css/landing-page.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- added links to style sheets -->
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css" />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+<p>hire</p>
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand topnav" href="/endeavors" title="Home">Endeavor</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    {{#if user}}
+                        <li>
+                            <a href="/profile">Dashboard</a>
+                        </li>  
+                    {{/if}}
+                    <li>
+                        <a href="#about">About</a>
+                    </li>
+                    <li>
+                        <a href="#services">Services</a>
+                    </li>
+                    <li>
+                        <a href="#contact">Contact</a>
+                    </li>
+                    {{#if user}}
+                        <li>
+                            <a href="/logout">Logout</a>
+                        </li>  
+                    {{/if}}
+                    {{#unless user}}
+                    <li>
+                        <a href="/login">Login</a>
+                    </li>
+                    <li>
+                        <a href="/signup">Signup</a>
+                    </li>
+                    {{/unless}}
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+    <!-- Header -->
+    <!-- <a name="about"></a>
+            <div class="intro-header intro-header-index">
+                <div class="container">
+
+
+
+                </div>
+        
+
+    </div>  -->
+    <!-- /.intro-header -->
+
+    <!-- Page Content -->
+
+  <a  name="services"></a>
+     <div class="content-section-a">
+
+        <div class="container">
+            <!--get all the job categories -->
+            <br>
+            <div class="form-group">
+              <label for="category">Category</label>
+            <select id="category" class="form-control" name="category" onChange="changeCategory(this.value)" required>
+                  <option value="">Choose a category</option>
+                  {{#each category}}
+                      <option id="category-val" name="category-val" value="{{this.description}}">{{this.description}}</option>
+                    {{/each}}
+            </select>
+        </div>
+                
+            <!-- loops through each job -->
+        {{#each jobs}}
+                <!-- checks if job has been completed -->
+            {{#unless this.completed}}
+
+                {{#unless this.bidaccepted}}
+
+                <div class="row">
+                
+                    <div class="job-box-container">  
+                        <a class="job-link" href="/viewJob/{{this.jobID}}/{{this.userID}}">
+                            {{#if this.bidding}}
+                                <img class="job-bid-image" src="/assets/images/bid_btn.png">
+                            {{else}}
+                                <img class="job-bid-image" src="/assets/images/fixed_btn.png">  
+                            {{/if}}
+                            <div class="job-box-small">
+                                <div class="job-title-box">
+                                        <h2 class="job-title">{{this.title}}</h2>
+                                </div>
+                                <img class="job-box-image1" src="{{this.image}}">
+                                {{#if this.bidding}}
+                                    <img class="job-view-image" src="/assets/images/view_bid_btn.png">
+                                {{else}}
+                                    <img class="job-view-image" src="/assets/images/view_fixed_btn.png">  
+                                {{/if}}
+                                <p class="job-title-desc">{{trimString this.description}}</p>
+
+                                <div class="job-box-footer">
+                                    <a class="btn btn-warning btn-lg job-box-category" href="/jobCategory/{{this.category}}">{{this.category}}</a>
+                                    <a class="btn btn-warning btn-lg job-box-category" href="/jobSubCategory/{{this.subcategory}}">{{this.subcategory}}</a>
+                                    <h2 class="job-box-price">{{this.budget}}</h2>
+
+                                </div>   
+                            </div>          
+                        </a>
+                    </div>
+            
+                </div>
+                {{/unless}}
+                
+            {{/unless}}
+            {{#if this.completed}}
+                <li class="names-devour">
+                    <!-- runs if burger is NOT marked as eaten in DB -->
+                    <!-- {{this.burger_name}} -->
+                </li>
+            {{/if}}
+        {{/each}}
+
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="list-inline">
+                        <li>
+                            <a href="#">Home</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="#about">About</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="#services">Services</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="#contact">Contact</a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted small">Copyright &copy; Endeavor 2016. All Rights Reserved</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="/assets/scripts/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/assets/scripts/bootstrap.min.js"></script>
+<script type="text/javascript">
+
+    function changeCategory(category){
+       window.location.href = '/jobCategory/' + category;  
+    };
+</script>
+
+</body>
+
+</html>

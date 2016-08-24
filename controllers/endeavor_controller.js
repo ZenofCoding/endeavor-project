@@ -182,7 +182,23 @@ router.get('/preferences', isLoggedIn, function(req, res) {
          });
        });
     });
-
+  // =====================================
+  // Hire SECTION =========================
+  // =====================================
+  // all the available users posted on the site
+    router.get('/hire', function(req, res) {
+     var condition = '';//'userID = ' + req.user.id;
+       endeavor.all('users', function (userHire) {
+         /*endeavor.all('category', function (category) {*/
+           res.render('hire', {
+             user: req.user,
+             userHire: userHire
+             /*category: category*/
+           });
+           console.log(userHire);
+       /*  });*/
+       });
+    });
  // all the available jobs posted on the site based on the category
  router.get('/jobCategory/:category', function(req, res) {
   var condition = 'category = "' + req.params.category +'"';
