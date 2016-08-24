@@ -53,11 +53,6 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    {{#if owned}}
-                        <li>
-                            <a>Owner!!!</a>
-                        </li>  
-                    {{/if}}
                     {{#unless owned}}
                     <li>
                         <a>Not Owner!!!</a>
@@ -266,7 +261,7 @@
                         <label for="job_review">This review will be available for other users to see and base their hiring decisions on.</label>
                     </div>
                     
-                    <!-- <input type="hidden" name="edit_jobUserID" value="{{user.id}}"> -->
+                    <input type="hidden" name="job_compTitle" value="{{this.title}}">
                     <input type="hidden" name="job_complete" value="1">
                     <input type="hidden" id="job_rated" name="job_rated" value="">
                     <button class="btn btn-warning btn-lg" type="submit">Complete Job &amp; Post Review</button>
@@ -309,10 +304,7 @@
                 </div>
                 <div class="modal-body">
                   <form id="job-complete-no-form" action="" method="POST">
-                    
-
-                    
-                    
+            
                     <!-- <input type="hidden" name="edit_jobUserID" value="{{user.id}}"> -->
                     <input type="hidden" name="job_complete" value="1">
                     
@@ -484,14 +476,14 @@
     <a name="jobs area"></a>
         <div class="content-section-b">
 
-            <div class="container extra-margin">
+            <div class="container">
 
                 {{#if owned}}
 
                 {{#job}}
 
                 {{#unless this.completed}}
-                    <div>
+                    <div class="extra-margin">
                         <a class="btn btn-danger btn-lg edit-buttons" data-toggle="modal" data-target="#jobEditModal" alt="Edit Posting Button">Edit This Posting</a>
 
                         <a class="btn btn-danger btn-lg edit-buttons" data-toggle="modal" data-target="#jobDeleteModal" alt="Remove Posting Button">Remove This Posting</a>
@@ -577,6 +569,7 @@
                     </form>
             
                 </div>
+
                 {{/unless}}
 
                 {{/each}}
@@ -584,6 +577,7 @@
                 {{#each job}}
 
                 {{#if this.completed}}
+
                 <div class="row">
                     <div class="comp-img-container">
                         <img class="job-completed-res" src="/assets/images/completed_straight.png">
@@ -643,28 +637,19 @@
                                     {{/each}}
                                 </div>
 
-                                    <img id="star-rating" class="job-view-image" src="{{starRating this.rating}}">
-                                
+                                <img id="star-rating" class="job-view-image" src="{{starRating this.rating}}">
 
-                                {{#each ../bidInfo}}
-
-                                    {{#if this.bidaccepted}}
-
-                                        {{#if avatar}}
-                                            <img class="img-responsive user-thumbnail" src="{{this.avatar}}" alt="">
-                                        {{else}}
-                                            <img class="img-responsive user-thumbnail" src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="">
-                                        {{/if}}
-
+                                <a href="/public/profile/{{this.employeeID}}">
+                                    {{#if avatar}}
+                                        <img class="img-responsive user-thumbnail" src="{{this.avatar}}" alt="">
+                                    {{else}}
+                                        <img class="img-responsive user-thumbnail" src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="">
                                     {{/if}}
-
-                                {{/each}}
+                                </a>
                                 
                                 <p class="job-title-desc">{{this.review}}</p>
                                 <div class="review-footer">
-                                    <a class="btn btn-warning btn-lg job-box-category" href="/jobCategory/{{this.category}}">{{this.category}}</a>
-                                    <a class="btn btn-warning btn-lg job-box-category" href="/jobSubCategory/{{this.subcategory}}">{{this.subcategory}}</a>
-                                    <h2 class="job-box-price">{{this.budget}}</h2>
+                                    <a class="btn btn-warning btn-lg job-box-category" href="/viewJob/{{this.jobID}}/{{this.employerID}}">View Job</a>
                                 </div>
                                    
                             </div>
@@ -775,29 +760,16 @@
         {{/each}}
 
         </div>
-        <!-- /.container -->
 
     </div>
     {{/if}}
 
-            <div class="row">
-                <div class="col-lg-5 col-sm-6">
-                    <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading">Customer Testimonials</h2>
-                    <p class="lead">This template features the 'Lato' font, part of the <a target="_blank" href="http://www.google.com/fonts">Google Web Font library</a>, as well as <a target="_blank" href="http://fontawesome.io">icons from Font Awesome</a>.</p>
-                </div>
-                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                    <img class="img-responsive" src="/assets/images/phones.png" alt="">
-                </div>
-            </div>
-
-        </div>
-        <!-- /.container -->
-
     {{/if}}
 
     {{/each}}
+
+        <!-- /.container -->
+
     <!-- /.content-section-b -->
 
   <a name="contact"></a>
