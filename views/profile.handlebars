@@ -409,7 +409,7 @@
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
                     {{#if user.displayName}}
-                        <h2 class="section-heading">{{user.displayName}} Overall Rating and<br>Professional Reviews</h2>
+                        <h2 class="section-heading">{{user.displayName}}&#39;s Overall Rating and<br>Professional Reviews</h2>
                     {{else}}
                         <h2 class="section-heading">{{user.username}} Overall Rating and<br>
                         Professional Reviews</h2>
@@ -540,55 +540,53 @@
     <!-- Endeavor Script -->
     <!-- <script src="/assets/scripts/script.js"></script> -->
 
-    <script type="text/javascript">
-        $(document).on('ready', function(){
+<script type="text/javascript">
+    $(document).on('ready', function(){
 
-            var possFeedback = 0;
-            var actFeedback = 0;
-            var feedObj = {{{json feedback}}};
+        var possFeedback = 0;
+        var actFeedback = 0;
+        var feedObj = {{{json feedback}}};
 
-            for(i=0; i<feedObj.length; i++) {
-                possFeedback += 5;
-                actFeedback += feedObj[i].rating;
-                //console.log(feedObj[i].rating);    
+        for(i=0; i<feedObj.length; i++) {
+            possFeedback += 5;
+            actFeedback += feedObj[i].rating;
+            //console.log(feedObj[i].rating);    
+        }
+
+        console.log("Possible Feedback Score: ", possFeedback);
+        console.log("Actual Feedback Score: ", actFeedback);
+
+        actualRating(possFeedback, actFeedback);
+
+        function actualRating(poss, act) {
+            if(actFeedback > 0){
+                $('#rating-back').animate({
+                    'width': (455 * act)/poss
+                }, 1000);   
             }
+        };
+});    
 
-            console.log("Possible Feedback Score: ", possFeedback);
-            console.log("Actual Feedback Score: ", actFeedback);
-
-            actualRating(possFeedback, actFeedback);
-
-            function actualRating(poss, act) {
-                if(actFeedback > 0){
-                    $('#rating-back').animate({
-                        'width': (455 * act)/poss
-                    }, 1000);   
-                }
-            };
-            
-
-
-            function populate(s1,s2){
-                var s1 = document.getElementById(s1);
-                var s2 = document.getElementById(s2);
-                s2.innerHTML = "";
-                if(s1.value == "Accounting"){
-                    var optionArray = ["|","artpunk|Art Punk","alternativerock|Alternative Rock","collegerock|College Rock","experimentalrock|Experimental                              Rock","gothicrock|Gothic Rock","grunge|Grunge","hardcorepunk|Hardcore Punk","hardrock|Hard Rock","indierock|Indie Rock",                                                                                                                "lofi|Lo-fi","newwave|New Wave","progressiverock|Progressive Rock","punk|Punk","shoegaze|Shoegaze","steampunk|Steampunk"];
-                } else if(s1.value == "Administrative"){
-                    var optionArray = ["|","acousticblues|Acoustic Blues","chicagoblues|Chicago Blues","classicblues|Classic Blues",
-                            "contemporaryblues|Contemporary Blues","countryblues|Country Blues","deltablues|Delta Blues","electricblues|Electric Blues"];
-                }
-                for(var option in optionArray){
-                    var pair = optionArray[option].split("|");
-                    var newOption = document.createElement("option");
-                    newOption.value = pair[0];
-                    newOption.innerHTML = pair[1];
-                    s2.options.add(newOption);
-                }
+        function populate(s1,s2){
+            var s1 = document.getElementById(s1);
+            var s2 = document.getElementById(s2);
+            s2.innerHTML = "";
+            if(s1.value == "Accounting"){
+                var optionArray = ["|","artpunk|Art Punk","alternativerock|Alternative Rock","collegerock|College Rock","experimentalrock|Experimental                              Rock","gothicrock|Gothic Rock","grunge|Grunge","hardcorepunk|Hardcore Punk","hardrock|Hard Rock","indierock|Indie Rock",                                                                                                                "lofi|Lo-fi","newwave|New Wave","progressiverock|Progressive Rock","punk|Punk","shoegaze|Shoegaze","steampunk|Steampunk"];
+            } else if(s1.value == "Administrative"){
+                var optionArray = ["|","acousticblues|Acoustic Blues","chicagoblues|Chicago Blues","classicblues|Classic Blues",
+                        "contemporaryblues|Contemporary Blues","countryblues|Country Blues","deltablues|Delta Blues","electricblues|Electric Blues"];
             }
+            for(var option in optionArray){
+                var pair = optionArray[option].split("|");
+                var newOption = document.createElement("option");
+                newOption.value = pair[0];
+                newOption.innerHTML = pair[1];
+                s2.options.add(newOption);
+            }
+        }
 
-        });
-    </script>
+</script>
 
 </body>
 

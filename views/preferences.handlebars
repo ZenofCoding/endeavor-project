@@ -367,13 +367,22 @@
     <!-- /.content-section-a -->
 
   <a name="contact"></a>
-    <div class="banner">
+{{#if user.hasbackground}}
+    <div class="banner2" style="background: url({{user.background}}) no-repeat center center;">
+{{/if}}
+{{#unless user.hasbackground}}
+    <div class="banner2" style="background: url(http://www.medicalrecoveryservices.org/wp-content/uploads/banner-background1.jpg) no-repeat center center;">
+{{/unless}}
 
         <div class="container">
 
             <div class="row">
                 <div class="col-lg-6">
-                    <h2>Connect to Start Bootstrap:</h2>
+                    {{#if user.displayName}}
+                        <h2>{{user.displayName}}</h2>
+                    {{else}}
+                        <h2>{{user.username}}</h2>
+                    {{/if}}
                 </div>
                 <div class="col-lg-6">
                     <ul class="list-inline banner-social-buttons">
