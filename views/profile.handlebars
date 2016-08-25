@@ -87,6 +87,16 @@
             <!-- /.navbar-collapse -->
         </div>
         <a class="btn btn-default btn-lg preferences-btn" href="/preferences" alt="">Preferences</a>
+        <a class="news-banner" href="/notifications/{{user.id}}">
+            <!-- <div class="news-banner">
+                <marquee class="news-text" behavior="scroll" direction="left"></marquee> 
+            </div>
+ -->        
+            <div class="scroll-left">
+                
+            </div>
+ </a>
+
         <!-- /.container -->
     </nav>
 
@@ -326,6 +336,7 @@
 
         </div>
 
+
   <a name="about"></a>
     <div class="content-section-a">
 
@@ -538,17 +549,22 @@
     <script src="/assets/scripts/bootstrap.min.js"></script>
 
     <!-- Endeavor Script -->
-    <!-- <script src="/assets/scripts/script.js"></script> -->
+    <script src="/assets/scripts/script.js"></script>
 
 <script type="text/javascript">
     $(document).on('ready', function(){
 
+        // Initialize possible and actual feedback score at 0
         var possFeedback = 0;
         var actFeedback = 0;
+        // Handlebars (feedback) is sent to the JSON helper and returned 
         var feedObj = {{{json feedback}}};
 
+        // Loop through helper response
         for(i=0; i<feedObj.length; i++) {
+            // For each feedback item increase possFeedback by 5
             possFeedback += 5;
+            // For each feedback item increase actFeedback by rating
             actFeedback += feedObj[i].rating;
             //console.log(feedObj[i].rating);    
         }
@@ -556,8 +572,11 @@
         console.log("Possible Feedback Score: ", possFeedback);
         console.log("Actual Feedback Score: ", actFeedback);
 
+        // Calls actualRating func and passes poss and actFeedback as parameters
         actualRating(possFeedback, actFeedback);
 
+        // If feedback is greater than 0
+        // Calculate the width of #rating-back css background color
         function actualRating(poss, act) {
             if(actFeedback > 0){
                 $('#rating-back').animate({
@@ -565,26 +584,61 @@
                 }, 1000);   
             }
         };
-});    
 
-        function populate(s1,s2){
-            var s1 = document.getElementById(s1);
-            var s2 = document.getElementById(s2);
-            s2.innerHTML = "";
-            if(s1.value == "Accounting"){
-                var optionArray = ["|","artpunk|Art Punk","alternativerock|Alternative Rock","collegerock|College Rock","experimentalrock|Experimental                              Rock","gothicrock|Gothic Rock","grunge|Grunge","hardcorepunk|Hardcore Punk","hardrock|Hard Rock","indierock|Indie Rock",                                                                                                                "lofi|Lo-fi","newwave|New Wave","progressiverock|Progressive Rock","punk|Punk","shoegaze|Shoegaze","steampunk|Steampunk"];
-            } else if(s1.value == "Administrative"){
-                var optionArray = ["|","acousticblues|Acoustic Blues","chicagoblues|Chicago Blues","classicblues|Classic Blues",
-                        "contemporaryblues|Contemporary Blues","countryblues|Country Blues","deltablues|Delta Blues","electricblues|Electric Blues"];
-            }
-            for(var option in optionArray){
-                var pair = optionArray[option].split("|");
-                var newOption = document.createElement("option");
-                newOption.value = pair[0];
-                newOption.innerHTML = pair[1];
-                s2.options.add(newOption);
-            }
+
+    function getNotifications() {
+
+        var slug = {{{json user}}};
+
+        console.log(slug.id);
+        
+        var queryURL = "/ajax/notifications/" + slug.id;
+
+        //ajax makes request and returns the response
+        $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
+
+          var notifyText;
+
+          for(var i=0; i < response.length; i++){
+
+            console.log(response[i]);
+
+            notifyText = $('<span>'); //creates a paragraph
+            notifyText.text(response[i].notification); //adds text from DB body
+            notifyText.addClass('spacing'); //added class to button
+
+            $('.scroll-left').append(notifyText);//prepends entire story div to main-content div
+
+          }
+            
+        }); 
+
+    }
+
+    // runs the getNotifications function as soons as the script is executed
+    getNotifications();
+
+
+    });    
+
+    function populate(s1,s2){
+        var s1 = document.getElementById(s1);
+        var s2 = document.getElementById(s2);
+        s2.innerHTML = "";
+        if(s1.value == "Accounting"){
+            var optionArray = ["|","art punk|Art Punk","alternativerock|Alternative Rock","collegerock|College Rock","experimentalrock|Experimental                              Rock","gothicrock|Gothic Rock","grunge|Grunge","hardcorepunk|Hardcore Punk","hardrock|Hard Rock","indierock|Indie Rock",                                                                                                                "lofi|Lo-fi","newwave|New Wave","progressiverock|Progressive Rock","punk|Punk","shoegaze|Shoegaze","steampunk|Steampunk"];
+        } else if(s1.value == "Administrative"){
+            var optionArray = ["|","acousticblues|Acoustic Blues","chicagoblues|Chicago Blues","classicblues|Classic Blues",
+                    "contemporaryblues|Contemporary Blues","countryblues|Country Blues","deltablues|Delta Blues","electricblues|Electric Blues"];
         }
+        for(var option in optionArray){
+            var pair = optionArray[option].split("|");
+            var newOption = document.createElement("option");
+            newOption.value = pair[0];
+            newOption.innerHTML = pair[1];
+            s2.options.add(newOption);
+        }
+    }
 
 </script>
 

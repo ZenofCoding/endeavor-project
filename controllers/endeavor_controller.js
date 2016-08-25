@@ -184,7 +184,23 @@ router.get('/preferences', isLoggedIn, function(req, res) {
          });
        });
     });
-
+  // =====================================
+  // Hire SECTION =========================
+  // =====================================
+  // all the available users posted on the site
+    router.get('/hire', function(req, res) {
+     var condition = '';//'userID = ' + req.user.id;
+       endeavor.all('user', function (userHire) {
+         /*endeavor.all('category', function (category) {*/
+           res.render('hire', {
+             user: req.user,
+             userHire: userHire
+             /*category: category*/
+           });
+           console.log(userHire);
+       /*  });*/
+       });
+    });
  // all the available jobs posted on the site based on the category
  router.get('/jobCategory/:category', function(req, res) {
   var condition = 'category = "' + req.params.category +'"';
@@ -311,8 +327,10 @@ router.post('/job/bid', function (req, res) {
   endeavor.create(['bid'], ['description', 'userID', 'jobID', 'amount', 'bidType', 'jobOwnerID'], [req.body.bid_description, req.body.bid_userID, req.body.bid_jobID, req.body.bid_budget, req.body.bid_type, req.body.job_owner], function (result) {
     var condition = 'jobID = ' + req.body.bid_jobID;
     endeavor.update(['jobs'], { bidID: result.insertId, hasbid: req.body.hasbid_initial, bidderID: req.body.bid_userID}, condition, function () {
+      endeavor.create(['notifications'], ['jobID', 'employerID', 'employeeID', 'notification'], [req.body.bid_jobID, req.body.job_owner, req.body.employee, req.body.note_Message], function () {
       // console.log('Resonse Logged', res.json(result));
-      res.redirect('/profile');
+        res.redirect('/profile');
+      });
     });
   });
 });
@@ -326,7 +344,9 @@ router.put('/job/bid/accept/:jobID/:bidID/:bidderID', function (req, res) {
   console.log('condition', condition,'condition2', condition2);
   endeavor.updateString(['jobs'], { bidID: req.params.bidID, bidaccepted: req.body.accept_bid, bidderID: req.params.bidderID }, condition, function () {
     endeavor.updateString(['bid'], { bidaccepted: req.body.accept_bid }, condition2, function () {
-    res.redirect('/profile');
+      endeavor.create(['notifications'], ['jobID', 'employerID', 'employeeID', 'notification'], [req.params.jobID, req.body.employer, req.params.bidderID, req.body.note_bidAccept], function () {
+        res.redirect('/profile');
+      });
     });
   });
 });
@@ -340,7 +360,9 @@ router.put('/job/app/accept/:jobID/:appID/:applicantID', function (req, res) {
   console.log('condition', condition,'condition2', condition2);
   endeavor.updateString(['jobs'], { bidID: req.params.appID, bidaccepted: req.body.accept_app, bidderID: req.params.applicantID }, condition, function () {
     endeavor.updateString(['bid'], { bidaccepted: req.body.accept_app }, condition2, function () {
-    res.redirect('/profile');
+      endeavor.create(['notifications'], ['jobID', 'employerID', 'employeeID', 'notification'], [req.params.jobID, req.body.employer, req.params.applicantID, req.body.note_ReviewMessage], function () {
+        res.redirect('/profile');
+      });
     });
   });
 });
@@ -352,7 +374,9 @@ router.put('/job/bid/reject/:bidID', function (req, res) {
   var condition = 'bidID = ' + req.params.bidID;
   console.log('condition', condition);
   endeavor.updateString(['bid'], { biddenied: req.body.reject_bid }, condition, function () {
-  res.redirect('back');
+    endeavor.create(['notifications'], ['jobID', 'employerID', 'employeeID', 'notification'], [req.body.jobID, req.body.employer, req.body.employee, req.body.note_bidReject], function () {
+      res.redirect('back');
+    });
   });
 });
 
@@ -481,7 +505,9 @@ router.put('/job/complete/:jobID/:employerID/:employeeID', function (req, res) {
   endeavor.create(['feedback'], ['rating', 'jobID', 'employerID', 'employeeID', 'review', 'title'], [req.body.job_rated, req.params.jobID, req.params.employerID, req.params.employeeID, req.body.job_review, req.body.job_compTitle], function () {
     var condition = 'jobID = ' + req.params.jobID;
     endeavor.update(['jobs'], { completed: req.body.job_complete }, condition, function () {
-      res.redirect('/profile');
+      endeavor.create(['notifications'], ['jobID', 'employerID', 'employeeID', 'notification'], [req.params.jobID, req.params.employerID, req.params.employeeID, req.body.note_ReviewMessage], function () {
+        res.redirect('/profile');
+      });
     });
   });
 });
@@ -494,6 +520,15 @@ router.put('/job/complete/noReview/:jobID', function (req, res) {
   endeavor.update(['jobs'], { completed: req.body.job_complete }, condition, function () {
     res.redirect('/profile');
   });
+});
+
+//ajax test
+// all the available jobs posted on the site
+router.get('/ajax/notifications/:id', function(req, res) {
+  var condition = 'employeeID = ' + req.params.id; 
+  endeavor.allWhere('notifications', condition, function (notifications) {
+    res.send(notifications);
+  });
 });
 
 // route middleware to make sure
