@@ -1,5 +1,7 @@
 .extra-margin{
   margin-top: 100px;
+  margin-left: -15px;
+  margin-right: -15px;
 }
 
 .intro-header-index{
@@ -143,10 +145,9 @@
 }
 
 .job-completed-res{
-  /*left: 345px;*/
+  margin-top: 50px;
   max-width: 479px;
   min-width: 250px;
-  z-index: 102;
 }
 
 .job-title-box{
@@ -310,6 +311,7 @@
 
 .edit-buttons{
   margin-right: 15px;
+  margin-top: 15px;
   background-color: #b40505;
 }
 
@@ -343,6 +345,10 @@
   padding: 5px 15px 5px 15px; 
 }
 
+.app-accepting{
+  margin-top: 20px;
+}
+
 .no-bottom-marg{
   margin-bottom: 0px;
 }
@@ -350,6 +356,20 @@
 .clear{
   float: left;
   clear: both;
+}
+
+#rating-back{
+  position: absolute;
+  top: 0px;
+  background-color: #f0ad4e;
+  width: 0px;
+  height: 85px;
+  z-index: 99;
+}
+
+.stars-cover{
+  position: relative;
+  z-index: 100;
 }
 
 /*begin styling for rating system*/

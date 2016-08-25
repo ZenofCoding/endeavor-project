@@ -27,39 +27,43 @@ app.use(bodyParser.json());
 app.use(methodOverride('_method'));
 var exphbs = require('express-handlebars');
 var hbs = exphbs.create({
-    // Specify helpers which are only registered on this instance.
-    helpers: {
-        trimString: function(passedString) {
-            var str = passedString.substring(0,725);
-            str = (str.slice(0,-3) + '. . .');
-            return str
-        },
-        prettifyDate: function(timestamp) {
-            // return new Date(timestamp).toString('yyyy-MM-dd')
-            return moment(timestamp).format('MMMM Do YYYY');
-        },
-        starRating: function(rating) {
-            switch (rating) {
-              case 1:
-                  rated = "/assets/images/stars_1.png";
-                  break;
-              case 2:
-                  rated = "/assets/images/stars_2.png";
-                  break;
-              case 3:
-                  rated = "/assets/images/stars_3.png";
-                  break;
-              case 4:
-                  rated = "/assets/images/stars_4.png";
-                  break;
-              case 5:
-                  rated = "/assets/images/stars_5.png";
-          }
-            return rated.toString();
-        }
-        // bar: function () { return 'BAR!'; }
-    }
+  // Specify helpers which are only registered on this instance.
+  helpers: {
+    trimString: function(passedString) {
+      var str = passedString.substring(0,725);
+      str = (str.slice(0,-3) + '. . .');
+      return str
+    },
+    prettifyDate: function(timestamp) {
+      return moment(timestamp).format('MMMM Do YYYY');
+    },
+    starRating: function(rating) {
+      switch (rating) {
+        case 1:
+          rated = "/assets/images/stars_1.png";
+          break;
+        case 2:
+          rated = "/assets/images/stars_2.png";
+          break;
+        case 3:
+          rated = "/assets/images/stars_3.png";
+          break;
+        case 4:
+          rated = "/assets/images/stars_4.png";
+          break;
+        case 5:
+          rated = "/assets/images/stars_5.png";
+      }
+        return rated.toString();
+    },
+    json: function(context) {
+      return JSON.stringify(context);
+    } 
+
+  }
+
 });
+
 app.engine('handlebars', hbs.engine, exphbs({
   defaultLayout: 'main'
 }));

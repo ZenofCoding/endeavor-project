@@ -106,17 +106,19 @@ router.get('/profile', isLoggedIn, function(req, res) {
   // });
   //var userObject = { user : req.user };
   var condition = 'userID = ' + req.user.id;
+  var condition2 = 'employeeID = ' + req.user.id;
   endeavor.allWhere('jobs', condition, function (jobs) {
     endeavor.all('category', function (category) {
       endeavor.allWhere('resume', condition, function (resumes) {
-        // console.log(hbsObject);
-        res.render('profile', {
-          user: req.user, 
-          jobs: jobs,
-          category: category,
-          resumes: resumes
-        });
-        
+        endeavor.allWhere('feedback', condition2, function (feedback) {
+          res.render('profile', {
+            user: req.user, 
+            jobs: jobs,
+            category: category,
+            resumes: resumes,
+            feedback: feedback
+          });
+        });  
       });
       //console.log(jobs, category);
     });
@@ -365,9 +367,9 @@ router.put('/job/app/accept/:jobID/:appID/:applicantID', function (req, res) {
 router.put('/job/bid/reject/:bidID', function (req, res) {
   var condition = 'bidID = ' + req.params.bidID;
   console.log('condition', condition);
-    endeavor.updateString(['bid'], { biddenied: req.body.reject_bid }, condition, function () {
-    res.redirect('back');
-    });
+  endeavor.updateString(['bid'], { biddenied: req.body.reject_bid }, condition, function () {
+  res.redirect('back');
+  });
 });
 
 // accesses the update function in endeavor.js
@@ -492,7 +494,7 @@ router.put('/preferences/update/summary/:id', function (req, res) {
 // passes the values from the job.handlebars form and passes the db column name
 // redirects to .get /profile
 router.put('/job/complete/:jobID/:employerID/:employeeID', function (req, res) {
-  endeavor.create(['feedback'], ['rating', 'jobID', 'employerID', 'employeeID', 'review'], [req.body.job_rated, req.params.jobID, req.params.employerID, req.params.employeeID, req.body.job_review], function () {
+  endeavor.create(['feedback'], ['rating', 'jobID', 'employerID', 'employeeID', 'review', 'title'], [req.body.job_rated, req.params.jobID, req.params.employerID, req.params.employeeID, req.body.job_review, req.body.job_compTitle], function () {
     var condition = 'jobID = ' + req.params.jobID;
     endeavor.update(['jobs'], { completed: req.body.job_complete }, condition, function () {
       res.redirect('/profile');
