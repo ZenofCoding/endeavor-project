@@ -17,6 +17,8 @@ The ***requestor*** can perform the following tasks:
   - Be able to post reviews and ratings after the job is complete
 
 The ***service provider*** can perform the following tasks:  
-  - Bid or apply for jobs
-  - Customize their profile/ portfolio
-  - communicate to the requestors
+  - Customize their profile/portfolio 
+  - Be able to post their referrals and reviews 
+  - Showcase their work with images and details
+  - Bid or apply for jobs from the posted job list
+  - Be able to communicate with the requestors
