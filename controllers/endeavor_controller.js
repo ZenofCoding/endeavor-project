@@ -188,7 +188,7 @@ router.get('/preferences', isLoggedIn, function(req, res) {
   // all the available users posted on the site
     router.get('/hire', function(req, res) {
      var condition = '';//'userID = ' + req.user.id;
-       endeavor.all('users', function (userHire) {
+       endeavor.all('user', function (userHire) {
          /*endeavor.all('category', function (category) {*/
            res.render('hire', {
              user: req.user,
