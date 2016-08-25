@@ -48,10 +48,108 @@ INSERT INTO `category` (`category`) VALUES ('Transportation');
 
 #SELECT * FROM `category`;
 
-INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (1, 'sub category1');
-INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (1, 'sub category2');
-INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (2, 'sub category3');
-INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (2, 'sub category4');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (1, 'Financial accounting‎');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (1, 'Environmental accounting');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (1, 'Management accounting');
+
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (2, 'Public administration‎');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (2, 'Office administration‎');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (2, 'Educational administration‎');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (2, 'Business administration');
+
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (3, 'Bridge design‎n‎');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (3, 'Landscape architecture‎');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (3, 'Building engineering‎');
+
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (4, 'Installation art‎');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (4, 'Glamour photography');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (4, 'Landscape photography');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (4, 'Cityscape art');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (4, 'Cartooning‎');
+
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (5, 'Management‎');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (5, '24/7 service');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (5, 'Customer experience');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (5, 'Marketing');
+
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (6, 'Project Coordinator');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (6, 'Network Engineer');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (6, 'Graphic Artist');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (6, 'Web Developer');
+
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (7, 'Project Management');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (7, 'Representative');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (7, 'Sales Associate');
+
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (8, 'Teacher');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (8, 'Tutor');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (8, 'Preschool Teacher');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (8, 'Teacher Assistant');
+
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (9, 'Project Coordinator');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (9, 'Network Engineer');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (9, 'Open Source Database Administrator');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (9, 'Web Developer');
+
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (10, 'Supervisor');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (10, 'Manager');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (10, 'Palnner');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (10, 'Coordinator');
+
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (11, 'Supervisor');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (11, 'Manager');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (11, 'Palnner');
+
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (12, 'Coordinator');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (12, 'Supervisor');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (12, 'Manager');
+
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (13, 'Palnner');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (13, 'Coordinator');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (13, 'Supervisor');
+
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (14, 'Manager');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (14, 'Palnner');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (14, 'Coordinator');
+
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (15, 'Supervisor');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (15, 'Manager');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (15, 'Palnner');
+
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (16, 'Supervisor');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (16, 'Manager');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (16, 'Palnner');
+
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (17, 'Coordinator');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (17, 'Supervisor');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (17, 'Manager');
+
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (18, 'Medical Representative');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (18, 'Medical Biller');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (18, 'Medical Assistant');
+
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (19, 'Music Teacher');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (19, 'Assistant');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (19, 'Music Coordinator');
+
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (20, 'Clark');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (20, 'Manager');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (20, 'Associate');
+
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (21, 'Manager');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (21, 'Executive');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (21, 'Palnner');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (21, 'Engineer');
+
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (22, 'Network Security');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (22, 'Security Analyst');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (22, 'Security Engineer');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (22, 'Security Gaurd');
+
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (23, 'Supervisor');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (23, 'Manager');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (23, 'Palnner');
+INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (23, 'Coordinator');
 
 #SELECT * FROM `subCategory`;
 
