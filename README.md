@@ -23,7 +23,13 @@ The ***service provider*** can perform the following tasks:
   - Bid or apply for jobs from the posted job list
   - Be able to communicate with the requestors
 
- ***Author & Contributor List***
- Adam Mattas
- Joe Shin
- Padmaja Kondeti
+ ***Author & Contributor List***  
+ - Adam Mattas    
+ - Joe Shin   
+ - Padmaja Kondeti    
+
+***Project Work Flow***
+
+***Future upcoming upgrades ***
+
+ ***Bugs***
