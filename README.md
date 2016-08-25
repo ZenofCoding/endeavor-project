@@ -1,6 +1,11 @@
 ________________________________________
-Endeavor
+HEADING
+===
+
+#Endeavor
+
 August 2016 – Project II
+---
 ________________________________________
 Endeavor is a custom built website for individuals/companies who want to request or provide services for any size and type of projects.
 
