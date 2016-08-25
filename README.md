@@ -22,14 +22,26 @@ The ***service provider*** can perform the following tasks:
   - Showcase their work with images and details
   - Bid or apply for jobs from the posted job list
   - Be able to communicate with the requestors
+________________________________________
 
- ***Author & Contributor List***  
+  
+
+Project Work Flow and Screen Shots
+---
+
+
+Future Upcoming Website Upgrades
+---
+
+
+Bugs
+ ---
+
+Author & Contributor List
+ ---
+
  - Adam Mattas    
  - Joe Shin   
- - Padmaja Kondeti    
+ - Padmaja Kondeti   
 
-***Project Work Flow***
-
-***Future upcoming upgrades ***
-
- ***Bugs***
+ 
