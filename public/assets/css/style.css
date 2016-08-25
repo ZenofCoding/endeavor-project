@@ -4,8 +4,13 @@
   margin-right: -15px;
 }
 
-.intro-header-index{
+/*.intro-header-index{
   background: url(../images/intro-bg.jpg) no-repeat center center;
+}*/
+
+.image1{
+background: url(../images/hire.gif) no-repeat center center;
+
 }
 
 .intro-header-profile {
