@@ -368,6 +368,7 @@
                             {{/if}}
                         {{/if}}
                         <input type="hidden" name="employer" value="{{this.userID}}">
+                        <input type="hidden" name="jobID" value="{{this.jobID}}">
                       <input type="hidden" name="accept_bid" value="1">
                       <button class="btn btn-warning btn-lg" type="submit">Accept</button>
 
@@ -415,6 +416,16 @@
                     <h2>Are you sure you want to reject the bid for this job posting?</h2>
                     <br>
                     <div>
+                    {{#if ../user}}
+                        {{#if ../user.displayName}}
+                            <input type="hidden" id="note_bidReject" name="note_bidReject" value="{{../user.displayName}} has rejected your bid.">
+                        {{else}}
+                            <input type="hidden" id="note_bidReject" name="note_bidReject" value="{{../user.username}} has rejected your bid.">
+                        {{/if}}
+                    {{/if}}
+                    <input type="hidden" name="jobID" value="{{this.jobID}}">
+                    <input type="hidden" name="employer" value="{{this.userID}}">
+                    <input type="hidden" name="employee" value="{{this.bidderID}}">
                     <input type="hidden" name="reject_bid" value="1">
                       <button class="btn btn-warning btn-lg" type="submit">Reject</button>
 

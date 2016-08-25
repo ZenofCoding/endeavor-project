@@ -311,8 +311,10 @@ router.post('/job/bid', function (req, res) {
   endeavor.create(['bid'], ['description', 'userID', 'jobID', 'amount', 'bidType', 'jobOwnerID'], [req.body.bid_description, req.body.bid_userID, req.body.bid_jobID, req.body.bid_budget, req.body.bid_type, req.body.job_owner], function (result) {
     var condition = 'jobID = ' + req.body.bid_jobID;
     endeavor.update(['jobs'], { bidID: result.insertId, hasbid: req.body.hasbid_initial, bidderID: req.body.bid_userID}, condition, function () {
+      endeavor.create(['notifications'], ['jobID', 'employerID', 'employeeID', 'notification'], [req.body.bid_jobID, req.body.job_owner, req.body.employee, req.body.note_Message], function () {
       // console.log('Resonse Logged', res.json(result));
-      res.redirect('/profile');
+        res.redirect('/profile');
+      });
     });
   });
 });
@@ -356,7 +358,9 @@ router.put('/job/bid/reject/:bidID', function (req, res) {
   var condition = 'bidID = ' + req.params.bidID;
   console.log('condition', condition);
   endeavor.updateString(['bid'], { biddenied: req.body.reject_bid }, condition, function () {
-  res.redirect('back');
+    endeavor.create(['notifications'], ['jobID', 'employerID', 'employeeID', 'notification'], [req.body.jobID, req.body.employer, req.body.employee, req.body.note_bidReject], function () {
+      res.redirect('back');
+    });
   });
 });
 

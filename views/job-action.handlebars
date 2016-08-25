@@ -130,10 +130,16 @@
                         <input type="hidden" name="bid_jobID" value="{{this.jobID}}">
                         {{#if ../user}}
                         <input type="hidden" name="bid_userID" value="{{../user.id}}">
+                            {{#if ../user.displayName}}
+                                <input type="hidden" id="note_Message" name="note_Message" value="{{../user.displayName}} has submitted a bid for your job posting.">
+                            {{else}}
+                                <input type="hidden" id="note_Message" name="note_Message" value="{{../user.username}} has submitted a bid for your job posting.">
+                            {{/if}}
                         {{/if}}
                         <input type="hidden" name="bid_type" value="1">
                         <input type="hidden" name="hasbid_initial" value="1">
                         <input type="hidden" name="job_owner" value="{{this.userID}}">
+                        <input type="hidden" name="employee" value="{{this.userID}}">
                         <button class="btn btn-warning btn-lg" type="submit">Submit Bid</button>
                     </form>
                 </div>
