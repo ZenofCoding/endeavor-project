@@ -22,3 +22,8 @@ The ***service provider*** can perform the following tasks:
   - Showcase their work with images and details
   - Bid or apply for jobs from the posted job list
   - Be able to communicate with the requestors
+
+ ***Author & Contributor List***
+ Adam Mattas
+ Joe Shin
+ Padmaja Kondeti
