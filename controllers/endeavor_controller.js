@@ -496,6 +496,15 @@ router.put('/job/complete/noReview/:jobID', function (req, res) {
   });
 });
 
+//ajax test
+// all the available jobs posted on the site
+router.get('/ajax/notifications/:id', function(req, res) {
+  var condition = 'employeeID = ' + req.params.id; 
+  endeavor.allWhere('notifications', condition, function (notifications) {
+    res.send(notifications);
+  });
+});
+
 // route middleware to make sure
 function isLoggedIn(req, res, next) {
 
