@@ -264,6 +264,13 @@
                     <input type="hidden" name="job_compTitle" value="{{this.title}}">
                     <input type="hidden" name="job_complete" value="1">
                     <input type="hidden" id="job_rated" name="job_rated" value="">
+                    {{#if ../user}}
+                        {{#if ../user.displayName}}
+                            <input type="hidden" id="note_ReviewMessage" name="note_ReviewMessage" value="{{../user.displayName}} posted a review of your performance.">
+                        {{else}}
+                            <input type="hidden" id="note_ReviewMessage" name="note_ReviewMessage" value="{{../user.username}} posted a review of your performance.">
+                        {{/if}}
+                    {{/if}}
                     <button class="btn btn-warning btn-lg" type="submit">Complete Job &amp; Post Review</button>
 
                     <a class="btn btn-warning btn-lg close-complete" alt="Cancel Button">Cancel</a>
@@ -353,7 +360,15 @@
                     <h2>Are you sure you want to accept the bid for this job posting?</h2>
                     <br>
                     <div>
-                    <input type="hidden" name="accept_bid" value="1">
+                        {{#if ../user}}
+                            {{#if ../user.displayName}}
+                                <input type="hidden" id="note_bidAccept" name="note_bidAccept" value="{{../user.displayName}} has accepted your bid.">
+                            {{else}}
+                                <input type="hidden" id="note_bidAccept" name="note_bidAccept" value="{{../user.username}} has accepted your bid.">
+                            {{/if}}
+                        {{/if}}
+                        <input type="hidden" name="employer" value="{{this.userID}}">
+                      <input type="hidden" name="accept_bid" value="1">
                       <button class="btn btn-warning btn-lg" type="submit">Accept</button>
 
                       <a class="btn btn-warning btn-lg close-accept" data-dismiss="modal" alt="Cancel Button">Cancel</a>  
@@ -448,6 +463,8 @@
                     <br>
                     <div>
                     <input type="hidden" name="accept_app" value="1">
+                    <input type="hidden" name="employer" value="{{this.userID}}">
+                    <input type="hidden" name="note_ReviewMessage" value="You have been hired for {{this.title}}">
                       <button class="btn btn-warning btn-lg" type="submit">Hire Applicant</button>
 
                       <a class="btn btn-warning btn-lg close-app-accept" data-dismiss="modal" alt="Cancel Button">Cancel</a>  

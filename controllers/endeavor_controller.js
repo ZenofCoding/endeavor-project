@@ -326,7 +326,9 @@ router.put('/job/bid/accept/:jobID/:bidID/:bidderID', function (req, res) {
   console.log('condition', condition,'condition2', condition2);
   endeavor.updateString(['jobs'], { bidID: req.params.bidID, bidaccepted: req.body.accept_bid, bidderID: req.params.bidderID }, condition, function () {
     endeavor.updateString(['bid'], { bidaccepted: req.body.accept_bid }, condition2, function () {
-    res.redirect('/profile');
+      endeavor.create(['notifications'], ['jobID', 'employerID', 'employeeID', 'notification'], [req.params.jobID, req.body.employer, req.params.bidderID, req.body.note_bidAccept], function () {
+        res.redirect('/profile');
+      });
     });
   });
 });
@@ -340,7 +342,9 @@ router.put('/job/app/accept/:jobID/:appID/:applicantID', function (req, res) {
   console.log('condition', condition,'condition2', condition2);
   endeavor.updateString(['jobs'], { bidID: req.params.appID, bidaccepted: req.body.accept_app, bidderID: req.params.applicantID }, condition, function () {
     endeavor.updateString(['bid'], { bidaccepted: req.body.accept_app }, condition2, function () {
-    res.redirect('/profile');
+      endeavor.create(['notifications'], ['jobID', 'employerID', 'employeeID', 'notification'], [req.params.jobID, req.body.employer, req.params.applicantID, req.body.note_ReviewMessage], function () {
+        res.redirect('/profile');
+      });
     });
   });
 });
@@ -481,7 +485,9 @@ router.put('/job/complete/:jobID/:employerID/:employeeID', function (req, res) {
   endeavor.create(['feedback'], ['rating', 'jobID', 'employerID', 'employeeID', 'review', 'title'], [req.body.job_rated, req.params.jobID, req.params.employerID, req.params.employeeID, req.body.job_review, req.body.job_compTitle], function () {
     var condition = 'jobID = ' + req.params.jobID;
     endeavor.update(['jobs'], { completed: req.body.job_complete }, condition, function () {
-      res.redirect('/profile');
+      endeavor.create(['notifications'], ['jobID', 'employerID', 'employeeID', 'notification'], [req.params.jobID, req.params.employerID, req.params.employeeID, req.body.note_ReviewMessage], function () {
+        res.redirect('/profile');
+      });
     });
   });
 });

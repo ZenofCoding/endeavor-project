@@ -35,7 +35,7 @@
 }
 
 .spacing{
-  margin-right: 100px;
+  margin-right: 200px;
   font-size: 18px;
 }
 
@@ -427,3 +427,59 @@
     background-image: url("../images/star.png");
 }
 /*end styling for rating system*/
+
+/*begin styling for marguee scroll*/
+.news-banner {
+  position: absolute;
+  width: 100%;
+  height: 45px;
+  background-color: #2a2a2a;
+  z-index: 99;
+}
+
+.news-banner:hover {
+  text-decoration: none;
+}
+
+.spacing {
+  white-space: nowrap;
+  overflow: hidden;
+  margin-right: 200px;
+  font-size: 18px;
+  font-weight: lighter;
+  color: #ffffff;
+}
+
+.scroll-left {
+  position: relative;
+  /* Starting position */
+  -moz-transform:translateX(100%);
+  -webkit-transform:translateX(100%);  
+  transform:translateX(100%);
+  /* Apply animation to this element */  
+  -moz-animation: scroll-left 40s linear infinite;
+  -webkit-animation: scroll-left 40s linear infinite;
+  animation: scroll-left 40s linear infinite;
+}
+/* Move it (define the animation) */
+@-moz-keyframes scroll-left {
+  0%   { -moz-transform: translateX(100%); }
+  100% { -moz-transform: translateX(-100%); }
+}
+@-webkit-keyframes scroll-left {
+  0%   { -webkit-transform: translateX(100%); }
+  100% { -webkit-transform: translateX(-100%); }
+}
+@keyframes scroll-left {
+  0%   { 
+  -moz-transform: translateX(100%); /* Browser bug fix */
+  -webkit-transform: translateX(100%); /* Browser bug fix */
+  transform: translateX(100%);     
+  }
+  100% { 
+  -moz-transform: translateX(-100%); /* Browser bug fix */
+  -webkit-transform: translateX(-100%); /* Browser bug fix */
+  transform: translateX(-100%); 
+  }
+}
+/*end styling for marguee scroll*/

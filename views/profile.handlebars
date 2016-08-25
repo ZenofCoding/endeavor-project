@@ -87,11 +87,16 @@
             <!-- /.navbar-collapse -->
         </div>
         <a class="btn btn-default btn-lg preferences-btn" href="/preferences" alt="">Preferences</a>
-        <a href="/notifications/{{user.id}}">
-            <div class="news-banner">
+        <a class="news-banner" href="/notifications/{{user.id}}">
+            <!-- <div class="news-banner">
                 <marquee class="news-text" behavior="scroll" direction="left"></marquee> 
             </div>
-        </a>
+ -->        
+            <div class="scroll-left">
+                
+            </div>
+ </a>
+
         <!-- /.container -->
     </nav>
 
@@ -598,13 +603,13 @@
 
             console.log(response[i]);
 
-            var notifyText = $('<span>'); //creates a paragraph
+            notifyText = $('<span>'); //creates a paragraph
             notifyText.text(response[i].notification); //adds text from DB body
             notifyText.addClass('spacing'); //added class to button
 
-          }
+            $('.scroll-left').append(notifyText);//prepends entire story div to main-content div
 
-          $('.news-text').append(notifyText);//prepends entire story div to main-content div
+          }
             
         }); 
 
