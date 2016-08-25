@@ -21,7 +21,8 @@ The ***service provider*** can perform the following tasks:
   - Be able to post their referrals and reviews 
   - Showcase their work with images and details
   - Bid or apply for jobs from the posted job list
-  - Be able to communicate with the requestors
+  - Be able to communicate with the requestors  
+
 ________________________________________
 
   
@@ -35,13 +36,12 @@ Future Upcoming Website Upgrades
 
 
 Bugs
- ---
+---
 
 Author & Contributor List
- ---
+---
 
  - Adam Mattas    
  - Joe Shin   
  - Padmaja Kondeti   
 
- 
