@@ -4,6 +4,10 @@
   margin-right: -15px;
 }
 
+.hide{
+  display: none;
+}
+
 /*.intro-header-index{
   background: url(../images/intro-bg.jpg) no-repeat center center;
 }*/
