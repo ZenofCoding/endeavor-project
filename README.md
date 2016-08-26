@@ -30,9 +30,9 @@
 
   <img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18021497/bf9fe264-6bb5-11e6-8ee3-a2e56e67d032.PNG" width="50%" alt="Screen Shot of HP"/>
   
-
   </p>
-  ![Alt text](/readme_images/screenshot_jobsearch.PNG?raw=true"screenshot_jobsearch.PNG")
+
+![Alt text](assets/images/hiring2.jpg?raw=true "hiring2.jpg")
 
   ## Technologies used
   You can give a brief listing of the technologies you've learned and applied here
