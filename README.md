@@ -41,8 +41,10 @@ You can give a brief listing of the technologies you've learned and applied here
 - Handblebars
 - MySQL
 - JawsDB
-- lucidchart
-- favicon generator
+- Heroku
+- GitHub
+- Lucidchart
+- Favicon generator
 
 ## Getting Started
 
@@ -54,9 +56,8 @@ What to install and how for local development and testing purposes
 
 ```
 - node.js: visit node.js and download...
-- mongodb: npm install -g mongodb
 - mysqldb: brew install mysql
-- jasmine: npm i -g jasmine
+
 ```
 
 ## Running the tests
