@@ -26,12 +26,11 @@ ________________________________________
 
 ## Screenshots
 Include a one or two screenshots of main UI/UX points of your app and how it solves a problem
-<p align="center">
-<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18021497/bf9fe264-6bb5-11e6-8ee3-a2e56e67d032.PNG" width="25%" alt="Screen Shot of HP"/>
-<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18021497/bf9fe264-6bb5-11e6-8ee3-a2e56e67d032.PNG" width="25%" alt="Screen Shot of HP"/>
-<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18021497/bf9fe264-6bb5-11e6-8ee3-a2e56e67d032.PNG" width="25%" alt="Screen Shot of HP"/>
-<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18021497/bf9fe264-6bb5-11e6-8ee3-a2e56e67d032.PNG" width="25%" alt="Screen Shot of HP"/>
-</p>
+
+```HP ```  | ```Profile``` |``` Provider ```|``` Requestor ``` 
+----|-----|----|----
+<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18021497/bf9fe264-6bb5-11e6-8ee3-a2e56e67d032.PNG"  alt="Screen Shot of HP"/>|<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18021497/bf9fe264-6bb5-11e6-8ee3-a2e56e67d032.PNG" alt="Screen Shot of HP"/>|<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18021497/bf9fe264-6bb5-11e6-8ee3-a2e56e67d032.PNG"  alt="Screen Shot of HP"/>|<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18021497/bf9fe264-6bb5-11e6-8ee3-a2e56e67d032.PNG" alt="Screen Shot of HP"/>
+
 
 
 ## Technologies used
