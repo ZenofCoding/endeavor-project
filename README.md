@@ -90,9 +90,9 @@ function awesomeThing() {
 
 ## Authors
 
-* **Adam Mattas**  - [John Doe](https://github.com/adamfader/)
-* **Joe Shin**  - [John Doe](https://github.com/ZenofCoding/)
-* **Padmaja Kondeti** -  [John Doe](https://github.com/PadmajaKondeti)
+* **Adam Mattas**  - [Adam Mattas](https://github.com/adamfader/)
+* **Joe Shin**  - [Joe Shin](https://github.com/ZenofCoding/)
+* **Padmaja Kondeti** -  [Padmaja Kondeti](https://github.com/PadmajaKondeti)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
