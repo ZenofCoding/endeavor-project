@@ -171,7 +171,7 @@
                       <select id="category" class="form-control" name="category" onChange="populate('category','subcategory')" required>
                       <option value="">Choose a category</option>
                       {{#each category}}
-                          <option value="{{this.description}}">{{this.description}}</option>
+                          <option value="{{this.description}}" data-catID="{{this.categoryID}}">{{this.description}}</option>
                       {{/each}}
                     </select>
                 </div>
@@ -620,6 +620,46 @@
 
 
     });    
+    function getSubCategories() {        
+        
+        var catID = $('#category').data('catID')
+        var slug = {{{json user}}};
+
+        console.log('ddd' + slug.id);
+        
+        var queryURL = "/ajax/subCategory/" + slug.id;
+
+        //ajax makes request and returns the response
+        $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
+
+          var subcategoryText;
+
+          for(var i=0; i < response.length; i++){
+
+            console.log(response[i].description);
+            // subcategoryText += $('<option'); //creates a paragraph
+            // subcategoryText += "{ value:" + i +" text:(" + response[i].description +">)}";
+            // subcategoryText += $('</option>'); //adds text from DB body
+            
+            $('#subcategory').append($("<option></option>").attr("value", i).html(response[i].description));
+
+            // notifyText = $('<span>'); //creates a paragraph
+            // notifyText.text(response[i].notification); //adds text from DB body
+            // notifyText.addClass('spacing'); //added class to button
+
+            // $('.scroll-left').append(notifyText);//prepends entire story div to main-content div
+
+          }
+          // console.log('subcategoryText'+ subcategoryText);
+
+          
+            
+        }); 
+
+    }
+
+    // runs the getNotifications function as soons as the script is executed
+    getSubCategories();
 
     function populate(s1,s2){
         var s1 = document.getElementById(s1);

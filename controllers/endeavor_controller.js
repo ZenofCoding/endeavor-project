@@ -530,7 +530,14 @@ router.get('/ajax/notifications/:id', function(req, res) {
     res.send(notifications);
   });
 });
-
+//ajax test
+// all the available subCategories posted on the site
+router.get('/ajax/subCategory/:id', function(req, res) {
+  var condition = 'categoryID = ' + req.params.id; 
+  endeavor.allWhere('subCategory', condition, function (subCategories) {
+    res.send(subCategories);
+  });
+});
 // route middleware to make sure
 function isLoggedIn(req, res, next) {
 
