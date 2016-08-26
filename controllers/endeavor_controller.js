@@ -327,7 +327,7 @@ router.post('/job/bid', function (req, res) {
   endeavor.create(['bid'], ['description', 'userID', 'jobID', 'amount', 'bidType', 'jobOwnerID'], [req.body.bid_description, req.body.bid_userID, req.body.bid_jobID, req.body.bid_budget, req.body.bid_type, req.body.job_owner], function (result) {
     var condition = 'jobID = ' + req.body.bid_jobID;
     endeavor.update(['jobs'], { bidID: result.insertId, hasbid: req.body.hasbid_initial, bidderID: req.body.bid_userID}, condition, function () {
-      endeavor.create(['notifications'], ['jobID', 'employerID', 'employeeID', 'notification'], [req.body.bid_jobID, req.body.job_owner, req.body.employee, req.body.note_Message], function () {
+      endeavor.create(['notifications'], ['jobID', 'employerID', 'employeeID', 'notification'], [req.body.bid_jobID, req.body.job_owner, req.body.job_owner, req.body.note_Message], function () {
       // console.log('Resonse Logged', res.json(result));
         res.redirect('/profile');
       });
@@ -522,8 +522,21 @@ router.put('/job/complete/noReview/:jobID', function (req, res) {
   });
 });
 
-//ajax test
-// all the available jobs posted on the site
+// ajax request
+// sends all of the user's notifications
+// employeeID should work for all messages because of the way they are inserted
+router.get('/notifications/:id', function(req, res) {
+  var condition = 'employeeID = ' + req.params.id; 
+  endeavor.allWhere('notifications', condition, function (notifications) {
+    res.render('notifications', {
+      user: req.user,
+      notifications: notifications
+    });
+  });
+});
+
+// ajax request
+// sends all of the user's notifications
 router.get('/ajax/notifications/:id', function(req, res) {
   var condition = 'employeeID = ' + req.params.id; 
   endeavor.allWhere('notifications', condition, function (notifications) {
@@ -531,6 +544,23 @@ router.get('/ajax/notifications/:id', function(req, res) {
   });
 });
 
+// ajax request
+// Deletes a notification where notificationID = id
+router.delete('/delete/note/:id', function(req, res) {
+  var condition = 'notificationID = ' + req.params.id; 
+  endeavor.delete('notifications', condition, function (deleted) {
+    res.send(deleted);
+  });
+});
+
+// ajax request
+// all the available subCategories posted on the site
+router.get('/ajax/subCategory/:id', function(req, res) {
+  var condition = 'categoryID = ' + req.params.id; 
+  endeavor.allWhere('subCategory', condition, function (subCategories) {
+    res.send(subCategories);
+  });
+});
 // route middleware to make sure
 function isLoggedIn(req, res, next) {
 

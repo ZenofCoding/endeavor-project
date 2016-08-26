@@ -52,19 +52,10 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <!-- {{#if user}}
+                    {{#if user}}
                         <li>
                             <a href="/profile">{{user.username}}</a>
                         </li>  
-                    {{/if}} -->
-                    {{#if user.displayName}}
-                        <li>
-                            <a href="/profile">{{user.displayName}}</a>
-                        </li> 
-                    {{else}}
-                        <li>
-                            <a href="/profile">{{user.username}}</a>
-                        </li> 
                     {{/if}}
                     <li>
                         <a href="#about">About</a>
@@ -96,17 +87,12 @@
             <!-- /.navbar-collapse -->
         </div>
         <a class="btn btn-default btn-lg preferences-btn" href="/preferences" alt="">Preferences</a>
-
-        <!-- scroll bar for notifications -->
-        <a class="news-banner hide" href="/notifications/{{user.id}}">      
-            <div class="scroll-left"></div>
-        </a>
-
         <!-- /.container -->
     </nav>
 
 
     <!-- Header -->
+    <!-- <a name="about"></a> -->
     <div class="intro-replace-profile">
         {{#if user.hasbackground}}
             <img class="intro-header-profile" src="{{user.background}}">
@@ -172,20 +158,22 @@
                 </div>
                 <div class="form-group">
                       <label for="category">Category</label>
-                      <select id="category" class="form-control" name="category" required> <!-- onChange="populate('category','subcategory')" required> -->
+                      <select id="category"  class="form-control" name="category"  required>
                       <option value="">Choose a category</option>
                       {{#each category}}
-                          <option value="{{this.description}}" data-catID="{{this.categoryID}}">{{this.description}}</option>
+                          <option value="{{this.description}}" data-categoryID="{{this.categoryID}}">{{this.description}}</option>
+
                       {{/each}}
                     </select>
                 </div>
                 <div class="form-group">
                       <label for="subcategory">Subcategory</label>
-                      <select id="subcategory" class="form-control" name="subcategory" required>
-                      <option value="">Choose a subcategory</option>
-                      <!-- {{#each category}}
-                          <option value="{{this.description}}">{{this.description}}</option>
-                      {{/each}} -->
+                      <select id="subcategory" class="form-control" name="subcategory"  required>
+                      <option value="">Choose a subCategory</option>
+                      {{#each subCategory}}
+                          <option value="{{this.description}}" >{{this.description}}</option>
+
+                      {{/each}}
                     </select>
                 </div>
                 <!-- <div class="form-group">
@@ -339,7 +327,6 @@
             <!-- /.container -->
 
         </div>
-
 
   <a name="about"></a>
     <div class="content-section-a">
@@ -553,132 +540,41 @@
     <script src="/assets/scripts/bootstrap.min.js"></script>
 
     <!-- Endeavor Script -->
-    <script src="/assets/scripts/script.js"></script>
+    <!-- <script src="/assets/scripts/script.js"></script> -->
 
-    <script type="text/javascript">
-        $(document).on('ready', function(){
+<script type="text/javascript">
+    $(document).on('ready', function(){
 
-            // Initialize possible and actual feedback score at 0
-            var possFeedback = 0;
-            var actFeedback = 0;
-            // Handlebars (feedback) is sent to the JSON helper and returned 
-            var feedObj = {{{json feedback}}};
+        var possFeedback = 0;
+        var actFeedback = 0;
+        var feedObj = {{{json feedback}}};
 
-            // Loop through helper response
-            for(i=0; i<feedObj.length; i++) {
-                // For each feedback item increase possFeedback by 5
-                possFeedback += 5;
-                // For each feedback item increase actFeedback by rating
-                actFeedback += feedObj[i].rating;
-                //console.log(feedObj[i].rating);    
-            }
-
-            console.log("Possible Feedback Score: ", possFeedback);
-            console.log("Actual Feedback Score: ", actFeedback);
-
-            // Calls actualRating func and passes poss and actFeedback as parameters
-            actualRating(possFeedback, actFeedback);
-
-            // If feedback is greater than 0
-            // Calculate the width of #rating-back css background color
-            function actualRating(poss, act) {
-                if(actFeedback > 0){
-                    $('#rating-back').animate({
-                        'width': (455 * act)/poss
-                    }, 1000);   
-                }
-            };
-
-
-            function getNotifications() {
-
-                var slug = {{{json user}}};
-                console.log(slug.id);
-                var queryURL = "/ajax/notifications/" + slug.id;
-
-                //ajax makes request and returns the response
-                $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
-
-                  var notifyText;
-
-                  for(var i=0; i < response.length; i++){
-
-                    console.log(response[i]);
-
-                    notifyText = $('<span>'); //creates a span element
-                    notifyText.text(response[i].notification); //adds text from DB response
-                    notifyText.addClass('spacing'); //added class to span
-
-                    $('.scroll-left').append(notifyText);//appends each notification to the marquee
-
-                  }
-
-                  if (response) {
-                    $('.news-banner').removeClass('hide');//shows the marquee if there are notifications
-                  }
-                    
-                }); 
-
-            }
-
-            // runs the getNotifications function as soons as the script is executed
-            getNotifications();
-
-            
-  
-        function getSubCategories() {        
-            
-            var catID = $('#category').data('catID')
-            //var slug = {{{json category}}};
-
-            //console.log('ddd' + slug.id);
-            
-            var queryURL = "/ajax/subCategory/" + catID;
-
-            //ajax makes request and returns the response
-            $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
-
-              var subcategoryText;
-
-              for(var i=0; i < response.length; i++){
-
-                console.log(response[i].description);
-                // subcategoryText += $('<option'); //creates a paragraph
-                // subcategoryText += "{ value:" + i +" text:(" + response[i].description +">)}";
-                // subcategoryText += $('</option>'); //adds text from DB body
-                var subCat = $('<option>');
-                subCat.val(response[i].description);
-                subCat.text(response[i].description);
-                $("#subcategory").append(subCat);
-                //$("#subcategory").append($("<option></option>").val(i).html(response[i].description));
-                // $('#subcategory').append($("<option></option>").attr("value", i).html(response[i].description));
-
-                // notifyText = $('<span>'); //creates a paragraph
-                // notifyText.text(response[i].notification); //adds text from DB body
-                // notifyText.addClass('spacing'); //added class to button
-
-                // $('.scroll-left').append(notifyText);//prepends entire story div to main-content div
-
-              }
-              // console.log('subcategoryText'+ subcategoryText);
-
-              
-                
-            }); 
-
+        for(i=0; i<feedObj.length; i++) {
+            possFeedback += 5;
+            actFeedback += feedObj[i].rating;
+            //console.log(feedObj[i].rating);    
         }
 
-        // runs the getNotifications function as soons as the script is executed
-        //getSubCategories();
+        console.log("Possible Feedback Score: ", possFeedback);
+        console.log("Actual Feedback Score: ", actFeedback);
 
-        });
+        actualRating(possFeedback, actFeedback);
+
+        function actualRating(poss, act) {
+            if(actFeedback > 0){
+                $('#rating-back').animate({
+                    'width': (455 * act)/poss
+                }, 1000);   
+            }
+        };
+});    
 
         function populate(s1,s2){
             var s1 = document.getElementById(s1);
             var s2 = document.getElementById(s2);
             s2.innerHTML = "";
             if(s1.value == "Accounting"){
-                var optionArray = ["|","art punk|Art Punk","alternativerock|Alternative Rock","collegerock|College Rock","experimentalrock|Experimental                              Rock","gothicrock|Gothic Rock","grunge|Grunge","hardcorepunk|Hardcore Punk","hardrock|Hard Rock","indierock|Indie Rock",                                                                                                                "lofi|Lo-fi","newwave|New Wave","progressiverock|Progressive Rock","punk|Punk","shoegaze|Shoegaze","steampunk|Steampunk"];
+                var optionArray = ["|","artpunk|Art Punk","alternativerock|Alternative Rock","collegerock|College Rock","experimentalrock|Experimental                              Rock","gothicrock|Gothic Rock","grunge|Grunge","hardcorepunk|Hardcore Punk","hardrock|Hard Rock","indierock|Indie Rock",                                                                                                                "lofi|Lo-fi","newwave|New Wave","progressiverock|Progressive Rock","punk|Punk","shoegaze|Shoegaze","steampunk|Steampunk"];
             } else if(s1.value == "Administrative"){
                 var optionArray = ["|","acousticblues|Acoustic Blues","chicagoblues|Chicago Blues","classicblues|Classic Blues",
                         "contemporaryblues|Contemporary Blues","countryblues|Country Blues","deltablues|Delta Blues","electricblues|Electric Blues"];
@@ -692,7 +588,7 @@
             }
         }
 
-    </script>
+</script>
 
 </body>
 

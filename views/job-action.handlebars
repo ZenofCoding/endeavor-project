@@ -54,20 +54,14 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    {{#if owned}}
+                    {{#if user.displayName}}
                         <li>
-                            <a>Owner!!!</a>
-                        </li>  
-                    {{/if}}
-                    {{#unless owned}}
-                    <li>
-                        <a>Not Owner!!!</a>
-                    </li>
-                    {{/unless}}
-                    {{#if user}}
+                            <a href="/profile">{{user.displayName}}</a>
+                        </li> 
+                    {{else}}
                         <li>
-                            <a href="/profile">Dashboard</a>
-                        </li>  
+                            <a href="/profile">{{user.username}}</a>
+                        </li> 
                     {{/if}}
                     <li>
                         <a href="#about">About</a>
@@ -99,6 +93,11 @@
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
+
+        <!-- scroll bar for notifications -->
+        <a class="news-banner hide" href="/notifications/{{user.id}}">      
+            <div class="scroll-left"></div>
+        </a>
     </nav>
 
 
@@ -107,12 +106,12 @@
     <a name="action"></a>
     <div class="content-section-a">
 
-        <div class="container extra-margin">
+        <div class="container">
 
             {{#each job}}
 
             {{#if this.bidding}}
-            <div class="row">
+            <div class="row margin-top-100">
                 <div class="col-lg-5 col-sm-6">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
@@ -139,7 +138,6 @@
                         <input type="hidden" name="bid_type" value="1">
                         <input type="hidden" name="hasbid_initial" value="1">
                         <input type="hidden" name="job_owner" value="{{this.userID}}">
-                        <input type="hidden" name="employee" value="{{this.userID}}">
                         <button class="btn btn-warning btn-lg" type="submit">Submit Bid</button>
                     </form>
                 </div>
@@ -148,7 +146,7 @@
                 </div>
             </div>
             {{else}}
-                <div class="row">
+                <div class="row margin-top-100">
                 <div class="col-lg-5 col-sm-6">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
@@ -163,6 +161,11 @@
                         <input type="hidden" name="bid_jobID" value="{{this.jobID}}">
                         {{#if ../user}}
                             <input type="hidden" name="bid_userID" value="{{../user.id}}">
+                            {{#if ../user.displayName}}
+                                <input type="hidden" id="note_Message" name="note_Message" value="{{../user.displayName}} has asked to be considered for your job posting.">
+                            {{else}}
+                                <input type="hidden" id="note_Message" name="note_Message" value="{{../user.username}} has asked to be considered for your job posting.">
+                            {{/if}}
                         {{/if}}
                         <input type="hidden" name="bid_type" value="0">
                         <input type="hidden" name="hasbid_initial" value="1">
@@ -187,8 +190,8 @@
       <!-- begin order up wrapper -->
     <a name="jobs area"></a>
         <div class="content-section-b">
-
-            <div class="container extra-margin">
+            <div class="extra-margin"></div>
+            <div class="container">
 
                 {{#if owned}}
                     <div>
@@ -398,6 +401,45 @@
     <!-- <script src="/assets/scripts/script.js"></script> -->
 
     <script type="text/javascript">
+
+        $(document).on('ready', function(){
+
+            function getNotifications() {
+
+                var slug = {{{json user}}};
+                console.log(slug.id);
+                var queryURL = "/ajax/notifications/" + slug.id;
+
+                //ajax makes request and returns the response
+                $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
+
+                  var notifyText;
+
+                  for(var i=0; i < response.length; i++){
+
+                    console.log(response[i]);
+
+                    notifyText = $('<span>'); //creates a span element
+                    notifyText.text(response[i].notification); //adds text from DB response
+                    notifyText.addClass('spacing'); //added class to span
+
+                    $('.scroll-left').append(notifyText);//appends each notification to the marquee
+
+                  }
+
+                  if (response) {
+                    $('.news-banner').removeClass('hide');//shows the marquee if there are notifications
+                  }
+                    
+                }); 
+
+            }
+
+            // runs the getNotifications function as soons as the script is executed
+            getNotifications();
+
+        }); 
+    
     function populate(s1,s2){
         var s1 = document.getElementById(s1);
         var s2 = document.getElementById(s2);

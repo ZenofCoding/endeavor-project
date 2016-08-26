@@ -56,6 +56,28 @@ var hbs = exphbs.create({
       }
         return rated.toString();
     },
+    noteType: function(type) {
+      switch (type) {
+        case 1:
+          typeImage = "/assets/images/bid_accept_area.png";
+          break;
+        case 2:
+          typeImage = "/assets/images/bid_reject_area.png";
+          break;
+        case 3:
+          typeImage = "/assets/images/bid_submit_area.png";
+          break;
+        case 4:
+          typeImage = "/assets/images/app_accept_area.png";
+          break;
+        case 5:
+          typeImage = "/assets/images/app_submit_area.png";
+          break;
+        case 6:
+          typeImage = "/assets/images/review_area.png";
+      }
+        return typeImage.toString();
+    },
     json: function(context) {
       return JSON.stringify(context);
     } 
