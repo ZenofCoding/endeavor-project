@@ -623,7 +623,7 @@
             var catID = $('#category option:selected').data('catid');
             //var slug = {{{json category}}};
 
-            $('#subcategory option').remove();
+            $('#subcategory').empty();
             
             var queryURL = "/ajax/subCategory/" + catID;
 
@@ -635,30 +635,15 @@
               for(var i=0; i < response.length; i++){
 
                 console.log(response[i].description);
-                // subcategoryText += $('<option'); //creates a paragraph
-                // subcategoryText += "{ value:" + i +" text:(" + response[i].description +">)}";
-                // subcategoryText += $('</option>'); //adds text from DB body
+
                 subcategoryText = $('<option>');
                 subcategoryText.val(response[i].description);
                 subcategoryText.text(response[i].description);
                 $("#subcategory").append(subcategoryText);
-                
-                //$("#subcategory").append($("<option></option>").val(i).html(response[i].description));
-                // $('#subcategory').append($("<option></option>").attr("value", i).html(response[i].description));
-
-                // notifyText = $('<span>'); //creates a paragraph
-                // notifyText.text(response[i].notification); //adds text from DB body
-                // notifyText.addClass('spacing'); //added class to button
-
-                // $('.scroll-left').append(notifyText);//prepends entire story div to main-content div
-
+             
               }
-              // console.log('subcategoryText'+ subcategoryText);
-
-              
-                
+             
             }); 
-
         }
 
         // runs the getNotifications function as soons as the script is executed
