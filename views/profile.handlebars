@@ -168,7 +168,7 @@
                 </div>
                 <div class="form-group">
                       <label for="category">Category</label>
-                      <select id="category" class="form-control" name="category" onChange="populate('category','subcategory')" required>
+                      <select id="category" class="form-control" name="category" required> <!-- onChange="populate('category','subcategory')" required> -->
                       <option value="">Choose a category</option>
                       {{#each category}}
                           <option value="{{this.description}}" data-catID="{{this.categoryID}}">{{this.description}}</option>
@@ -640,8 +640,8 @@
             // subcategoryText += $('<option'); //creates a paragraph
             // subcategoryText += "{ value:" + i +" text:(" + response[i].description +">)}";
             // subcategoryText += $('</option>'); //adds text from DB body
-            
-            $('#subcategory').append($("<option></option>").attr("value", i).html(response[i].description));
+            $("#subcategory").append($("<option></option>").val(i).html(response[i].description));
+            // $('#subcategory').append($("<option></option>").attr("value", i).html(response[i].description));
 
             // notifyText = $('<span>'); //creates a paragraph
             // notifyText.text(response[i].notification); //adds text from DB body
