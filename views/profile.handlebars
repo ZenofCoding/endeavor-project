@@ -52,10 +52,19 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    {{#if user}}
+                    <!-- {{#if user}}
                         <li>
                             <a href="/profile">{{user.username}}</a>
                         </li>  
+                    {{/if}} -->
+                    {{#if user.displayName}}
+                        <li>
+                            <a href="/profile">{{user.displayName}}</a>
+                        </li> 
+                    {{else}}
+                        <li>
+                            <a href="/profile">{{user.username}}</a>
+                        </li> 
                     {{/if}}
                     <li>
                         <a href="#about">About</a>
@@ -89,7 +98,6 @@
         <a class="btn btn-default btn-lg preferences-btn" href="/preferences" alt="">Preferences</a>
 
         <!-- scroll bar for notifications -->
-
         <a class="news-banner hide" href="/notifications/{{user.id}}">      
             <div class="scroll-left"></div>
         </a>
@@ -616,14 +624,14 @@
             // runs the getNotifications function as soons as the script is executed
             getNotifications();
 
-        });    
+            
   
         function getSubCategories() {        
             
             var catID = $('#category').data('catID')
             //var slug = {{{json category}}};
 
-            console.log('ddd' + slug.id);
+            //console.log('ddd' + slug.id);
             
             var queryURL = "/ajax/subCategory/" + catID;
 
@@ -661,7 +669,9 @@
         }
 
         // runs the getNotifications function as soons as the script is executed
-        getSubCategories();
+        //getSubCategories();
+
+        });
 
         function populate(s1,s2){
             var s1 = document.getElementById(s1);

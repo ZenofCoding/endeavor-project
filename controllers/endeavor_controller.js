@@ -522,15 +522,28 @@ router.put('/job/complete/noReview/:jobID', function (req, res) {
   });
 });
 
-//ajax test
-// all the available jobs posted on the site
+// ajax request
+// sends all of the user's notifications
+// employeeID should work for all messages because of the way they are inserted
+router.get('/notifications/:id', function(req, res) {
+  var condition = 'employeeID = ' + req.params.id; 
+  endeavor.allWhere('notifications', condition, function (notifications) {
+    res.render('notifications', {
+      user: req.user,
+      notifications: notifications
+    });
+  });
+});
+
+// ajax request
+// sends all of the user's notifications
 router.get('/ajax/notifications/:id', function(req, res) {
   var condition = 'employeeID = ' + req.params.id; 
   endeavor.allWhere('notifications', condition, function (notifications) {
     res.send(notifications);
   });
 });
-//ajax test
+// ajax request
 // all the available subCategories posted on the site
 router.get('/ajax/subCategory/:id', function(req, res) {
   var condition = 'categoryID = ' + req.params.id; 

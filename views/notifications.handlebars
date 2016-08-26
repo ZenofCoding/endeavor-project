@@ -52,10 +52,14 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    {{#if user}}
+                    {{#if user.displayName}}
+                        <li>
+                            <a href="/profile">{{user.displayName}}</a>
+                        </li> 
+                    {{else}}
                         <li>
                             <a href="/profile">{{user.username}}</a>
-                        </li>  
+                        </li> 
                     {{/if}}
                     <li>
                         <a href="#about">About</a>
@@ -86,7 +90,6 @@
             </div>
             <!-- /.navbar-collapse -->
         </div>
-        <a class="btn btn-default btn-lg preferences-btn" href="/preferences" alt="">Preferences</a>
 
         <!-- scroll bar for notifications -->
 
@@ -97,48 +100,11 @@
         <!-- /.container -->
     </nav>
 
-
-    <!-- Header -->
-    <div class="intro-replace-profile">
-        {{#if user.hasbackground}}
-            <img class="intro-header-profile" src="{{user.background}}">
-        {{/if}}
-        {{#unless user.hasbackground}}
-            <img class="intro-header-profile" src="http://www.medicalrecoveryservices.org/wp-content/uploads/banner-background1.jpg">
-        {{/unless}}
-        <div class="container">
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="intro-message">
-                        <h1>{{user.displayName}}</h1>
-                        <h3>{{user.displaySentence}}</h3>
-                        <hr class="intro-divider">
-                        <ul class="list-inline intro-social-buttons">
-                            <li>
-                                <a href="https://twitter.com/SBootstrap" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
-                            </li>
-                            <li>
-                                <a href="https://github.com/IronSummitMedia/startbootstrap" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
-                            </li>
-                            <li>
-                                <a href="#" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">Linkedin</span></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <!-- /.container -->
-
-    </div>
-    <!-- /.intro-header -->
-
     <!-- Page Content -->
 
     <!-- begin order up wrapper -->
     <a name="notifications"></a>
+        <div class="extra-margin"></div>
         <div class="content-section-b">
 
             <div class="container">
@@ -147,12 +113,15 @@
                     <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
                         <hr class="section-heading-spacer">
                         <div class="clearfix"></div>
-                        <h2 class="section-heading">Find the Best Company<br>Manage Your Notifications</h2>
-                        <p class="lead">Start a bidding war over your job, task, or project. Review portfolios and credentials to make a confident decision based on merit.</p>
-                        <a class="btn btn-warning btn-lg" data-toggle="modal" data-target="#jobPostModal" alt="">Create New Job Posting</a>
+                        {{#if user.displayName}}
+                            <h2 class="section-heading">{{user.displayName}}<br>Manage Your Notifications</h2>
+                        {{else}}
+                            <h2 class="section-heading">{{user.username}}<br>Manage Your Notifications</h2>
+                        {{/if}}
+                        <p class="lead">Click on a notification to view the posting associated with it. Clean up your inbox by removing old or unwanted notifications.</p>
                     </div>
                     <div class="col-lg-5 col-sm-pull-6  col-sm-6">
-                        <img class="img-responsive" src="http://www.breathtaking-network-marketing-secrets.com/images/best-company.png" alt="">
+                        <img class="img-responsive" src="/assets/images/notification.png" alt="">
                     </div>
                 </div>
 
@@ -161,185 +130,7 @@
 
         </div>
 
-
-  <a name="about"></a>
-    <div class="content-section-a">
-
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5 col-sm-6">
-                    <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading">About<br>{{user.displayName}}</h2>
-                    <p class="lead summary-about">{{user.summary}}</p>
-                </div>
-                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                    {{#if user.hasavatar}}
-                        <img class="img-responsive pref-pic" src="{{user.avatar}}" alt="User Profile Picture">
-                    {{else}}
-                        <img class="img-responsive pref-pic" src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="Default Profile Picture">
-                    {{/if}}
-                </div>
-            </div>
-
-        </div>
-        <!-- /.container -->
-
-    </div>
-    <!-- /.content-section-a -->
-
-    <a name="experience"></a>
-    <div class="content-section-b">
-
-        <div class="container">
-
-                <div class="row">
-                    <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
-                        <hr class="section-heading-spacer">
-                        <div class="clearfix"></div>
-                        <h2 class="section-heading">Professional Experience<br>{{user.displayName}}</h2>
-                        <p class="lead">Detailed history of professional and personal accomplishments.</p>
-                    </div>
-                    <div class="col-lg-5 col-sm-pull-6  col-sm-6">
-                            <img class="img-responsive" src="http://www.kawman.com/images/company_profile.jpg" alt="Resume Section Image">
-                    </div>
-                </div>
-
-            <!-- loops through each job -->
-            {{#each resumes}}
-
-                <br><br>
-                <div class="row">
-                    <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
-                        <hr class="section-heading-spacer">
-                        <div class="clearfix"></div>
-                        <h2 class="section-heading resume-title">{{this.company}}</h2>
-                        <p class="lead resume-position">{{this.position}}</p>
-                        <p class="lead resume-right">{{this.location}}</p>
-                        <p class="lead resume-description">{{this.description}}</p>
-                        <p class="lead resume-right resume-date">{{prettifyDate this.startdate}} - {{prettifyDate this.enddate}}</p>
-                    </div>
-                    <div class="col-lg-5 col-sm-pull-6  col-sm-6">
-                        {{#if this.hasimage}}
-                            <img class="img-responsive pref-pic" src="{{this.image}}" alt="Custom Background Banner">
-                        {{else}}
-                            <img class="img-responsive pref-pic" src="https://upload.wikimedia.org/wikipedia/commons/5/59/Logo-Logo.svg" alt="No Logo Image">
-                        {{/if}}
-                    </div>
-                </div>
-
-            {{/each}}
-
-        </div>
-        <!-- /.container -->
-
-    </div>
-    <!-- /.content-section-b -->
-
-    <div class="content-section-a">
-
-        <div class="container">
-
-            <div class="row">
-                <div class="col-lg-5 col-sm-6">
-                    <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    {{#if user.displayName}}
-                        <h2 class="section-heading">{{user.displayName}}&#39;s Overall Rating and<br>Professional Reviews</h2>
-                    {{else}}
-                        <h2 class="section-heading">{{user.username}} Overall Rating and<br>
-                        Professional Reviews</h2>
-                    {{/if}}
-                    <p class="lead">The reviews displayed here are from jobs completed on this site.</p>
-                </div>
-                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                    <img class="img-responsive stars-cover" src="/assets/images/all_5_stars.png" alt="5 Stars Raing Picture">
-                    <span id="rating-back"></span>
-                </div>
-            </div>
-
-            {{#each feedback}}
-
-                <div class="row">
-  
-                    <div class="job-box-head">
-                            
-                        </div>
-                        <div class="job-container">      
-                            <div class="review-box">
-                                <div class="review-title-box">
-                                        <h2 class="review-title">Review for {{this.title}}</h2>
-                                </div>
-
-                                <img id="star-rating" class="job-view-image" src="{{starRating this.rating}}">
-
-                                    <a href="/public/profile/{{this.employerID}}">
-                                        {{#if avatar}}
-                                            <img class="img-responsive user-thumbnail" src="{{this.avatar}}" alt="">
-                                        {{else}}
-                                            <img class="img-responsive user-thumbnail" src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="">
-                                        {{/if}}
-                                    </a>
-                                
-                                <p class="job-title-desc">{{this.review}}</p>
-                                <div class="review-footer">
-                                    <a class="btn btn-warning btn-lg job-box-category" href="/viewJob/{{this.jobID}}/{{this.employerID}}">View Job</a>
-                                </div>
-                                   
-                            </div>
-                            
-                        </div>
-
-                </div>
-
-                {{/each}}
-
-        </div>
-        <!-- /.container -->
-
-    </div>
-    <!-- /.content-section-a -->
-
-  <a name="contact"></a>
-{{#if user.hasbackground}}
-    <div class="banner2" style="background: url({{user.background}}) no-repeat center center;">
-{{/if}}
-{{#unless user.hasbackground}}
-    <div class="banner2" style="background: url(http://www.medicalrecoveryservices.org/wp-content/uploads/banner-background1.jpg) no-repeat center center;">
-{{/unless}}
-
-        <div class="container">
-
-            <div class="row">
-                <div class="col-lg-6">
-                    {{#if user.displayName}}
-                        <h2>{{user.displayName}}</h2>
-                    {{else}}
-                        <h2>{{user.username}}</h2>
-                    {{/if}}
-                </div>
-                <div class="col-lg-6">
-                    <ul class="list-inline banner2-social-buttons">
-                        <li>
-                            <a href="https://twitter.com/SBootstrap" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/IronSummitMedia/startbootstrap" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
-                        </li>
-                        <li>
-                            <a href="#" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">Linkedin</span></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-        <!-- /.container -->
-
-    </div>
-    <!-- /.banner -->
-
-    <!-- Footer -->
+        <!-- Footer -->
     <footer>
         <div class="container">
             <div class="row">
@@ -374,42 +165,10 @@
     <script src="/assets/scripts/bootstrap.min.js"></script>
 
     <!-- Endeavor Script -->
-    <script src="/assets/scripts/script.js"></script>
+    <!-- <script src="/assets/scripts/script.js"></script> -->
 
     <script type="text/javascript">
         $(document).on('ready', function(){
-
-            // Initialize possible and actual feedback score at 0
-            var possFeedback = 0;
-            var actFeedback = 0;
-            // Handlebars (feedback) is sent to the JSON helper and returned 
-            var feedObj = {{{json feedback}}};
-
-            // Loop through helper response
-            for(i=0; i<feedObj.length; i++) {
-                // For each feedback item increase possFeedback by 5
-                possFeedback += 5;
-                // For each feedback item increase actFeedback by rating
-                actFeedback += feedObj[i].rating;
-                //console.log(feedObj[i].rating);    
-            }
-
-            console.log("Possible Feedback Score: ", possFeedback);
-            console.log("Actual Feedback Score: ", actFeedback);
-
-            // Calls actualRating func and passes poss and actFeedback as parameters
-            actualRating(possFeedback, actFeedback);
-
-            // If feedback is greater than 0
-            // Calculate the width of #rating-back css background color
-            function actualRating(poss, act) {
-                if(actFeedback > 0){
-                    $('#rating-back').animate({
-                        'width': (455 * act)/poss
-                    }, 1000);   
-                }
-            };
-
 
             function getNotifications() {
 
@@ -445,27 +204,7 @@
             // runs the getNotifications function as soons as the script is executed
             getNotifications();
 
-
         });    
-
-        function populate(s1,s2){
-            var s1 = document.getElementById(s1);
-            var s2 = document.getElementById(s2);
-            s2.innerHTML = "";
-            if(s1.value == "Accounting"){
-                var optionArray = ["|","art punk|Art Punk","alternativerock|Alternative Rock","collegerock|College Rock","experimentalrock|Experimental                              Rock","gothicrock|Gothic Rock","grunge|Grunge","hardcorepunk|Hardcore Punk","hardrock|Hard Rock","indierock|Indie Rock",                                                                                                                "lofi|Lo-fi","newwave|New Wave","progressiverock|Progressive Rock","punk|Punk","shoegaze|Shoegaze","steampunk|Steampunk"];
-            } else if(s1.value == "Administrative"){
-                var optionArray = ["|","acousticblues|Acoustic Blues","chicagoblues|Chicago Blues","classicblues|Classic Blues",
-                        "contemporaryblues|Contemporary Blues","countryblues|Country Blues","deltablues|Delta Blues","electricblues|Electric Blues"];
-            }
-            for(var option in optionArray){
-                var pair = optionArray[option].split("|");
-                var newOption = document.createElement("option");
-                newOption.value = pair[0];
-                newOption.innerHTML = pair[1];
-                s2.options.add(newOption);
-            }
-        }
 
     </script>
 

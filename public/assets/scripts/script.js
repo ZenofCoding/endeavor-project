@@ -88,36 +88,4 @@ $(document).on('ready', function(){
     $("#job-complete-no-form").attr("action", "");
   })
 
-  // function getNotifications() {
-
-  //   var slug = {{{json feedback}}};
-  //   //var slug = JSON.parse('{{{json user}}}');
-
-  //   console.log(slug);
-    
-  //   var queryURL = "/ajax/notifications";
-
-  //   //ajax makes request and returns the response
-  //   $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
-
-  //     var notifyText;
-
-  //     for(var i=0; i < response.length; i++){
-
-  //       //console.log(response[i].jobID);
-  //       notifyText.text(response[i].notification); //adds text from DB body
-
-  //       console.log(response[i]);
-
-  //     }
-
-  //     $('.news-text').append(notifyText);//prepends entire story div to main-content div
-        
-  //   }); 
-
-  // }
-
-  // // runs the getNotifications function as soons as the script is executed
-  // getNotifications();
-
 });
