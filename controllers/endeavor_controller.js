@@ -543,6 +543,16 @@ router.get('/ajax/notifications/:id', function(req, res) {
     res.send(notifications);
   });
 });
+
+// ajax request
+// Deletes a notification where notificationID = id
+router.delete('/delete/note/:id', function(req, res) {
+  var condition = 'notificationID = ' + req.params.id; 
+  endeavor.delete('notifications', condition, function (deleted) {
+    res.send(deleted);
+  });
+});
+
 // ajax request
 // all the available subCategories posted on the site
 router.get('/ajax/subCategory/:id', function(req, res) {

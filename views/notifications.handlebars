@@ -119,6 +119,21 @@
                             <h2 class="section-heading">{{user.username}}<br>Manage Your Notifications</h2>
                         {{/if}}
                         <p class="lead">Click on a notification to view the posting associated with it. Clean up your inbox by removing old or unwanted notifications.</p>
+
+                        {{#each notifications}}
+                            <!-- <h1>Notification</h1> -->
+                            <div class="note-box-container">  
+                                <a class="job-link" href="/viewJob/{{this.jobID}}/{{this.employerID}}">
+                                    <img class="note-image" src="{{noteType type}}">
+
+                                    <div class="note-title-container">
+                                        <p class="note-title">{{this.notification}}</p>
+                                    </div>  
+                                            
+                                </a>
+                            </div>
+                            <a class="btn btn-warning btn-lg note-remove" data-id="{{this.notificationID}}" href="">Delete</a>
+                        {{/each}}
                     </div>
                     <div class="col-lg-5 col-sm-pull-6  col-sm-6">
                         <img class="img-responsive" src="/assets/images/notification.png" alt="">
@@ -203,6 +218,24 @@
 
             // runs the getNotifications function as soons as the script is executed
             getNotifications();
+
+            $(document).on('click', '.note-remove', function(){
+
+                var slug = $(this).data('id');
+
+                var queryURL = "/delete/note/" + slug + "?_method=DELETE";
+
+                //ajax makes request and returns the response
+                $.ajax({url: queryURL, type: 'POST'}).done(function(response) {
+
+                  if (response) {
+                    console.log('ok!');
+                    //$(this, '.note-box-container').addClass('hide');//hides the notification div
+                  }
+                    
+                });
+
+            });
 
         });    
 
