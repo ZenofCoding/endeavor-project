@@ -618,12 +618,12 @@
 
         });    
   
-        function getSubCategories(catID) {        
+        function getSubCategories() {        
             
-            //var catID = $('#category').data('catID')
+            var catID = $('#category').data('catID')
             //var slug = {{{json category}}};
 
-            //console.log('ddd' + slug.id);
+            console.log('ddd' + slug.id);
             
             var queryURL = "/ajax/subCategory/" + catID;
 
@@ -661,7 +661,7 @@
         }
 
         // runs the getNotifications function as soons as the script is executed
-        getSubCategories(1);
+        getSubCategories();
 
         function populate(s1,s2){
             var s1 = document.getElementById(s1);
