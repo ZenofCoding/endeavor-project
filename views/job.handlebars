@@ -53,15 +53,14 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    {{#unless owned}}
-                    <li>
-                        <a>Not Owner!!!</a>
-                    </li>
-                    {{/unless}}
-                    {{#if user}}
+                    {{#if user.displayName}}
                         <li>
-                            <a href="/profile">Dashboard</a>
-                        </li>  
+                            <a href="/profile">{{user.displayName}}</a>
+                        </li> 
+                    {{else}}
+                        <li>
+                            <a href="/profile">{{user.username}}</a>
+                        </li> 
                     {{/if}}
                     <li>
                         <a href="#about">About</a>
@@ -93,6 +92,12 @@
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
+
+        <!-- scroll bar for notifications -->
+        <a class="news-banner hide" href="/notifications/{{user.id}}">      
+            <div class="scroll-left"></div>
+        </a>
+
     </nav>
 
     {{#if owned}}
@@ -504,7 +509,7 @@
     <a name="jobs area"></a>
         <div class="content-section-b">
 
-            <div class="container">
+            <div class="container margin-top-100">
 
                 {{#if owned}}
 
@@ -868,6 +873,45 @@
     <script src="/assets/scripts/script.js"></script>
 
     <script type="text/javascript">
+
+        $(document).on('ready', function(){
+
+            function getNotifications() {
+
+                var slug = {{{json user}}};
+                console.log(slug.id);
+                var queryURL = "/ajax/notifications/" + slug.id;
+
+                //ajax makes request and returns the response
+                $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
+
+                  var notifyText;
+
+                  for(var i=0; i < response.length; i++){
+
+                    console.log(response[i]);
+
+                    notifyText = $('<span>'); //creates a span element
+                    notifyText.text(response[i].notification); //adds text from DB response
+                    notifyText.addClass('spacing'); //added class to span
+
+                    $('.scroll-left').append(notifyText);//appends each notification to the marquee
+
+                  }
+
+                  if (response) {
+                    $('.news-banner').removeClass('hide');//shows the marquee if there are notifications
+                  }
+                    
+                }); 
+
+            }
+
+            // runs the getNotifications function as soons as the script is executed
+            getNotifications();
+
+        }); 
+
     function populate(s1,s2){
         var s1 = document.getElementById(s1);
         var s2 = document.getElementById(s2);

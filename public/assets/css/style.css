@@ -4,6 +4,14 @@
   margin-right: -15px;
 }
 
+.margin-top-150{
+  margin-top: 150px;
+}
+
+.margin-top-100{
+  margin-top: 100px;
+}
+
 .hide{
   display: none;
 }
@@ -30,10 +38,10 @@ background: url(../images/hire.gif) no-repeat center center;
   width: 100%;
 }
 
-.news-banner{
+/*.news-banner{
   position: absolute;
   width: 100%;
-  height: 45px;
+  height: 50px;
   background-color: #2a2a2a;
   z-index: 99;
   padding: 8px 0px 7px 0px;
@@ -41,7 +49,7 @@ background: url(../images/hire.gif) no-repeat center center;
 
 .news-text{
   color: #ffffff;
-}
+}*/
 
 .spacing{
   margin-right: 200px;
@@ -51,7 +59,7 @@ background: url(../images/hire.gif) no-repeat center center;
 .preferences-btn{
   position: absolute;
   right: 0;
-  padding: 10px 50px 10px 50px;
+  padding: 12px 50px 13px 50px;
   background-color: #f8f8f8;
   border-color: #f8f8f8;
   border-top: none;
@@ -441,7 +449,8 @@ background: url(../images/hire.gif) no-repeat center center;
 .news-banner {
   position: absolute;
   width: 100%;
-  height: 45px;
+  height: 50px;
+  padding-top: 12px;
   background-color: #2a2a2a;
   z-index: 99;
 }
@@ -492,3 +501,43 @@ background: url(../images/hire.gif) no-repeat center center;
   }
 }
 /*end styling for marguee scroll*/
+
+/*begin notifications styling*/
+.note-box-container{
+  border: 1px solid #2a2a2a;
+}
+
+.note-image{
+  width: 100%;
+}
+
+.note-title-container{
+  position: absolute;
+  top: -10px;
+  right: 0;
+  width: 338px;
+  padding-right: 5px;
+}
+
+.note-title{
+  color: #ffffff;
+  text-align: right;
+  font-size: 20px;
+}
+
+.note-remove{
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  background-color: #2a2a2a;
+  font-size: 16px;
+  border-radius: 0px;
+  border: 1px solid #2a2a2a;
+}
+
+.note-remove:hover{
+  background-color: #ffffff;
+  color: #2a2a2a;
+  border: 1px solid #2a2a2a;
+}
+/*end notifications styling*/
