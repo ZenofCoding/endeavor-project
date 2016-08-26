@@ -94,7 +94,7 @@ function awesomeThing() {
 * **Joe Shin**  - [Joe Shin](https://github.com/ZenofCoding/)
 * **Padmaja Kondeti** -  [Padmaja Kondeti](https://github.com/PadmajaKondeti)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/ZenofCoding/endeavor-project/graphs/contributors) who participated in this project.
 
 ## License
 
