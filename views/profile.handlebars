@@ -623,14 +623,14 @@
             var catID = $('#category option:selected').data('catid');
             //var slug = {{{json category}}};
 
-            console.log('ddd' + catID);
+            $('#subcategory option').remove();
             
             var queryURL = "/ajax/subCategory/" + catID;
 
             //ajax makes request and returns the response
             $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
 
-              var subcategoryText;
+              var subcategoryText ='';
 
               for(var i=0; i < response.length; i++){
 
@@ -638,10 +638,11 @@
                 // subcategoryText += $('<option'); //creates a paragraph
                 // subcategoryText += "{ value:" + i +" text:(" + response[i].description +">)}";
                 // subcategoryText += $('</option>'); //adds text from DB body
-                var subCat = $('<option>');
-                subCat.val(response[i].description);
-                subCat.text(response[i].description);
-                $("#subcategory").append(subCat);
+                subcategoryText = $('<option>');
+                subcategoryText.val(response[i].description);
+                subcategoryText.text(response[i].description);
+                $("#subcategory").append(subcategoryText);
+                
                 //$("#subcategory").append($("<option></option>").val(i).html(response[i].description));
                 // $('#subcategory').append($("<option></option>").attr("value", i).html(response[i].description));
 
