@@ -27,7 +27,10 @@ ________________________________________
 ## Screenshots
 Include a one or two screenshots of main UI/UX points of your app and how it solves a problem
 <p align="center">
-<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18021497/bf9fe264-6bb5-11e6-8ee3-a2e56e67d032.PNG" width="100%" alt="Screen Shot of HP"/>
+<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18021497/bf9fe264-6bb5-11e6-8ee3-a2e56e67d032.PNG" width="25%" alt="Screen Shot of HP"/>
+<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18021497/bf9fe264-6bb5-11e6-8ee3-a2e56e67d032.PNG" width="25%" alt="Screen Shot of HP"/>
+<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18021497/bf9fe264-6bb5-11e6-8ee3-a2e56e67d032.PNG" width="25%" alt="Screen Shot of HP"/>
+<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18021497/bf9fe264-6bb5-11e6-8ee3-a2e56e67d032.PNG" width="25%" alt="Screen Shot of HP"/>
 </p>
 
 
@@ -36,7 +39,10 @@ You can give a brief listing of the technologies you've learned and applied here
 - node.js
 - Express
 - Handblebars
-- mongodb
+- MySQL
+- JawsDB
+- lucidchart
+- favicon generator
 
 ## Getting Started
 
@@ -65,7 +71,7 @@ jasmine spec/appSpec.js
 
 ## Built With
 
-* Atom - Sublime Text is pretty cool too I guess
+* Sublime Text is pretty cool too I guess
 * Balsamiq - Wireframe of choice 
 * RoboMongo - Because .pretty() everything is tedious
 
@@ -84,7 +90,9 @@ function awesomeThing() {
 
 ## Authors
 
-* **John Doe** - *Initial work* - [John Doe](https://github.com)
+* **Adam Mattas**  - [John Doe](https://github.com/adamfader/)
+* **Joe Shin**  - [John Doe](https://github.com/ZenofCoding/)
+* **Padmaja Kondeti** -  [John Doe](https://github.com/PadmajaKondeti)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
