@@ -99,15 +99,10 @@ See also the list of [contributors](https://github.com/ZenofCoding/endeavor-proj
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
-<<<<<<< HEAD
+
 ## Acknowledgments
 
 * Hat tip to anyone who's code was used
 * Inspiration
 
 * etc
-=======
-  * Hat tip to anyone who's code was used
-  * Inspiration
-  * etc
->>>>>>> 4559765b302f00f76bbc0090b21682260687eb66
