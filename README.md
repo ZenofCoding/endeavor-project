@@ -32,7 +32,6 @@ Include a one or two screenshots of main UI/UX points of your app and how it sol
 <img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18021497/bf9fe264-6bb5-11e6-8ee3-a2e56e67d032.PNG"  alt="Screen Shot of HP"/>|<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18021497/bf9fe264-6bb5-11e6-8ee3-a2e56e67d032.PNG" alt="Screen Shot of HP"/>|<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18021497/bf9fe264-6bb5-11e6-8ee3-a2e56e67d032.PNG"  alt="Screen Shot of HP"/>|<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18021497/bf9fe264-6bb5-11e6-8ee3-a2e56e67d032.PNG" alt="Screen Shot of HP"/>
 
 
-
 ## Technologies used
 You can give a brief listing of the technologies you've learned and applied here
 - node.js
@@ -100,9 +99,15 @@ See also the list of [contributors](https://github.com/ZenofCoding/endeavor-proj
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
+<<<<<<< HEAD
 ## Acknowledgments
 
 * Hat tip to anyone who's code was used
 * Inspiration
 
 * etc
+=======
+  * Hat tip to anyone who's code was used
+  * Inspiration
+  * etc
+>>>>>>> 4559765b302f00f76bbc0090b21682260687eb66
