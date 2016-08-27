@@ -76,7 +76,13 @@ router.post('/login/stay', passport.authenticate('local-login-stay', {
           } else {
             req.session.cookie.expires = false;
           }
-      res.redirect('/viewJobAction/' + req.body.jobID +'/'+ req.body.userJob);
+
+          if(req.body.jobID == '0'){
+            res.redirect('/public/profile/' + req.body.userJob + '/' + true); 
+          }else{
+            res.redirect('/viewJobAction/' + req.body.jobID +'/'+ req.body.userJob); 
+          }
+      
 });
 
 // =====================================
@@ -121,6 +127,71 @@ router.get('/profile', isLoggedIn, function(req, res) {
         });  
       });
       //console.log(jobs, category);
+    });
+  });
+  //console.log(req.user);
+});
+
+// =====================================
+// PUBLIC PROFILE SECTION =========================
+// =====================================
+// we will want this protected so you have to be logged in to visit
+// we will use route middleware to verify this (the isLoggedIn function)
+router.get('/public/profile/:owner', function(req, res) {
+  // res.render('profile', {
+  //   user : req.user // get the user out of session and pass to template
+  // });
+  //var userObject = { user : req.user };
+  var condition = 'userID = ' + req.params.owner;
+  var condition2 = 'employeeID = ' + req.params.owner;
+  var condition3 = 'id = ' + req.params.owner;
+  endeavor.allWhere('jobs', condition, function (jobs) {
+    endeavor.manyWhere(['id', 'username', 'avatar', 'background', 'displayName', 'summary', 'displaySentence'], 'user', condition3, function (owner) {
+      endeavor.allWhere('resume', condition, function (resumes) {
+        endeavor.allWhere('feedback', condition2, function (feedback) {
+          res.render('profile-public', {
+            user: req.user,
+            owner: owner, 
+            jobs: jobs,
+            resumes: resumes,
+            feedback: feedback
+          });
+        });  
+      });
+      console.log(owner);
+    });
+  });
+  //console.log(req.user);
+});
+
+// =====================================
+// PUBLIC PROFILE SECTION =========================
+// =====================================
+// we will want this protected so you have to be logged in to visit
+// we will use route middleware to verify this (the isLoggedIn function)
+router.get('/public/profile/:owner/:success', function(req, res) {
+  // res.render('profile', {
+  //   user : req.user // get the user out of session and pass to template
+  // });
+  //var userObject = { user : req.user };
+  var condition = 'userID = ' + req.params.owner;
+  var condition2 = 'employeeID = ' + req.params.owner;
+  var condition3 = 'id = ' + req.params.owner;
+  endeavor.allWhere('jobs', condition, function (jobs) {
+    endeavor.manyWhere(['id', 'username', 'avatar', 'background', 'displayName', 'summary', 'displaySentence'], 'user', condition3, function (owner) {
+      endeavor.allWhere('resume', condition, function (resumes) {
+        endeavor.allWhere('feedback', condition2, function (feedback) {
+          res.render('profile-public', {
+            user: req.user,
+            success: req.params.success,
+            owner: owner, 
+            jobs: jobs,
+            resumes: resumes,
+            feedback: feedback
+          });
+        });  
+      });
+      console.log(owner);
     });
   });
   //console.log(req.user);
@@ -525,7 +596,7 @@ router.put('/job/complete/noReview/:jobID', function (req, res) {
 // ajax request
 // sends all of the user's notifications
 // employeeID should work for all messages because of the way they are inserted
-router.get('/notifications/:id', function(req, res) {
+router.get('/notifications/:id', isLoggedIn, function(req, res) {
   var condition = 'employeeID = ' + req.params.id; 
   endeavor.allWhere('notifications', condition, function (notifications) {
     res.render('notifications', {
@@ -560,6 +631,15 @@ router.get('/ajax/subCategory/:id', function(req, res) {
   endeavor.allWhere('subCategory', condition, function (subCategories) {
     res.send(subCategories);
   });
+});
+
+// =====================================
+// SEND PRIVATE MESSAGE =========================
+// =====================================
+// we will want this protected so you have to be logged in to use
+// we will use route middleware to verify this (the isLoggedIn2 function)
+router.get('/new/message/:id/:user', isLoggedIn2, function(req, res) {
+  res.redirect('/public/profile/' + req.params.user + '/' + true);
 });
 // route middleware to make sure
 function isLoggedIn(req, res, next) {
