@@ -597,11 +597,23 @@ router.put('/job/complete/noReview/:jobID', function (req, res) {
 // sends all of the user's notifications
 // employeeID should work for all messages because of the way they are inserted
 router.get('/notifications/:id', isLoggedIn, function(req, res) {
-  var condition = 'employeeID = ' + req.params.id; 
+  var condition = 'employeeID = ' + req.params.id;
+  var condition1 = 'receiver = ' + req.params.id;
+  var condition2 = 'parent = "x"';
+  var condition3 = 'rdelete = "0"';
+  var condition4 = 'sender = ' + req.params.id;
+  var condition5 = 'sdelete = "0"';
+  var condition6 = 'parent = "x"';
+  var condition7 = 'hasreplies = "1"';
+  var condition8 = 'senttime';
   endeavor.allWhere('notifications', condition, function (notifications) {
-    res.render('notifications', {
-      user: req.user,
-      notifications: notifications
+    endeavor.allParentPm('pm', condition1, condition2, condition3, condition4, condition5, condition6, condition7, condition8, function (pms) {
+      res.render('notifications', {
+        user: req.user,
+        notifications: notifications,
+        pms: pms
+      });
+      console.log('Private Messages', pms);
     });
   });
 });
@@ -609,7 +621,7 @@ router.get('/notifications/:id', isLoggedIn, function(req, res) {
 // ajax request
 // sends all of the user's notifications
 router.get('/ajax/notifications/:id', function(req, res) {
-  var condition = 'employeeID = ' + req.params.id; 
+  var condition = 'employeeID = ' + req.params.id;
   endeavor.allWhere('notifications', condition, function (notifications) {
     res.send(notifications);
   });
@@ -636,10 +648,32 @@ router.get('/ajax/subCategory/:id', function(req, res) {
 // =====================================
 // SEND PRIVATE MESSAGE =========================
 // =====================================
+// redirects to profile-public and opens pm form
 // we will want this protected so you have to be logged in to use
 // we will use route middleware to verify this (the isLoggedIn2 function)
 router.get('/new/message/:id/:user', isLoggedIn2, function(req, res) {
   res.redirect('/public/profile/' + req.params.user + '/' + true);
+});
+
+// redirects to profile-public and opens pm form
+// we will want this protected so you have to be logged in to use
+// we will use route middleware to verify this (the isLoggedIn2 function)
+router.post('/send/new/message', isLoggedIn2, function(req, res) {
+  endeavor.create(['pm'], ['receiver', 'sender', 'subject', 'message', 'parent'], [req.body.pm_receiver, req.body.pm_sender, req.body.pm_subject, req.body.pm_message, req.body.parent], function () {
+    res.redirect('/public/profile/' + req.body.pm_receiver + '/' + true);
+  });
+});
+
+// sends all of the user's notifications
+// employeeID should work for all messages because of the way they are inserted
+router.get('/private/messages/:id', isLoggedIn, function(req, res) {
+  var condition = 'employeeID = ' + req.params.id; 
+  endeavor.allParentPm('pm', condition, function (pms) {
+    res.render('notifications', {
+      user: req.user,
+      notifications: notifications
+    });
+  });
 });
 // route middleware to make sure
 function isLoggedIn(req, res, next) {
