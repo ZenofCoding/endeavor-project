@@ -596,12 +596,12 @@ router.put('/job/complete/noReview/:jobID', function (req, res) {
 // ajax request
 // sends all of the user's notifications
 // employeeID should work for all messages because of the way they are inserted
-router.get('/notifications/:id', isLoggedIn, function(req, res) {
+router.get('/notifications/:id/:user', isLoggedIn, function(req, res) {
   var condition = 'employeeID = ' + req.params.id;
-  var condition1 = 'receiver = ' + req.params.id;
+  var condition1 = 'receiver = "' + req.params.user +'"';
   var condition2 = 'parent = "x"';
   var condition3 = 'rdelete = "0"';
-  var condition4 = 'sender = ' + req.params.id;
+  var condition4 = 'sender = "' + req.params.user +'"';
   var condition5 = 'sdelete = "0"';
   var condition6 = 'parent = "x"';
   var condition7 = 'hasreplies = "1"';
@@ -660,7 +660,7 @@ router.get('/new/message/:id/:user', isLoggedIn2, function(req, res) {
 // we will use route middleware to verify this (the isLoggedIn2 function)
 router.post('/send/new/message', isLoggedIn2, function(req, res) {
   endeavor.create(['pm'], ['receiver', 'sender', 'subject', 'message', 'parent'], [req.body.pm_receiver, req.body.pm_sender, req.body.pm_subject, req.body.pm_message, req.body.parent], function () {
-    res.redirect('/public/profile/' + req.body.pm_receiver + '/' + true);
+    res.redirect('/public/profile/' + req.body.owner + '/' + true);
   });
 });
 

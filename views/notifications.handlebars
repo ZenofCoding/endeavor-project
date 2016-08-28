@@ -136,7 +136,7 @@
                         {{/each}}
                     </div>
                     <div class="col-lg-5 col-sm-pull-6  col-sm-6">
-                        <img class="img-responsive" src="/assets/images/notification.png" alt="">
+                        <img class="img-responsive" src="/assets/images/notification.png" alt="Notifications Picture">
                     </div>
                 </div>
 
@@ -144,6 +144,76 @@
             <!-- /.container -->
 
         </div>
+
+        <a name=""></a>
+    <div class="content-section-a">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                        {{#if user.displayName}}
+                            <h2 class="section-heading">{{user.displayName}}<br>Manage Your Inbox</h2>
+                        {{else}}
+                            <h2 class="section-heading">{{user.username}}<br>Manage Your Inbox</h2>
+                        {{/if}}
+                        {{#if pms}}
+                            <p class="lead summary-about">Manage your messages.</p>
+                        {{else}}
+                            <p class="lead summary-about">You have no messages.</p>
+                        {{/if}}
+                        {{#each pms}}
+                            <!-- <h1>Notification</h1> -->
+                            <div class="message-box-container">  
+                                <div class="job-link">
+                                    {{#if rread}}
+                                        {{#if hasreplies}}
+                                            <img class="note-image" src="/assets/images/message_new_area.png">
+                                        {{else}}
+                                            <img class="note-image" src="/assets/images/message_reply_area.png">    
+                                        {{/if}}
+                                    {{else}}
+                                        {{#if hasreplies}}
+                                            <img class="note-image" src="/assets/images/message_area.png">
+                                        {{else}}
+                                            <img class="note-image" src="/assets/images/message_new_reply_area.png">
+                                        {{/if}}
+                                    {{/if}}
+
+                                    <div class="form-group message-container">
+                                        <div class="form-control message-holder" id="orig-message">{{this.message}}</div>
+                                        <label class="from" for="orig-message">{{this.sender}}</label>
+                                        <label class="orig-date" for="orig-message">{{prettifyDatetime this.senttime}}</label>
+                                    </div>
+
+                                    <form>
+                                        <div class="form-group reply-container">
+                                            <textarea type="text" id="message_reply" class="form-control reply-field" name="message_reply" rows="10" placeholder="Your reply here..." required></textarea>
+                                            <a class="btn btn-warning btn-lg reply-submit" data-id="{{this.notificationID}}" href="">Submit</a>
+                                        </div>
+                                    </form>
+
+                                    <div class="message-title-container">
+                                        <p class="message-title">{{this.subject}}</p>
+                                    </div>  
+                                            
+                                </div>
+                            </div>
+                            <a class="btn btn-warning btn-lg note-remove" data-id="{{this.notificationID}}" href="">Delete</a>
+                        {{/each}}
+                </div>
+                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                    <img class="img-responsive" src="/assets/images/inbox.png" alt="Notifications Picture">
+                </div>
+            </div>
+
+        </div>
+
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-a -->
 
         <!-- Footer -->
     <footer>
@@ -218,29 +288,6 @@
 
             // runs the getNotifications function as soons as the script is executed
             getNotifications();
-
-            // Get list of parent pm's not deleted
-            // function getParentPms() {
-
-            //     var slug = {{{json user}}};
-            //     console.log(slug.id);
-            //     var pmQueryURL = "/ajax/notifications/" + slug.id;
-
-            //     //ajax makes request and returns the response
-            //     $.ajax({url: pmQueryURL, method: 'GET'}).done(function(response) {
-
-                  
-
-            //       if (response) {
-            //         //$('.news-banner').removeClass('hide');//shows the marquee if there are notifications
-            //       }
-                    
-            //     }); 
-
-            // }
-
-            // // runs the getNotifications function as soons as the script is executed
-            // getParentPms();
 
             $(document).on('click', '.note-remove', function(){
 
