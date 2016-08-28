@@ -107,7 +107,7 @@
         {{/unless}}
 
         <!-- scroll bar for notifications -->
-        <a class="news-banner hide" href="/notifications/{{user.id}}">      
+        <a class="news-banner hide" href="/notifications/{{user.id}}/{{user.username}}">      
             <div class="scroll-left"></div>
         </a>
 
@@ -186,10 +186,11 @@
                 </div>
                 <!-- <input type="hidden" name="edit_jobUserID" value="{{user.id}}"> -->
                 {{#user}}
-                    <input type="hidden" name="pm_sender" value="{{this.id}}">
+                    <input type="hidden" name="pm_sender" value="{{this.username}}">
                 {{/user}}
                 {{#owner}}
-                    <input type="hidden" name="pm_receiver" value="{{this.id}}">
+                    <input type="hidden" name="pm_receiver" value="{{this.username}}">
+                    <input type="hidden" name="owner" value="{{this.id}}">
                 {{/owner}}
                 <input type="hidden" name="parent" value="x">
                 <button class="btn btn-warning btn-lg" type="submit">Send Message</button>

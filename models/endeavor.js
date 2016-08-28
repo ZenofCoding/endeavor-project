@@ -27,6 +27,12 @@ var endeavor = {
       cb(res);
     });
   },
+  // calls SELECT multiple columns function where condition = ? in orm.js passing table and param names
+  manyWhereAsc: function (params, table, condition1, condition2, cb) {
+    orm.manyWhereAsc(params, table, condition1, condition2, function (res) {
+      cb(res);
+    });
+  },
   // calls INSERT/create function in orm.js
   // passes table name, column name, and value
   // cols and vals are arrays

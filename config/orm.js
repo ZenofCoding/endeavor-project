@@ -114,6 +114,23 @@ var orm = {
       cb(result);
     });
   },
+  // selects all rows from DB table
+  manyWhereAsc: function (params, table, condition1, condition2, cb) {
+    var queryString = 'SELECT ' + params + ' FROM ' + table + ' ';
+
+    queryString = queryString + ' WHERE ';
+    queryString = queryString + condition1;
+    queryString = queryString + ' ORDER BY ';
+    queryString = queryString + condition2;
+    queryString = queryString + ' ASC';
+
+    console.log(queryString);
+
+    connection.query(queryString, function (err, result) {
+      if (err) throw err;
+      cb(result);
+    });
+  },
     // vals is an array of values that we want to save to cols
     // cols are the columns we want to insert the values into
     // insert into DB as prepared statement using parameters passed in
