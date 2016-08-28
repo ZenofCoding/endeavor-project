@@ -52,19 +52,10 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <!-- {{#if user}}
+                    {{#if user}}
                         <li>
                             <a href="/profile">{{user.username}}</a>
                         </li>  
-                    {{/if}} -->
-                    {{#if user.displayName}}
-                        <li>
-                            <a href="/profile">{{user.displayName}}</a>
-                        </li> 
-                    {{else}}
-                        <li>
-                            <a href="/profile">{{user.username}}</a>
-                        </li> 
                     {{/if}}
                     <li>
                         <a href="#about">About</a>
@@ -98,6 +89,7 @@
         <a class="btn btn-default btn-lg preferences-btn" href="/preferences" alt="">Preferences</a>
 
         <!-- scroll bar for notifications -->
+
         <a class="news-banner hide" href="/notifications/{{user.id}}/{{user.username}}">      
             <div class="scroll-left"></div>
         </a>
@@ -172,16 +164,16 @@
                 </div>
                 <div class="form-group">
                       <label for="category">Category</label>
-                      <select id="category" class="form-control" name="category" required> <!-- onChange="populate('category','subcategory')" required> -->
+                      <select id="category" class="form-control" name="category" onChange="getSubCategories()" required>
                       <option value="">Choose a category</option>
                       {{#each category}}
-                          <option value="{{this.description}}" data-catID="{{this.categoryID}}">{{this.description}}</option>
+                          <option value="{{this.description}}" data-catid="{{this.categoryID}}">{{this.description}}</option>
                       {{/each}}
                     </select>
                 </div>
                 <div class="form-group">
                       <label for="subcategory">Subcategory</label>
-                      <select id="subcategory" class="form-control" name="subcategory" required>
+                      <select id="subcategory" class="form-control" name="subcategory"  required>
                       <option value="">Choose a subcategory</option>
                       <!-- {{#each category}}
                           <option value="{{this.description}}">{{this.description}}</option>
@@ -624,54 +616,38 @@
             // runs the getNotifications function as soons as the script is executed
             getNotifications();
 
-            
+        });    
   
-        function getSubCategories() {        
+        function getSubCategories() {     
             
-            var catID = $('#category').data('catID')
+            var catID = $('#category option:selected').data('catid');
             //var slug = {{{json category}}};
 
-            //console.log('ddd' + slug.id);
+            $('#subcategory').empty();
             
             var queryURL = "/ajax/subCategory/" + catID;
 
             //ajax makes request and returns the response
             $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
 
-              var subcategoryText;
+              var subcategoryText ='';
 
               for(var i=0; i < response.length; i++){
 
                 console.log(response[i].description);
-                // subcategoryText += $('<option'); //creates a paragraph
-                // subcategoryText += "{ value:" + i +" text:(" + response[i].description +">)}";
-                // subcategoryText += $('</option>'); //adds text from DB body
-                var subCat = $('<option>');
-                subCat.val(response[i].description);
-                subCat.text(response[i].description);
-                $("#subcategory").append(subCat);
-                //$("#subcategory").append($("<option></option>").val(i).html(response[i].description));
-                // $('#subcategory').append($("<option></option>").attr("value", i).html(response[i].description));
 
-                // notifyText = $('<span>'); //creates a paragraph
-                // notifyText.text(response[i].notification); //adds text from DB body
-                // notifyText.addClass('spacing'); //added class to button
-
-                // $('.scroll-left').append(notifyText);//prepends entire story div to main-content div
-
+                subcategoryText = $('<option>');
+                subcategoryText.val(response[i].description);
+                subcategoryText.text(response[i].description);
+                $("#subcategory").append(subcategoryText);
+             
               }
-              // console.log('subcategoryText'+ subcategoryText);
-
-              
-                
+             
             }); 
-
         }
 
         // runs the getNotifications function as soons as the script is executed
-        //getSubCategories();
-
-        });
+        
 
         function populate(s1,s2){
             var s1 = document.getElementById(s1);
