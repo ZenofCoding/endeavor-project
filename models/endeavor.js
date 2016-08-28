@@ -15,6 +15,18 @@ var endeavor = {
       cb(res);
     });
   },
+  // calls SELECT */all function where condition = ? in orm.js passing table name
+  allParentPm: function (table, condition1, condition2, condition3, condition4, condition5, condition6, condition7, condition8, cb) {
+    orm.allParentPm(table, condition1, condition2, condition3, condition4, condition5, condition6, condition7, condition8, function (res) {
+      cb(res);
+    });
+  },
+  // calls SELECT multiple columns function where condition = ? in orm.js passing table and param names
+  manyWhere: function (params, table, condition, cb) {
+    orm.manyWhere(params, table, condition, function (res) {
+      cb(res);
+    });
+  },
   // calls INSERT/create function in orm.js
   // passes table name, column name, and value
   // cols and vals are arrays

@@ -219,6 +219,29 @@
             // runs the getNotifications function as soons as the script is executed
             getNotifications();
 
+            // Get list of parent pm's not deleted
+            // function getParentPms() {
+
+            //     var slug = {{{json user}}};
+            //     console.log(slug.id);
+            //     var pmQueryURL = "/ajax/notifications/" + slug.id;
+
+            //     //ajax makes request and returns the response
+            //     $.ajax({url: pmQueryURL, method: 'GET'}).done(function(response) {
+
+                  
+
+            //       if (response) {
+            //         //$('.news-banner').removeClass('hide');//shows the marquee if there are notifications
+            //       }
+                    
+            //     }); 
+
+            // }
+
+            // // runs the getNotifications function as soons as the script is executed
+            // getParentPms();
+
             $(document).on('click', '.note-remove', function(){
 
                 var slug = $(this).data('id');
