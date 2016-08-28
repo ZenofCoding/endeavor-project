@@ -167,17 +167,17 @@
                             <!-- <h1>Notification</h1> -->
                             <div class="message-box-container">  
                                 <div class="job-link">
-                                    {{#if rread}}
-                                        {{#if hasreplies}}
-                                            <img class="note-image" src="/assets/images/message_new_area.png">
+                                    {{#if this.rread}}
+                                        {{#if this.hasreplies}}
+                                            <img class="note-image" src="/assets/images/message_reply_area.png">
                                         {{else}}
-                                            <img class="note-image" src="/assets/images/message_reply_area.png">    
+                                            <img class="note-image" src="/assets/images/message_area.png">    
                                         {{/if}}
                                     {{else}}
-                                        {{#if hasreplies}}
-                                            <img class="note-image" src="/assets/images/message_area.png">
-                                        {{else}}
+                                        {{#if this.hasreplies}}
                                             <img class="note-image" src="/assets/images/message_new_reply_area.png">
+                                        {{else}}
+                                            <img class="note-image" src="/assets/images/message_new_area.png">
                                         {{/if}}
                                     {{/if}}
 

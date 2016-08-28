@@ -684,23 +684,24 @@ router.post('/send/reply/message', isLoggedIn2, function(req, res) {
   });
 });
 
-// we will want this protected so you have to be logged in to use
-// we will use route middleware to verify this (the isLoggedIn2 function)
-// router.put('/update/reply/message', function(req, res) {
-//   var condition = 'id = ' + req.body.osid;
-//   endeavor.updateString(['pm'], { hasreplies: req.body.hasreplies, rread: req.body.rread, sread: req.body.sread}, condition, function () {
-//     res.send(inserted);
-//   });
+// sends all of the user's notifications
+// router.get('/private/messages/:id', isLoggedIn, function(req, res) {
+//   var condition = 'employeeID = ' + req.params.id; 
+//   endeavor.allParentPm('pm', condition, function (pms) {
+//     res.render('notifications', {
+//       user: req.user,
+//       notifications: notifications
+//     });
+//   });
 // });
 
-// sends all of the user's notifications
-router.get('/private/messages/:id', isLoggedIn, function(req, res) {
-  var condition = 'employeeID = ' + req.params.id; 
-  endeavor.allParentPm('pm', condition, function (pms) {
-    res.render('notifications', {
-      user: req.user,
-      notifications: notifications
-    });
+// AJAX request
+// Sends all of the parent pm's replies
+router.get('/private/message/replies/:id', isLoggedIn, function(req, res) {
+  var condition1 = 'parent = ' + req.params.id;
+  var condition2 = "senttime"; 
+  endeavor.manyWhereAsc(['sender', 'message', 'senttime'], 'pm', condition1, condition2, function (replies) {
+    res.send(replies);
   });
 });
 // route middleware to make sure
