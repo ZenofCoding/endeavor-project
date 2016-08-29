@@ -259,19 +259,31 @@ router.get('/preferences', isLoggedIn, function(req, res) {
   // Hire SECTION =========================
   // =====================================
   // all the available users posted on the site
-    router.get('/hire', function(req, res) {
-     var condition = '';//'userID = ' + req.user.id;
-       endeavor.all('user', function (userHire) {
-         /*endeavor.all('category', function (category) {*/
-           res.render('hire', {
-             user: req.user,
-             userHire: userHire
-             /*category: category*/
-           });
-           console.log(userHire);
-       /*  });*/
-       });
+  router.get('/hire', function(req, res) {
+      endeavor.all('category', function (category) {
+          endeavor.all('user', function (user) {
+              res.render('hire', {
+                user: req.user,
+                category: category
+              });
+           });
+       });
+  });
+
+  // all the available users  on the site based on the category
+ router.get('/hire/:category', function(req, res) {
+  var condition = 'category = "' + req.params.category +'"';
+    endeavor.allWhere('userCategory', condition, function (userCategory) {
+       var condition1 = 'id = "' + req.params.user +'"';
+        endeavor.allWhere('user', condition, function (user) {
+          res.render('hire', {
+          user: req.user,
+          category: category
+        });
+      });
     });
+  });
+ //
  // all the available jobs posted on the site based on the category
  router.get('/jobCategory/:category', function(req, res) {
   var condition = 'category = "' + req.params.category +'"';
@@ -349,6 +361,25 @@ var condition7 = 'jobs.jobID = ' + req.params.id;
     });
   });
 });
+
+// renders the job that corresponds to the categoryID passed in request
+router.get('/viewUsers/:categoryID', function(req, res) {
+var categoryCondition = 'categoryID = ' + req.params.categoryID;
+  endeavor.allWhere('userCategory', condition, function (user) {
+    var userCondition = 'id = ' + req.params.user;
+    endeavor.allWhere('user', userCondition, function (hire) {
+        endeavor.all('category', function (category) {
+            res.render('hire', {
+              user: req.user,
+              category: category
+            });
+            console.log('hello');
+            //console.log(postUser, req.params.user, req.user);
+          });
+        });   
+      });  
+    });
+
 
 // renders the job that corresponds to the jobID passed in request
 // renders page for bidding and applying for jobs
