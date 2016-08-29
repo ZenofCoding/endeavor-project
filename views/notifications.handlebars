@@ -31,6 +31,8 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <!-- Link to Moment.js -->
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 
 </head>
 
@@ -187,6 +189,10 @@
                                         <label class="orig-date" for="orig-message">{{prettifyDatetime this.senttime}}</label>
                                     </div>
 
+                                    {{#if this.hasreplies}}
+                                        <div class="replies_div" id="reply{{this.id}}"></div>
+                                    {{/if}}
+
                                     <form action="/send/reply/message" method="POST">
                                         <div class="form-group reply-container">
                                             <textarea type="text" id="pm_message" class="form-control reply-field" name="pm_message" rows="10" placeholder="Your reply here..." required></textarea>
@@ -261,6 +267,7 @@
     <!-- <script src="/assets/scripts/script.js"></script> -->
 
     <script type="text/javascript">
+
         $(document).on('ready', function(){
 
             function getNotifications() {
@@ -315,69 +322,68 @@
 
             });
 
-            //post PM REPLY
-            // $(document).on('click', '.reply-submit', function(){
+            getReplies();
 
-            //     //ajax makes request and returns the response
-            //     $.ajax({url: '/send/reply/message', 
-            //         type: 'POST',
-            //         dataType: 'json',
-            //         data: {
-            //             receiver: $(this).attr('id', 'pm_receiver').val(),
-            //             sender: $(this).attr('id', 'pm_sender').val(),
-            //             parent: $(this).attr('id', 'parent').val(),
-            //             subject: $(this).attr('id', 'pm_subject').val(),
-            //             message: $(this).attr('id', 'pm_message').val()
-            //         } 
-            //     }).done(function(response) {
+            function getReplies() {
 
-            //       if (response) {
-            //         console.log('next update has replies column!');
-            //         //$(this, '.note-box-container').addClass('hide');//hides the notification div
-            //         if($(this).('#pm_sender').attr('value') == $(this).('#orig_sender').attr('value')){
+                var pms = {{{json pms}}};
+                // console.log('PMS are here: ', pms);
 
-            //             //ajax makes request and returns the response
-            //             $.ajax({url: '/update/reply/message?_method=PUT', 
-            //                 type: 'POST',
-            //                 dataType: 'json',
-            //                 data: {
-            //                     hasreplies: '1',
-            //                     rread: '0',
-            //                     sread: '1',
-            //                     osid: $(this).attr('id', 'orig-sender').val()
-            //                 } 
-            //             }).done(function(response) {
-            //                 if(response){
-            //                     console.log('Insert Successful!');
-            //                 }
-            //             });
+                //$('#reply'+pms.id).text('!!!!!!!!!');
+                for(var i=0; i < pms.length; i++){
 
-            //         }else{
+                    if(pms[i].hasreplies == 1){
 
-            //             //ajax makes request and returns the response
-            //             $.ajax({url: '/update/reply/message?_method=PUT', 
-            //                 type: 'POST',
-            //                 dataType: 'json',
-            //                 data: {
-            //                     hasreplies: '1',
-            //                     rread: '1',
-            //                     sread: '0',
-            //                     osid: $(this).attr('id', 'orig-sender').val()
-            //                 } 
-            //             }).done(function(response) {
-            //                 if(response){
-            //                     console.log('Insert Successful!');
-            //                 }
-            //             });
+                        var parentID = pms[i].id;
 
-            //         }
-            //       }else{
-            //         console.log('error!!!');
-            //       }
-                    
-            //     });
+                        var queryReply = "/private/message/replies/" + parentID;
 
-            // });
+                        //ajax makes request and returns the response
+                        $.ajax({url: queryReply, type: 'GET'}).done(function(response) {
+
+                          if (response) {
+                            console.log(response);
+
+                            for(var i=0; i < response.length; i++){
+
+                                var rawTime = response[i].senttime;
+                                var time = moment(rawTime).format('lll');
+
+                                var replyContainer = $('<div>');
+                                replyContainer.addClass('form-group message-container');
+
+                                var replyInner = $('<div>');
+                                replyInner.text(response[i].message);
+                                replyInner.attr('id', 'orig-message');
+                                replyInner.addClass('form-control message-holder');
+
+                                var replyLabel1 = $('<label>');
+                                replyLabel1.text('Reply: ' + response[i].sender);
+                                replyLabel1.attr('for', 'orig-message');
+                                replyLabel1.addClass('from');
+
+                                var replyLabel2 = $('<label>');
+                                replyLabel2.text(time);
+                                replyLabel2.attr('for', 'orig-message');
+                                replyLabel2.addClass('orig-date');
+
+                                replyContainer.append(replyInner)//appends child div to replyContainer
+                                replyContainer.append(replyLabel1)//appends child div to replyContainer
+                                replyContainer.append(replyLabel2)//appends child div to replyContainer
+
+                                $('#reply' + parentID).append(replyContainer);//appends each notification to the 
+
+                            }
+
+                          }
+                            
+                        });
+
+                    }
+
+                  }
+
+            }
 
         });    
 
