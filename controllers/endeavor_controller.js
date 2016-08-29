@@ -684,25 +684,50 @@ router.post('/send/reply/message', isLoggedIn2, function(req, res) {
   });
 });
 
-// sends all of the user's notifications
-// router.get('/private/messages/:id', isLoggedIn, function(req, res) {
-//   var condition = 'employeeID = ' + req.params.id; 
-//   endeavor.allParentPm('pm', condition, function (pms) {
-//     res.render('notifications', {
-//       user: req.user,
-//       notifications: notifications
-//     });
-//   });
-// });
-
 // AJAX request
 // Sends all of the parent pm's replies
 router.get('/private/message/replies/:id', isLoggedIn, function(req, res) {
   var condition1 = 'parent = ' + req.params.id;
   var condition2 = "senttime"; 
-  endeavor.manyWhereAsc(['sender', 'message', 'senttime'], 'pm', condition1, condition2, function (replies) {
+  endeavor.manyWhereAsc(['sender', 'message', 'senttime', 'parent'], 'pm', condition1, condition2, function (replies) {
     res.send(replies);
   });
+});
+
+// accesses the update function in endeavor.js
+// passes the values from the notification.handlebars form and passes the db column name
+// redirects to notifications
+router.put('/message/delete/:pmID/:senderID/:user', function (req, res) {
+  var condition = 'id = ' + req.params.pmID;
+  var sDelete = '1';
+  var rDelete = '1';
+  if(req.params.senderID == req.params.user){
+    endeavor.update(['pm'], { sdelete: sDelete }, condition, function () {
+      res.redirect('back');
+    });
+  }else{
+    endeavor.update(['pm'], { rdelete: rDelete }, condition, function () {
+      res.redirect('back');
+    });
+  } 
+});
+
+// accesses the update function in endeavor.js
+// passes the values from the notification.handlebars form and passes the db column name
+// redirects to notifications
+router.put('/message/read/:pmID/:senderID/:user', function (req, res) {
+  var condition = 'id = ' + req.params.pmID;
+  var sRead = '1';
+  var rRead = '1';
+  if(req.params.senderID == req.params.user){
+    endeavor.update(['pm'], { sread: sRead }, condition, function (success) {
+      res.send(success)
+    });
+  }else{
+    endeavor.update(['pm'], { rread: rRead }, condition, function (success) {
+      res.send(success);
+    });
+  } 
 });
 // route middleware to make sure
 function isLoggedIn(req, res, next) {
