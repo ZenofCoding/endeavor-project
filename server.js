@@ -38,7 +38,7 @@ var hbs = exphbs.create({
       return moment(timestamp).format('MMMM Do YYYY');
     },
     prettifyDatetime: function(timestamp) {
-      return moment(timestamp).format('MMMM Do YYYY, h:mm a');
+      return moment(timestamp).format('lll');
     },
     starRating: function(rating) {
       switch (rating) {
