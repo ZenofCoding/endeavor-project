@@ -60,3 +60,9 @@ CREATE TABLE `subCategory` (
   PRIMARY KEY (`subCategoryID`)#,
   #FOREIGN KEY (`categoryID`) REFERENCES `category`(`categoryID`)
 );
+CREATE TABLE `userCategory` (
+  `userCategory` int NOT NULL AUTO_INCREMENT,
+  `categoryID` int NOT NULL,
+ `userID` int NOT NULL,
+  PRIMARY KEY (`userCategory`)
+);
