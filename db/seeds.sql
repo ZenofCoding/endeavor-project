@@ -46,6 +46,9 @@ INSERT INTO `category` (`category`) VALUES ('Sales');
 INSERT INTO `category` (`category`) VALUES ('Security');
 INSERT INTO `category` (`category`) VALUES ('Transportation');
 
+
+
+
 #SELECT * FROM `category`;
 
 INSERT INTO `subCategory` (`categoryID`, `description`) VALUES (1, 'Financial accounting‎');
@@ -210,3 +213,33 @@ INSERT INTO `faq` (`question`, `answer`,`categoryID`, `userID`, `subcategoryID`)
 VALUES ('question1', 'answer1',1,1, 1);
 
 #SELECT * FROM `faq`;
+
+#SELECT * FROM `userCategory`;
+INSERT INTO `userCategory` (`categoryID`, `userID`) VALUES (1, 6);
+INSERT INTO `userCategory` (`categoryID`, `userID`) VALUES (2, 6);
+INSERT INTO `userCategory` (`categoryID`, `userID`) VALUES (3, 6);
+INSERT INTO `userCategory` (`categoryID`, `userID`) VALUES (4, 6);
+INSERT INTO `userCategory` (`categoryID`, `userID`) VALUES (5, 6);
+INSERT INTO `userCategory` (`categoryID`, `userID`) VALUES (6, 6);
+INSERT INTO `userCategory` (`categoryID`, `userID`) VALUES (7, 6);
+INSERT INTO `userCategory` (`categoryID`, `userID`) VALUES (8, 6);
+INSERT INTO `userCategory` (`categoryID`, `userID`) VALUES (9, 6);
+INSERT INTO `userCategory` (`categoryID`, `userID`) VALUES (10, 6);
+INSERT INTO `userCategory` (`categoryID`, `userID`) VALUES (11, 6);
+INSERT INTO `userCategory` (`categoryID`, `userID`) VALUES (12, 6);
+INSERT INTO `userCategory` (`categoryID`, `userID`) VALUES (12, 6);
+
+INSERT INTO `userCategory` (`categoryID`, `userID`) VALUES (1, 14);
+INSERT INTO `userCategory` (`categoryID`, `userID`) VALUES (2, 14);
+INSERT INTO `userCategory` (`categoryID`, `userID`) VALUES (3, 14);
+INSERT INTO `userCategory` (`categoryID`, `userID`) VALUES (4, 14);
+INSERT INTO `userCategory` (`categoryID`, `userID`) VALUES (5, 14);
+INSERT INTO `userCategory` (`categoryID`, `userID`) VALUES (6, 14);
+
+INSERT INTO `userCategory` (`categoryID`, `userID`) VALUES (7, 10);
+INSERT INTO `userCategory` (`categoryID`, `userID`) VALUES (8, 10);
+INSERT INTO `userCategory` (`categoryID`, `userID`) VALUES (9, 10);
+INSERT INTO `userCategory` (`categoryID`, `userID`) VALUES (10, 10);
+INSERT INTO `userCategory` (`categoryID`, `userID`) VALUES (11, 10);
+INSERT INTO `userCategory` (`categoryID`, `userID`) VALUES (12, 10);
+INSERT INTO `userCategory` (`categoryID`, `userID`) VALUES (12, 10);
