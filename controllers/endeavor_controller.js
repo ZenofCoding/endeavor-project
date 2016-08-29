@@ -709,8 +709,25 @@ router.put('/message/delete/:pmID/:senderID/:user', function (req, res) {
     endeavor.update(['pm'], { rdelete: rDelete }, condition, function () {
       res.redirect('back');
     });
-  }
-  
+  } 
+});
+
+// accesses the update function in endeavor.js
+// passes the values from the notification.handlebars form and passes the db column name
+// redirects to notifications
+router.put('/message/read/:pmID/:senderID/:user', function (req, res) {
+  var condition = 'id = ' + req.params.pmID;
+  var sRead = '1';
+  var rRead = '1';
+  if(req.params.senderID == req.params.user){
+    endeavor.update(['pm'], { sread: sRead }, condition, function (success) {
+      res.send(success)
+    });
+  }else{
+    endeavor.update(['pm'], { rread: rRead }, condition, function (success) {
+      res.send(success);
+    });
+  } 
 });
 // route middleware to make sure
 function isLoggedIn(req, res, next) {

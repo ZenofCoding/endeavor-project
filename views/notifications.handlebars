@@ -167,7 +167,7 @@
                         {{/if}}
                         {{#each pms}}
                             <!-- <h1>Notification</h1> -->
-                            <div class="message-box-container">  
+                            <div class="message-box-container" data-id="{{this.id}}" data-sender="{{this.sender}}" data-user="{{../user.username}}">  
                                 <div class="job-link">
                                     {{#if this.rread}}
                                         {{#if this.hasreplies}}
@@ -183,35 +183,38 @@
                                         {{/if}}
                                     {{/if}}
 
-                                    <div class="form-group message-container">
-                                        <div class="form-control message-holder" id="orig-message">{{this.message}}</div>
-                                        <label class="from" for="orig-message">{{this.sender}}</label>
-                                        <label class="orig-date" for="orig-message">{{prettifyDatetime this.senttime}}</label>
-                                    </div>
-
-                                    {{#if this.hasreplies}}
-                                        <div class="replies_div" id="reply{{this.id}}"></div>
-                                    {{/if}}
-
-                                    <form action="/send/reply/message" method="POST">
-                                        <div class="form-group reply-container">
-                                            <textarea type="text" id="pm_message" class="form-control reply-field" name="pm_message" rows="10" placeholder="Your reply here..." required></textarea>
-                                            <button type="submit" class="btn btn-warning btn-lg reply-submit">Submit</button>
-                                        </div>
-
-                                        {{#if ../user}}
-                                            <input type="hidden" id="pm_sender" name="pm_sender" value="{{../user.username}}">
-                                        {{/if}}
-                                        <input type="hidden" id="pm_receiver" name="pm_receiver" value="x">
-                                        <input type="hidden" id="pm_subject" name="pm_subject" value="x">
-                                        <input type="hidden" id="parent" name="parent" value="{{this.id}}">
-                                        <input type="hidden" id="orig_sender" name="orig_sender" value="{{this.sender}}">
-                                    </form>
-
                                     <div class="message-title-container">
                                         <p class="message-title">{{this.subject}}</p>
-                                    </div>  
-                                            
+                                    </div> 
+                                    
+                                    <div class="message-curtain{{this.id}} hide">
+                                        <div class="form-group message-container">
+                                            <div class="form-control message-holder" id="orig-message">{{this.message}}</div>
+                                            <label class="from" for="orig-message">{{this.sender}}</label>
+                                            <label class="orig-date" for="orig-message">{{prettifyDatetime this.senttime}}</label>
+                                        </div>
+
+                                        {{#if this.hasreplies}}
+                                            <div class="replies_div" id="reply{{this.id}}"></div>
+                                        {{/if}}
+
+                                        <form action="/send/reply/message" method="POST">
+                                            <div class="form-group reply-container">
+                                                <textarea type="text" id="pm_message" class="form-control reply-field" name="pm_message" rows="10" placeholder="Your reply here..." required></textarea>
+                                                <button type="submit" class="btn btn-warning btn-lg reply-submit">Submit</button>
+                                            </div>
+
+                                            {{#if ../user}}
+                                                <input type="hidden" id="pm_sender" name="pm_sender" value="{{../user.username}}">
+                                            {{/if}}
+                                            <input type="hidden" id="pm_receiver" name="pm_receiver" value="x">
+                                            <input type="hidden" id="pm_subject" name="pm_subject" value="x">
+                                            <input type="hidden" id="parent" name="parent" value="{{this.id}}">
+                                            <input type="hidden" id="orig_sender" name="orig_sender" value="{{this.sender}}">
+                                        </form>
+
+                                         
+                                    </div>            
                                 </div>
                             </div>
                             <a class="btn btn-warning btn-lg message-remove" data-id="{{this.id}}" data-sender="{{this.sender}}" data-user="{{../user.username}}" href="">Delete</a>
@@ -393,6 +396,26 @@
 
                   if (response) {
                     console.log('ok!');
+                  }
+                    
+                });
+
+            });
+
+            $(document).on('click', '.message-box-container', function(){
+
+                var pmID = $(this).data('id');
+                var senderID = $(this).data('sender');
+                var username = $(this).data('user');
+
+                var queryRead = "/message/read/" + pmID + "/" + senderID + "/" + username + "?_method=PUT";
+
+                //ajax makes request and returns the response
+                $.ajax({url: queryRead, type: 'POST'}).done(function(response) {
+
+                  if (response) {
+                    console.log('ok!');
+                    $('.message-curtain' + pmID).removeClass('hide');
                   }
                     
                 });
