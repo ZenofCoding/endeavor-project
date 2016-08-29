@@ -546,6 +546,7 @@ background: url(../images/hire.gif) no-repeat center center;
 .message-box-container{
   border: 1px solid #2a2a2a;
   background-color: #fd9602;
+  cursor: pointer;
 }
 
 .message-title-container{
