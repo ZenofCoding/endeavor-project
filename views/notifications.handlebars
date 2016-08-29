@@ -214,7 +214,7 @@
                                             
                                 </div>
                             </div>
-                            <a class="btn btn-warning btn-lg note-remove" data-id="{{this.notificationID}}" href="">Delete</a>
+                            <a class="btn btn-warning btn-lg message-remove" data-id="{{this.id}}" data-sender="{{this.sender}}" data-user="{{../user.username}}" href="">Delete</a>
                         {{/each}}
                 </div>
                 <div class="col-lg-5 col-lg-offset-2 col-sm-6">
@@ -335,12 +335,10 @@
                     if(pms[i].hasreplies == 1){
 
                         var parentID = pms[i].id;
-
                         var queryReply = "/private/message/replies/" + parentID;
 
                         //ajax makes request and returns the response
                         $.ajax({url: queryReply, type: 'GET'}).done(function(response) {
-
                           if (response) {
                             console.log(response);
 
@@ -370,20 +368,36 @@
                                 replyContainer.append(replyInner)//appends child div to replyContainer
                                 replyContainer.append(replyLabel1)//appends child div to replyContainer
                                 replyContainer.append(replyLabel2)//appends child div to replyContainer
+                                var parent = eval(response[i].parent);
 
-                                $('#reply' + parentID).append(replyContainer);//appends each notification to the 
+                                $('#reply' + parent).append(replyContainer);//appends each notification to the 
 
                             }
-
-                          }
-                            
+                          }      
                         });
-
                     }
-
                   }
 
             }
+
+            $(document).on('click', '.message-remove', function(){
+
+                var pmID = $(this).data('id');
+                var senderID = $(this).data('sender');
+                var username = $(this).data('user');
+
+                var queryRemove = "/message/delete/" + pmID + "/" + senderID + "/" + username + "?_method=PUT";
+
+                //ajax makes request and returns the response
+                $.ajax({url: queryRemove, type: 'POST'}).done(function(response) {
+
+                  if (response) {
+                    console.log('ok!');
+                  }
+                    
+                });
+
+            });
 
         });    
 

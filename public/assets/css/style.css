@@ -606,4 +606,20 @@ background: url(../images/hire.gif) no-repeat center center;
   color: #2a2a2a;
   margin-right: 15px;
 }
+
+.message-remove{
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  background-color: #2a2a2a;
+  font-size: 16px;
+  border-radius: 0px;
+  border: 1px solid #2a2a2a;
+}
+
+.message-remove:hover{
+  background-color: #ffffff;
+  color: #2a2a2a;
+  border: 1px solid #2a2a2a;
+}
 /*end styling for messages*/
