@@ -27,13 +27,13 @@ ________________________________________
 ## Screenshots
 Include a one or two screenshots of main UI/UX points of your app and how it solves a problem
 
-```HP ```  | ```Login``` |``` Profile ```|``` Requestor ``` 
+```HP ```  | ```Login``` |``` Profile ```|``` About ``` 
 ----|-----|----|----
-<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18041375/0b213496-6d86-11e6-8781-2da013d893a7.PNG"  alt="screenshot-HP"/>|<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18041488/98ac8d46-6d87-11e6-9bf6-4e1923034e5e.PNG" alt="screenshot-login"/>|<img align="center" height=120px src="https://cloud.githubusercontent.com/assets/3626203/18041612/a74c268a-6d88-11e6-8cff-9f108eecfb5f.png"  alt="screenshot-profile"/>|<img align="center"  height=120px src="https://cloud.githubusercontent.com/assets/3626203/18041516/dcd94edc-6d87-11e6-8137-5ed269216565.png" alt="Screenshot-About"/>
+<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18041375/0b213496-6d86-11e6-8781-2da013d893a7.PNG"  alt="screenshot-HP"/>|<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18041488/98ac8d46-6d87-11e6-9bf6-4e1923034e5e.PNG" alt="screenshot-login"/>|<img align="center" height=130px src="https://cloud.githubusercontent.com/assets/3626203/18041612/a74c268a-6d88-11e6-8cff-9f108eecfb5f.png"  alt="screenshot-profile"/>|<img align="center"  height=130px src="https://cloud.githubusercontent.com/assets/3626203/18041516/dcd94edc-6d87-11e6-8137-5ed269216565.png" alt="Screenshot-About"/>
 
-```HP ```  | ```Profile``` |``` Provider ```|``` Requestor ``` 
+```Job Creation ```  | ```Job Search``` |``` Notifications ```|``` Messages ``` 
 ----|-----|----|----
-<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18021497/bf9fe264-6bb5-11e6-8ee3-a2e56e67d032.PNG"  alt="Screen Shot of HP"/>|<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18021497/bf9fe264-6bb5-11e6-8ee3-a2e56e67d032.PNG" alt="Screen Shot of HP"/>|<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18021497/bf9fe264-6bb5-11e6-8ee3-a2e56e67d032.PNG"  alt="Screen Shot of HP"/>|<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18021497/bf9fe264-6bb5-11e6-8ee3-a2e56e67d032.PNG" alt="Screen Shot of HP"/>
+<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18041519/e1c3cd1e-6d87-11e6-813a-8ce2b70303d8.png"  alt="Screenshot-jobcreation"/>|<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18041521/e3b7f55a-6d87-11e6-942f-9632b34b7246.PNG" alt="Screenshot-jobsearch"/>|<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18041524/e7fded22-6d87-11e6-97e5-62b10f5d8507.png"  alt="Screenshot-notifications"/>|<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18041526/e9e20c90-6d87-11e6-9bd0-59ada5179e08.PNG" alt="Screenshot-messages"/>
 
 ```HP ```  | ```Profile``` |``` Provider ```|``` Requestor ``` 
 ----|-----|----|----
