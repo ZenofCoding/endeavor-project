@@ -271,19 +271,38 @@ router.get('/preferences', isLoggedIn, function(req, res) {
   });
 
   // all the available users  on the site based on the category
- router.get('/hire/:category', function(req, res) {
-  var condition = 'category = "' + req.params.category +'"';
-    endeavor.allWhere('userCategory', condition, function (userCategory) {
-       var condition1 = 'id = "' + req.params.user +'"';
-        endeavor.allWhere('user', condition, function (user) {
-          res.render('hire', {
-          user: req.user,
-          category: category
-        });
-      });
-    });
-  });
+ // router.get('/hire/:category', function(req, res) {
+ //  var condition = 'category = "' + req.params.category +'"';
+ //    endeavor.allWhere('userCategory', condition, function (userCategory) {
+ //       var condition1 = 'id = "' + req.params.user +'"';
+ //        endeavor.allWhere('user', condition, function (user) {
+ //          res.render('hire', {
+ //          user: req.user,
+ //          category: category
+ //        });
+ //      });
+ //    });
+ //  });
  //
+ // renders the job that corresponds to the categoryID passed in request
+router.get('/viewUsers/:categoryID', function(req, res) {
+var categoryCondition = 'userCategory.categoryID = ' + req.params.categoryID;
+var joinCondition = 'user.id = userCategory.categoryID';
+   endeavor.joinTwotables(['user.avatar', 'user.displayName', 'user.summary', 'user.hasavatar'], categoryCondition, joinCondition, function (hire) {
+     res.render('hire', {
+    user: req.user,
+    displayName: displayName,
+    avatar: avatar,
+    summary: summary,
+    hasavatar: hasavatar
+   }); 
+  console.log(res);
+  });
+});
+
+ 
+  
+
  // all the available jobs posted on the site based on the category
  router.get('/jobCategory/:category', function(req, res) {
   var condition = 'category = "' + req.params.category +'"';
@@ -312,6 +331,7 @@ router.get('/preferences', isLoggedIn, function(req, res) {
       });
     });
 });
+
 
 // renders the job that corresponds to the jobID passed in request
 router.get('/viewJob/:id/:user', function(req, res) {
@@ -362,23 +382,6 @@ var condition7 = 'jobs.jobID = ' + req.params.id;
   });
 });
 
-// renders the job that corresponds to the categoryID passed in request
-router.get('/viewUsers/:categoryID', function(req, res) {
-var categoryCondition = 'categoryID = ' + req.params.categoryID;
-  endeavor.allWhere('userCategory', condition, function (user) {
-    var userCondition = 'id = ' + req.params.user;
-    endeavor.allWhere('user', userCondition, function (hire) {
-        endeavor.all('category', function (category) {
-            res.render('hire', {
-              user: req.user,
-              category: category
-            });
-            console.log('hello');
-            //console.log(postUser, req.params.user, req.user);
-          });
-        });   
-      });  
-    });
 
 
 // renders the job that corresponds to the jobID passed in request

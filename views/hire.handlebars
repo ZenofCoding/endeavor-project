@@ -131,19 +131,43 @@
                 <!-- checks if job has been completed -->
             {{#unless this.completed}}
 
-                {{#unless this.bidaccepted}}
+                <!-- {{#unless this.bidaccepted}} -->
 
                 <div class="row">
+
+
+                     <div class="content-section-a">
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-5 col-sm-6">
+                                    <hr class="section-heading-spacer">
+                                    <div class="clearfix"></div>
+                                    <h2 class="section-heading">About<br>{{user.displayName}}</h2>
+                                    <p class="lead summary-about">{{user.summary}}</p>
+                                </div>
+                                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                                    {{#if user.hasavatar}}
+                                        <img class="img-responsive pref-pic" src="{{user.avatar}}" alt="User Profile Picture">
+                                    {{else}}
+                                        <img class="img-responsive pref-pic" src="//s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="Default Profile Picture">
+                                    {{/if}}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
                 
-                    <div class="job-box-container">  
+                    <!-- <div class="job-box-container">   -->
                         <!-- <a class="job-link" href="/viewJob/{{this.jobID}}/{{this.userID}}"> -->
-                        <a class="job-link" href="/viewUser/{{this.categoryID}}">
+                       <!--  <a class="job-link" href="/viewUser/{{this.categoryID}}"> -->
                             <!-- {{#if this.bidding}}
                                 <img class="job-bid-image" src="/assets/images/bid_btn.png">
                             {{else}}
                                 <img class="job-bid-image" src="/assets/images/fixed_btn.png">  
                             {{/if}} -->
-                            <div class="job-box-small">
+                            <!-- <div class="job-box-small"> -->
                                 <!-- <div class="job-title-box">
                                         <h2 class="job-title">{{this.title}}</h2>
                                 </div>
@@ -155,18 +179,18 @@
                                 {{/if}} -->
                                 <!-- <p class="job-title-desc">{{trimString this.description}}</p> -->
 
-                                <div class="job-box-footer">
+                              <!--   <div class="job-box-footer">
                                     <a class="btn btn-warning btn-lg job-box-category" href="/jobCategory/{{this.category}}">{{this.category}}</a>
                                     <a class="btn btn-warning btn-lg job-box-category" href="/jobSubCategory/{{this.subcategory}}">{{this.subcategory}}</a>
                                     <h2 class="job-box-price">{{this.budget}}</h2>
 
                                 </div>   
-                            </div>          
-                        </a>
-                    </div>
+                            </div>      -->     
+                      <!--   </a>
+                    </div> -->
             
-                </div>
-                {{/unless}}
+                <!-- </div> -->
+                <!-- {{/unless}} -->
                 
             {{/unless}}
             {{#if this.completed}}
@@ -181,7 +205,7 @@
 
     </div>
 
-    <!-- Footer -->
+    <!-- Footer --> 
     <footer>
         <div class="container">
             <div class="row">
@@ -217,7 +241,7 @@
 <script type="text/javascript">
 
     function changeUsers(category){
-      // window.location.href = '/viewUsers/:' + $('#category-val').data('categoryid');  
+      window.location.href = '/viewUsers/' + $('#category-val').data('categoryid');  
     };
 </script>
 
