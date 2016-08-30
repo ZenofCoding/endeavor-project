@@ -291,10 +291,7 @@ var joinCondition = ' user.id = userCategory.userID ';
    endeavor.joinTwotables(['user.avatar', 'user.displayName', 'user.summary', 'user.hasavatar'], 'userCategory', 'user', categoryCondition, joinCondition, function (hire) {
      res.render('hire', {
     user: req.user,
-    displayName: displayName,
-    avatar: avatar,
-    summary: summary,
-    hasavatar: hasavatar
+    hire: hire
    }); 
   console.log(res);
   });
