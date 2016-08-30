@@ -65,6 +65,9 @@
                     <li>
                         <a href="#contact">Contact</a>
                     </li>
+                    <li>
+                        <a href="/jobsearch">JobSearch</a>
+                    </li>
                     {{#if user}}
                         <li>
                             <a href="/logout">Logout</a>
@@ -138,7 +141,15 @@
                                 <div class="job-title-box">
                                         <h2 class="job-title">{{this.displayName}}</h2>
                                 </div>
-                                <img class="job-box-image1" src="{{this.avatar}}">
+      
+
+                                <a href="/public/profile/{{this.id}}">
+                                    {{#if this.hasavatar}}
+                                        <img class="img-responsive pref-pic" src="{{this.avatar}}" alt="User Profile Picture">
+                                    {{else}}
+                                    <img class="img-responsive pref-pic" src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="Default Profile Picture">
+                                    {{/if}}
+                                </a>
                                 
                                 <p class="job-title-desc">{{this.summary}}</p>
 
