@@ -118,81 +118,40 @@
             <br>
             <div class="form-group">
               <label for="category">Category</label>
-            <select id="category" class="form-control" name="category" onChange="changeUsers(this.value)"  required>
+            <select id="category" class="form-control" name="category"  onChange="changeCategory(this.value)" required>
                   <option value="">Choose a category</option>
+                  <h2>test</h2>
                   {{#each category}}
-                      <option id="category-val" name="category-val" data-categoryid="{{this.categoryID}}" value="{{this.description}}">{{this.description}}</option>
+                      <option id="category-val" name="category-val"  data-categoryID="{{this.categoryID}}" value="{{this.description}}">{{this.description}}</option>
                     {{/each}}
             </select>
         </div>
                 
             <!-- loops through each job -->
-        {{#each jobs}}
+        {{#each user}}
                 <!-- checks if job has been completed -->
-            {{#unless this.completed}}
+           <!--  {{#unless this.completed}}
 
-                <!-- {{#unless this.bidaccepted}} -->
+                {{#unless this.bidaccepted}} -->
 
                 <div class="row">
-
-
-                     <div class="content-section-a">
-
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-5 col-sm-6">
-                                    <hr class="section-heading-spacer">
-                                    <div class="clearfix"></div>
-                                    <h2 class="section-heading">About<br>{{user.displayName}}</h2>
-                                    <p class="lead summary-about">{{user.summary}}</p>
-                                </div>
-                                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                                    {{#if user.hasavatar}}
-                                        <img class="img-responsive pref-pic" src="{{user.avatar}}" alt="User Profile Picture">
-                                    {{else}}
-                                        <img class="img-responsive pref-pic" src="//s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="Default Profile Picture">
-                                    {{/if}}
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
                 
-                    <!-- <div class="job-box-container">   -->
-                        <!-- <a class="job-link" href="/viewJob/{{this.jobID}}/{{this.userID}}"> -->
-                       <!--  <a class="job-link" href="/viewUser/{{this.categoryID}}"> -->
-                            <!-- {{#if this.bidding}}
-                                <img class="job-bid-image" src="/assets/images/bid_btn.png">
-                            {{else}}
-                                <img class="job-bid-image" src="/assets/images/fixed_btn.png">  
-                            {{/if}} -->
-                            <!-- <div class="job-box-small"> -->
-                                <!-- <div class="job-title-box">
-                                        <h2 class="job-title">{{this.title}}</h2>
+                    <div class="job-box-container">  
+                        <a class="job-link" href="/viewUser/{{this.categoryID}}">
+                            <div class="job-box-small">
+                                <div class="job-title-box">
+                                        <h2 class="job-title">{{this.username}}</h2>
                                 </div>
-                                <img class="job-box-image1" src="{{this.image}}"> -->
-                                <!-- {{#if this.bidding}}
-                                    <img class="job-view-image" src="/assets/images/view_bid_btn.png">
-                                {{else}}
-                                    <img class="job-view-image" src="/assets/images/view_fixed_btn.png">  
-                                {{/if}} -->
-                                <!-- <p class="job-title-desc">{{trimString this.description}}</p> -->
-
-                              <!--   <div class="job-box-footer">
+                                <div class="job-box-footer">
                                     <a class="btn btn-warning btn-lg job-box-category" href="/jobCategory/{{this.category}}">{{this.category}}</a>
-                                    <a class="btn btn-warning btn-lg job-box-category" href="/jobSubCategory/{{this.subcategory}}">{{this.subcategory}}</a>
-                                    <h2 class="job-box-price">{{this.budget}}</h2>
-
+                                  
                                 </div>   
-                            </div>      -->     
-                      <!--   </a>
-                    </div> -->
+                            </div>          
+                        </a>
+                    </div>
             
-                <!-- </div> -->
-                <!-- {{/unless}} -->
-                
-            {{/unless}}
+                </div>
+
             {{#if this.completed}}
                 <li class="names-devour">
                     <!-- runs if burger is NOT marked as eaten in DB -->
@@ -205,7 +164,7 @@
 
     </div>
 
-    <!-- Footer --> 
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="row">
@@ -240,8 +199,8 @@
     <script src="/assets/scripts/bootstrap.min.js"></script>
 <script type="text/javascript">
 
-    function changeUsers(category){
-      window.location.href = '/viewUsers/' + $('#category-val').data('categoryid');  
+    function changeCategory(category){
+       window.location.href = '/jobCategory/' + category;  
     };
 </script>
 

@@ -238,6 +238,23 @@ var orm = {
       cb(result);
     });
   },
+  joinTwotables: function (colNames, table1, table2, condition1, condition2, cb) {
+    var queryString = 'SELECT ' + colNames.toString() + ' FROM ' + table1;
+    queryString = queryString + ' , ' +table2;
+     queryString = queryString + ' WHERE ';
+     queryString = queryString + condition1;
+     queryString = queryString + ' AND ';
+    queryString = queryString + condition2;
+    console.log(queryString);
+    connection.query(queryString, function (err, result) {
+      if (err) throw err;
+      cb(result);
+    });
+  },
+      // objColVals would be the columns and values that you want to update
+    // an example of objColVals would be {name: Big Mac, devoured: true}
+    //select userCategory.userID from user, userCategory where userCategory.categoryID = 12 and userCategory.userID = user.id;
+  
     // objColVals would be the columns and values that you want to update
     // an example of objColVals would be {name: Big Mac, devoured: true}
   delete: function (table, condition, cb) {

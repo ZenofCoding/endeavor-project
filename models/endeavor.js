@@ -78,6 +78,11 @@ var endeavor = {
       cb(res);
     });
   },
+  joinTwotables: function (colNames, table1, table2, condition1, condition2, cb) {
+    orm.joinTwotables(colNames, table1, table2, condition1, condition2, function (res) {
+      cb(res);
+    });
+  },
   // calls UPDATE/update function in orm.js
   // passes table name, column name, value, and id
   // objColVals is object
