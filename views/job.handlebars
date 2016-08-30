@@ -33,6 +33,7 @@
     <![endif]-->
     <!-- Link to Moment.js -->
     <!-- <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script> -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico" />
 </head>
 
 <body>
@@ -133,10 +134,10 @@
                     </div>
                     <div class="form-group">
                           <label for="edit_jobCategory">Category</label>
-                          <select id="edit_jobCategory" class="form-control" name="edit_jobCategory" onChange="populate('edit_jobCategory','edit_jobSubcategory')" required>
+                          <select id="edit_jobCategory" class="form-control" name="edit_jobCategory" onChange="getSubCategories()" required>
                           <option value="">Choose a category</option>
                           {{#each ../category}}
-                              <option value="{{this.description}}">{{this.description}}</option>
+                              <option value="{{this.description}}" data-catid="{{this.categoryID}}">{{this.description}}</option>
                           {{/each}}
                         </select>
                     </div>
@@ -876,11 +877,12 @@
 
         $(document).on('ready', function(){
 
+            {{#if user}}
             function getNotifications() {
 
-                var slug = {{{json user}}};
-                console.log(slug.id);
-                var queryURL = "/ajax/notifications/" + slug.id;
+                var slug = {{{json user.id}}};
+                console.log(slug);
+                var queryURL = "/ajax/notifications/" + slug;
 
                 //ajax makes request and returns the response
                 $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
@@ -909,27 +911,41 @@
 
             // runs the getNotifications function as soons as the script is executed
             getNotifications();
+            {{/if}}
 
         }); 
 
-    function populate(s1,s2){
-        var s1 = document.getElementById(s1);
-        var s2 = document.getElementById(s2);
-        s2.innerHTML = "";
-        if(s1.value == "Accounting"){
-            var optionArray = ["|","artpunk|Art Punk","alternativerock|Alternative Rock","collegerock|College Rock","experimentalrock|Experimental                              Rock","gothicrock|Gothic Rock","grunge|Grunge","hardcorepunk|Hardcore Punk","hardrock|Hard Rock","indierock|Indie Rock",                                                                                                                "lofi|Lo-fi","newwave|New Wave","progressiverock|Progressive Rock","punk|Punk","shoegaze|Shoegaze","steampunk|Steampunk"];
-        } else if(s1.value == "Administrative"){
-            var optionArray = ["|","acousticblues|Acoustic Blues","chicagoblues|Chicago Blues","classicblues|Classic Blues",
-                    "contemporaryblues|Contemporary Blues","countryblues|Country Blues","deltablues|Delta Blues","electricblues|Electric Blues"];
+        function getSubCategories() {     
+            
+            var catID = $('#edit_jobCategory option:selected').data('catid');
+            //var slug = {{{json category}}};
+
+            $('#edit_jobSubcategory').empty();
+            
+            var queryURL = "/ajax/subCategory/" + catID;
+
+            if($('#edit_jobCategory').val() != ''){
+              //ajax makes request and returns the response
+              $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
+
+                var subcategoryText ='';
+
+                for(var i=0; i < response.length; i++){
+
+                  console.log(response[i].description);
+
+                  subcategoryText = $('<option>');
+                  subcategoryText.val(response[i].description);
+                  subcategoryText.text(response[i].description);
+                  $("#edit_jobSubcategory").append(subcategoryText);
+               
+                }
+               
+              }); 
+
+            }
         }
-        for(var option in optionArray){
-            var pair = optionArray[option].split("|");
-            var newOption = document.createElement("option");
-            newOption.value = pair[0];
-            newOption.innerHTML = pair[1];
-            s2.options.add(newOption);
-        }
-    }
+
     </script>
 
 </body>

@@ -581,12 +581,12 @@
                 }
             };
 
-
+            {{#if user}}
             function getNotifications() {
 
-                var slug = {{{json user}}};
-                console.log(slug.id);
-                var queryURL = "/ajax/notifications/" + slug.id;
+                var slug = {{{json user.id}}};
+                console.log(slug);
+                var queryURL = "/ajax/notifications/" + slug;
 
                 //ajax makes request and returns the response
                 $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
@@ -615,6 +615,7 @@
 
             // runs the getNotifications function as soons as the script is executed
             getNotifications();
+            {{/if}}
 
         });    
   
@@ -627,45 +628,26 @@
             
             var queryURL = "/ajax/subCategory/" + catID;
 
-            //ajax makes request and returns the response
-            $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
+            if($('#category').val() != ''){
+                //ajax makes request and returns the response
+                $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
 
-              var subcategoryText ='';
+                  var subcategoryText ='';
 
-              for(var i=0; i < response.length; i++){
+                  for(var i=0; i < response.length; i++){
 
-                console.log(response[i].description);
+                    console.log(response[i].description);
 
-                subcategoryText = $('<option>');
-                subcategoryText.val(response[i].description);
-                subcategoryText.text(response[i].description);
-                $("#subcategory").append(subcategoryText);
-             
-              }
-             
-            }); 
-        }
+                    subcategoryText = $('<option>');
+                    subcategoryText.val(response[i].description);
+                    subcategoryText.text(response[i].description);
+                    $("#subcategory").append(subcategoryText);
+                 
+                  }
+                 
+                });
 
-        // runs the getNotifications function as soons as the script is executed
-        
-
-        function populate(s1,s2){
-            var s1 = document.getElementById(s1);
-            var s2 = document.getElementById(s2);
-            s2.innerHTML = "";
-            if(s1.value == "Accounting"){
-                var optionArray = ["|","art punk|Art Punk","alternativerock|Alternative Rock","collegerock|College Rock","experimentalrock|Experimental                              Rock","gothicrock|Gothic Rock","grunge|Grunge","hardcorepunk|Hardcore Punk","hardrock|Hard Rock","indierock|Indie Rock",                                                                                                                "lofi|Lo-fi","newwave|New Wave","progressiverock|Progressive Rock","punk|Punk","shoegaze|Shoegaze","steampunk|Steampunk"];
-            } else if(s1.value == "Administrative"){
-                var optionArray = ["|","acousticblues|Acoustic Blues","chicagoblues|Chicago Blues","classicblues|Classic Blues",
-                        "contemporaryblues|Contemporary Blues","countryblues|Country Blues","deltablues|Delta Blues","electricblues|Electric Blues"];
-            }
-            for(var option in optionArray){
-                var pair = optionArray[option].split("|");
-                var newOption = document.createElement("option");
-                newOption.value = pair[0];
-                newOption.innerHTML = pair[1];
-                s2.options.add(newOption);
-            }
+            } 
         }
 
     </script>
