@@ -287,8 +287,8 @@ router.get('/preferences', isLoggedIn, function(req, res) {
  // renders the job that corresponds to the categoryID passed in request
 router.get('/viewUsers/:categoryID', function(req, res) {
 var categoryCondition = 'userCategory.categoryID = ' + req.params.categoryID;
-var joinCondition = 'user.id = userCategory.categoryID';
-   endeavor.joinTwotables(['user.avatar', 'user.displayName', 'user.summary', 'user.hasavatar'], categoryCondition, joinCondition, function (hire) {
+var joinCondition = ' user.id = userCategory.userID ';
+   endeavor.joinTwotables(['user.avatar', 'user.displayName', 'user.summary', 'user.hasavatar'], 'userCategory', 'user', categoryCondition, joinCondition, function (hire) {
      res.render('hire', {
     user: req.user,
     displayName: displayName,

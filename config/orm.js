@@ -240,7 +240,7 @@ var orm = {
   },
   joinTwotables: function (colNames, table1, table2, condition1, condition2, cb) {
     var queryString = 'SELECT ' + colNames.toString() + ' FROM ' + table1;
-    queryString = queryString + table2;
+    queryString = queryString + ' , ' +table2;
      queryString = queryString + ' WHERE ';
      queryString = queryString + condition1;
      queryString = queryString + ' AND ';
