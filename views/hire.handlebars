@@ -121,7 +121,7 @@
             <select id="category" class="form-control" name="category" onChange="changeUsers(this.value)"  required>
                   <option value="">Choose a category</option>
                   {{#each category}}
-                      <option id="category-val" name="category-val" data-categoryid="{{this.categoryID}}" value="{{this.description}}">{{this.description}}</option>
+                      <option id="category-val" name="category-val" data-categoryid="{{this.categoryID}}" value="{{this.categoryID}}">{{this.description}}</option>
                     {{/each}}
             </select>
         </div>
@@ -241,7 +241,8 @@
 <script type="text/javascript">
 
     function changeUsers(category){
-      window.location.href = '/viewUsers/' + $('#category-val').data('categoryid');  
+        alert(category);
+      window.location.href = '/viewUsers/' + category;  
     };
 </script>
 

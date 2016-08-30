@@ -261,12 +261,13 @@ router.get('/preferences', isLoggedIn, function(req, res) {
   // all the available users posted on the site
   router.get('/hire', function(req, res) {
       endeavor.all('category', function (category) {
-          endeavor.all('user', function (user) {
+         // endeavor.all('user', function (user) {
               res.render('hire', {
-                user: req.user,
+               // user: req.user,
                 category: category
+
               });
-           });
+           //});
        });
   });
 
@@ -285,18 +286,22 @@ router.get('/preferences', isLoggedIn, function(req, res) {
  //  });
  //
  // renders the job that corresponds to the categoryID passed in request
-router.get('/viewUsers/:categoryID', function(req, res) {
+router.get('/viewUsers/:categoryID', function(req, res) {  
 var categoryCondition = 'userCategory.categoryID = ' + req.params.categoryID;
 var joinCondition = ' user.id = userCategory.userID ';
-   endeavor.joinTwotables(['user.avatar', 'user.displayName', 'user.summary', 'user.hasavatar'], 'userCategory', 'user', categoryCondition, joinCondition, function (hire) {
+   endeavor.joinTwotables(['user.avatar', 'user.displayName', 'user.summary', 'user.hasavatar'], 'userCategory', 'user', categoryCondition, joinCondition, function (userHire) {
+    endeavor.all('category', function (category) {
      res.render('hire', {
-    user: req.user,
-    displayName: displayName,
-    avatar: avatar,
-    summary: summary,
-    hasavatar: hasavatar
-   }); 
-  console.log(res);
+      user: req.user,
+      displayName: userHire.displayName,
+      avatar: userHire.avatar,
+      summary: userHire.summary,
+      hasavatar: userHire.hasavatar,
+      category: category
+     });
+     console.log(category);
+  }); 
+  console.log(userHire);
   });
 });
 
