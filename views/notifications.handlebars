@@ -33,7 +33,7 @@
     <![endif]-->
     <!-- Link to Moment.js -->
     <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-
+    <link rel="shortcut icon" href="/assets/images/favicon.ico" />
 </head>
 
 <body>
@@ -272,11 +272,12 @@
 
         $(document).on('ready', function(){
 
+            {{#if user}}
             function getNotifications() {
 
-                var slug = {{{json user}}};
-                console.log(slug.id);
-                var queryURL = "/ajax/notifications/" + slug.id;
+                var slug = {{{json user.id}}};
+                console.log(slug);
+                var queryURL = "/ajax/notifications/" + slug;
 
                 //ajax makes request and returns the response
                 $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
@@ -305,6 +306,7 @@
 
             // runs the getNotifications function as soons as the script is executed
             getNotifications();
+            {{/if}}
 
             $(document).on('click', '.note-remove', function(){
 
