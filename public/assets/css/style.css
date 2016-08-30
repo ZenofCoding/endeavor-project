@@ -221,6 +221,7 @@ background: url(../images/hire.gif) no-repeat center center;
 .job-title-desc{
   margin: 15px 15px 15px 15px;
   white-space: pre-wrap;
+  color: #000000;
 }
 
 .float-right{
