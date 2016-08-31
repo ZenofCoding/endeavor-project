@@ -67,19 +67,14 @@ What to install and how for local development and testing purposes
 
 ## Running the tests
 
-Explain how to run the automated tests for this system (if applicable)
-
 ```
-jasmine
 
-jasmine spec/appSpec.js
 ```
 
 ## Built With
 
 * Sublime Text is pretty cool too I guess
-* Balsamiq - Wireframe of choice 
-* RoboMongo - Because .pretty() everything is tedious
+
 
 ## Walk throughs of code
 For Project presentation, you can include snippets of code you found buggy, interesting, or are overall proud of here.  Try to limit the quantity and size to quick readable bits.
@@ -87,11 +82,10 @@ For Project presentation, you can include snippets of code you found buggy, inte
 You can also show where you've used technologies you've learned and applied here.
 
 ```
-function awesomeThing() {
-    //...
-    // try not to make it too long otherwise, point to filepaths:line numbers
-    //...
-}
+<!-- scroll bar for notifications -->
+        <a class="news-banner hide" href="/notifications/{{user.id}}/{{user.username}}">      
+            <div class="scroll-left"></div>
+        </a>
 ```
 
 ## Authors
