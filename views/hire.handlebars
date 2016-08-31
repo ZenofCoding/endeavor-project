@@ -51,10 +51,14 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    {{#if user}}
+                    {{#if user.displayName}}
                         <li>
-                            <a href="/profile">Dashboard</a>
-                        </li>  
+                            <a href="/profile">{{user.displayName}}</a>
+                        </li> 
+                    {{else}}
+                        <li>
+                            <a href="/profile">{{user.username}}</a>
+                        </li> 
                     {{/if}}
                     <li>
                         <a href="#about">About</a>
@@ -118,6 +122,7 @@
             </div>
 
         </div>
+    </div>
         <!-- /.container -->
 
     </div>
@@ -125,7 +130,7 @@
 
     <!-- Page Content -->
 
-  <a  name="services"></a>
+  <a name="services"></a>
      <div class="content-section-a">
 
         <div class="container">
@@ -133,7 +138,7 @@
             <br>
             <div class="form-group">
               <label for="category">Category</label>
-            <select id="category" class="form-control" name="category" onChange="changeUsers(this.value)"  required>
+            <select id="category" class="form-control" name="category" onChange="changeUsers(this.value)" required>
                   <option value="">Choose a category</option>
                   {{#each category}}
                       <option id="category-val" name="category-val" data-categoryid="{{this.categoryID}}" value="{{this.categoryID}}">{{this.description}}</option>
@@ -147,32 +152,78 @@
 
                 <div class="row">
 
-                    <div class="job-box-container">  
-                        
-                            <div class="job-box-small">
-                                <div class="job-title-box">
-                                        <h2 class="job-title">{{this.displayName}}</h2>
+                    <div class="job-box-container">      
+                            <div class="hire-box-small">
+                                <div class="hire-title-box">
+                                    {{#if this.displayName}}
+                                        <h2 class="hire-title">{{this.displayName}}</h2> 
+                                    {{else}}
+                                        <h2 class="hire-title">{{this.username}}</h2>
+                                    {{/if}}   
                                 </div>
       
-
                                 <a href="/public/profile/{{this.id}}">
                                     {{#if this.hasavatar}}
-                                        <img class="img-responsive pref-pic" src="{{this.avatar}}" alt="User Profile Picture">
+                                        <img class="job-box-image1" src="{{this.avatar}}" alt="User Profile Picture">
                                     {{else}}
-                                    <img class="img-responsive pref-pic" src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="Default Profile Picture">
+                                        <img class="job-box-image1" src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="Default Profile Picture">
                                     {{/if}}
                                 </a>
                                 
-                                <p class="job-title-desc">{{this.summary}}</p>
+                                {{#if this.summary}}
+                                    <p class="job-title-desc">{{trimString this.summary}}</p>
+                                {{/if}}
 
+                                <div class="job-box-footer">
+                                </div>
+
+                            </div>            
+                    </div>
+
+                </div>
+   
+        {{/each}}
+
+            <!-- loops through each job -->
+        {{#each employee}}
+         
+
+                <div class="row">
+
+                    <div class="job-box-container">  
+                        
+                        <div class="hire-box-small">
+                            <div class="hire-title-box">
+                                {{#if this.displayName}}
+                                    <h2 class="hire-title">{{this.displayName}}</h2> 
+                                {{else}}
+                                    <h2 class="hire-title">{{this.username}}</h2>
+                                {{/if}}
+                            </div>
+  
+                            <a href="/public/profile/{{this.id}}">
+                                {{#if this.hasavatar}}
+                                    <img class="job-box-image1" src="{{this.avatar}}" alt="User Profile Picture">
+                                {{else}}
+                                    <img class="job-box-image1" src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="Default Profile Picture">
+                                {{/if}}
+                            </a>
                             
-                            </div>          
+                            {{#if this.summary}}
+                                <p class="job-title-desc">{{trimString this.summary}}</p>
+                            {{/if}}
+
+                            <div class="job-box-footer">
+                            </div>
+                        
+                        </div>          
                        
                     </div>
             
                 </div>
    
         {{/each}}
+
 
         </div>
 
@@ -215,7 +266,7 @@
 
     function changeUsers(category){
         
-      window.location.href = '/viewUsers/' + category;  
+      window.location.href = '/hire/' + category;  
     };
 </script>
 
