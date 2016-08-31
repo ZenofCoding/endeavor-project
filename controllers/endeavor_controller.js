@@ -435,7 +435,7 @@ router.post('/job/bid', function (req, res) {
   endeavor.create(['bid'], ['description', 'userID', 'jobID', 'amount', 'bidType', 'jobOwnerID'], [req.body.bid_description, req.body.bid_userID, req.body.bid_jobID, req.body.bid_budget, req.body.bid_type, req.body.job_owner], function (result) {
     var condition = 'jobID = ' + req.body.bid_jobID;
     endeavor.update(['jobs'], { bidID: result.insertId, hasbid: req.body.hasbid_initial, bidderID: req.body.bid_userID}, condition, function () {
-      endeavor.create(['notifications'], ['jobID', 'employerID', 'employeeID', 'notification', 'type'], [req.body.bid_jobID, req.body.job_owner, req.body.job_owner, req.body.note_Message, req.body.bid_type], function () {
+      endeavor.create(['notifications'], ['jobID', 'employerID', 'employeeID', 'notification', 'type'], [req.body.bid_jobID, req.body.job_owner, req.body.job_owner, req.body.note_Message, req.body.note_type], function () {
       // console.log('Resonse Logged', res.json(result));
         res.redirect('/profile');
       });
