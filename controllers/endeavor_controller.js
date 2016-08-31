@@ -261,13 +261,15 @@ router.get('/preferences', isLoggedIn, function(req, res) {
   // all the available users posted on the site
   router.get('/hire', function(req, res) {
       endeavor.all('category', function (category) {
-         // endeavor.all('user', function (user) {
+        var Condition = 'employee = true';
+          endeavor.allWhere('user', Condition, function (employee) {
               res.render('hire', {
-               // user: req.user,
-                category: category
+                user: req.user,
+                category: category,
+                employee: employee
 
               });
-           //});
+           });
        });
   });
 
@@ -286,9 +288,9 @@ router.get('/preferences', isLoggedIn, function(req, res) {
  //  });
  //
  // renders the job that corresponds to the categoryID passed in request
-router.get('/viewUsers/:categoryID', function(req, res) {  
+router.get('/hire/:categoryID', function(req, res) {  
 var categoryCondition = 'userCategory.categoryID = ' + req.params.categoryID;
-var joinCondition = ' user.id = userCategory.userID ';
+var joinCondition = ' user.id = userCategory.userID AND user.employee = true';
    endeavor.joinTwotables(['user.id', 'user.avatar', 'user.displayName', 'user.summary', 'user.hasavatar'], 'userCategory', 'user', categoryCondition, joinCondition, function (userHire) {
     endeavor.all('category', function (category) {
     res.render('hire', {
