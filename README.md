@@ -29,7 +29,7 @@ Include a one or two screenshots of main UI/UX points of your app and how it sol
 
 ```Home Page ```  | ```Login``` |``` Hire ```|``` JobSearch ``` 
 ----|-----|----|----
-<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18041375/0b213496-6d86-11e6-8781-2da013d893a7.PNG"  alt="screenshot-HP"/>|<img align="center"  src="https://cloud.githubusercontent.com/assets/3626203/18144981/5b582bbe-6f97-11e6-8e81-15b35c108603.PNG" alt="screenshot-login"/>|<img  height=130px width=60% align="center" src="https://cloud.githubusercontent.com/assets/3626203/18145036/7ee616f4-6f97-11e6-9aca-18291872cdea.png"  alt="screenshot-hire"/>|<img align="center"  height=130px width=75% src="https://cloud.githubusercontent.com/assets/3626203/18145023/6fb2c632-6f97-11e6-9342-6fb2d917fbb7.PNG" alt="Screenshot-jobsearch"/>
+<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18041375/0b213496-6d86-11e6-8781-2da013d893a7.PNG"  alt="screenshot-HP"/>|<img align="center"  src="https://cloud.githubusercontent.com/assets/3626203/18144981/5b582bbe-6f97-11e6-8e81-15b35c108603.PNG" alt="screenshot-login"/>|<img  height=130px width=70% align="center" src="https://cloud.githubusercontent.com/assets/3626203/18145036/7ee616f4-6f97-11e6-9aca-18291872cdea.png"  alt="screenshot-hire"/>|<img align="center"  height=130px width=65% src="https://cloud.githubusercontent.com/assets/3626203/18145023/6fb2c632-6f97-11e6-9342-6fb2d917fbb7.PNG" alt="Screenshot-jobsearch"/>
 
 ```Profile ```  | ```About ``` |``` Job Creation ```|``` Job Edition ``` 
 ----|-----|----|----
