@@ -41,7 +41,8 @@ Include a one or two screenshots of main UI/UX points of your app and how it sol
 
 ## Technologies used
 You can give a brief listing of the technologies you've learned and applied here
-- node.js
+
+- node.js|      
 - Express
 - Handblebars
 - MySQL
@@ -50,6 +51,11 @@ You can give a brief listing of the technologies you've learned and applied here
 - GitHub
 - Lucidchart
 - Favicon generator
+- Express-Session
+- Cookie-Parser
+- Method-Override
+- Flash
+- Moment
 
 ## Getting Started
 
