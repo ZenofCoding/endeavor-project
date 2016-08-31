@@ -25,7 +25,7 @@ The ***service provider*** can perform the following tasks:
 ________________________________________
 
 ## Screenshots
-Include a one or two screenshots of main UI/UX points of your app and how it solves a problem
+
 
 ```Home Page ```  | ```Login``` |``` Hire ```|``` JobSearch ``` 
 ----|-----|----|----
@@ -40,7 +40,6 @@ Include a one or two screenshots of main UI/UX points of your app and how it sol
 <img align="center" height=130px src="https://cloud.githubusercontent.com/assets/3626203/18146227/98a6c840-6f9c-11e6-8de3-a2bc47848674.PNG" alt="Screen Shot of preferences"/>|<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18145062/94c741c8-6f97-11e6-9a4d-5686e9d1e7e1.png"/>|<img align="center" width=100% src="https://cloud.githubusercontent.com/assets/3626203/18145095/b670a378-6f97-11e6-9fb2-a7ca4e796016.png" alt="Screenshot-messages"/>|<img align="center"width=100% src="https://cloud.githubusercontent.com/assets/3626203/18041528/eb4ea53e-6d87-11e6-817a-7b7422fb2955.png"  alt="ScreenShot-ratings"/>
 
 ## Technologies used
-You can give a brief listing of the technologies you've learned and applied here
 
 - node.js|      
 - Express
@@ -59,11 +58,8 @@ You can give a brief listing of the technologies you've learned and applied here
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisities
-
-What to install and how for local development and testing purposes
 
 ```
 - node.js: visit node.js and download...
@@ -83,7 +79,7 @@ What to install and how for local development and testing purposes
 
 
 ## Walk throughs of code
-For Project presentation, you can include snippets of code you found buggy, interesting, or are overall proud of here.  Try to limit the quantity and size to quick readable bits.
+
 
 You can also show where you've used technologies you've learned and applied here.
 
