@@ -162,6 +162,40 @@
    
         {{/each}}
 
+            <!-- loops through each job -->
+        {{#each employee}}
+         
+
+                <div class="row">
+
+                    <div class="job-box-container">  
+                        
+                            <div class="job-box-small">
+                                <div class="job-title-box">
+                                        <h2 class="job-title">{{this.displayName}}</h2>
+                                </div>
+      
+
+                                <a href="/public/profile/{{this.id}}">
+                                    {{#if this.hasavatar}}
+                                        <img class="img-responsive pref-pic" src="{{this.avatar}}" alt="User Profile Picture">
+                                    {{else}}
+                                    <img class="img-responsive pref-pic" src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="Default Profile Picture">
+                                    {{/if}}
+                                </a>
+                                
+                                <p class="job-title-desc">{{this.summary}}</p>
+
+                            
+                            </div>          
+                       
+                    </div>
+            
+                </div>
+   
+        {{/each}}
+
+
         </div>
 
     </div>
@@ -203,7 +237,7 @@
 
     function changeUsers(category){
         
-      window.location.href = '/viewUsers/' + category;  
+      window.location.href = '/hire/' + category;  
     };
 </script>
 
