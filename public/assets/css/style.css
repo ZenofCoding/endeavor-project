@@ -625,3 +625,22 @@ background: url(../images/hire.gif) no-repeat center center;
   border: 1px solid #2a2a2a;
 }
 /*end styling for messages*/
+.hire-box-small{
+  text-decoration: none;
+  position: relative;
+  margin-top: 15px;
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.hire-title-box{
+  position: relative;
+  background-color: #2a2a2a;
+  padding: 1px 15px 1px 15px;
+}
+
+.hire-title{
+  color: #ffffff;
+}
