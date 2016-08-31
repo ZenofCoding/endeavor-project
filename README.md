@@ -105,5 +105,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Manjesh V on github for sharing his authentication code
+*  Thanks to Manjesh V on github for sharing his authentication code
 
