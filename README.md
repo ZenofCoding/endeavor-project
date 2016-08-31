@@ -33,7 +33,7 @@ Include a one or two screenshots of main UI/UX points of your app and how it sol
 
 ```Profile ```  | ```About ``` |``` Job Creation ```|``` Job Edition ``` 
 ----|-----|----|----
-<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18145055/8bff5b52-6f97-11e6-8832-72ea934a0c79.png"  alt="Screenshot-profile"/>|<img align="center" width=75% src="https://cloud.githubusercontent.com/assets/3626203/18041521/e3b7f55a-6d87-11e6-942f-9632b34b7246.PNG" alt="Screenshot-jobsearch"/>|<img align="center" height=130px width=75% src="https://cloud.githubusercontent.com/assets/3626203/18041517/deee3836-6d87-11e6-85d2-717b603da636.png"  alt="ScreenShot-editing"/>|<img align="center" width=75% src="https://cloud.githubusercontent.com/assets/3626203/18021497/bf9fe264-6bb5-11e6-8ee3-a2e56e67d032.PNG" alt="Screen Shot of HP"/>
+<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18145055/8bff5b52-6f97-11e6-8832-72ea934a0c79.png"  alt="Screenshot-profile"/>|<img align="center" width=75% src="https://cloud.githubusercontent.com/assets/3626203/18145261/715b255a-6f98-11e6-9663-f4d7b00e31c3.png" alt="Screenshot-about"/>|<img align="center" height=130px width=75% src="https://cloud.githubusercontent.com/assets/3626203/18145277/7ed873e0-6f98-11e6-8a67-54bc31c50462.png"  alt="ScreenShot-creation"/>|<img align="center" width=75% src="https://cloud.githubusercontent.com/assets/3626203/18145283/8a769a74-6f98-11e6-8cf4-406bd2e807de.png" alt="Screen Shot of jodediting"/>
 
 ```Notifications ```  | ```Messages``` |``` Ratings ```|``` Requestor ``` 
 ----|-----|----|----
