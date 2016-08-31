@@ -434,7 +434,7 @@ router.post('/job/bid', function (req, res) {
   endeavor.create(['bid'], ['description', 'userID', 'jobID', 'amount', 'bidType', 'jobOwnerID'], [req.body.bid_description, req.body.bid_userID, req.body.bid_jobID, req.body.bid_budget, req.body.bid_type, req.body.job_owner], function (result) {
     var condition = 'jobID = ' + req.body.bid_jobID;
     endeavor.update(['jobs'], { bidID: result.insertId, hasbid: req.body.hasbid_initial, bidderID: req.body.bid_userID}, condition, function () {
-      endeavor.create(['notifications'], ['jobID', 'employerID', 'employeeID', 'notification'], [req.body.bid_jobID, req.body.job_owner, req.body.job_owner, req.body.note_Message], function () {
+      endeavor.create(['notifications'], ['jobID', 'employerID', 'employeeID', 'notification', 'type'], [req.body.bid_jobID, req.body.job_owner, req.body.job_owner, req.body.note_Message, req.body.bid_type], function () {
       // console.log('Resonse Logged', res.json(result));
         res.redirect('/profile');
       });
@@ -448,10 +448,11 @@ router.post('/job/bid', function (req, res) {
 router.put('/job/bid/accept/:jobID/:bidID/:bidderID', function (req, res) {
   var condition = 'jobID = ' + req.params.jobID;
   var condition2 = 'bidID = ' + req.params.bidID;
+  var typeBidAccept = '1';
   console.log('condition', condition,'condition2', condition2);
   endeavor.updateString(['jobs'], { bidID: req.params.bidID, bidaccepted: req.body.accept_bid, bidderID: req.params.bidderID }, condition, function () {
     endeavor.updateString(['bid'], { bidaccepted: req.body.accept_bid }, condition2, function () {
-      endeavor.create(['notifications'], ['jobID', 'employerID', 'employeeID', 'notification'], [req.params.jobID, req.body.employer, req.params.bidderID, req.body.note_bidAccept], function () {
+      endeavor.create(['notifications'], ['jobID', 'employerID', 'employeeID', 'notification', 'type'], [req.params.jobID, req.body.employer, req.params.bidderID, req.body.note_bidAccept, typeBidAccept], function () {
         res.redirect('/profile');
       });
     });
@@ -464,10 +465,11 @@ router.put('/job/bid/accept/:jobID/:bidID/:bidderID', function (req, res) {
 router.put('/job/app/accept/:jobID/:appID/:applicantID', function (req, res) {
   var condition = 'jobID = ' + req.params.jobID;
   var condition2 = 'bidID = ' + req.params.appID;
+  var typeAppAccept = '4';
   console.log('condition', condition,'condition2', condition2);
   endeavor.updateString(['jobs'], { bidID: req.params.appID, bidaccepted: req.body.accept_app, bidderID: req.params.applicantID }, condition, function () {
     endeavor.updateString(['bid'], { bidaccepted: req.body.accept_app }, condition2, function () {
-      endeavor.create(['notifications'], ['jobID', 'employerID', 'employeeID', 'notification'], [req.params.jobID, req.body.employer, req.params.applicantID, req.body.note_ReviewMessage], function () {
+      endeavor.create(['notifications'], ['jobID', 'employerID', 'employeeID', 'notification', 'type'], [req.params.jobID, req.body.employer, req.params.applicantID, req.body.note_ReviewMessage, typeAppAccept], function () {
         res.redirect('/profile');
       });
     });
@@ -479,9 +481,10 @@ router.put('/job/app/accept/:jobID/:appID/:applicantID', function (req, res) {
 // redirects to .get /preferences with a value of true and shows success modal
 router.put('/job/bid/reject/:bidID', function (req, res) {
   var condition = 'bidID = ' + req.params.bidID;
+  var typeBidReject = '2';
   console.log('condition', condition);
   endeavor.updateString(['bid'], { biddenied: req.body.reject_bid }, condition, function () {
-    endeavor.create(['notifications'], ['jobID', 'employerID', 'employeeID', 'notification'], [req.body.jobID, req.body.employer, req.body.employee, req.body.note_bidReject], function () {
+    endeavor.create(['notifications'], ['jobID', 'employerID', 'employeeID', 'notification', 'type'], [req.body.jobID, req.body.employer, req.body.employee, req.body.note_bidReject, typeBidReject], function () {
       res.redirect('back');
     });
   });
@@ -611,8 +614,9 @@ router.put('/preferences/update/summary/:id', function (req, res) {
 router.put('/job/complete/:jobID/:employerID/:employeeID', function (req, res) {
   endeavor.create(['feedback'], ['rating', 'jobID', 'employerID', 'employeeID', 'review', 'title'], [req.body.job_rated, req.params.jobID, req.params.employerID, req.params.employeeID, req.body.job_review, req.body.job_compTitle], function () {
     var condition = 'jobID = ' + req.params.jobID;
+    var typeReview = '6';
     endeavor.update(['jobs'], { completed: req.body.job_complete }, condition, function () {
-      endeavor.create(['notifications'], ['jobID', 'employerID', 'employeeID', 'notification'], [req.params.jobID, req.params.employerID, req.params.employeeID, req.body.note_ReviewMessage], function () {
+      endeavor.create(['notifications'], ['jobID', 'employerID', 'employeeID', 'notification', 'type'], [req.params.jobID, req.params.employerID, req.params.employeeID, req.body.note_ReviewMessage, typeReview], function () {
         res.redirect('/profile');
       });
     });
