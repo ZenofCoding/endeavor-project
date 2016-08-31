@@ -604,6 +604,7 @@
 .message-holder{
   background-color: #f0ad4e !important;
   border-color: #f0ad4e !important;
+  height: auto;
 }
 
 .reply-field{
