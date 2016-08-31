@@ -33,7 +33,7 @@ Include a one or two screenshots of main UI/UX points of your app and how it sol
 
 ```Profile ```  | ```About ``` |``` Job Creation ```|``` Job Edition ``` 
 ----|-----|----|----
-<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18145055/8bff5b52-6f97-11e6-8832-72ea934a0c79.png"  alt="Screenshot-profile"/>|<img align="center" width=75% src="https://cloud.githubusercontent.com/assets/3626203/18145261/715b255a-6f98-11e6-9663-f4d7b00e31c3.png" alt="Screenshot-about"/>|<img align="center" height=130px width=75% src="https://cloud.githubusercontent.com/assets/3626203/18146490/f5f061c2-6f9d-11e6-849e-a899b749be12.png"  alt="ScreenShot-creation"/>|<img align="center" width=75% src="https://cloud.githubusercontent.com/assets/3626203/18145283/8a769a74-6f98-11e6-8cf4-406bd2e807de.png" alt="Screen Shot of jodediting"/>
+<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18145055/8bff5b52-6f97-11e6-8832-72ea934a0c79.png"  alt="Screenshot-profile"/>|<img align="center" width=75% src="https://cloud.githubusercontent.com/assets/3626203/18145261/715b255a-6f98-11e6-9663-f4d7b00e31c3.png" alt="Screenshot-about"/>|<img align="center" height=180px width=75% src="https://cloud.githubusercontent.com/assets/3626203/18146490/f5f061c2-6f9d-11e6-849e-a899b749be12.png"  alt="ScreenShot-creation"/>|<img align="center" width=75% src="https://cloud.githubusercontent.com/assets/3626203/18145283/8a769a74-6f98-11e6-8cf4-406bd2e807de.png" alt="Screen Shot of jodediting"/>
 
 ``` Preferences ``` |```Notifications ```  | ```Messages``` |``` Ratings ```
 ----|-----|----|----
