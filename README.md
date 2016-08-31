@@ -35,9 +35,9 @@ Include a one or two screenshots of main UI/UX points of your app and how it sol
 ----|-----|----|----
 <img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18145055/8bff5b52-6f97-11e6-8832-72ea934a0c79.png"  alt="Screenshot-profile"/>|<img align="center" width=75% src="https://cloud.githubusercontent.com/assets/3626203/18145261/715b255a-6f98-11e6-9663-f4d7b00e31c3.png" alt="Screenshot-about"/>|<img align="center" height=130px width=75% src="https://cloud.githubusercontent.com/assets/3626203/18145277/7ed873e0-6f98-11e6-8a67-54bc31c50462.png"  alt="ScreenShot-creation"/>|<img align="center" width=75% src="https://cloud.githubusercontent.com/assets/3626203/18145283/8a769a74-6f98-11e6-8cf4-406bd2e807de.png" alt="Screen Shot of jodediting"/>
 
-```Notifications ```  | ```Messages``` |``` Ratings ```|``` Requestor ``` 
+``` Preferences ``` |```Notifications ```  | ```Messages``` |``` Ratings ```
 ----|-----|----|----
-<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18145062/94c741c8-6f97-11e6-9a4d-5686e9d1e7e1.png"/>|<img align="center" width=100% src="https://cloud.githubusercontent.com/assets/3626203/18145095/b670a378-6f97-11e6-9fb2-a7ca4e796016.png" alt="Screenshot-messages"/>|<img align="center"width=100% src="https://cloud.githubusercontent.com/assets/3626203/18041528/eb4ea53e-6d87-11e6-817a-7b7422fb2955.png"  alt="ScreenShot-ratings"/>|<img align="center" width=100% src="https://cloud.githubusercontent.com/assets/3626203/18021497/bf9fe264-6bb5-11e6-8ee3-a2e56e67d032.PNG" alt="Screen Shot of HP"/>
+<img align="center" width=100% src="https://cloud.githubusercontent.com/assets/3626203/18021497/bf9fe264-6bb5-11e6-8ee3-a2e56e67d032.PNG" alt="Screen Shot of HP"/>|<img align="center" src="https://cloud.githubusercontent.com/assets/3626203/18145062/94c741c8-6f97-11e6-9a4d-5686e9d1e7e1.png"/>|<img align="center" width=100% src="https://cloud.githubusercontent.com/assets/3626203/18145095/b670a378-6f97-11e6-9fb2-a7ca4e796016.png" alt="Screenshot-messages"/>|<img align="center"width=100% src="https://cloud.githubusercontent.com/assets/3626203/18041528/eb4ea53e-6d87-11e6-817a-7b7422fb2955.png"  alt="ScreenShot-ratings"/>
 
 ## Technologies used
 You can give a brief listing of the technologies you've learned and applied here
