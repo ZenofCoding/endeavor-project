@@ -52,10 +52,14 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    {{#if user}}
+                    {{#if user.displayName}}
+                        <li>
+                            <a href="/profile">{{user.displayName}}</a>
+                        </li> 
+                    {{else}}
                         <li>
                             <a href="/profile">{{user.username}}</a>
-                        </li>  
+                        </li> 
                     {{/if}}
                     <li>
                         <a href="#about">About</a>
@@ -421,7 +425,7 @@
                         <h2 class="section-heading">{{user.username}} Overall Rating and<br>
                         Professional Reviews</h2>
                     {{/if}}
-                    <p class="lead">The reviews displayed here are from jobs completed on this site.</p>
+                    <p class="lead">Reviews displayed in this section are from actual jobs and projects completed here on Endeavor.</p>
                 </div>
                 <div class="col-lg-5 col-lg-offset-2 col-sm-6">
                     <img class="img-responsive stars-cover" src="/assets/images/all_5_stars.png" alt="5 Stars Raing Picture">
